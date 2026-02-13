@@ -28,7 +28,7 @@ const svgStyles = computed<CSSProperties>(() => ({
 
 const wrapperStyles = computed<CSSProperties>(() => ({
   display: "inline-flex",
-  paddingLeft: linkStyles.value.textDecoration === "underline" ? "0.3em" : "0",
+  paddingInlineStart: linkStyles.value.textDecoration === "underline" ? "0.3em" : "0",
   height: "1em",
   width: "1em",
   position: "relative",

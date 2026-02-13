@@ -31,8 +31,8 @@ const contentStyles = computed<CSSProperties>(() => {
     flexGrow: "1",
     paddingTop: `${paddingTop}mm`,
     paddingBottom: layout.value.columns === "1" ? `${layout.value.verticalMargin}mm` : "0",
-    paddingLeft: `${paddingHorizontal}mm`,
-    paddingRight: `${paddingHorizontal}mm`,
+    paddingInlineStart: `${paddingHorizontal}mm`,
+    paddingInlineEnd: `${paddingHorizontal}mm`,
     backgroundColor: bgColor,
     color: textColor
   }

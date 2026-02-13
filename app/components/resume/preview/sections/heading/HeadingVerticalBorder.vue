@@ -11,7 +11,7 @@ const props = defineProps<{
 const iconStyle = computed<CSSProperties>(() => ({
   display: "inline-flex",
   alignItems: "center",
-  marginRight: props.iconHtml ? "0.4em" : "0",
+  marginInlineEnd: props.iconHtml ? "0.4em" : "0",
   flexShrink: 0,
   color: "currentColor"
 }))
@@ -19,11 +19,12 @@ const iconStyle = computed<CSSProperties>(() => ({
 <template>
   <div
     :style="{
-      borderLeftColor: props.headingColor,
+      borderInlineStartColor: props.headingColor,
       display: 'flex',
       alignItems: 'center',
-      paddingLeft: '0.3em',
-      borderLeftWidth: '0.2em'
+      paddingInlineStart: '0.3em',
+      borderInlineStartWidth: '0.2em',
+      borderInlineStartStyle: 'solid'
     }"
   >
     <span v-if="iconHtml" :style="iconStyle" v-html="iconHtml" />

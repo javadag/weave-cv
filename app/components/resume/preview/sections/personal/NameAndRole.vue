@@ -31,12 +31,10 @@ const containerStyles = computed<CSSProperties>(() => ({
   paddingBottom: isSameLine ? undefined : `${mainConfigs.value.bottomSpace}px`
 }))
 
-console.log(personalConfigs.value.main)
-
 const nameStyles = computed<CSSProperties>(() => ({
   fontSize: `${personalConfigs.value.main.title.fontSize}pt`,
   fontWeight: personalConfigs.value.main.title.fontWeight,
-  marginRight: isStacked.value ? "0" : "0.3em"
+  marginInlineEnd: isStacked.value ? "0" : "0.3em"
 }))
 
 const jobTitleStyles = computed<CSSProperties>(() => ({

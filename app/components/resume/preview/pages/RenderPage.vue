@@ -21,7 +21,8 @@ const pageStyles = computed<CSSProperties>(() => {
     textRendering: "geometricPrecision",
     fontVariantLigatures: "none",
     width: `${paperSize.w}mm`,
-    height: `${paperSize.h}mm`
+    height: `${paperSize.h}mm`,
+    direction: configs.value.general.layout.rtl ? "rtl" : "ltr"
   }
 })
 </script>

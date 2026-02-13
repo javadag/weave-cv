@@ -59,7 +59,7 @@ const shouldShowMarker = computed(() => {
 })
 
 const markerContainerStyles = computed<CSSProperties>(() => ({
-  paddingLeft: "1.5px",
+  paddingInlineStart: "1.5px",
   width: "0.9em",
   minWidth: "0.9em",
   display: "flex",

@@ -16,8 +16,8 @@ const isPersonalOnTop = computed(() => layout.value.personalPosition === "top")
 
 const containerStyles = computed<CSSProperties>(() => ({
   paddingTop: isPersonalOnTop.value ? `${layout.value.verticalMargin}mm` : undefined,
-  paddingRight: isPersonalOnTop.value ? `${layout.value.horizontalMargin}mm` : undefined,
-  paddingLeft: isPersonalOnTop.value ? `${layout.value.horizontalMargin}mm` : undefined,
+  paddingInlineEnd: isPersonalOnTop.value ? `${layout.value.horizontalMargin}mm` : undefined,
+  paddingInlineStart: isPersonalOnTop.value ? `${layout.value.horizontalMargin}mm` : undefined,
   backgroundColor: colors.value.primary.bgColor,
   paddingBottom: `${personalConfigs.value.bottomSpace}px`,
   whiteSpace: "pre-wrap",
@@ -25,10 +25,11 @@ const containerStyles = computed<CSSProperties>(() => ({
   flexDirection: personalConfigs.value.variant === "stacked" ? "column" : "row",
   textAlign: personalConfigs.value.align,
   justifyContent:
-    personalConfigs.value.align === "left"
-      ? "flex-start"
-      : personalConfigs.value.align === "center"
-        ? "center"
+    personalConfigs.value.align === "center"
+      ? "center"
+      : (personalConfigs.value.align === "left" && !layout.value.rtl) ||
+          (personalConfigs.value.align === "right" && layout.value.rtl)
+        ? "flex-start"
         : "flex-end",
   gap: personalConfigs.value.variant === "inline" ? "1em" : undefined
 }))

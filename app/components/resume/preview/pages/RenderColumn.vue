@@ -28,6 +28,9 @@ const columnStyles = computed<CSSProperties>(() => {
   const horizontalPadding = isSideLayout ? layout.value.horizontalMargin : 0
   const sidePadding = hasUniformBackground.value ? "1em" : `${0.5 * layout.value.horizontalMargin}mm`
 
+  const paddingStart = side === "left" ? `${horizontalPadding}mm` : sidePadding
+  const paddingEnd = side === "right" ? `${horizontalPadding}mm` : sidePadding
+
   return {
     background: columnColors.value.bgColor,
     width: `${width}%`,
@@ -35,8 +38,8 @@ const columnStyles = computed<CSSProperties>(() => {
     color: columnColors.value.textColor,
     paddingTop: `${verticalPadding}mm`,
     paddingBottom: `${verticalPadding}mm`,
-    paddingLeft: side === "left" ? `${horizontalPadding}mm` : sidePadding,
-    paddingRight: side === "right" ? `${horizontalPadding}mm` : sidePadding
+    paddingInlineStart: paddingStart,
+    paddingInlineEnd: paddingEnd
   }
 })
 

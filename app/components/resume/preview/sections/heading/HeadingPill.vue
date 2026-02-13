@@ -19,7 +19,7 @@ const backgroundColor = computed(() => {
 const iconStyle = computed<CSSProperties>(() => ({
   display: "inline-flex",
   alignItems: "center",
-  marginRight: props.iconHtml ? "0.4em" : "0",
+  marginInlineEnd: props.iconHtml ? "0.4em" : "0",
   flexShrink: 0,
   color: "currentColor"
 }))

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { determineDisplayMode, isContentEmpty } from "~/utils/preview/core/entryUtils"
-import type { AdvancedSectionTypeSchema, TAdvancedContent } from "~/utils/schemas/content.schema"
+import type { AdvancedSectionTypeSchema } from "~/utils/schemas/content.schema"
 import type { TAdvancedSectionVariant } from "~/utils/schemas/shared.schema"
 import DescriptionContent from "./content/DescriptionContent.vue"
 
@@ -15,7 +15,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { updateHeight } = usePreviewStore()
-const { elementRef } = useSelfResizeObserver((height) => {
+useSelfResizeObserver((height) => {
   updateHeight(props.lineId, height)
 })
 
@@ -47,10 +47,9 @@ const contentStyle = computed(() => ({
 
 const resumeStore = useResumeStore()
 const { core } = storeToRefs(resumeStore)
-const sectionContents = computed(() => core.value?.[props.sid]?.contents as TAdvancedContent[])
 
 const content = computed(() => {
-  return sectionContents.value.find((content) => content.id === props.contentId)
+  return core.value?.[props.sid]?.contents?.find((content) => content.id === props.contentId)
 })
 
 const contentLayoutWidth = computed(() =>

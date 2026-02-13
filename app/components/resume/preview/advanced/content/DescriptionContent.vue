@@ -28,11 +28,11 @@ const vNodes = computed(() => {
 })
 
 const hasIndentation = computed(() => !props.isProfileSection && contentLayout.value.indent > 0)
-const paddingLeft = computed(() => (hasIndentation.value ? `${contentLayout.value.indent}px` : undefined))
+const paddingInlineStart = computed(() => (hasIndentation.value ? `${contentLayout.value.indent}px` : undefined))
 
 const containerStyles = computed(() => ({
   width: "100%",
-  paddingLeft: paddingLeft.value,
+  paddingInlineStart: paddingInlineStart.value,
   whiteSpace: "pre-wrap" as const,
   wordBreak: "break-word" as const,
   paddingBottom: props.isLast

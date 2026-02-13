@@ -20,12 +20,11 @@ const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 
 const content = computed(
-  () => core.value?.[props.sid]?.contents.find((content) => content.id === props.contentId) as TAdvancedContent
+  () => core.value?.[props.sid]?.contents?.find((content) => content.id === props.contentId) as TAdvancedContent
 )
 
 const { updateHeight } = usePreviewStore()
-
-const { elementRef } = useSelfResizeObserver((height) => {
+useSelfResizeObserver((height) => {
   updateHeight(props.contentId, height)
 })
 

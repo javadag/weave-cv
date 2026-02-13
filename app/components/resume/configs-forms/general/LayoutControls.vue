@@ -2,6 +2,7 @@
 import { capitalize } from "vue"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
+import ToggleInput from "~/components/ui/ToggleInput.vue"
 import type { TPaperSize } from "~/constants/papers"
 import { PAPER_SIZES } from "~/constants/papers"
 import { createOptionsFromEnum } from "~/utils/preview/helpers"
@@ -69,12 +70,12 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       label="Language"
       :options="languageOptions"
       @update:model-value="(value) => handleUpdate('language', value)"
-    />
+    />  -->
     <ToggleInput
       v-model="configs.general.layout.rtl"
       label="Right-to-left (RTL)"
       @update:model-value="(value) => handleUpdate('rtl', value)"
-    /> -->
+    />
     <SelectItem
       v-model="configs.general.layout.dateFormat"
       label="Date format"
