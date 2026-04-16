@@ -23,22 +23,22 @@ const toggleConfigs = () => {
 <template>
   <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex gap-3 xl:hidden">
     <UButton
-      :icon="isSectionsOpen ? 'i-lucide-x' : 'i-lucide-file-text'"
+      :icon="'i-lucide-file-text'"
       size="lg"
       color="primary"
-      class="shadow-lg"
+      class="shadow-lg hover:bg-primary/100"
       @click="toggleSections"
     >
-      <span class="hidden sm:inline">{{ isSectionsOpen ? "Close" : "Sections" }}</span>
+      <span class="hidden sm:inline">Sections</span>
     </UButton>
     <UButton
-      :icon="isConfigsOpen ? 'i-lucide-x' : 'i-lucide-settings'"
+      :icon="'i-lucide-settings'"
       size="lg"
       color="primary"
-      class="shadow-lg"
+      class="shadow-lg hover:bg-primary/100"
       @click="toggleConfigs"
     >
-      <span class="hidden sm:inline">{{ isConfigsOpen ? "Close" : "Settings" }}</span>
+      <span class="hidden sm:inline">Settings</span>
     </UButton>
   </div>
 </template>

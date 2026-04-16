@@ -58,7 +58,7 @@ const hasReachedLimit = computed(() => resumeCount.value >= MAX_RESUMES_PER_USER
       color="warning"
       variant="solid"
       title="Resume Limit Reached"
-      :description="`You have reached the maximum limit of ${MAX_RESUMES_PER_USER} resumes. Please delete an existing resume to create a new one.`"
+      :description="`You have reached the maximum limit of ${MAX_RESUMES_PER_USER} resumes.`"
       class="mb-6"
     />
     <UAlert

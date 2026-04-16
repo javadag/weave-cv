@@ -34,14 +34,12 @@ const handleUpdate = (key: string, value: unknown) => {
         @update:model-value="(value) => handleUpdate('color', value)"
       />
     </ConfigWrapper>
-
     <ConfigWrapper title="Icon">
       <ToggleInput
         v-model="configs.general.links.icon.visible"
         label="Show"
         @update:model-value="(value) => handleUpdate('icon.visible', value)"
       />
-
       <SelectItem
         :model-value="configs.general.links.icon.type"
         label="Type"

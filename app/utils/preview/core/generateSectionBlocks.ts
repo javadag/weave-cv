@@ -1,6 +1,6 @@
 import { h } from "vue"
 import RenderPersonal from "~/components/resume/preview/sections/personal/RenderPersonal.vue"
-import PersonalSpace from "~/components/resume/preview/sections/PersonalSpace.vue"
+import PersonalSpace from "~/components/resume/preview/sections/space/PersonalSpace.vue"
 import type { OTHER_SECTION_TYPES } from "~/constants/sectionTypes"
 import { generateCoreBlocks } from "./generateCoreBlocks"
 import type { TBlock } from "./types"
