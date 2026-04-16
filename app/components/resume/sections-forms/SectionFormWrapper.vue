@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { capitalize } from "vue"
 import type { TCoreSectionType } from "~/utils/schemas/content.schema"
 import SectionTitleForm from "./SectionTitleForm.vue"
 
@@ -31,7 +32,7 @@ const props = withDefaults(
       class="text-base group p-0 w-full font-semibold flex items-center active:bg-inherit hover:bg-inherit text-default"
       block
     >
-      {{ props.title }}
+      {{ props.title || capitalize(props.sectionId.split("-")[0] ?? "Section") }}
     </UButton>
     <template #content>
       <SectionTitleForm
