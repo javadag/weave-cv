@@ -159,6 +159,7 @@ onUnmounted(() => {
           alignItems: 'center',
           paddingBottom: '0.5em',
           height: 'fit-content',
+          lineHeight: '1',
           color: configs.general.colors.primary.textColor
         }"
       >
