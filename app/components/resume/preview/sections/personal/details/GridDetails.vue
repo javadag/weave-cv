@@ -15,7 +15,7 @@ const iconConfig = computed(() => configs.value.personal.details.icon)
 const textColor = computed(() => configs.value.general.colors.primary.textColor)
 
 const detailItems = computed(() => {
-  return personal.value.details.filter((item) => item.value && !item.isHidden)
+  return personal.value?.details.filter((item) => item.value && !item.isHidden) ?? []
 })
 </script>
 
@@ -51,7 +51,9 @@ const detailItems = computed(() => {
           :style="iconConfig.type"
           :color="textColor"
         />
-        <span>{{ item.value }}</span>
+        <span class="inline-flex leading-none items-center text-center">
+          {{ item.value }}
+        </span>
       </DetailWrapper>
     </div>
   </div>

@@ -22,7 +22,7 @@ const textColor = computed(() => configs.value.general.colors.primary.textColor)
 const containerRef = ref<HTMLElement>()
 
 const detailItems = computed(() => {
-  return personal.value.details.filter((item) => item.value && !item.isHidden)
+  return personal.value?.details.filter((item) => item.value && !item.isHidden) ?? []
 })
 
 let resizeObserver: ResizeObserver | null = null
@@ -127,8 +127,7 @@ onUnmounted(() => {
         :style="{
           display: 'flex',
           alignItems: 'center',
-          gap: iconConfig.visible ? '0.5em' : '0',
-          height: 'fit-content',
+          gap: iconConfig.visible ? '0.3em' : '0',
           paddingBottom: '0.5em'
         }"
       >
@@ -139,7 +138,9 @@ onUnmounted(() => {
           :style="iconConfig.type"
           :color="textColor"
         />
-        <span>{{ item.value }}</span>
+        <span class="inline-flex leading-none items-center text-center">
+          {{ item.value }}
+        </span>
         <StyledIcon
           v-if="iconConfig.visible && iconConfig.align === 'right'"
           :icon="SOLID_ICONS[item.type]"

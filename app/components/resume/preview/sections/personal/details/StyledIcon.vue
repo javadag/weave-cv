@@ -32,11 +32,13 @@ const innerIconColor = computed(() =>
   frameConfig.value.frameStyle === "outline" ? props.color : configs.value.general.colors.primary.bgColor
 )
 
-const innerIconSize = computed(() => (frameConfig.value.type === "none" ? props.size : Math.floor(props.size * 0.7)))
+const VIEW_BOX_SIZE = 24
+const ICON_SCALE = 0.7
+const ICON_OFFSET = (VIEW_BOX_SIZE * (1 - ICON_SCALE)) / 2
 
 const createIconPath = (fillColor: string) =>
   h("path", {
-    d: props.icon,
+    d: props.icon!,
     fill: fillColor,
     stroke: "none"
   })
@@ -47,11 +49,16 @@ const createSimpleIcon = () =>
     {
       width: `${props.size}`,
       height: `${props.size}`,
-      viewBox: "0 0 24 24",
+      viewBox: `0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`,
       fill: "none",
+      xmlns: "http://www.w3.org/2000/svg",
+      role: "img",
       style: {
-        display: "inline-block",
-        verticalAlign: "middle"
+        display: "inline-flex",
+        justifyContent: "center",
+        aliitems: "center",
+        verticalAlign: "middle",
+        flexShrink: 0
       }
     },
     [createIconPath(props.color)]
@@ -59,15 +66,13 @@ const createSimpleIcon = () =>
 
 const createSquareFramedIcon = () => {
   const isOutline = frameConfig.value.frameStyle === "outline"
-  const iconSizeInViewBox = (innerIconSize.value / props.size) * 40
-  const iconOffset = (40 - iconSizeInViewBox) / 2
 
   return h(
     "svg",
     {
       width: `${props.size}`,
       height: `${props.size}`,
-      viewBox: "0 0 40 40",
+      viewBox: `0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`,
       xmlns: "http://www.w3.org/2000/svg",
       role: "img",
       style: {
@@ -80,24 +85,20 @@ const createSquareFramedIcon = () => {
       h("rect", {
         x: "0.5",
         y: "0.5",
-        width: "39",
-        height: "39",
+        width: `${VIEW_BOX_SIZE - 1}`,
+        height: `${VIEW_BOX_SIZE - 1}`,
         rx: "0",
         fill: isOutline ? "none" : props.color,
         stroke: isOutline ? props.color : "none",
         "stroke-width": isOutline ? "1" : "0"
       }),
-      h("g", { transform: `translate(${iconOffset}, ${iconOffset})` }, [
-        h(
-          "svg",
-          {
-            width: `${iconSizeInViewBox}`,
-            height: `${iconSizeInViewBox}`,
-            viewBox: "0 0 24 24"
-          },
-          [createIconPath(innerIconColor.value)]
-        )
-      ])
+      h(
+        "g",
+        {
+          transform: `translate(${ICON_OFFSET}, ${ICON_OFFSET}) scale(${ICON_SCALE})`
+        },
+        [createIconPath(innerIconColor.value)]
+      )
     ]
   )
 }
@@ -106,29 +107,32 @@ const createCircularFramedIcon = () => {
   const isOutline = frameConfig.value.frameStyle === "outline"
 
   return h(
-    "div",
+    "svg",
     {
+      width: `${props.size}`,
+      height: `${props.size}`,
+      viewBox: `0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`,
+      xmlns: "http://www.w3.org/2000/svg",
+      role: "img",
       style: {
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: `${props.size}px`,
-        height: `${props.size}px`,
-        borderRadius: "50%",
-        backgroundColor: isOutline ? "transparent" : props.color,
-        border: isOutline ? `1px solid ${props.color}` : "none",
+        display: "inline-block",
+        verticalAlign: "middle",
         flexShrink: 0
       }
     },
     [
+      h("circle", {
+        cx: VIEW_BOX_SIZE / 2,
+        cy: VIEW_BOX_SIZE / 2,
+        r: VIEW_BOX_SIZE / 2,
+        fill: isOutline ? "none" : props.color,
+        stroke: isOutline ? props.color : "none",
+        "stroke-width": isOutline ? "1" : "0"
+      }),
       h(
-        "svg",
+        "g",
         {
-          width: `${innerIconSize.value}`,
-          height: `${innerIconSize.value}`,
-          viewBox: "0 0 24 24",
-          fill: "none",
-          style: { display: "block" }
+          transform: `translate(${ICON_OFFSET}, ${ICON_OFFSET}) scale(${ICON_SCALE})`
         },
         [createIconPath(innerIconColor.value)]
       )

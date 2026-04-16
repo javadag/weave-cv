@@ -18,22 +18,11 @@ const LINK_ICON_PATHS: Record<TLinkIconType, string[]> = {
 
 const svgStyles = computed<CSSProperties>(() => ({
   display: "inline-block",
-  position: "absolute",
-  top: linkStyles.value.textDecoration === "underline" ? "0.3em" : "0.25em",
   fill: linkIconStyles.value.color,
   width: "0.8em",
   height: "0.8em",
-  flexShrink: 0
-}))
-
-const wrapperStyles = computed<CSSProperties>(() => ({
-  display: "inline-flex",
-  paddingInlineStart: linkStyles.value.textDecoration === "underline" ? "0.3em" : "0",
-  height: "1em",
-  width: "1em",
-  position: "relative",
-  alignItems: "center",
-  justifyContent: "center"
+  flexShrink: 0,
+  paddingInlineStart: linkStyles.value.textDecoration === "underline" ? "0.1em" : "0"
 }))
 
 const selectedIconPaths = computed(() => LINK_ICON_PATHS[linkIconStyles.value.type] || LINK_ICON_PATHS.arrow)
@@ -41,16 +30,15 @@ const isVisible = computed(() => linkIconStyles.value.visible)
 </script>
 
 <template>
-  <span v-if="isVisible" :style="wrapperStyles">
-    <svg
-      :style="svgStyles"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path v-for="(path, index) in selectedIconPaths" :key="index" :d="path" />
-    </svg>
-  </span>
+  <svg
+    v-if="isVisible"
+    :style="svgStyles"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path v-for="(path, index) in selectedIconPaths" :key="index" :d="path" />
+  </svg>
 </template>
