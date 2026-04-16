@@ -17,6 +17,14 @@ const user = useSupabaseUser()
         </NuxtLink>
         <div class="flex items-center gap-3">
           <UserDropdown v-if="user" />
+          <UButton
+            href="https://github.com/javadag/weave-cv"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="link"
+            icon="i-lucide-github"
+            size="md"
+          />
           <Theme />
         </div>
       </div>
