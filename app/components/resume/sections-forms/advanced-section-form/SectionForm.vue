@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, watch } from "vue"
+import { VueDraggable, type SortableEvent } from "vue-draggable-plus"
 import { ADVANCED_SECTION_ITEM, BASIC_SECTION_ITEM } from "~/constants/singleContent"
 import type {
   BasicSectionTypeSchema,
@@ -23,6 +25,16 @@ const { updateContent } = useResumeStore()
 const isAdvancedSection = computed(() => AdvancedSectionTypeSchema.safeParse(props.sectionType).success)
 const isSummarySection = computed(() => props.sectionType === "summary")
 
+const sectionContentsRef = ref([...props.section.contents])
+
+watch(
+  () => props.section.contents,
+  (newContents) => {
+    sectionContentsRef.value = [...newContents]
+  },
+  { immediate: true }
+)
+
 const handleAddContent = () => {
   const newContent: TAdvancedContent | TBasicContent = {
     id: `${props.section.type}-${Date.now()}`,
@@ -40,7 +52,13 @@ const handleDeleteContent = (id: string) => {
     props.section.contents.filter((content) => content.id !== id)
   )
 }
+
+const handleReorder = (_event: SortableEvent) => {
+  const reorderedContents = sectionContentsRef.value.map((item) => item)
+  updateContent(`${props.sectionId}.contents`, reorderedContents)
+}
 </script>
+
 <template>
   <SectionFormWrapper
     :section-id="props.sectionId"
@@ -50,7 +68,15 @@ const handleDeleteContent = (id: string) => {
     :is-title-visible="props.section.isTitleVisible"
   >
     <div class="flex flex-col gap-3">
-      <div class="flex flex-col gap-2">
+      <VueDraggable
+        v-model="sectionContentsRef"
+        :handle="'.handle'"
+        :disabled="props.section.contents.length < 2"
+        direction="vertical"
+        :animation="150"
+        class="flex flex-col gap-2"
+        @end="handleReorder"
+      >
         <SectionFormItem
           v-for="content in props.section.contents"
           :key="content.id"
@@ -61,7 +87,7 @@ const handleDeleteContent = (id: string) => {
           class="relative group"
           @delete="handleDeleteContent(content.id)"
         />
-      </div>
+      </VueDraggable>
       <UButton v-if="!isSummarySection" variant="subtle" @click="handleAddContent"> + Add Content </UButton>
     </div>
   </SectionFormWrapper>
