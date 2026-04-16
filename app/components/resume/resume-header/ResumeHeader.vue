@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Download from "./Download.vue"
-import Export from "./Export.vue"
 import SaveChanges from "./SaveChanges.vue"
 
 const saving = ref(false)
@@ -52,7 +51,7 @@ const titleModel = computed({
       >
         <SaveChanges :saving="saving" :disabled="saving" @saving="saving = $event" />
         <Download :disabled="saving" />
-        <Export :disabled="saving" />
+        <!-- <Export :disabled="saving" /> -->
       </div>
     </div>
   </div>
