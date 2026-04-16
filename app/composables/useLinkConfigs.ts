@@ -23,9 +23,10 @@ export function useLinkConfigs(url?: MaybeRef<string | undefined>) {
     }
   })
 
-  const linkStyles = computed<{ textDecoration: string; color: string }>(() => {
+  const linkStyles = computed<{ textDecoration: string; textUnderlineOffset: string; color: string }>(() => {
     return {
       textDecoration: linksConfig.value.underline ? "underline" : "none",
+      textUnderlineOffset: linksConfig.value.underline ? "0.15em" : "0",
       color: linksConfig.value.color
     }
   })

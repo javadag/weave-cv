@@ -62,9 +62,7 @@ const addDetail = () => {
     url
   }
 
-  const currentDetails = personal.details
-
-  updatePersonal("details", [...currentDetails, newDetail])
+  updatePersonal("details", [...(personal?.details ?? []), newDetail])
   closeForm()
 }
 
@@ -87,7 +85,6 @@ const resetForm = () => {
       Add Detail
     </UButton>
   </div>
-
   <div v-if="isAddingDetail" class="p-3 space-y-3 border border-muted rounded-lg">
     <div class="grid grid-cols-2 gap-2">
       <div class="flex flex-col gap-1.5">
@@ -99,9 +96,7 @@ const resetForm = () => {
         <USelect v-model="form.key" :items="detailOptions" placeholder="Detail Type" />
       </div>
     </div>
-
     <UInput v-model="form.value" class="w-full" placeholder="Enter value..." @keyup.enter="addDetail" />
-
     <div class="flex gap-2">
       <UButton size="sm" @click="addDetail">Add</UButton>
       <UButton variant="ghost" size="sm" @click="closeForm">Cancel</UButton>

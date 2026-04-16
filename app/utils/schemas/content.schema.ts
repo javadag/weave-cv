@@ -29,96 +29,79 @@ export const DETAILS_CATALOG = {
   professional: {
     linkedin: {
       label: "LinkedIn",
-      icon: "linkedin",
-      urlTemplate: "https://linkedin.com/in/{value}"
+      icon: "linkedin"
     },
     github: {
       label: "GitHub",
-      icon: "github",
-      urlTemplate: "https://github.com/{value}"
+      icon: "github"
     },
     gitlab: {
       label: "GitLab",
-      icon: "git-branch",
-      urlTemplate: "https://gitlab.com/{value}"
+      icon: "git-branch"
     },
     website: {
       label: "Website",
-      icon: "globe",
-      urlTemplate: "https://{value}"
+      icon: "globe"
     }
   },
   social: {
     twitter: {
       label: "X / Twitter",
-      icon: "twitter",
-      urlTemplate: "https://twitter.com/{value}"
+      icon: "twitter"
     },
     instagram: {
       label: "Instagram",
-      icon: "camera",
-      urlTemplate: "https://instagram.com/{value}"
+      icon: "camera"
     },
     facebook: {
       label: "Facebook",
-      icon: "users",
-      urlTemplate: "https://facebook.com/{value}"
+      icon: "users"
     },
     reddit: {
       label: "Reddit",
-      icon: "circle-user",
-      urlTemplate: "https://reddit.com/user/{value}"
+      icon: "circle-user"
     }
   },
   creative: {
     dribbble: {
       label: "Dribbble",
-      icon: "palette",
-      urlTemplate: "https://dribbble.com/{value}"
+      icon: "palette"
     },
     behance: {
       label: "Behance",
-      icon: "palette",
-      urlTemplate: "https://behance.net/{value}"
+      icon: "palette"
     },
     figma: {
       label: "Figma",
-      icon: "palette",
-      urlTemplate: "https://figma.com/@{value}"
+      icon: "palette"
     }
   },
   media: {
     youtube: {
       label: "YouTube",
-      icon: "play-circle",
-      urlTemplate: "https://youtube.com/{value}"
+      icon: "play-circle"
     },
     spotify: {
       label: "Spotify",
-      icon: "music",
-      urlTemplate: "https://open.spotify.com/user/{value}"
+      icon: "music"
     },
     twitch: {
       label: "Twitch",
-      icon: "video",
-      urlTemplate: "https://twitch.tv/{value}"
+      icon: "video"
     }
   },
   finance: {
     paypal: {
       label: "PayPal",
-      icon: "credit-card",
-      urlTemplate: "https://paypal.me/{value}"
+      icon: "credit-card"
     },
     bitcoin: {
       label: "Bitcoin",
-      icon: "circle-dollar-sign",
-      urlTemplate: "bitcoin:{value}"
+      icon: "circle-dollar-sign"
     },
     ethereum: {
       label: "Ethereum",
-      icon: "circle-dollar-sign",
-      urlTemplate: "ethereum:{value}"
+      icon: "circle-dollar-sign"
     }
   }
 } as const

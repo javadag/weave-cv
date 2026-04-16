@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ColorPicker from "~/components/ui/ColorPicker.vue"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
@@ -63,6 +64,19 @@ const handleUpdate = (key: string, value: unknown) => {
       />
     </ConfigWrapper>
     <ConfigWrapper title="Details">
+      <ConfigWrapper variant="grid">
+        <ToggleInput
+          v-model="configs.personal.details.underline"
+          label="Underline"
+          @update:model-value="(value) => handleUpdate('details.underline', value)"
+        />
+        <ColorPicker
+          v-model="configs.personal.details.color"
+          label="Color"
+          :color="configs.personal.details.color"
+          @update:model-value="(value) => handleUpdate('details.color', value)"
+        />
+      </ConfigWrapper>
       <SelectItem
         v-model="configs.personal.details.variant"
         label="Variant"

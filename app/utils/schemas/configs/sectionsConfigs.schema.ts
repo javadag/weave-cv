@@ -45,6 +45,8 @@ export const PersonalConfigsSchema = z.object({
     bottomSpace: z.number().min(0).max(100)
   }),
   details: z.object({
+    underline: z.boolean(),
+    color: z.string(),
     variant: Variant,
     separator: Separator,
     icon: z.object({

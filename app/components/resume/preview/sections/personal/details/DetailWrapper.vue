@@ -18,6 +18,8 @@ const { configs } = storeToRefs(configsStore)
 const combinedStyle = computed<CSSProperties>(() => ({
   color: configs.value.general.colors.primary.textColor,
   minWidth: "0",
+  textDecoration: configs.value.personal.details.underline ? "underline" : "",
+  textDecorationColor: configs.value.personal.details.color,
   ...props.style
 }))
 </script>
