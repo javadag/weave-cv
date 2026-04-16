@@ -20,7 +20,7 @@ const { updateContent } = useResumeStore()
 const sectionFieldsConfig = computed(() => SECTION_FIELDS_CONFIG[props.sectionType])
 
 const getFieldConfig = (field: EditorField) => {
-  return sectionFieldsConfig.value.find((config) => config.field === field)
+  return sectionFieldsConfig.value.find((config) => config.field === field)!
 }
 
 const hasField = (field: EditorField) => {
@@ -87,31 +87,35 @@ const handleDone = () => {
 
 <template>
   <div class="flex flex-col gap-4 rounded-lg p-3 w-full bg-accented/40">
-    <span class="text-lg font-semibold">Edit Item</span>
+    <div class="flex justify-between items-center gap-2 flex-wrap">
+      <span class="text-lg font-semibold"
+        >Edit {{ content.title || ("location" in content ? content.location : "") || "" }}</span
+      >
+      <UButton size="sm" variant="soft" color="primary" :leading-icon="'i-lucide-check'" @click="handleDone" />
+    </div>
     <div class="space-y-3">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <TextInput
           v-if="hasField('title')"
           :model-value="getStringFieldValue('title')"
-          :label="getFieldConfig('title')?.label || 'Title'"
-          :placeholder="getFieldConfig('title')?.placeholder || 'e.g. Title'"
+          :label="getFieldConfig('title').label"
+          :placeholder="getFieldConfig('title').placeholder || 'test'"
           @update:model-value="(value) => handleFieldUpdate('title', value)"
         />
         <TextInput
           v-if="hasField('subtitle')"
           :model-value="getStringFieldValue('subtitle')"
-          :label="getFieldConfig('subtitle')?.label || 'Subtitle'"
-          :placeholder="getFieldConfig('subtitle')?.placeholder || 'e.g. Subtitle'"
+          :label="getFieldConfig('subtitle').label"
+          :placeholder="getFieldConfig('subtitle').placeholder"
           @update:model-value="(value) => handleFieldUpdate('subtitle', value)"
         />
       </div>
-
       <div v-if="hasField('startDate') || hasField('endDate')" class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div v-if="hasField('startDate')" class="flex flex-col gap-2">
           <DatePicker
             :model-value="getDateFieldValue('startDate')"
-            :label="getFieldConfig('startDate')?.label || 'Start Date'"
-            :placeholder="getFieldConfig('startDate')?.placeholder || 'e.g. 2020-01-01'"
+            :label="getFieldConfig('startDate').label"
+            :placeholder="getFieldConfig('startDate').placeholder"
             @update:model-value="(value) => handleDateUpdate('startDate', value)"
           />
           <UButton
@@ -129,9 +133,9 @@ const handleDone = () => {
           <DatePicker
             v-if="hasField('endDate')"
             :model-value="getDateFieldValue('endDate')"
-            :label="getFieldConfig('endDate')?.label || 'End Date'"
+            :label="getFieldConfig('endDate').label"
             :disabled="getBooleanFieldValue('present')"
-            :placeholder="getFieldConfig('endDate')?.placeholder || 'e.g. 2022-12-31'"
+            :placeholder="getFieldConfig('endDate').placeholder"
             @update:model-value="(value) => handleDateUpdate('endDate', value)"
           />
           <div class="flex flex-col gap-2">
@@ -149,7 +153,7 @@ const handleDone = () => {
             <ToggleInput
               v-if="hasField('present')"
               :model-value="getBooleanFieldValue('present')"
-              :label="getFieldConfig('present')?.label || 'Present'"
+              :label="getFieldConfig('present').label"
               :style="'start'"
               @update:model-value="(value) => handleFieldUpdate('present', value)"
             />
@@ -159,34 +163,32 @@ const handleDone = () => {
       <ToggleInput
         v-if="props.isAdvancedSection && hasField('showDateDay')"
         :model-value="getBooleanFieldValue('showDateDay')"
-        :label="getFieldConfig('showDateDay')?.label || 'Show day in dates'"
+        :label="getFieldConfig('showDateDay').label"
         :style="'start'"
         @update:model-value="(value) => handleFieldUpdate('showDateDay', value)"
       />
-
       <TextInput
         v-if="hasField('location')"
         :model-value="getStringFieldValue('location')"
-        :label="getFieldConfig('location')?.label || 'Location'"
-        :placeholder="getFieldConfig('location')?.placeholder || 'e.g. San Francisco, CA'"
+        :label="getFieldConfig('location').label"
+        :placeholder="getFieldConfig('location').placeholder"
         @update:model-value="(value) => handleFieldUpdate('location', value)"
       />
       <TextInput
         v-if="hasField('url')"
         :model-value="getStringFieldValue('url')"
-        :label="getFieldConfig('url')?.label || 'URL'"
-        :placeholder="getFieldConfig('url')?.placeholder || 'e.g. https://example.com'"
+        :label="getFieldConfig('url').label"
+        :placeholder="getFieldConfig('url').placeholder"
         type="url"
         @update:model-value="(value) => handleFieldUpdate('url', value)"
       />
       <RichTextEditor
         v-if="hasField('description')"
         :content="getStringFieldValue('description')"
-        :label="getFieldConfig('description')?.label || 'Description'"
-        :placeholder="getFieldConfig('description')?.placeholder || 'Enter details...'"
+        :label="getFieldConfig('description').label"
+        :placeholder="getFieldConfig('description').placeholder"
         @update:content="(htmlContent) => handleFieldUpdate('description', htmlContent)"
       />
     </div>
-    <UButton size="lg" class="w-full justify-center" label="Done" @click="handleDone" />
   </div>
 </template>

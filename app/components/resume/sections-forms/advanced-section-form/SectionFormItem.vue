@@ -46,13 +46,13 @@ const handleToggleVisibility = () => {
       class="flex flex-1 items-center hover:bg-accented/80 duration-150 bg-accented/50 rounded-md p-2 divide-x divide-accented [&>*]:px-2 [&>*]:text-sm"
       @click="isEditing = !isEditing"
     >
-      <span class="font-bold">{{ content.title }}</span>
+      <span class="font-bold">{{ content.title || ("location" in content ? content.location : "") || "" }}</span>
     </button>
     <Visibility
       v-if="sectionType !== 'summary'"
       :is-hidden="content.isHidden"
       :on-toggle="() => handleToggleVisibility()"
     />
-    <Delete v-if="sectionType !== 'summary'" :on-delete="() => emits('delete')" tooltip="Delete content" />
+    <Delete v-if="sectionType !== 'summary'" :on-delete="() => emits('delete')" tooltip="Delete" />
   </div>
 </template>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{
+import type { InputProps } from "@nuxt/ui"
+
+interface Props extends InputProps {
   label: string
   labelVariant?: "inline" | "stacked"
-  modelValue: string
-  trailingIcon?: string
-}>()
+}
+
+const props = defineProps<Props>()
 
 const emit = defineEmits<{ (e: "update:modelValue", value: string): void }>()
 
@@ -20,6 +22,12 @@ const model = computed({
     :label="props.label"
     :ui="{ label: 'text-sm font-medium text-muted', container: 'basis-1/2' }"
   >
-    <UInput v-model="model" class="w-full" :trailing-icon="props.trailingIcon" />
+    <UInput
+      v-model="model"
+      class="w-full"
+      :placeholder="placeholder"
+      v-bind="$attrs"
+      :trailing-icon="props.trailingIcon"
+    />
   </UFormField>
 </template>

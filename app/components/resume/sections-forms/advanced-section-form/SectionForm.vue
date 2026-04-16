@@ -88,7 +88,14 @@ const handleReorder = (_event: SortableEvent) => {
           @delete="handleDeleteContent(content.id)"
         />
       </VueDraggable>
-      <UButton v-if="!isSummarySection" variant="subtle" @click="handleAddContent"> + Add Content </UButton>
+      <UButton
+        v-if="!isSummarySection"
+        class="flex justify-center items-center"
+        variant="subtle"
+        @click="handleAddContent"
+      >
+        <UIcon name="i-lucide-plus" />
+      </UButton>
     </div>
   </SectionFormWrapper>
 </template>
