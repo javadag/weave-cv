@@ -46,7 +46,12 @@ const handleToggleVisibility = () => {
       class="flex flex-1 items-center hover:bg-accented/80 duration-150 bg-accented/50 rounded-md p-2 divide-x divide-accented [&>*]:px-2 [&>*]:text-sm"
       @click="isEditing = !isEditing"
     >
-      <span class="font-bold">{{ content.title || ("location" in content ? content.location : "") || "" }}</span>
+      <span class="font-bold line-clamp-1">{{
+        content.title ||
+        ("subtitle" in content && content.subtitle) ||
+        ("location" in content ? content.location : "") ||
+        ""
+      }}</span>
     </button>
     <Visibility
       v-if="sectionType !== 'summary'"

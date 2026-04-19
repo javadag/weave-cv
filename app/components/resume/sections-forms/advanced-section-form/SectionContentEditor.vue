@@ -87,9 +87,15 @@ const handleDone = () => {
 
 <template>
   <div class="flex flex-col gap-4 rounded-lg p-3 w-full bg-accented/40">
-    <div class="flex justify-between items-center gap-2 flex-wrap">
-      <span class="text-lg font-semibold"
-        >Edit {{ content.title || ("location" in content ? content.location : "") || "" }}</span
+    <div class="flex justify-between items-center gap-2">
+      <span class="text-lg font-semibold line-clamp-1"
+        >Edit
+        {{
+          content.title ||
+          ("subtitle" in content && content.subtitle) ||
+          ("location" in content ? content.location : "") ||
+          ""
+        }}</span
       >
       <UButton size="sm" variant="soft" color="primary" :leading-icon="'i-lucide-check'" @click="handleDone" />
     </div>

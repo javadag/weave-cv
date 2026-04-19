@@ -131,7 +131,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
           class="flex items-center gap-2 w-full p-2 rounded-lg cursor-move bg-muted"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground" />
-          <span class="text-sm font-medium">{{ section.title }}</span>
+          <span class="text-sm font-medium capitalize">{{ section.title || section.type }}</span>
         </div>
       </VueDraggable>
       <VueDraggable
@@ -150,7 +150,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
           class="flex items-center gap-2 w-full p-2 rounded-lg cursor-move bg-muted"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground" />
-          <span class="text-sm font-medium">{{ section.title }}</span>
+          <span class="text-sm font-medium capitalize">{{ section.title || section.type }}</span>
         </div>
       </VueDraggable>
     </div>
@@ -168,7 +168,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         class="flex items-center gap-2 w-full p-2 rounded-lg cursor-move bg-muted"
       >
         <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground" />
-        <span class="text-sm font-medium">{{ section.title }}</span>
+        <span class="text-sm font-medium capitalize">{{ section.title || section.type }}</span>
       </div>
     </VueDraggable>
   </ConfigWrapper>

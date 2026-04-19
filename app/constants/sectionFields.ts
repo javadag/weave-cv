@@ -59,8 +59,8 @@ export const SECTION_FIELDS_CONFIG: Record<TCoreSectionType, FieldConfig[]> = {
     { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
   ],
   projects: [
-    { field: "title", label: "Project Name", placeholder: "e.g. E-commerce Platform" },
-    { field: "subtitle", label: "Role/Organization", placeholder: "e.g. Lead Developer" },
+    { field: "title", label: "Role/Organization", placeholder: "e.g. Lead Developer" },
+    { field: "subtitle", label: "Project Name", placeholder: "e.g. E-commerce Platform" },
     { field: "startDate", label: "Start Date", placeholder: "e.g. 2021-01-01" },
     { field: "endDate", label: "End Date", placeholder: "e.g. 2021-12-31" },
     { field: "showDateDay", label: "Full Date" },
