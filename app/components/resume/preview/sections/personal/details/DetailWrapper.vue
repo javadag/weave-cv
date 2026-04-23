@@ -15,10 +15,12 @@ const hasUrl = computed(() => props.url && props.url.trim() !== "")
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 
+console.log(hasUrl.value)
+
 const combinedStyle = computed<CSSProperties>(() => ({
   color: configs.value.general.colors.primary.textColor,
   minWidth: "0",
-  textDecoration: configs.value.personal.details.underline && hasUrl ? "underline" : "",
+  textDecorationLine: configs.value.personal.details.underline && hasUrl.value ? "underline" : "none",
   textDecorationColor: configs.value.personal.details.color,
   ...props.style
 }))
