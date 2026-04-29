@@ -1,0 +1,283 @@
+{
+  "nav": {
+    "signIn": "ورود",
+    "dashboard": "داشبورد"
+  },
+  "hero": {
+    "badge": "{version} - اکنون با پشتیبانی از RTL",
+    "titleStart": "سازنده رزومه‌ای که",
+    "titleHighlight": "واقعاً کمکت می‌کند استخدام شوی.",
+    "subtitle": "یک قالب انتخاب کن، داستانت را وارد کن، و یک PDF کامل صادر کن — کنترل کامل طراحی، سازگار با ATS و رایگان.",
+    "buildBtn": "ساخت رزومه",
+    "browseBtn": "مشاهده قالب‌ها",
+    "trustNoCreditCard": "بدون کارت اعتباری",
+    "trustFreeResumes": "تا {max} رزومه رایگان",
+    "trustCloudSync": "همگام‌سازی ابری",
+    "savedAgo": "۲ ثانیه پیش ذخیره شد",
+    "atsCheck": "بررسی ATS موفق",
+    "sections": "بخش‌ها",
+    "addSection": "+ افزودن بخش"
+  },
+  "features": {
+    "badge": "ویژگی‌ها",
+    "title": "ساخته شده برای روشی که واقعاً دنبال کار می‌گردی.",
+    "subtitle": "بدون شعارهای هوش مصنوعی. فقط ابزارهایی که نیاز داری تا یک رزومه عالی را در یک بعدازظهر بسازی.",
+    "refinedTemplatesTitle": "قالب‌های پالایش‌شده",
+    "refinedTemplatesBody": "مدرن، کلاسیک، خلاقانه، مینیمال، پررنگ، آکادمیک. همه با ATS تست شده و قابل چاپ.",
+    "dragDropTitle": "بخش‌های کشیدنی",
+    "dragDropBody": "مرتب‌سازی مجدد، تبدیل به دو ستون، تغییر تراکم. پیش‌نمایش زنده، بدون شگفتی صفحه‌بندی.",
+    "pixelPdfTitle": "PDF بدون نقص",
+    "pixelPdfBody": "فونت‌های تعبیه‌شده، کرنینگ واقعی، A4 یا Letter. همان فایلی که هر استخدام‌کننده می‌بیند.",
+    "colorTypeTitle": "کنترل رنگ و نوشتار",
+    "colorTypeBody": "پالت، فونت، فاصله‌گذاری را تنظیم کن — در چارچوب پیش‌فرض‌های منطقی.",
+    "cloudSyncTitle": "همگام‌سازی ابری",
+    "cloudSyncBody": "تا {max} رزومه، ذخیره‌سازی خودکار، نسخه‌بندی. بدون از دست دادن پیش‌نویس، دستگاه عوض کن.",
+    "freeTitle": "رایگان",
+    "freeBody": "بدون پرداخت، بدون فروش اضافه. ما فقط می‌خواهیم شغل را بگیری."
+  },
+  "templates": {
+    "badge": "قالب‌ها",
+    "titleLine1": "یک نقطه شروع انتخاب کن.",
+    "titleLine2": "مال خودت کن.",
+    "subtitle": "برای مرور اسکرول کن — ردیف‌ها در جهت مخالف حرکت می‌کنند. هر قالب با ATS تست شده و قابل چاپ است.",
+    "seeAll": "مشاهده همه قالب‌ها ←",
+    "useTemplate": "استفاده از این قالب ←",
+    "use": "استفاده ←"
+  },
+  "cta": {
+    "badge": "رایگان برای همیشه · بدون کارت اعتباری",
+    "titleLine1": "رزومه‌ات را شروع کن.",
+    "titleLine2": "شغل را بگیر.",
+    "subtitle": "یک قالب انتخاب کن، داستانت را اضافه کن، PDF را صادر کن — در کمتر از ده دقیقه. بدون دیوار ثبت‌نام، بدون فروش اضافه، بدون تله.",
+    "buildBtn": "ساخت رزومه — رایگان",
+    "examplesBtn": "مشاهده نمونه‌ها",
+    "stat1": "میانگین ۷ دقیقه ساخت",
+    "stat2": "قالب‌های پالایش‌شده",
+    "stat3": "PDF بدون نقص",
+    "resumeExported": "رزومه صادر شد",
+    "atsScore": "امتیاز ATS: ۹۸/۱۰۰",
+    "keywords": "۱۱ کلمه کلیدی مطابقت یافت"
+  },
+  "footer": {
+    "tagline": "سازنده رزومه صادق و بی‌تکلف. رایگان، برای همیشه.",
+    "copyright": "© {year} Weave CV. تمامی حقوق محفوظ است.",
+    "madeWith": "ساخته شده با {heart} برای جویندگان کار در همه‌جا · مجوز MIT",
+    "colProduct": "محصول",
+    "colResources": "منابع",
+    "colCompany": "شرکت",
+    "colLegal": "حقوقی",
+    "linkFeatures": "ویژگی‌ها",
+    "linkHelpFaq": "راهنما و سوالات",
+    "linkChangelog": "تغییرات",
+    "linkAbout": "درباره",
+    "linkContact": "تماس",
+    "linkPrivacy": "حریم خصوصی",
+    "linkTerms": "شرایط استفاده"
+  },
+  "auth": {
+    "login": {
+      "title": "خوش برگشتی",
+      "subtitle": "برای ادامه وارد حساب خود شو",
+      "emailLabel": "آدرس ایمیل",
+      "emailPlaceholder": "آدرس ایمیل خود را وارد کن",
+      "passwordLabel": "رمز عبور",
+      "passwordPlaceholder": "رمز عبور خود را وارد کن",
+      "forgotPassword": "رمز عبور را فراموش کردی؟",
+      "signInBtn": "ورود",
+      "signingIn": "در حال ورود...",
+      "orContinueWith": "یا ادامه با",
+      "noAccount": "حساب کاربری نداری؟",
+      "signUpFree": "ثبت‌نام رایگان",
+      "errorEmail": "لطفاً آدرس ایمیل خود را وارد کن",
+      "errorPassword": "لطفاً رمز عبور خود را وارد کن",
+      "errorUnexpected": "خطای غیرمنتظره‌ای رخ داد"
+    },
+    "register": {
+      "title": "ایجاد حساب",
+      "subtitle": "برای شروع با حساب خود ثبت‌نام کن",
+      "emailLabel": "آدرس ایمیل",
+      "emailPlaceholder": "آدرس ایمیل خود را وارد کن",
+      "passwordLabel": "رمز عبور",
+      "passwordPlaceholder": "یک رمز عبور بساز",
+      "confirmPasswordLabel": "تأیید رمز عبور",
+      "confirmPasswordPlaceholder": "رمز عبور خود را تأیید کن",
+      "createBtn": "ایجاد حساب",
+      "creating": "در حال ایجاد حساب...",
+      "orContinueWith": "یا ادامه با",
+      "withGoogle": "ادامه با Google",
+      "withGithub": "ادامه با GitHub",
+      "haveAccount": "قبلاً حساب داری؟",
+      "signInHere": "اینجا وارد شو",
+      "errorEmail": "لطفاً آدرس ایمیل خود را وارد کن",
+      "errorPassword": "لطفاً رمز عبور خود را وارد کن",
+      "errorConfirm": "لطفاً رمز عبور خود را تأیید کن",
+      "errorMatch": "رمزهای عبور مطابقت ندارند",
+      "errorUnexpected": "خطای غیرمنتظره‌ای رخ داد"
+    }
+  },
+  "dashboard": {
+    "myResumes": {
+      "title": "رزومه‌های من",
+      "subtitle": "رزومه‌هایت را مدیریت و ویرایش کن",
+      "limitTitle": "به حد رزومه رسیدی",
+      "limitDesc": "به حداکثر {max} رزومه رسیده‌ای. یکی از رزومه‌های موجود را آرشیو کن تا بیشتر اضافه کنی.",
+      "errorTitle": "مشکلی در دریافت رزومه‌هایت پیش آمد",
+      "errorDesc": "لطفاً بعداً دوباره امتحان کن"
+    },
+    "profile": {
+      "title": "پروفایل",
+      "subtitle": "اطلاعات حساب شما.",
+      "fieldFullName": "نام کامل",
+      "fieldEmail": "ایمیل",
+      "readOnlyNote": "فیلدهای پروفایل توسط ارائه‌دهنده ورود مدیریت می‌شوند و اینجا قابل ویرایش نیستند."
+    },
+    "settings": {
+      "title": "تنظیمات",
+      "subtitle": "اولویت‌هایت را مدیریت کن.",
+      "appearanceTitle": "ظاهر",
+      "appearanceSubtitle": "انتخاب کن Weave CV روی این دستگاه چطور به نظر برسد.",
+      "darkMode": "حالت تاریک",
+      "darkModeDesc": "برای ویرایش دیر وقت، راحت‌تر برای چشم.",
+      "languageTitle": "زبان",
+      "languageSubtitle": "زبان رابط Weave CV.",
+      "languageLabel": "زبان"
+    },
+    "account": {
+      "title": "حساب",
+      "subtitle": "مدیریت حساب",
+      "deleteTitle": "حذف حساب",
+      "deleteDesc": "حساب، رزومه‌ها و تمام داده‌هایت را به‌طور دائمی حذف کن. این کار قابل بازگشت نیست.",
+      "deleteBtn": "حذف حساب",
+      "warningNote": "پس از حذف، داده‌هایت قابل بازیابی نخواهند بود."
+    }
+  },
+  "sidebar": {
+    "myResumes": "رزومه‌های من",
+    "profile": "پروفایل",
+    "settings": "تنظیمات",
+    "account": "حساب",
+    "logOut": "خروج"
+  },
+  "userDropdown": {
+    "dashboard": "داشبورد",
+    "logout": "خروج",
+    "loggedOut": "خارج شدی",
+    "loggedOutDesc": "با موفقیت از سیستم خارج شدی",
+    "errorTitle": "خطا",
+    "errorDesc": "خروج از سیستم ناموفق بود. لطفاً دوباره امتحان کن."
+  },
+  "common": {
+    "cancel": "لغو",
+    "delete": "حذف",
+    "error": "خطا",
+    "success": "موفقیت",
+    "toggleSidebar": "تغییر نوار کناری",
+    "withGoogle": "ادامه با Google",
+    "withGithub": "ادامه با GitHub"
+  },
+  "emptyState": {
+    "title": "هنوز رزومه‌ای نداری",
+    "subtitle": "اولین رزومه خود را برای شروع بساز"
+  },
+  "createResume": {
+    "button": "ساخت رزومه جدید",
+    "modalTitle": "یک قالب انتخاب کن",
+    "modalSubtitle": "برای شروع ساخت رزومه، یک قالب انتخاب کن",
+    "selectHint": "لطفاً برای ادامه یک قالب انتخاب کن",
+    "createBtn": "ساخت رزومه",
+    "successTitle": "موفقیت",
+    "successDesc": "رزومه با موفقیت ایجاد شد",
+    "errorTitle": "خطا",
+    "errorUnexpected": "خطای غیرمنتظره‌ای رخ داد"
+  },
+  "importResume": {
+    "button": "ورود اطلاعات",
+    "fromJson": "از فایل JSON",
+    "fromPdf": "از فایل PDF",
+    "pdfDesc": "استخراج با هوش مصنوعی",
+    "successTitle": "رزومه وارد شد",
+    "jsonSuccessDesc": "«{title}» با موفقیت وارد شد",
+    "pdfSuccessDesc": "بخش‌ها را بررسی و در صورت نیاز اصلاح کن.",
+    "failedTitle": "ورود اطلاعات ناموفق",
+    "errorInvalidJson": "فایل رزومه نامعتبر است: عنوان، محتوا یا تنظیمات وجود ندارد",
+    "errorPdfNoText": "متنی در این PDF یافت نشد. ممکن است تصویر اسکن‌شده باشد — یک PDF متنی امتحان کن.",
+    "errorUnexpected": "خطای غیرمنتظره‌ای رخ داد"
+  },
+  "resumeCard": {
+    "duplicate": "تکثیر",
+    "duplicating": "در حال تکثیر...",
+    "delete": "حذف",
+    "duplicateSuccessTitle": "موفقیت",
+    "duplicateSuccessDesc": "رزومه با موفقیت تکثیر شد",
+    "duplicateErrorTitle": "خطا",
+    "duplicateErrorDesc": "تکثیر رزومه ناموفق بود",
+    "createdAt": "ساخته شده {date}",
+    "updatedAt": "به‌روزرسانی شده {date}"
+  },
+  "deleteResumeModal": {
+    "title": "حذف رزومه",
+    "subtitle": "این کار قابل بازگشت نیست",
+    "messagePart1": "آیا مطمئنی می‌خواهی",
+    "messagePart2": "را حذف کنی؟ این کار رزومه و تمام داده‌های آن را به‌طور دائمی حذف خواهد کرد.",
+    "errorTitle": "حذف رزومه ناموفق بود",
+    "errorDesc": "لطفاً دوباره امتحان کن"
+  },
+  "deleteAccountModal": {
+    "title": "حذف حساب",
+    "subtitle": "این کار قابل بازگشت نیست",
+    "messagePart1": "آیا مطمئنی می‌خواهی حساب خود را به‌طور دائمی حذف کنی؟ این کار",
+    "messageStrong": "تمام رزومه‌ها و داده‌های شما",
+    "messagePart2": "را حذف خواهد کرد و قادر به بازیابی آن‌ها نخواهید بود.",
+    "successTitle": "حساب حذف شد",
+    "successDesc": "حساب شما و تمام داده‌های مرتبط حذف شدند.",
+    "errorTitle": "حذف حساب ناموفق بود",
+    "errorDesc": "لطفاً دوباره امتحان کن یا در صورت ادامه مشکل با پشتیبانی تماس بگیر."
+  },
+  "confirmPage": {
+    "errorTitle": "ورود ناموفق",
+    "tryAgain": "تلاش دوباره",
+    "contactSupport": "تماس با پشتیبانی",
+    "checkInbox": "صندوق ایمیل خود را بررسی کن",
+    "sentLinkTo": "یک لینک تأیید ارسال کردیم به",
+    "clickLinkHint": "روی لینک ایمیل کلیک کن تا حساب خود را فعال کنی. ممکن است یک دقیقه طول بکشد.",
+    "wrongEmail": "ایمیل اشتباه است؟",
+    "signUpAgain": "ثبت‌نام دوباره",
+    "verifyingEmail": "در حال تأیید ایمیل…",
+    "redirecting": "صبر کن، تا لحظه‌ای دیگر هدایت می‌شوی.",
+    "completing": "در حال تکمیل ورود…"
+  },
+  "forgotPassword": {
+    "title": "بازیابی رمز عبور",
+    "subtitle": "ایمیل خود را وارد کن تا یک لینک بازیابی برای شما ارسال کنیم",
+    "emailLabel": "آدرس ایمیل",
+    "emailPlaceholder": "آدرس ایمیل خود را وارد کن",
+    "submitBtn": "ارسال لینک بازیابی",
+    "sending": "در حال ارسال…",
+    "errorEmail": "لطفاً آدرس ایمیل خود را وارد کن",
+    "sentTitle": "صندوق ایمیل خود را بررسی کن",
+    "sentLinkTo": "یک لینک بازیابی ارسال کردیم به",
+    "sentHint": "روی لینک ایمیل کلیک کن تا رمز عبور جدید تنظیم کنی.",
+    "remembered": "یادت آمد؟",
+    "signIn": "ورود"
+  },
+  "resetPassword": {
+    "expiredTitle": "لینک منقضی شده",
+    "expiredSubtitle": "این لینک بازیابی رمز عبور دیگر معتبر نیست.",
+    "invalidAlertTitle": "لینک بازیابی نامعتبر",
+    "requestNewLink": "درخواست لینک جدید",
+    "contactSupport": "تماس با پشتیبانی",
+    "verifying": "در حال تأیید لینک بازیابی…",
+    "redirecting": "صبر کن، تا لحظه‌ای دیگر هدایت می‌شوی.",
+    "title": "تنظیم رمز عبور جدید",
+    "subtitle": "یک رمز عبور قوی برای حساب خود انتخاب کن",
+    "passwordLabel": "رمز عبور جدید",
+    "passwordPlaceholder": "حداقل ۶ کاراکتر",
+    "confirmPasswordLabel": "تأیید رمز عبور",
+    "confirmPasswordPlaceholder": "رمز عبور جدید را تکرار کن",
+    "submitBtn": "تنظیم رمز عبور جدید",
+    "saving": "در حال ذخیره…",
+    "errorEmpty": "لطفاً یک رمز عبور جدید وارد کن",
+    "errorShort": "رمز عبور باید حداقل ۸ کاراکتر باشد",
+    "errorMatch": "رمزهای عبور مطابقت ندارند"
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "nav": {
+    "signIn": "Sign in",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "badge": "{version} - now with RTL support",
+    "titleStart": "The résumé builder that",
+    "titleHighlight": "actually gets you hired.",
+    "subtitle": "Pick a template, drop in your story, export a perfect PDF, full design control, ATS-friendly by default and free.",
+    "buildBtn": "Build my résumé",
+    "browseBtn": "Browse templates",
+    "trustNoCreditCard": "No credit card",
+    "trustFreeResumes": "Up to {max} résumés free",
+    "trustCloudSync": "Cloud sync",
+    "savedAgo": "Saved 2s ago",
+    "atsCheck": "ATS check passed",
+    "sections": "Sections",
+    "addSection": "+ Add section"
+  },
+  "features": {
+    "badge": "Features",
+    "title": "Built for the way you actually job hunt.",
+    "subtitle": "No bloated AI gimmicks. Just the tools you need to ship a great résumé in an afternoon.",
+    "refinedTemplatesTitle": "Refined templates",
+    "refinedTemplatesBody": "Modern, classic, creative, minimal, bold, academic. All ATS-tested, all printable.",
+    "dragDropTitle": "Drag & drop sections",
+    "dragDropBody": "Reorder, swap to two columns, change density. Live preview, no page-break surprises.",
+    "pixelPdfTitle": "Pixel-perfect PDF",
+    "pixelPdfBody": "Embedded fonts, real kerning, A4 or Letter. The same file every recruiter sees.",
+    "colorTypeTitle": "Color & type control",
+    "colorTypeBody": "Tune palettes, fonts, spacing — bounded by sensible defaults you can't break.",
+    "cloudSyncTitle": "Cloud sync",
+    "cloudSyncBody": "Up to {max} résumés, autosaved, versioned. Switch devices without losing a draft.",
+    "freeTitle": "Free",
+    "freeBody": "No paywall, no upsell, no upsold features. We just want you to land the role."
+  },
+  "templates": {
+    "badge": "Templates",
+    "titleLine1": "Pick a starting point.",
+    "titleLine2": "Make it yours.",
+    "subtitle": "Scroll to browse — the rows drift in opposite directions as you move down the page. Every template is ATS-tested and printable.",
+    "seeAll": "See all templates →",
+    "useTemplate": "Use this template →",
+    "use": "Use →"
+  },
+  "cta": {
+    "badge": "Free forever · No credit card",
+    "titleLine1": "Start your résumé.",
+    "titleLine2": "Land the job.",
+    "subtitle": "Pick a template, add your story, export the PDF — in under ten minutes. No signup wall, no upsell, no catch.",
+    "buildBtn": "Build my résumé — free",
+    "examplesBtn": "See examples",
+    "stat1": "7-min average build",
+    "stat2": "Polished templates",
+    "stat3": "Pixel-perfect PDF",
+    "resumeExported": "Resume exported",
+    "atsScore": "ATS score: 98/100",
+    "keywords": "11 keywords matched"
+  },
+  "footer": {
+    "tagline": "The honest, no-nonsense résumé builder. Free, forever.",
+    "copyright": "© {year} Weave CV. All rights reserved.",
+    "madeWith": "Made with {heart} for job seekers everywhere · MIT licensed",
+    "colProduct": "Product",
+    "colResources": "Resources",
+    "colCompany": "Company",
+    "colLegal": "Legal",
+    "linkFeatures": "Features",
+    "linkHelpFaq": "Help & FAQ",
+    "linkChangelog": "Changelog",
+    "linkAbout": "About",
+    "linkContact": "Contact",
+    "linkPrivacy": "Privacy",
+    "linkTerms": "Terms"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your account to continue",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "forgotPassword": "Forgot password?",
+      "signInBtn": "Sign In",
+      "signingIn": "Signing in...",
+      "orContinueWith": "Or continue with",
+      "noAccount": "Don't have an account?",
+      "signUpFree": "Sign up for free",
+      "errorEmail": "Please enter your email address",
+      "errorPassword": "Please enter your password",
+      "errorUnexpected": "An unexpected error occurred"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Sign up to get started with your account",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a password",
+      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "createBtn": "Create Account",
+      "creating": "Creating account...",
+      "orContinueWith": "Or continue with",
+      "withGoogle": "Continue with Google",
+      "withGithub": "Continue with GitHub",
+      "haveAccount": "Already have an account?",
+      "signInHere": "Sign in here",
+      "errorEmail": "Please enter your email address",
+      "errorPassword": "Please enter your password",
+      "errorConfirm": "Please confirm your password",
+      "errorMatch": "Passwords do not match",
+      "errorUnexpected": "An unexpected error occurred"
+    }
+  },
+  "dashboard": {
+    "myResumes": {
+      "title": "My Resumes",
+      "subtitle": "Manage and edit your resumes",
+      "limitTitle": "Resume limit reached",
+      "limitDesc": "You have reached the maximum limit of {max} resumes. Archive an existing one to add more.",
+      "errorTitle": "Something went wrong while fetching your resumes",
+      "errorDesc": "Please try again later"
+    },
+    "profile": {
+      "title": "Profile",
+      "subtitle": "Your account information.",
+      "fieldFullName": "Full name",
+      "fieldEmail": "Email",
+      "readOnlyNote": "Profile fields are managed by your sign-in provider and can't be edited here."
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "Manage your preferences.",
+      "appearanceTitle": "Appearance",
+      "appearanceSubtitle": "Choose how Weave CV looks on this device.",
+      "darkMode": "Dark mode",
+      "darkModeDesc": "Easier on the eyes for late-night editing.",
+      "languageTitle": "Language",
+      "languageSubtitle": "Interface language for Weave CV.",
+      "languageLabel": "Language"
+    },
+    "account": {
+      "title": "Account",
+      "subtitle": "َManage your account.",
+      "deleteTitle": "Delete account",
+      "deleteDesc": "Permanently remove your account, resumes, and all data. This cannot be undone.",
+      "deleteBtn": "Delete account",
+      "warningNote": "Once deleted, your data cannot be recovered."
+    }
+  },
+  "sidebar": {
+    "myResumes": "My Resumes",
+    "profile": "Profile",
+    "settings": "Settings",
+    "account": "Account",
+    "logOut": "Log out"
+  },
+  "userDropdown": {
+    "dashboard": "Dashboard",
+    "logout": "Logout",
+    "loggedOut": "Logged out",
+    "loggedOutDesc": "You have been successfully logged out",
+    "errorTitle": "Error",
+    "errorDesc": "Failed to log out. Please try again."
+  },
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "error": "Error",
+    "success": "Success",
+    "toggleSidebar": "Toggle sidebar",
+    "withGoogle": "Continue with Google",
+    "withGithub": "Continue with GitHub"
+  },
+  "emptyState": {
+    "title": "No resumes yet",
+    "subtitle": "Create your first resume to get started"
+  },
+  "createResume": {
+    "button": "Create New Resume",
+    "modalTitle": "Choose a Template",
+    "modalSubtitle": "Select a template to start building your resume",
+    "selectHint": "Please select a template to continue",
+    "createBtn": "Create Resume",
+    "successTitle": "Success",
+    "successDesc": "Resume created successfully",
+    "errorTitle": "Error",
+    "errorUnexpected": "An unexpected error occurred"
+  },
+  "importResume": {
+    "button": "Import",
+    "fromJson": "From JSON",
+    "fromPdf": "From PDF",
+    "pdfDesc": "AI-powered extraction",
+    "successTitle": "Resume Imported",
+    "jsonSuccessDesc": "\"{title}\" imported successfully",
+    "pdfSuccessDesc": "Review and adjust the sections as needed.",
+    "failedTitle": "Import Failed",
+    "errorInvalidJson": "Invalid resume file: missing title, content, or configs",
+    "errorPdfNoText": "No text found in this PDF. It may be a scanned image — try a text-based PDF.",
+    "errorUnexpected": "An unexpected error occurred"
+  },
+  "resumeCard": {
+    "duplicate": "Duplicate",
+    "duplicating": "Duplicating...",
+    "delete": "Delete",
+    "duplicateSuccessTitle": "Success",
+    "duplicateSuccessDesc": "Resume duplicated successfully",
+    "duplicateErrorTitle": "Error",
+    "duplicateErrorDesc": "Failed to duplicate resume",
+    "createdAt": "Created {date}",
+    "updatedAt": "Updated {date}"
+  },
+  "deleteResumeModal": {
+    "title": "Delete Resume",
+    "subtitle": "This action cannot be undone",
+    "messagePart1": "Are you sure you want to delete",
+    "messagePart2": "? This will permanently remove the resume and all its data.",
+    "errorTitle": "Failed to delete resume",
+    "errorDesc": "Please try again"
+  },
+  "deleteAccountModal": {
+    "title": "Delete account",
+    "subtitle": "This action cannot be undone",
+    "messagePart1": "Are you sure you want to permanently delete your account? This will remove",
+    "messageStrong": "all your resumes and data",
+    "messagePart2": "and you will not be able to recover them.",
+    "successTitle": "Account deleted",
+    "successDesc": "Your account and all associated data have been removed.",
+    "errorTitle": "Failed to delete account",
+    "errorDesc": "Please try again or contact support if the problem persists."
+  },
+  "confirmPage": {
+    "errorTitle": "Sign-in failed",
+    "tryAgain": "Try again",
+    "contactSupport": "Contact support",
+    "checkInbox": "Check your inbox",
+    "sentLinkTo": "We sent a confirmation link to",
+    "clickLinkHint": "Click the link in the email to activate your account. It may take a minute to arrive.",
+    "wrongEmail": "Wrong email?",
+    "signUpAgain": "Sign up again",
+    "verifyingEmail": "Verifying your email…",
+    "redirecting": "Hold tight, you'll be redirected in a moment.",
+    "completing": "Completing sign-in…"
+  },
+  "forgotPassword": {
+    "title": "Reset password",
+    "subtitle": "Enter your email and we'll send you a reset link",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "submitBtn": "Send reset link",
+    "sending": "Sending…",
+    "errorEmail": "Please enter your email address",
+    "sentTitle": "Check your inbox",
+    "sentLinkTo": "We sent a reset link to",
+    "sentHint": "Click the link in the email to set a new password.",
+    "remembered": "Remembered it?",
+    "signIn": "Sign in"
+  },
+  "resetPassword": {
+    "expiredTitle": "Link expired",
+    "expiredSubtitle": "This password reset link is no longer valid.",
+    "invalidAlertTitle": "Reset link invalid",
+    "requestNewLink": "Request a new link",
+    "contactSupport": "Contact support",
+    "verifying": "Verifying reset link…",
+    "redirecting": "Hold tight, you'll be redirected in a moment.",
+    "title": "Set new password",
+    "subtitle": "Choose a strong password for your account",
+    "passwordLabel": "New Password",
+    "passwordPlaceholder": "At least 6 characters",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat your new password",
+    "submitBtn": "Set new password",
+    "saving": "Saving…",
+    "errorEmpty": "Please enter a new password",
+    "errorShort": "Password must be at least 8 characters",
+    "errorMatch": "Passwords do not match"
+  }
+}
