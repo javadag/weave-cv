@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { APP_VERSION } from "~/constants/config"
-import { MAX_RESUMES } from "~/constants/limits"
+import { APP_VERSION, MAX_RESUMES } from "~/constants/config"
 
 const { t } = useI18n()
 
@@ -119,7 +118,9 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
           </div>
           <div class="grid h-[480px] grid-cols-[160px_1fr] lg:h-[540px]">
             <div class="border-r border-default bg-muted p-3 text-xs">
-              <div class="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-dimmed">{{ $t("hero.sections") }}</div>
+              <div class="mb-2.5 text-[10px] font-semibold uppercase tracking-widest text-dimmed">
+                {{ $t("hero.sections") }}
+              </div>
               <div
                 v-for="(sec, i) in sidebarSections"
                 :key="sec"
@@ -132,7 +133,9 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
               >
                 {{ sec }}
               </div>
-              <div class="mt-4 cursor-pointer px-2.5 py-2 text-xs font-semibold text-primary">{{ $t("hero.addSection") }}</div>
+              <div class="mt-4 cursor-pointer px-2.5 py-2 text-xs font-semibold text-primary">
+                {{ $t("hero.addSection") }}
+              </div>
             </div>
             <div class="flex items-center justify-center bg-elevated dark:bg-default p-5">
               <div

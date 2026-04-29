@@ -5,7 +5,7 @@ import ImportResumeButton from "~/components/dashboard/ImportResumeButton.vue"
 import LoadingSkeleton from "~/components/dashboard/LoadingSkeleton.vue"
 import ResumeGrid from "~/components/dashboard/ResumeGrid.vue"
 import { useResumeCount } from "~/composables/useResumeCount"
-import { MAX_RESUMES } from "~/constants/limits"
+import { MAX_RESUMES } from "~/constants/config"
 
 definePageMeta({ layout: "dashboard" })
 

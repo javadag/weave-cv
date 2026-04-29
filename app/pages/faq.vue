@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { CONTACT_EMAIL } from "~/constants/config"
-import { MAX_RESUMES } from "~/constants/limits"
+import { CONTACT_EMAIL, MAX_RESUMES } from "~/constants/config"
 
 definePageMeta({ layout: "landing" })
 

@@ -1,5 +1,5 @@
 import type { serverSupabaseClient } from "#supabase/server"
-import { MAX_RESUMES } from "~/constants/limits"
+import { MAX_RESUMES } from "~/constants/config"
 import type { Database } from "~/types/database.types"
 
 export async function checkResumeLimit(

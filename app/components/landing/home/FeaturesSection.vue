@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MAX_RESUMES } from "~/constants/limits"
+import { MAX_RESUMES } from "~/constants/config"
 
 const { t } = useI18n()
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui"
-import { MAX_RESUMES } from "~/constants/limits"
+import { MAX_RESUMES } from "~/constants/config"
 import Logo from "../layout/Logo.vue"
 
 const open = defineModel<boolean>("open", { default: false })

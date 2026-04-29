@@ -17,3 +17,5 @@ export const CURRENT_SCHEMA_VERSION = 1
 // (changelogen) bumps it and the UI follows automatically.
 export const APP_VERSION = pkg.version
 export const CONTACT_EMAIL = "hello@weavecv.app"
+
+export const MAX_RESUMES = 3
