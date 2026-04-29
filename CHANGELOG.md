@@ -1,4 +1,29 @@
 
+## v2.3.0
+
+[compare changes](https://github.com/JavadAg/weave-cv/compare/v2.1.0...v2.3.0)
+
+### 🚀 Enhancements
+
+- Add autosave, offline support ([de3afae](https://github.com/JavadAg/weave-cv/commit/de3afae))
+- Add translation for en,fa ([61a4463](https://github.com/JavadAg/weave-cv/commit/61a4463))
+
+### 💅 Refactors
+
+- **landing:** Added new pages and design ([d607dc3](https://github.com/JavadAg/weave-cv/commit/d607dc3))
+- **dashboard:** Add sidebar and settings, import resume ([749b2e3](https://github.com/JavadAg/weave-cv/commit/749b2e3))
+- Single source for config, remove obsolete file ([6301b05](https://github.com/JavadAg/weave-cv/commit/6301b05))
+
+### 🏡 Chore
+
+- **release:** V2.1.1 ([a78f677](https://github.com/JavadAg/weave-cv/commit/a78f677))
+- **release:** V2.1.3 ([57992cd](https://github.com/JavadAg/weave-cv/commit/57992cd))
+- **release:** V2.2.0 ([1e08848](https://github.com/JavadAg/weave-cv/commit/1e08848))
+
+### ❤️ Contributors
+
+- Javadag <j.aghebati93@gmail.com>
+
 ## v2.2.0
 
 [compare changes](https://github.com/JavadAg/weave-cv/compare/v2.1.0...v2.2.0)
