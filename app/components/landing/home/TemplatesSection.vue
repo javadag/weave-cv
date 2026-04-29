@@ -1,0 +1,115 @@
+<script setup lang="ts">
+import { TEMPLATES } from "~/constants/templates"
+import TemplateCarouselCard from "./TemplateCarouselCard.vue"
+
+const SHIFT = 155
+
+const base = TEMPLATES.slice(0, 6).map((t, i) => ({
+  id: t.id,
+  name: t.name,
+  screenshot: `/images/templates/${i + 1}.png`
+}))
+
+const rowA = [...base, ...base]
+const rowB = [...base.toReversed(), ...base.toReversed()]
+
+// scrollProgress: 0 = section entering viewport from bottom
+//                 0.5 = section centred in viewport
+//                 1 = section exiting at top
+const scrollProgress = ref(0.5)
+const sectionRef = ref<HTMLElement>()
+
+function updateProgress() {
+  const el = sectionRef.value
+  if (!el) return
+  const rect = el.getBoundingClientRect()
+  const viewH = window.innerHeight
+  const total = viewH + rect.height
+  const scrolled = viewH - rect.top
+  scrollProgress.value = Math.max(0, Math.min(1, scrolled / total))
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", updateProgress, { passive: true })
+  updateProgress()
+})
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", updateProgress)
+})
+
+// Row A: starts shifted right (+SHIFT), ends shifted left (-SHIFT) → right-to-left on scroll down
+const offsetA = computed(() => SHIFT * (1 - 2 * scrollProgress.value))
+// Row B: starts shifted left (-SHIFT), ends shifted right (+SHIFT) → left-to-right on scroll down
+const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
+</script>
+
+<template>
+  <section ref="sectionRef" class="relative flex flex-col justify-center items-center w-full py-24 max-w-screen">
+    <!-- <div
+      v-motion
+      :initial="{ opacity: 0, y: 20 }"
+      :visible="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+      :visible-once="true"
+      class="mx-auto mb-10 flex w-full max-w-compact items-end justify-between px-6 lg:px-12"
+    >
+      <div>
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full border border-primary-200 bg-primary-50 px-3 py-1.5 text-xs font-semibold text-primary dark:border-primary/25 dark:bg-primary/10"
+        >
+          Templates
+        </span>
+        <h2 class="mt-5 text-balance text-4xl font-bold tracking-[-0.03em] text-highlighted sm:text-5xl">
+          Pick a starting point.<br />Make it yours.
+        </h2>
+        <p class="mt-4 max-w-md text-base leading-relaxed text-dimmed">
+          Scroll to browse — the rows drift in opposite directions as you move down the page. Every template is
+          ATS-tested and printable.
+        </p>
+      </div>
+      <div class="hidden shrink-0 items-center gap-4 sm:flex">
+        <UButton
+          to="/dashboard"
+          variant="outline"
+          class="shrink-0 rounded-xl border-default font-semibold transition-colors duration-200 hover:border-accented"
+        >
+          See all templates →
+        </UButton>
+      </div>
+    </div> -->
+    <div
+      class="relative flex w-full justify-center items-center overflow-hidden flex-col pointer-events-none"
+      style="transform: translateZ(0)"
+    >
+      <div
+        class="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 sm:w-20 lg:w-[120px]"
+        style="background: linear-gradient(90deg, var(--ui-bg), transparent)"
+      />
+      <div
+        class="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 sm:w-20 lg:w-[120px]"
+        style="background: linear-gradient(270deg, var(--ui-bg), transparent)"
+      />
+
+      <!-- Row A -->
+      <div
+        class="flex gap-4 sm:gap-5 will-change-transform transition-transform duration-[80ms] ease-out"
+        :style="{ transform: `translate3d(${offsetA}px, 0, 0)` }"
+      >
+        <TemplateCarouselCard v-for="(t, i) in rowA" :key="'a' + i" :name="t.name" :screenshot="t.screenshot" />
+      </div>
+
+      <!-- Row B -->
+      <div
+        class="mt-4 flex gap-4 sm:mt-5 sm:gap-5 will-change-transform transition-transform duration-[80ms] ease-out"
+        :style="{ transform: `translate3d(${offsetB}px, 0, 0)` }"
+      >
+        <TemplateCarouselCard v-for="(t, i) in rowB" :key="'b' + i" :name="t.name" :screenshot="t.screenshot" />
+      </div>
+    </div>
+
+    <!-- <div class="mx-auto mt-8 flex w-full max-w-compact justify-center px-6 sm:hidden">
+      <UButton to="/dashboard" variant="outline" class="rounded-xl border-default font-semibold">
+        See all templates →
+      </UButton>
+    </div> -->
+  </section>
+</template>

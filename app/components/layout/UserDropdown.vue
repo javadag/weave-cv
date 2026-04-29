@@ -1,8 +1,8 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const router = useRouter()
-const route = useRoute()
 const toast = useToast()
 
 const userEmail = computed(() => user.value?.email || "")
@@ -20,16 +20,14 @@ const userInitials = computed(() => {
 
 const userAvatar = computed(() => user.value?.user_metadata?.avatar_url || null)
 
-const isDashboard = computed(() => route.path === "/dashboard")
-
 const handleLogout = async () => {
   try {
     const { error } = await supabase.auth.signOut()
     if (error) throw error
 
     toast.add({
-      title: "Logged out",
-      description: "You have been successfully logged out",
+      title: t("userDropdown.loggedOut"),
+      description: t("userDropdown.loggedOutDesc"),
       color: "success"
     })
 
@@ -37,42 +35,35 @@ const handleLogout = async () => {
   } catch (error) {
     console.error("Logout error:", error)
     toast.add({
-      title: "Error",
-      description: "Failed to log out. Please try again.",
+      title: t("userDropdown.errorTitle"),
+      description: t("userDropdown.errorDesc"),
       color: "error"
     })
   }
 }
 
-const menuItems = computed(() => {
-  const items = []
-
-  if (!isDashboard.value) {
-    items.push({
-      label: "Dashboard",
-      icon: "i-lucide-layout-dashboard",
-      onSelect: () => router.push("/dashboard")
-    })
-  }
-
-  items.push({
-    label: "Logout",
+const menuItems = computed(() => [
+  {
+    label: t("userDropdown.dashboard"),
+    icon: "i-lucide-layout-dashboard",
+    onSelect: () => router.push("/dashboard")
+  },
+  {
+    label: t("userDropdown.logout"),
     icon: "i-lucide-log-out",
     onSelect: handleLogout
-  })
-
-  return [items]
-})
+  }
+])
 </script>
 
 <template>
   <UDropdownMenu v-if="user" :items="menuItems" :popper="{ placement: 'bottom-end' }">
-    <UButton color="neutral" variant="ghost" size="sm" class="gap-2">
+    <UButton color="neutral" variant="ghost" size="sm" class="gap-2 rounded-full border border-muted px-1.5">
       <UAvatar v-if="userAvatar" :src="userAvatar" :alt="userEmail" size="xs" class="ring-2 ring-default/20" />
       <UAvatar v-else :alt="userEmail" size="xs" class="ring-2 ring-default/20 bg-primary text-primary-foreground">
         {{ userInitials }}
       </UAvatar>
-      <span class="hidden sm:inline text-sm font-medium text-default">{{ userEmail }}</span>
+      <span class="hidden sm:inline font-medium text-[13px]">{{ userEmail }}</span>
       <UIcon name="i-lucide-chevron-down" class="w-4 h-4 text-muted" />
     </UButton>
   </UDropdownMenu>

@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
   "type": "module",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -41,7 +41,7 @@
     "pdfjs-dist": "^5.7.284",
     "pinia": "^3.0.3",
     "puppeteer-core": "^24.29.0",
-    "reka-ui": "^2.5.0",
+    "reka-ui": "^2.9.6",
     "sortablejs": "^1.15.6",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",

@@ -1,1 +1,1 @@
-export const MAX_RESUMES_PER_USER = 4
+export const MAX_RESUMES = 3

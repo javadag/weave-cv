@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import BenefitsSection from "~/components/landing/BenefitsSection.vue"
-import CTASection from "~/components/landing/CTASection.vue"
-import FeaturesSection from "~/components/landing/FeaturesSection.vue"
-import HeroSection from "~/components/landing/HeroSection.vue"
-import LandingFooter from "~/components/landing/LandingFooter.vue"
+import CTASection from "~/components/landing/home/CTASection.vue"
+import FeaturesSection from "~/components/landing/home/FeaturesSection.vue"
+import HeroSection from "~/components/landing/home/HeroSection.vue"
+import TemplatesSection from "~/components/landing/home/TemplatesSection.vue"
+
+definePageMeta({
+  layout: "landing"
+})
 
 useHead({
   title: "Weave CV - Create Professional Resumes",
@@ -37,11 +40,8 @@ useHead({
 </script>
 
 <template>
-  <div class="grid w-full">
-    <HeroSection />
-    <FeaturesSection />
-    <BenefitsSection />
-    <CTASection />
-    <LandingFooter />
-  </div>
+  <HeroSection />
+  <FeaturesSection />
+  <TemplatesSection />
+  <CTASection />
 </template>
