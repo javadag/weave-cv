@@ -1,7 +1,7 @@
 {
   "name": "nuxt-app",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -12,9 +12,9 @@
     "update-types": "bash scripts/update-types.sh",
     "prepare": "husky install",
     "changelog": "changelogen --output CHANGELOG.md",
-    "release:patch": "changelogen --release --bump patch",
-    "release:minor": "changelogen --release --bump minor",
-    "release:major": "changelogen --release --bump major"
+    "release:patch": "changelogen --release --no-tag --bump patch",
+    "release:minor": "changelogen --release --no-tag --bump minor",
+    "release:major": "changelogen --release --no-tag --bump major"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.68",
