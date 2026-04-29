@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import ChangeTemplateModal from "./ChangeTemplateModal.vue"
 import Download from "./Download.vue"
 import SaveChanges from "./SaveChanges.vue"
 
 const saving = ref(false)
+const isTemplateModalOpen = ref(false)
 
 const resumeStore = useResumeStore()
 const { title } = storeToRefs(resumeStore)
@@ -46,13 +48,23 @@ const titleModel = computed({
       </UInput>
     </div>
     <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+      <UButton
+        color="neutral"
+        variant="outline"
+        size="lg"
+        icon="i-lucide-layout-template"
+        @click="isTemplateModalOpen = true"
+      >
+        <span class="hidden sm:inline">Change Template</span>
+      </UButton>
       <div
         class="flex items-center rounded-lg bg-elevated/50 p-1 gap-1 sm:gap-2 border border-muted shadow-sm backdrop-blur-sm"
       >
-        <SaveChanges :saving="saving" :disabled="saving" @saving="saving = $event" />
+        <SaveChanges @saving="saving = $event" />
         <Download :disabled="saving" />
         <!-- <Export :disabled="saving" /> -->
       </div>
     </div>
+    <ChangeTemplateModal v-model="isTemplateModalOpen" />
   </div>
 </template>

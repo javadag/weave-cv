@@ -1,67 +1,27 @@
 <script setup lang="ts">
-import { FetchError } from "ofetch"
-import { DUMMY_CORE_SECTIONS, DUMMY_PERSONAL_SECTION, DUMMY_TITLE } from "~/constants/dummyData"
 import { PAPER_SIZES } from "~/constants/papers"
 import { TEMPLATES, type Template } from "~/constants/templates"
-import type { TResume } from "~/types/resume.types"
 
-const { t } = useI18n()
 const modelValue = defineModel<boolean>({ default: false })
 const selectedTemplate = ref<Template | null>(null)
-const isCreating = ref(false)
 
+const configsStore = useConfigsStore()
 const toast = useToast()
-
-const emits = defineEmits<{
-  created: [resume: TResume]
-}>()
 
 const handleTemplateSelect = (template: Template) => {
   selectedTemplate.value = template
 }
 
-const handleCreate = async () => {
+const handleApply = () => {
   if (!selectedTemplate.value) return
-
-  isCreating.value = true
-  try {
-    const newResume = await $fetch<TResume>("/api/resumes", {
-      method: "POST",
-      body: {
-        title: DUMMY_TITLE,
-        content: {
-          personal: DUMMY_PERSONAL_SECTION,
-          core: DUMMY_CORE_SECTIONS
-        },
-        configs: selectedTemplate.value.configs
-      }
-    })
-
-    if (!newResume?.id) {
-      throw new Error("Resume was created but no ID was returned")
-    }
-
-    toast.add({
-      title: t("createResume.successTitle"),
-      description: t("createResume.successDesc"),
-      color: "success"
-    })
-
-    emits("created", newResume)
-
-    modelValue.value = false
-    selectedTemplate.value = null
-  } catch (error) {
-    console.error("Failed to create resume:", error)
-
-    toast.add({
-      title: t("createResume.errorTitle"),
-      description: error instanceof FetchError ? error.statusMessage : t("createResume.errorUnexpected"),
-      color: "error"
-    })
-  } finally {
-    isCreating.value = false
-  }
+  configsStore.setConfigs(selectedTemplate.value.configs)
+  toast.add({
+    title: "Template Applied",
+    description: `"${selectedTemplate.value.name}" has been applied — your content is preserved`,
+    color: "success"
+  })
+  modelValue.value = false
+  selectedTemplate.value = null
 }
 
 const handleCancel = () => {
@@ -70,14 +30,12 @@ const handleCancel = () => {
 }
 
 watch(modelValue, (isOpen) => {
-  if (!isOpen) {
-    selectedTemplate.value = null
-  }
+  if (!isOpen) selectedTemplate.value = null
 })
 </script>
 
 <template>
-  <UModal v-model:open="modelValue" :prevent-close="isCreating" class="max-w-compact">
+  <UModal v-model:open="modelValue" class="max-w-compact">
     <template #content>
       <UCard>
         <template #header>
@@ -85,21 +43,21 @@ watch(modelValue, (isOpen) => {
             <div
               class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center"
             >
-              <UIcon name="i-lucide-file-text" class="w-5 h-5 text-primary" />
+              <UIcon name="i-lucide-layout-template" class="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-default">{{ $t("createResume.modalTitle") }}</h3>
-              <p class="text-sm text-muted mt-1">{{ $t("createResume.modalSubtitle") }}</p>
+              <h3 class="text-lg font-semibold text-default">Change Template</h3>
+              <p class="text-sm text-muted mt-1">Pick a new style — your content will be preserved</p>
             </div>
           </div>
         </template>
+
         <div class="py-2">
           <div class="flex flex-wrap items-start max-h-[700px] overflow-scroll justify-start gap-4">
             <button
               v-for="template in TEMPLATES"
               :key="template.id"
               type="button"
-              :disabled="isCreating"
               :style="{
                 aspectRatio: `${PAPER_SIZES['A4'].w / PAPER_SIZES['A4'].h}`,
                 width: `${PAPER_SIZES['A4'].w * 0.5}mm`
@@ -108,8 +66,7 @@ watch(modelValue, (isOpen) => {
                 'group relative flex flex-col items-center justify-between rounded-lg border-2 p-4 text-left transition-all duration-200 hover:shadow-lg',
                 selectedTemplate?.id === template.id
                   ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
-                  : 'border-default/20 hover:border-primary/40 bg-default/50',
-                isCreating && 'opacity-50 cursor-not-allowed'
+                  : 'border-default/20 hover:border-primary/40 bg-default/50'
               ]"
               @click="handleTemplateSelect(template)"
             >
@@ -139,20 +96,14 @@ watch(modelValue, (isOpen) => {
             </button>
           </div>
           <div v-if="!selectedTemplate" class="mt-4 p-3 rounded-lg bg-muted/50 border border-default/20">
-            <p class="text-sm text-muted text-center">{{ $t("createResume.selectHint") }}</p>
+            <p class="text-sm text-muted text-center">Select a template to apply</p>
           </div>
         </div>
+
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton color="neutral" variant="ghost" :disabled="isCreating" @click="handleCancel"> {{ $t("common.cancel") }} </UButton>
-            <UButton
-              color="primary"
-              :disabled="!selectedTemplate || isCreating"
-              :loading="isCreating"
-              @click="handleCreate"
-            >
-              {{ $t("createResume.createBtn") }}
-            </UButton>
+            <UButton color="neutral" variant="ghost" @click="handleCancel">Cancel</UButton>
+            <UButton color="primary" :disabled="!selectedTemplate" @click="handleApply"> Apply Template </UButton>
           </div>
         </template>
       </UCard>
