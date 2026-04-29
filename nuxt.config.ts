@@ -13,8 +13,24 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-tiptap-editor",
     "@nuxt/image",
-    "@vueuse/motion/nuxt"
+    "@vueuse/motion/nuxt",
+    "@nuxtjs/i18n"
   ],
+  i18n: {
+    baseUrl: "https://weavecv.com",
+    strategy: "no_prefix",
+    defaultLocale: "en",
+    locales: [
+      { code: "en", language: "en-US", name: "English", file: "en.json", dir: "ltr" },
+      { code: "fa", language: "fa-IR", name: "Persian (فارسی)", file: "fa.json", dir: "rtl" }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "weave-cv:language",
+      redirectOn: "root",
+      alwaysRedirect: false
+    }
+  },
   runtimeConfig: {
     public: {
       motion: {
@@ -40,8 +56,8 @@ export default defineNuxtConfig({
   supabase: {
     types: "~/types/database.types.ts",
     redirectOptions: {
-      exclude: ["/", "/register"],
-      include: ["/dashboard", "/editor(/*)?", "/login"],
+      exclude: ["/", "/register", "/forgot-password", "/reset-password"],
+      include: ["/dashboard(/*)?", "/editor(/*)?", "/login"],
       login: "/login",
       callback: "/confirm"
     }

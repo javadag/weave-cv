@@ -10,6 +10,7 @@ export default withNuxt(eslintPluginUnicorn.configs.recommended, eslintConfigPre
     "unicorn/no-for-loop": "off",
     "unicorn/no-null": "off",
     "vue/no-v-html": "off",
-    "vue/no-v-text-v-html-on-component": "off"
+    "vue/no-v-text-v-html-on-component": "off",
+    "vue/no-multiple-template-root": "off"
   }
 })
