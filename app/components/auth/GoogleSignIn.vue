@@ -25,6 +25,6 @@ const signInWithGoogle = async () => {
       class="text-xs size-5 bg-gradient-to-r from-blue-500 to-red-500 rounded-sm flex items-center justify-center font-bold text-inverted"
       >G</span
     >
-    Continue with Google
+    {{ $t("common.withGoogle") }}
   </UButton>
 </template>
