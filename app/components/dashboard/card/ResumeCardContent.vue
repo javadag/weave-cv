@@ -8,14 +8,14 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const { locale } = useI18n()
+
 const formatDate = (dateString: string | null) => {
   if (!dateString) return ""
-  return new Date(dateString).toLocaleDateString("en-US", {
+  return new Date(dateString).toLocaleDateString(locale.value === "fa" ? "fa-IR" : "en-US", {
     year: "numeric",
     month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+    day: "numeric"
   })
 }
 
@@ -38,9 +38,9 @@ const handleEdit = (id: string) => {
       />
     </div>
     <div class="flex justify-between items-center text-xs text-muted">
-      <span>Created {{ formatDate(props.resume.created_at) }}</span>
+      <span>{{ $t("resumeCard.createdAt", { date: formatDate(props.resume.created_at) }) }}</span>
       <span v-if="props.resume.updated_at !== props.resume.created_at">
-        Updated {{ formatDate(props.resume.updated_at) }}
+        {{ $t("resumeCard.updatedAt", { date: formatDate(props.resume.updated_at) }) }}
       </span>
     </div>
   </div>

@@ -14,6 +14,7 @@ const emits = defineEmits<{
   refresh: []
 }>()
 
+const { t } = useI18n()
 const isDeleteModalOpen = ref(false)
 const isDuplicating = ref(false)
 const toast = useToast()
@@ -37,8 +38,8 @@ const handleDuplicateClick = async () => {
     })
 
     toast.add({
-      title: "Success",
-      description: "Resume duplicated successfully",
+      title: t("resumeCard.duplicateSuccessTitle"),
+      description: t("resumeCard.duplicateSuccessDesc"),
       color: "success"
     })
 
@@ -47,8 +48,8 @@ const handleDuplicateClick = async () => {
     console.error("Failed to duplicate resume:", error)
 
     toast.add({
-      title: "Error",
-      description: "Failed to duplicate resume",
+      title: t("resumeCard.duplicateErrorTitle"),
+      description: t("resumeCard.duplicateErrorDesc"),
       color: "error"
     })
   } finally {
@@ -68,13 +69,13 @@ const handleDuplicateClick = async () => {
           :items="[
             [
               {
-                label: isDuplicating ? 'Duplicating...' : 'Duplicate',
+                label: isDuplicating ? $t('resumeCard.duplicating') : $t('resumeCard.duplicate'),
                 icon: 'i-lucide-copy',
                 disabled: isDuplicating || disableDuplicate,
                 onSelect: () => handleDuplicateClick()
               },
               {
-                label: 'Delete',
+                label: $t('resumeCard.delete'),
                 icon: 'i-lucide-trash',
                 onSelect: () => handleDeleteClick()
               }

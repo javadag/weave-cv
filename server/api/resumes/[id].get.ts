@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from "#supabase/server"
-import { CURRENT_SCHEMA_VERSION } from "~/constants/version"
+import { CURRENT_SCHEMA_VERSION } from "~/constants/config"
 import type { Json } from "~/types/database.types"
 import { migrateResumeData } from "~/utils/migrations/migrations"
 import { requireAuth } from "../../utils/auth"

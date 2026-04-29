@@ -1,5 +1,5 @@
 import type { serverSupabaseClient } from "#supabase/server"
-import { MAX_RESUMES_PER_USER } from "~/constants/limits"
+import { MAX_RESUMES } from "~/constants/limits"
 import type { Database } from "~/types/database.types"
 
 export async function checkResumeLimit(
@@ -19,11 +19,11 @@ export async function checkResumeLimit(
     })
   }
 
-  if (count !== null && count >= MAX_RESUMES_PER_USER) {
+  if (count !== null && count >= MAX_RESUMES) {
     const actionText = action === "creating" ? "creating a new one" : "duplicating"
     throw createError({
       statusCode: 403,
-      statusMessage: `You have reached the maximum limit of ${MAX_RESUMES_PER_USER} resumes. Please delete an existing resume before ${actionText}.`
+      statusMessage: `You have reached the maximum limit of ${MAX_RESUMES} resumes. Please delete an existing resume before ${actionText}.`
     })
   }
 }

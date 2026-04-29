@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from "#supabase/server"
-import { CURRENT_SCHEMA_VERSION } from "~/constants/version"
+import { CURRENT_SCHEMA_VERSION } from "~/constants/config"
 import type { TablesInsert } from "~/types/database.types"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"

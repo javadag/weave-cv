@@ -25,8 +25,16 @@ const handleResumeCreated = (resume: TResume) => {
 
 <template>
   <div>
-    <UButton color="primary" size="lg" icon="i-lucide-plus" :disabled="disabled" @click="handleModalOpen">
-      <slot>Create New Resume</slot>
+    <UButton
+      :ui="{
+        leadingIcon: 'size-4'
+      }"
+      color="primary"
+      icon="i-lucide-plus"
+      :disabled="disabled"
+      @click="handleModalOpen"
+    >
+      <slot>{{ $t("createResume.button") }}</slot>
     </UButton>
     <TemplateSelectionModal v-model="isModalOpen" @created="handleResumeCreated" />
   </div>

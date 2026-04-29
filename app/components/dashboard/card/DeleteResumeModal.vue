@@ -7,6 +7,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const { t } = useI18n()
 const modelValue = defineModel<boolean>({ default: false })
 const isDeleting = ref(false)
 
@@ -27,8 +28,8 @@ const handleDelete = async () => {
   } catch (error) {
     console.error("Failed to delete resume:", error)
     toast.add({
-      title: "Failed to delete resume",
-      description: "Please try again",
+      title: t("deleteResumeModal.errorTitle"),
+      description: t("deleteResumeModal.errorDesc"),
       color: "error"
     })
   } finally {
@@ -52,19 +53,18 @@ const handleCancel = () => {
               <UIcon name="i-lucide-alert-triangle" class="w-5 h-5 text-red-600 dark:text-red-400" />
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-default">Delete Resume</h3>
-              <p class="text-sm text-muted mt-1">This action cannot be undone</p>
+              <h3 class="text-lg font-semibold text-default">{{ $t("deleteResumeModal.title") }}</h3>
+              <p class="text-sm text-muted mt-1">{{ $t("deleteResumeModal.subtitle") }}</p>
             </div>
           </div>
         </template>
         <p class="text-sm text-default">
-          Are you sure you want to delete <strong>{{ resume.title }}</strong
-          >? This will permanently remove the resume and all its data.
+          {{ $t("deleteResumeModal.messagePart1") }} <strong>{{ resume.title }}</strong>{{ $t("deleteResumeModal.messagePart2") }}
         </p>
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton color="neutral" variant="ghost" :disabled="isDeleting" @click="handleCancel"> Cancel </UButton>
-            <UButton color="error" :loading="isDeleting" @click="handleDelete"> Delete </UButton>
+            <UButton color="neutral" variant="ghost" :disabled="isDeleting" @click="handleCancel"> {{ $t("common.cancel") }} </UButton>
+            <UButton color="error" :loading="isDeleting" @click="handleDelete"> {{ $t("common.delete") }} </UButton>
           </div>
         </template>
       </UCard>
