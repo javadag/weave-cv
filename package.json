@@ -10,11 +10,12 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "update-types": "bash scripts/update-types.sh",
+    "build:pdf-css": "tailwindcss -i app/assets/css/tailwind.css -o public/tailwind-pdf.css --minify",
     "prepare": "husky install",
     "changelog": "changelogen --output CHANGELOG.md",
-    "release:patch": "changelogen --release --no-tag --bump patch",
-    "release:minor": "changelogen --release --no-tag --bump minor",
-    "release:major": "changelogen --release --no-tag --bump major"
+    "release:patch": "changelogen --release --bump patch",
+    "release:minor": "changelogen --release --bump minor",
+    "release:major": "changelogen --release --bump major"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.68",
