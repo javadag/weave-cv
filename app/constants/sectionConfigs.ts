@@ -1,40 +1,12 @@
 import type { TCoreSectionType } from "~/utils/schemas/content.schema"
+import { SECTIONS_REGISTRY, type SectionConfigOption } from "~/constants/sections/registry"
 
-// Configuration options available for each section type
-export type SectionConfigOption =
-  | "variant"
-  | "separator"
-  | "titleSubtitleVariant"
-  | "dateLocationVariant"
-  | "subTitleFirst"
-  | "grids"
-  | "typography"
+export type { SectionConfigOption } from "~/constants/sections/registry"
 
-// Configuration mapping for each section type
-export const SECTION_CONFIGS_CONFIG: Record<TCoreSectionType, SectionConfigOption[]> = {
-  // Basic sections
-  summary: [],
-  skills: ["variant", "separator", "grids", "typography"],
-  languages: ["variant", "separator", "grids", "typography"],
-  certificates: ["variant", "separator", "grids", "typography"],
+export const SECTION_CONFIGS_CONFIG: Record<TCoreSectionType, SectionConfigOption[]> = Object.fromEntries(
+  Object.entries(SECTIONS_REGISTRY).map(([key, descriptor]) => [key, descriptor.configOptions])
+) as Record<TCoreSectionType, SectionConfigOption[]>
 
-  // Advanced sections
-  experiences: ["variant", "separator", "titleSubtitleVariant", "dateLocationVariant", "subTitleFirst", "typography"],
-  educations: ["variant", "separator", "titleSubtitleVariant", "dateLocationVariant", "subTitleFirst", "typography"],
-  projects: ["variant", "separator", "titleSubtitleVariant", "dateLocationVariant", "subTitleFirst", "typography"],
-  awards: ["variant", "separator", "titleSubtitleVariant", "dateLocationVariant", "subTitleFirst", "typography"],
-  courses: ["variant", "separator", "titleSubtitleVariant", "dateLocationVariant", "subTitleFirst", "typography"]
-}
-
-// Section display names and icons
-export const SECTION_DISPLAY_CONFIG: Record<TCoreSectionType, { label: string; icon: string }> = {
-  summary: { label: "Summary", icon: "i-lucide-book-open" },
-  skills: { label: "Skills", icon: "i-lucide-wrench" },
-  languages: { label: "Languages", icon: "i-lucide-globe" },
-  certificates: { label: "Certificates", icon: "i-lucide-award" },
-  experiences: { label: "Experience", icon: "i-lucide-briefcase" },
-  educations: { label: "Education", icon: "i-lucide-graduation-cap" },
-  projects: { label: "Projects", icon: "i-lucide-folder-open" },
-  awards: { label: "Awards", icon: "i-lucide-trophy" },
-  courses: { label: "Courses", icon: "i-lucide-book" }
-}
+export const SECTION_DISPLAY_CONFIG: Record<TCoreSectionType, { label: string; icon: string }> = Object.fromEntries(
+  Object.entries(SECTIONS_REGISTRY).map(([key, descriptor]) => [key, { label: descriptor.label, icon: descriptor.icon }])
+) as Record<TCoreSectionType, { label: string; icon: string }>

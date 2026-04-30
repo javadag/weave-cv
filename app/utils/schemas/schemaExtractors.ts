@@ -22,10 +22,10 @@ function extractNumberConstraints(schema: z.ZodNumber): { min?: number; max?: nu
 }
 
 export function extractNumberConstraintsFromPath(
-  parentSchema: z.ZodObject<Record<string, z.ZodTypeAny>>,
+  parentSchema: z.ZodPrefault<z.ZodObject<Record<string, z.ZodTypeAny>>> | z.ZodObject<Record<string, z.ZodTypeAny>>,
   path: string
 ) {
-  const shape = parentSchema.shape
+  const shape = parentSchema instanceof z.ZodPrefault ? parentSchema.unwrap().shape : parentSchema.shape
   const fieldSchema = shape[path]
 
   if (fieldSchema && fieldSchema instanceof z.ZodNumber) {

@@ -1,5 +1,6 @@
 import { DEFAULT_CONFIGS } from "~/constants/default"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
+import { mergeConfigs } from "~/utils/configs/mergeConfigs"
 
 export const useConfigsStore = defineStore("configs", {
   state: () => ({
@@ -7,7 +8,7 @@ export const useConfigsStore = defineStore("configs", {
   }),
   actions: {
     setConfigs(value: TConfigs) {
-      this.configs = value
+      this.configs = mergeConfigs(DEFAULT_CONFIGS, value)
     },
     updateOrder(type: "oneCol" | "twoCol", value: string[] | { left: string[]; right: string[] }) {
       this.$patch((state) => {

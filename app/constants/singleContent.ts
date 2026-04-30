@@ -1,94 +1,17 @@
+import { SECTIONS_REGISTRY } from "~/constants/sections/registry"
 import type { TAdvancedContent, TBasicContent } from "~/utils/schemas/content.schema"
 
 /* Used for adding new content to sections */
 
-export const SUMMARY_ITEM: Omit<TBasicContent, "id"> = {
-  isHidden: false,
-  title: "Professional Summary",
-  description:
-    "<p>Dedicated software engineer with expertise in full-stack development and cloud architecture. Proven track record of delivering scalable solutions and leading technical teams in fast-paced environments.</p>"
-}
-
-export const EXPERIENCE_ITEM: Omit<TAdvancedContent, "id"> = {
-  isHidden: false,
-  url: "https://innovatecorp.com",
-  subtitle: "InnovateCorp Solutions",
-  title: "Senior Software Engineer",
-  startDate: "2022-03-01",
-  endDate: "2024-08-01",
-  present: false,
-  showDateDay: true,
-  location: "Austin, TX",
-  description:
-    "<ul><li><p>Led development of microservices architecture serving 100K+ daily users.</p></li><li><p>Mentored junior developers and established code review best practices.</p></li><li><p>Implemented CI/CD pipelines reducing deployment time by 60%.</p></li></ul>"
-}
-
-export const EDUCATION_ITEM: Omit<TAdvancedContent, "id"> = {
-  isHidden: false,
-  subtitle: "Stanford University",
-  title: "Master of Science in Software Engineering",
-  startDate: "2017-09-01",
-  endDate: "2019-05-01",
-  showDateDay: true,
-  location: "Stanford, CA",
-  description:
-    "<ul><li><p>Specialized in distributed systems and machine learning applications</p></li><li><p>Graduated Magna Cum Laude with GPA 3.8/4.0</p></li></ul>"
-}
-
-export const COURSE_ITEM: Omit<TAdvancedContent, "id"> = {
-  isHidden: false,
-  title: "Advanced React Patterns",
-  subtitle: "Frontend Masters",
-  startDate: "2023-06-01",
-  endDate: "2023-08-01",
-  present: false,
-  showDateDay: true,
-  location: "Online",
-  description:
-    "<ul><li><p>Mastered advanced React concepts including hooks, context, and performance optimization</p></li><li><p>Built complex applications using modern React ecosystem tools</p></li></ul>"
-}
-
-export const AWARD_ITEM: Omit<TAdvancedContent, "id"> = {
-  isHidden: false,
-  title: "Excellence in Innovation",
-  subtitle: "Tech Industry Awards",
-  startDate: "2023-11-01",
-  endDate: "2023-11-01",
-  present: false,
-  showDateDay: true,
-  location: "San Francisco, CA",
-  description: "<p>Recognized for outstanding contribution to open-source projects and community building</p>"
-}
-
-export const PROJECT_ITEM: Omit<TAdvancedContent, "id"> = {
-  title: "CloudSync Platform",
-  subtitle: "Enterprise Data Synchronization",
-  isHidden: false,
-  startDate: "2023-01-01",
-  endDate: "2023-12-01",
-  showDateDay: true,
-  url: "https://cloudsync.enterprise.com",
-  description:
-    "<ul><li><p>Architected real-time data synchronization platform for enterprise clients.</p></li><li><p>Implemented advanced conflict resolution algorithms with 99.9% accuracy.</p></li><li><p>Scaled to handle 1M+ concurrent connections using Kubernetes.</p></li></ul>"
-}
-
-export const SKILL_ITEM: Omit<TBasicContent, "id"> = {
-  isHidden: false,
-  title: "Backend Technologies",
-  description: "<p>Node.js, Python, Go, PostgreSQL, Redis</p>"
-}
-
-export const LANGUAGE_ITEM: Omit<TBasicContent, "id"> = {
-  isHidden: false,
-  title: "French",
-  description: "<p>Conversational</p>"
-}
-
-export const CERTIFICATE_ITEM: Omit<TBasicContent, "id"> = {
-  isHidden: false,
-  title: "AWS Solutions Architect",
-  description: "<p>Professional certification in cloud architecture and deployment</p>"
-}
+export const SUMMARY_ITEM = SECTIONS_REGISTRY.summary.singleItem as Omit<TBasicContent, "id">
+export const SKILL_ITEM = SECTIONS_REGISTRY.skills.singleItem as Omit<TBasicContent, "id">
+export const LANGUAGE_ITEM = SECTIONS_REGISTRY.languages.singleItem as Omit<TBasicContent, "id">
+export const CERTIFICATE_ITEM = SECTIONS_REGISTRY.certificates.singleItem as Omit<TBasicContent, "id">
+export const EXPERIENCE_ITEM = SECTIONS_REGISTRY.experiences.singleItem as Omit<TAdvancedContent, "id">
+export const EDUCATION_ITEM = SECTIONS_REGISTRY.educations.singleItem as Omit<TAdvancedContent, "id">
+export const PROJECT_ITEM = SECTIONS_REGISTRY.projects.singleItem as Omit<TAdvancedContent, "id">
+export const AWARD_ITEM = SECTIONS_REGISTRY.awards.singleItem as Omit<TAdvancedContent, "id">
+export const COURSE_ITEM = SECTIONS_REGISTRY.courses.singleItem as Omit<TAdvancedContent, "id">
 
 export const BASIC_SECTION_ITEM = {
   skills: SKILL_ITEM,

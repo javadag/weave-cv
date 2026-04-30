@@ -64,10 +64,7 @@ const { pending } = useFetch<Tables<"resumes">>(`/api/resumes/${id.value}`, {
     const content = data.content as { personal: TPersonalContent; core: TCoreSections }
     const resumeConfigs = data.configs as TConfigs
 
-    setContent({
-      personal: content.personal,
-      core: content.core
-    })
+    setContent({ personal: content.personal, core: content.core })
     setConfigs(resumeConfigs)
     setTitle(data.title)
   }

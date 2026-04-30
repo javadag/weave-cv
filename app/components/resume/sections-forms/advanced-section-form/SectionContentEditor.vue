@@ -89,7 +89,7 @@ const handleDone = () => {
   <div class="flex flex-col gap-4 rounded-lg p-3 w-full bg-accented/40">
     <div class="flex justify-between items-center gap-2">
       <span class="text-lg font-semibold line-clamp-1"
-        >Edit
+        >{{ $t('editor.form.edit') }}
         {{
           content.title ||
           ("subtitle" in content && content.subtitle) ||
@@ -132,7 +132,7 @@ const handleDone = () => {
             class="self-start"
             @click="clearDate('startDate')"
           >
-            Clear date
+            {{ $t('editor.form.clearDate') }}
           </UButton>
         </div>
         <div v-if="hasField('endDate') || hasField('present')" class="flex flex-col gap-2">
