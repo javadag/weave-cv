@@ -1,4 +1,26 @@
 
+## v2.5.0
+
+[compare changes](https://github.com/JavadAg/weave-cv/compare/v2.4.0...v2.5.0)
+
+### 🚀 Enhancements
+
+- **resume:** Add photo ([8da76d4](https://github.com/JavadAg/weave-cv/commit/8da76d4))
+- Add template switch ([87f16be](https://github.com/JavadAg/weave-cv/commit/87f16be))
+
+### 🩹 Fixes
+
+- Changelog dup ([65748c7](https://github.com/JavadAg/weave-cv/commit/65748c7))
+- Build error ([a40b61c](https://github.com/JavadAg/weave-cv/commit/a40b61c))
+
+### 💅 Refactors
+
+- Simplfied flow for changes in configs ([261018e](https://github.com/JavadAg/weave-cv/commit/261018e))
+
+### ❤️ Contributors
+
+- Javadag <j.aghebati93@gmail.com>
+
 ## v2.4.0
 
 [compare changes](https://github.com/JavadAg/weave-cv/compare/v2.3.0...v2.4.0)
