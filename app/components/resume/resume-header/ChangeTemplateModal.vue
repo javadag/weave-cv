@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { PAPER_SIZES } from "~/constants/papers"
 import { TEMPLATES, type Template } from "~/constants/templates"
+import { reconcileSectionsOrder } from "~/utils/configs/reconcileSectionsOrder"
 
 const modelValue = defineModel<boolean>({ default: false })
 const selectedTemplate = ref<Template | null>(null)
 
 const configsStore = useConfigsStore()
+const resumeStore = useResumeStore()
 const toast = useToast()
+const { t } = useI18n()
 
 const handleTemplateSelect = (template: Template) => {
   selectedTemplate.value = template
@@ -14,10 +17,25 @@ const handleTemplateSelect = (template: Template) => {
 
 const handleApply = () => {
   if (!selectedTemplate.value) return
-  configsStore.setConfigs(selectedTemplate.value.configs)
+  const templateConfigs = selectedTemplate.value.configs
+  const reconciledOrder = reconcileSectionsOrder(
+    templateConfigs.general.layout.order,
+    configsStore.configs.general.layout.order,
+    Object.keys(resumeStore.core ?? {})
+  )
+  configsStore.setConfigs({
+    ...templateConfigs,
+    general: {
+      ...templateConfigs.general,
+      layout: {
+        ...templateConfigs.general.layout,
+        order: reconciledOrder
+      }
+    }
+  })
   toast.add({
-    title: "Template Applied",
-    description: `"${selectedTemplate.value.name}" has been applied — your content is preserved`,
+    title: t("editor.template.appliedTitle"),
+    description: t("editor.template.appliedDesc", { name: selectedTemplate.value.name }),
     color: "success"
   })
   modelValue.value = false
@@ -46,8 +64,8 @@ watch(modelValue, (isOpen) => {
               <UIcon name="i-lucide-layout-template" class="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-default">Change Template</h3>
-              <p class="text-sm text-muted mt-1">Pick a new style — your content will be preserved</p>
+              <h3 class="text-lg font-semibold text-default">{{ $t('editor.template.title') }}</h3>
+              <p class="text-sm text-muted mt-1">{{ $t('editor.template.subtitle') }}</p>
             </div>
           </div>
         </template>
@@ -96,14 +114,14 @@ watch(modelValue, (isOpen) => {
             </button>
           </div>
           <div v-if="!selectedTemplate" class="mt-4 p-3 rounded-lg bg-muted/50 border border-default/20">
-            <p class="text-sm text-muted text-center">Select a template to apply</p>
+            <p class="text-sm text-muted text-center">{{ $t('editor.template.selectHint') }}</p>
           </div>
         </div>
 
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton color="neutral" variant="ghost" @click="handleCancel">Cancel</UButton>
-            <UButton color="primary" :disabled="!selectedTemplate" @click="handleApply"> Apply Template </UButton>
+            <UButton color="neutral" variant="ghost" @click="handleCancel">{{ $t('common.cancel') }}</UButton>
+            <UButton color="primary" :disabled="!selectedTemplate" @click="handleApply">{{ $t('editor.template.applyBtn') }}</UButton>
           </div>
         </template>
       </UCard>
