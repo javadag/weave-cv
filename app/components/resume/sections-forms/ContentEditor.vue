@@ -28,13 +28,13 @@ const stopEditing = () => {
 
 <template>
   <UButton v-if="!isEditing" variant="ghost" class="w-full" @click="startEditing">
-    <div class="line-clamp-2" v-html="props.content || 'Click to add content...'"></div>
+    <div class="line-clamp-2" v-html="props.content || $t('editor.form.clickToAdd')"></div>
   </UButton>
 
   <div v-else class="space-y-1 bg-accented/50 p-2 rounded-lg">
     <div class="flex items-center justify-between">
-      <h3 class="text-sm font-medium text-default">Edit Content</h3>
-      <UButton variant="ghost" size="sm" color="neutral" @click="stopEditing"> Close </UButton>
+      <h3 class="text-sm font-medium text-default">{{ $t('editor.form.editContent') }}</h3>
+      <UButton variant="ghost" size="sm" color="neutral" @click="stopEditing">{{ $t('editor.form.close') }}</UButton>
     </div>
     <RichTextEditor :content="content" @update:content="handleUpdate" />
   </div>

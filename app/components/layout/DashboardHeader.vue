@@ -5,13 +5,15 @@ import UserDropdown from "~/components/layout/UserDropdown.vue"
 
 const open = defineModel<boolean>("open")
 const user = useSupabaseUser()
+const { locale } = useI18n()
+const isRtl = computed(() => locale.value === "fa")
 </script>
 
 <template>
   <header class="h-16 bg-default/80 border-b border-default backdrop-blur">
     <div class="mx-auto h-full max-w-compact w-full flex justify-between items-center px-6">
       <UButton
-        icon="i-lucide-panel-left"
+        :icon="isRtl ? 'i-lucide-panel-right' : 'i-lucide-panel-left'"
         color="neutral"
         variant="ghost"
         :aria-label="$t('common.toggleSidebar')"

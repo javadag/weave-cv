@@ -28,13 +28,13 @@ const titleModel = computed({
         icon="i-lucide-arrow-left"
         class="hidden lg:flex flex-shrink-0"
       >
-        <span class="hidden xl:inline">Dashboard</span>
+        <span class="hidden xl:inline">{{ $t('editor.header.dashboard') }}</span>
       </UButton>
       <UInput
         v-model="titleModel"
         :minlength="3"
         :maxlength="50"
-        placeholder="Resume Title"
+        :placeholder="$t('editor.header.resumeTitle')"
         size="lg"
         icon="i-heroicons-document-text"
         class="w-full min-w-0"
@@ -55,7 +55,7 @@ const titleModel = computed({
         icon="i-lucide-layout-template"
         @click="isTemplateModalOpen = true"
       >
-        <span class="hidden sm:inline">Change Template</span>
+        <span class="hidden sm:inline">{{ $t('editor.header.changeTemplate') }}</span>
       </UButton>
       <div
         class="flex items-center rounded-lg bg-elevated/50 p-1 gap-1 sm:gap-2 border border-muted shadow-sm backdrop-blur-sm"

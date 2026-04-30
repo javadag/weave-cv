@@ -29,7 +29,7 @@ const toggleConfigs = () => {
       class="shadow-lg hover:bg-primary/100"
       @click="toggleSections"
     >
-      <span class="hidden sm:inline">Sections</span>
+      <span class="hidden sm:inline">{{ $t('editor.sections') }}</span>
     </UButton>
     <UButton
       :icon="'i-lucide-settings'"
@@ -38,7 +38,7 @@ const toggleConfigs = () => {
       class="shadow-lg hover:bg-primary/100"
       @click="toggleConfigs"
     >
-      <span class="hidden sm:inline">Settings</span>
+      <span class="hidden sm:inline">{{ $t('editor.settings') }}</span>
     </UButton>
   </div>
 </template>

@@ -32,11 +32,11 @@ const getConfigValue = (sectionType: string, key: string) => {
       :title="SECTION_DISPLAY_CONFIG[sectionType].label"
       :icon="SECTION_DISPLAY_CONFIG[sectionType].icon"
     >
-      <ConfigWrapper title="Layout">
+      <ConfigWrapper :title="$t('editor.configs.layout')">
         <SelectItem
           v-if="SECTION_CONFIGS_CONFIG[sectionType].includes('variant')"
           :model-value="getConfigValue(sectionType, 'variant') as string"
-          label="Variant"
+          :label="$t('editor.configs.variant')"
           :options="variantOptions"
           @update:model-value="(value) => handleUpdate(sectionType, 'variant', value as TVariant)"
         />
@@ -45,7 +45,7 @@ const getConfigValue = (sectionType: string, key: string) => {
             getConfigValue(sectionType, 'variant') === 'grid' && SECTION_CONFIGS_CONFIG[sectionType].includes('grids')
           "
           :model-value="getConfigValue(sectionType, 'grids') as number"
-          label="Grids"
+          :label="$t('editor.configs.grids')"
           :min="1"
           :max="4"
           @update:model-value="(value) => handleUpdate(sectionType, 'grids', value)"
@@ -56,7 +56,7 @@ const getConfigValue = (sectionType: string, key: string) => {
             SECTION_CONFIGS_CONFIG[sectionType].includes('separator')
           "
           :model-value="getConfigValue(sectionType, 'separator') as string"
-          label="Separator"
+          :label="$t('editor.configs.separator')"
           :options="separatorOptions"
           @update:model-value="(value) => handleUpdate(sectionType, 'separator', value as TSeparator)"
         />

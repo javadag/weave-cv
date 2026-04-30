@@ -12,9 +12,9 @@ import PersonalDetailsControls from "./sections/PersonalDetailsControls.vue"
   <div class="flex flex-col hide-scrollbar overflow-y-auto h-full rounded-xl bg-default p-4 space-y-6">
     <div class="space-y-4">
       <h2
-        class="text-lg flex justify-start items-center font-semibold text-default tracking-tight before:content-[''] before:w-1 before:h-6 before:bg-primary before:rounded-full before:mr-2 before:inline-block"
+        class="text-lg flex justify-start items-center font-semibold text-default tracking-tight before:content-[''] before:w-1 before:h-6 before:bg-primary before:rounded-full before:me-2 before:inline-block"
       >
-        General
+        {{ $t('editor.configs.general') }}
       </h2>
       <div class="space-y-3">
         <LayoutControls />
@@ -27,9 +27,9 @@ import PersonalDetailsControls from "./sections/PersonalDetailsControls.vue"
 
     <div class="space-y-4">
       <h2
-        class="text-lg flex justify-start items-center font-semibold text-default tracking-tight before:content-[''] before:w-1 before:h-6 before:bg-primary before:rounded-full before:mr-2 before:inline-block"
+        class="text-lg flex justify-start items-center font-semibold text-default tracking-tight before:content-[''] before:w-1 before:h-6 before:bg-primary before:rounded-full before:me-2 before:inline-block"
       >
-        Sections
+        {{ $t('editor.configs.sections') }}
       </h2>
       <div class="space-y-3">
         <PersonalDetailsControls />

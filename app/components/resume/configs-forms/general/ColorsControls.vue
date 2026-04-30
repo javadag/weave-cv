@@ -32,8 +32,8 @@ const applyModel = computed({
 </script>
 
 <template>
-  <ConfigsContainer title="Colors" icon="i-lucide-palette" :collapsible="true" :default-expanded="true">
-    <ConfigWrapper title="Apply Accent" variant="grid">
+  <ConfigsContainer :title="$t('editor.configs.colors')" icon="i-lucide-palette" :collapsible="true" :default-expanded="true">
+    <ConfigWrapper :title="$t('editor.configs.applyAccent')" variant="grid">
       <USelectMenu
         v-model="applyModel"
         multiple
@@ -44,43 +44,43 @@ const applyModel = computed({
       />
     </ConfigWrapper>
 
-    <ConfigWrapper title="Primary" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.primary')" variant="grid">
       <ColorPicker
         :model-value="configs.general.colors.primary.textColor"
-        label="Text Color"
+        :label="$t('editor.configs.textColor')"
         :color="configs.general.colors.primary.textColor"
         @update:model-value="(value) => handleUpdate('primary.textColor', value)"
       />
       <ColorPicker
         :model-value="configs.general.colors.primary.bgColor"
-        label="Background Color"
+        :label="$t('editor.configs.bgColor')"
         :color="configs.general.colors.primary.bgColor"
         @update:model-value="(value) => handleUpdate('primary.bgColor', value)"
       />
       <ColorPicker
         :model-value="configs.general.colors.primary.accentColor"
-        label="Accent Color"
+        :label="$t('editor.configs.accentColor')"
         :color="configs.general.colors.primary.accentColor"
         @update:model-value="(value) => handleUpdate('primary.accentColor', value)"
       />
     </ConfigWrapper>
 
-    <ConfigWrapper title="Secondary" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.secondary')" variant="grid">
       <ColorPicker
         :model-value="configs.general.colors.secondary.textColor"
-        label="Text Color"
+        :label="$t('editor.configs.textColor')"
         :color="configs.general.colors.secondary.textColor"
         @update:model-value="(value) => handleUpdate('secondary.textColor', value)"
       />
       <ColorPicker
         :model-value="configs.general.colors.secondary.bgColor"
-        label="Background Color"
+        :label="$t('editor.configs.bgColor')"
         :color="configs.general.colors.secondary.bgColor"
         @update:model-value="(value) => handleUpdate('secondary.bgColor', value)"
       />
       <ColorPicker
         :model-value="configs.general.colors.secondary.accentColor"
-        label="Accent Color"
+        :label="$t('editor.configs.accentColor')"
         :color="configs.general.colors.secondary.accentColor"
         @update:model-value="(value) => handleUpdate('secondary.accentColor', value)"
       />

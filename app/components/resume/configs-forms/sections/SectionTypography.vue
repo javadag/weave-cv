@@ -70,7 +70,7 @@ function getString(field: string): string {
     <NumberInput
       v-if="!props.exclude?.includes('fontSize')"
       :model-value="getNumber(fontSizeFieldName)"
-      :label="fontSizeFieldName === 'fontSizeMultiplier' ? 'Font Size Multiplier' : 'Font Size'"
+      :label="fontSizeFieldName === 'fontSizeMultiplier' ? $t('editor.configs.fontSizeMultiplier') : $t('editor.configs.fontSize')"
       label-variant="stacked"
       :min="fontSizeConstraints?.min"
       :max="fontSizeConstraints?.max"
@@ -80,7 +80,7 @@ function getString(field: string): string {
     <SelectItem
       v-if="!props.exclude?.includes('fontWeight')"
       :model-value="getString('fontWeight')"
-      label="Font Weight"
+      :label="$t('editor.configs.fontWeight')"
       label-variant="stacked"
       :options="fontWeightOptions"
       @update:model-value="(value) => onUpdate('fontWeight', value)"
@@ -88,7 +88,7 @@ function getString(field: string): string {
     <SelectItem
       v-if="!props.exclude?.includes('fontCase')"
       :model-value="getString('fontCase')"
-      label="Font Case"
+      :label="$t('editor.configs.fontCase')"
       label-variant="stacked"
       :options="fontCaseOptions"
       @update:model-value="(value) => onUpdate('fontCase', value)"
@@ -96,7 +96,7 @@ function getString(field: string): string {
     <SelectItem
       v-if="!props.exclude?.includes('fontStyle')"
       :model-value="getString('fontStyle')"
-      label="Font Style"
+      :label="$t('editor.configs.fontStyle')"
       label-variant="stacked"
       :options="fontStyleOptions"
       @update:model-value="(value) => onUpdate('fontStyle', value)"

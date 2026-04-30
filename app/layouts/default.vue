@@ -10,8 +10,8 @@ const user = useSupabaseUser()
   <div
     class="w-full relative grid min-h-dvh mx-auto grid-rows-[auto_1fr] after:content-[''] after:absolute after:top-0 after:z-[-2] after:size-full after:bg-[radial-gradient(#ddd_1px,#efefef_1px)] after:[background-size:16px_16px] dark:after:bg-[radial-gradient(#3b3b3b_1px,#222226_1px)] dark:after:[background-size:20px_20px]"
   >
-    <header class="backdrop-blur-md border-b border-default bg-default/80">
-      <div class="mx-auto max-w-compact px-6 py-3 lg:px-12 h-full flex justify-between items-center">
+    <header class="backdrop-blur-md border-b border-default bg-default/80 h-16">
+      <div class="mx-auto max-w-compact px-6 lg:px-12 h-full flex justify-between items-center">
         <Logo />
         <div class="flex items-center gap-3">
           <UserDropdown v-if="user" />

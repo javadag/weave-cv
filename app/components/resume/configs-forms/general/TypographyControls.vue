@@ -33,19 +33,19 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ConfigsContainer title="Typography" icon="i-lucide-type" :collapsible="true" :default-expanded="true">
+  <ConfigsContainer :title="$t('editor.configs.typography')" icon="i-lucide-type" :collapsible="true" :default-expanded="true">
     <ConfigWrapper variant="grid">
       <SelectItem
         v-model="configs.general.typography.fontFamily"
         label-variant="stacked"
-        label="Font Family"
+        :label="$t('editor.configs.fontFamily')"
         :options="FONT_OPTIONS.map((option) => ({ label: option.label, value: option.value }))"
         @update:model-value="(v) => handleUpdate('fontFamily', v)"
       />
       <NumberInput
         v-model="configs.general.typography.fontSize"
         label-variant="stacked"
-        label="Font Size"
+        :label="$t('editor.configs.fontSize')"
         :min="fontSizeConstraints.min"
         :max="fontSizeConstraints.max"
         :step="1"
@@ -54,7 +54,7 @@ onMounted(async () => {
       <NumberInput
         v-model="configs.general.typography.lineHeight"
         label-variant="stacked"
-        label="Line Height"
+        :label="$t('editor.configs.lineHeight')"
         :min="lineHeightConstraints.min"
         :max="lineHeightConstraints.max"
         :step="0.1"
@@ -62,25 +62,25 @@ onMounted(async () => {
       />
     </ConfigWrapper>
     <SectionTypography
-      title="Personal Name"
+      :title="$t('editor.configs.personalName')"
       base-key="personal.main.title"
       :exclude="['fontStyle', 'fontCase']"
       :schema="PersonalConfigsSchema.shape.main.shape.title"
     />
     <SectionTypography
-      title="Personal Job Title"
+      :title="$t('editor.configs.personalJobTitle')"
       base-key="personal.main.subtitle"
       :exclude="['fontStyle', 'fontCase']"
       :schema="PersonalConfigsSchema.shape.main.shape.subtitle"
     />
     <SectionTypography
-      title="Content Title"
+      :title="$t('editor.configs.contentTitle')"
       base-key="general.layout.contentLayout.title"
       :schema="ContentLayoutSchema.shape.title"
       :exclude="['fontCase']"
     />
     <SectionTypography
-      title="Content Subtitle"
+      :title="$t('editor.configs.contentSubtitle')"
       base-key="general.layout.contentLayout.subtitle"
       :schema="ContentLayoutSchema.shape.subtitle"
       :exclude="['fontCase']"

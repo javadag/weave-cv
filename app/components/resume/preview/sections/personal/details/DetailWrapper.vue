@@ -15,8 +15,6 @@ const hasUrl = computed(() => props.url && props.url.trim() !== "")
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 
-console.log(hasUrl.value)
-
 const combinedStyle = computed<CSSProperties>(() => ({
   color: configs.value.general.colors.primary.textColor,
   minWidth: "0",

@@ -20,29 +20,29 @@ const handleUpdate = (key: string, value: unknown) => {
 </script>
 
 <template>
-  <ConfigsContainer title="Links" icon="i-lucide-link" :collapsible="true" :default-expanded="true">
+  <ConfigsContainer :title="$t('editor.configs.links')" icon="i-lucide-link" :collapsible="true" :default-expanded="true">
     <ConfigWrapper variant="grid">
       <ToggleInput
         v-model="configs.general.links.underline"
-        label="Underline"
+        :label="$t('editor.configs.underline')"
         @update:model-value="(value) => handleUpdate('underline', value)"
       />
       <ColorPicker
         v-model="configs.general.links.color"
-        label="Color"
+        :label="$t('editor.configs.color')"
         :color="configs.general.links.color"
         @update:model-value="(value) => handleUpdate('color', value)"
       />
     </ConfigWrapper>
-    <ConfigWrapper title="Icon">
+    <ConfigWrapper :title="$t('editor.configs.icon')">
       <ToggleInput
         v-model="configs.general.links.icon.visible"
-        label="Show"
+        :label="$t('editor.configs.show')"
         @update:model-value="(value) => handleUpdate('icon.visible', value)"
       />
       <SelectItem
         :model-value="configs.general.links.icon.type"
-        label="Type"
+        :label="$t('editor.configs.type')"
         :disabled="!configs.general.links.icon.visible"
         :options="iconTypeOptions"
         @update:model-value="(value) => handleUpdate('icon.type', value)"
@@ -50,7 +50,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <ColorPicker
         v-model="configs.general.links.icon.color"
         :disabled="!configs.general.links.icon.visible"
-        label="Color"
+        :label="$t('editor.configs.color')"
         :color="configs.general.links.icon.color"
         @update:model-value="(value) => handleUpdate('icon.color', value)"
       />

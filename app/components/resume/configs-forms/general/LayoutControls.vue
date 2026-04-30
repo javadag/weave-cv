@@ -64,7 +64,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
 </script>
 
 <template>
-  <ConfigsContainer title="Layout" icon="i-lucide-grid" :collapsible="true" :default-expanded="true">
+  <ConfigsContainer :title="$t('editor.configs.layout')" icon="i-lucide-grid" :collapsible="true" :default-expanded="true">
     <!-- <SelectItem
       :model-value="configs.general.layout.language"
       label="Language"
@@ -73,24 +73,24 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
     />  -->
     <ToggleInput
       v-model="configs.general.layout.rtl"
-      label="Right-to-left (RTL)"
+      :label="$t('editor.configs.rtl')"
       @update:model-value="(value) => handleUpdate('rtl', value)"
     />
     <SelectItem
       v-model="configs.general.layout.dateFormat"
-      label="Date format"
+      :label="$t('editor.configs.dateFormat')"
       :options="dateFormatOptions"
       @update:model-value="(value) => handleUpdate('dateFormat', value)"
     />
     <SelectItem
       :model-value="configs.general.layout.size"
-      label="Page Size"
+      :label="$t('editor.configs.pageSize')"
       :options="pageSizeOptions"
       @update:model-value="(value) => handleUpdate('size', value)"
     />
     <SelectItem
       :model-value="configs.general.layout.columns"
-      label="Columns"
+      :label="$t('editor.configs.columns')"
       :options="columnsOptions"
       @update:model-value="
         (value) => {
@@ -104,22 +104,22 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
     <SelectItem
       :disabled="configs.general.layout.columns === '1'"
       :model-value="configs.general.layout.personalPosition"
-      label="Personal Section"
+      :label="$t('editor.configs.personalSection')"
       :options="personalPositionOptions"
       @update:model-value="(value) => handleUpdate('personalPosition', value)"
     />
     <NumberInput
       v-model="configs.general.layout.sectionGap"
-      label="Section Gap"
+      :label="$t('editor.configs.sectionGap')"
       :min="sectionGapConstraints.min"
       :max="sectionGapConstraints.max"
       @update:model-value="(value) => handleUpdate('sectionGap', value)"
     />
-    <ConfigWrapper title="Margins" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.margins')" variant="grid">
       <NumberInput
         label-variant="stacked"
         :model-value="configs.general.layout.verticalMargin"
-        label="Vertical (Top/Bottom)"
+        :label="$t('editor.configs.vertical')"
         :min="verticalMarginConstraints.min"
         :max="verticalMarginConstraints.max"
         @update:model-value="(value) => handleUpdate('verticalMargin', value)"
@@ -127,18 +127,18 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       <NumberInput
         label-variant="stacked"
         :model-value="configs.general.layout.horizontalMargin"
-        label="Horizontal (Left/Right)"
+        :label="$t('editor.configs.horizontal')"
         :min="horizontalMarginConstraints.min"
         :max="horizontalMarginConstraints.max"
         @update:model-value="(value) => handleUpdate('horizontalMargin', value)"
       />
     </ConfigWrapper>
-    <ConfigWrapper title="Columns Width" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.columnsWidth')" variant="grid">
       <NumberInput
         :disabled="configs.general.layout.columns === '1'"
         label-variant="stacked"
         :model-value="configs.general.layout.columnsWidth.left"
-        label="Left Column (%)"
+        :label="$t('editor.configs.leftColumn')"
         :min="columnsWidthConstraints.min"
         :max="columnsWidthConstraints.max"
         @update:model-value="(value) => handleColumnWidthUpdate('left', value)"
@@ -147,17 +147,17 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         :disabled="configs.general.layout.columns === '1'"
         label-variant="stacked"
         :model-value="configs.general.layout.columnsWidth.right"
-        label="Right Column (%)"
+        :label="$t('editor.configs.rightColumn')"
         :min="columnsWidthConstraints.min"
         :max="columnsWidthConstraints.max"
         @update:model-value="(value) => handleColumnWidthUpdate('right', value)"
       />
     </ConfigWrapper>
-    <ConfigWrapper title="Content Layout Width (Content First)" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.contentLayoutContentFirst')" variant="grid">
       <NumberInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.contentFirstWidth.left"
-        label="Left Column (%)"
+        :label="$t('editor.configs.leftColumn')"
         :min="contentFirstWidthConstraints.min"
         :max="contentFirstWidthConstraints.max"
         @update:model-value="(value) => handleContentLayoutWidthUpdate('contentFirst', 'left', value)"
@@ -165,17 +165,17 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       <NumberInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.contentFirstWidth.right"
-        label="Right Column (%)"
+        :label="$t('editor.configs.rightColumn')"
         :min="contentFirstWidthConstraints.min"
         :max="contentFirstWidthConstraints.max"
         @update:model-value="(value) => handleContentLayoutWidthUpdate('contentFirst', 'right', value)"
       />
     </ConfigWrapper>
-    <ConfigWrapper title="Content Layout Width (Date First)" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.contentLayoutDateFirst')" variant="grid">
       <NumberInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.dateFirstWidth.left"
-        label="Left Column (%)"
+        :label="$t('editor.configs.leftColumn')"
         :min="dateFirstWidthConstraints.min"
         :max="dateFirstWidthConstraints.max"
         @update:model-value="(value) => handleContentLayoutWidthUpdate('dateFirst', 'left', value)"
@@ -183,7 +183,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       <NumberInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.dateFirstWidth.right"
-        label="Right Column (%)"
+        :label="$t('editor.configs.rightColumn')"
         :min="dateFirstWidthConstraints.min"
         :max="dateFirstWidthConstraints.max"
         @update:model-value="(value) => handleContentLayoutWidthUpdate('dateFirst', 'right', value)"
@@ -191,14 +191,14 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
     </ConfigWrapper>
     <NumberInput
       v-model="configs.general.layout.contentLayout.indent"
-      label="Content Indent"
+      :label="$t('editor.configs.contentIndent')"
       :min="indentConstraints.min"
       :max="indentConstraints.max"
       @update:model-value="(value) => handleUpdate('contentLayout.indent', value)"
     />
     <SelectItem
       :model-value="configs.general.layout.contentLayout.listType"
-      label="List Type"
+      :label="$t('editor.configs.listType')"
       :options="listTypeOptions"
       @update:model-value="(value) => handleUpdate('contentLayout.listType', value)"
     />

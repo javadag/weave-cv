@@ -76,7 +76,7 @@ const handleDownload = async () => {
     :class="[!props.disabled && !downloading && 'hover:bg-elevated/50 hover:shadow-sm']"
     @click="handleDownload"
   >
-    <span class="hidden sm:inline">{{ downloading ? "Generating..." : "Download PDF" }}</span>
-    <span class="sm:hidden">{{ downloading ? "..." : "Download" }}</span>
+    <span class="hidden sm:inline">{{ downloading ? $t('editor.header.generating') : $t('editor.header.downloadPdf') }}</span>
+    <span class="sm:hidden">{{ downloading ? '...' : $t('editor.header.download') }}</span>
   </UButton>
 </template>

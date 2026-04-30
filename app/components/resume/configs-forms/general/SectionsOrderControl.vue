@@ -32,6 +32,7 @@ const sections = computed(() => {
   return sectionOrder
     .map((sectionId: string) => {
       const section = core.value?.[sectionId]
+
       if (section?.isSectionVisible) {
         return [sectionId, section] as [string, TCoreSection]
       }
@@ -113,7 +114,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
 </script>
 
 <template>
-  <ConfigWrapper title="Sections Order">
+  <ConfigWrapper :title="$t('editor.configs.sectionsOrder')">
     <div v-if="isTwoColumnLayout" class="gap-2 items-start justify-between grid grid-cols-2 mt-2">
       <VueDraggable
         ref="leftColumnRef"

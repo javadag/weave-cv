@@ -32,7 +32,7 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
       @click="showAddSectionModal = true"
     >
       <UIcon name="i-lucide-plus" class="w-4 h-4" />
-      Add Section
+      {{ $t('editor.addSection.button') }}
     </UButton>
 
     <UModal v-model:open="showAddSectionModal">
@@ -46,15 +46,15 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
                 <UIcon name="i-lucide-layers" class="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-default">Add New Section</h3>
-                <p class="text-sm text-muted mt-1">Select a section type to add to your resume</p>
+                <h3 class="text-lg font-semibold text-default">{{ $t('editor.addSection.modalTitle') }}</h3>
+                <p class="text-sm text-muted mt-1">{{ $t('editor.addSection.modalSubtitle') }}</p>
               </div>
             </div>
           </template>
 
           <div class="py-2">
             <div v-if="availableSectionTypes.length === 0" class="p-4 text-center text-muted">
-              <p>All available sections have been added.</p>
+              <p>{{ $t('editor.addSection.empty') }}</p>
             </div>
             <div v-else class="grid grid-cols-2 gap-3">
               <button
@@ -83,7 +83,7 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
 
           <template #footer>
             <div class="flex justify-end">
-              <UButton color="neutral" variant="ghost" @click="showAddSectionModal = false"> Cancel </UButton>
+              <UButton color="neutral" variant="ghost" @click="showAddSectionModal = false">{{ $t('common.cancel') }}</UButton>
             </div>
           </template>
         </UCard>

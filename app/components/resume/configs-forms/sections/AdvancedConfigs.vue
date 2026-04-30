@@ -38,11 +38,11 @@ const advancedVariantOptions = AdvancedSectionVariant.options.map((option) => ({
       :title="SECTION_DISPLAY_CONFIG[sectionType].label"
       :icon="SECTION_DISPLAY_CONFIG[sectionType].icon"
     >
-      <ConfigWrapper title="Layout" variant="grid">
+      <ConfigWrapper :title="$t('editor.configs.layout')" variant="grid">
         <SelectItem
           v-if="SECTION_CONFIGS_CONFIG[sectionType].includes('variant')"
           :model-value="getConfigValue(sectionType, 'variant') as string"
-          label="Variant"
+          :label="$t('editor.configs.variant')"
           label-variant="stacked"
           :options="advancedVariantOptions"
           @update:model-value="(value) => handleUpdate(sectionType, 'variant', value)"
@@ -50,7 +50,7 @@ const advancedVariantOptions = AdvancedSectionVariant.options.map((option) => ({
         <SelectItem
           v-if="SECTION_CONFIGS_CONFIG[sectionType].includes('titleSubtitleVariant')"
           :model-value="getConfigValue(sectionType, 'titleSubtitleVariant') as string"
-          label="Title Variant"
+          :label="$t('editor.configs.titleVariant')"
           label-variant="stacked"
           :options="variantSimpleOptions"
           @update:model-value="(value) => handleUpdate(sectionType, 'titleSubtitleVariant', value as TVariantSimple)"
@@ -58,7 +58,7 @@ const advancedVariantOptions = AdvancedSectionVariant.options.map((option) => ({
         <ToggleInput
           v-if="SECTION_CONFIGS_CONFIG[sectionType].includes('subTitleFirst')"
           :model-value="getConfigValue(sectionType, 'subTitleFirst') as boolean"
-          label="Subtitle First"
+          :label="$t('editor.configs.subtitleFirst')"
           @update:model-value="(value) => handleUpdate(sectionType, 'subTitleFirst', value)"
         />
       </ConfigWrapper>

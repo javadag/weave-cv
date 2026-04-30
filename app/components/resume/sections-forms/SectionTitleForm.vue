@@ -41,7 +41,7 @@ const handleDelete = () => {
         />
         <Visibility
           :is-hidden="!props.isTitleVisible"
-          :tooltip="props.isTitleVisible ? 'Hide title' : 'Show title'"
+          :tooltip="props.isTitleVisible ? $t('editor.form.hideTitle') : $t('editor.form.showTitle')"
           :on-toggle="() => updateContent(`${props.sectionId}.isTitleVisible`, !props.isTitleVisible)"
         />
       </div>
@@ -50,10 +50,10 @@ const handleDelete = () => {
     <div v-if="props.isSectionHideable" class="flex items-center gap-2 shrink-0">
       <Visibility
         :is-hidden="!props.isSectionVisible"
-        :tooltip="props.isSectionVisible ? 'Hide section' : 'Show section'"
+        :tooltip="props.isSectionVisible ? $t('editor.form.hideSection') : $t('editor.form.showSection')"
         :on-toggle="() => updateContent(`${props.sectionId}.isSectionVisible`, !props.isSectionVisible)"
       />
-      <Delete :on-delete="() => handleDelete()" tooltip="Delete section" />
+      <Delete :on-delete="() => handleDelete()" :tooltip="$t('editor.form.deleteSection')" />
     </div>
   </div>
 </template>

@@ -5,7 +5,8 @@ import Logo from "../layout/Logo.vue"
 
 const open = defineModel<boolean>("open", { default: false })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const isRtl = computed(() => locale.value === "fa")
 const { count } = useResumeCount()
 const supabase = useSupabaseClient()
 const router = useRouter()
@@ -43,6 +44,7 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
   <USidebar
     v-model:open="open"
     collapsible="offcanvas"
+    :side="isRtl ? 'right' : 'left'"
     :ui="{
       container: 'h-full',
       body: 'py-4'
@@ -51,7 +53,7 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
     <template #header>
       <Logo />
       <UButton
-        class="mr-0 ml-auto sm:hidden"
+        class="me-0 ms-auto sm:hidden"
         color="neutral"
         variant="ghost"
         icon="i-lucide-x"

@@ -45,7 +45,7 @@ const transformStyle = computed(() => ({
 }))
 </script>
 <template>
-  <div ref="container" class="overflow-y-auto w-full h-full hide-scrollbar" :class="{ absolute: isResponsive }">
+  <div ref="container" class="overflow-y-auto w-full h-full hide-scrollbar" :class="{ absolute: isResponsive }" style="direction: ltr">
     <div :style="transformStyle">
       <RenderPages :pages="pages" />
     </div>

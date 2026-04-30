@@ -80,26 +80,26 @@ const resetForm = () => {
 
 <template>
   <div class="flex items-center justify-between">
-    <span class="text-sm font-medium text-default">Contact Details</span>
+    <span class="text-sm font-medium text-default">{{ $t('editor.form.contactDetails') }}</span>
     <UButton variant="ghost" :disabled="isAddingDetail" size="sm" icon="i-lucide-plus" @click="isAddingDetail = true">
-      Add Detail
+      {{ $t('editor.form.addDetail') }}
     </UButton>
   </div>
   <div v-if="isAddingDetail" class="p-3 space-y-3 border border-muted rounded-lg">
     <div class="grid grid-cols-2 gap-2">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm font-medium text-muted">Category</span>
-        <USelect v-model="form.type" :items="categoryOptions" placeholder="Category" />
+        <span class="text-sm font-medium text-muted">{{ $t('editor.form.category') }}</span>
+        <USelect v-model="form.type" :items="categoryOptions" :placeholder="$t('editor.form.category')" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm font-medium text-muted">Detail Type</span>
-        <USelect v-model="form.key" :items="detailOptions" placeholder="Detail Type" />
+        <span class="text-sm font-medium text-muted">{{ $t('editor.form.detailType') }}</span>
+        <USelect v-model="form.key" :items="detailOptions" :placeholder="$t('editor.form.detailType')" />
       </div>
     </div>
-    <UInput v-model="form.value" class="w-full" placeholder="Enter value..." @keyup.enter="addDetail" />
+    <UInput v-model="form.value" class="w-full" :placeholder="$t('editor.form.enterValue')" @keyup.enter="addDetail" />
     <div class="flex gap-2">
-      <UButton size="sm" @click="addDetail">Add</UButton>
-      <UButton variant="ghost" size="sm" @click="closeForm">Cancel</UButton>
+      <UButton size="sm" @click="addDetail">{{ $t('editor.form.add') }}</UButton>
+      <UButton variant="ghost" size="sm" @click="closeForm">{{ $t('common.cancel') }}</UButton>
     </div>
   </div>
 </template>

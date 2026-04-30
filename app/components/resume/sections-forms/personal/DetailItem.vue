@@ -58,7 +58,7 @@ const handleRemove = () => {
         :model-value="detail.value"
         :ui="{ leadingIcon: 'size-4' }"
         class="flex-1"
-        placeholder="Value"
+        :placeholder="$t('editor.form.valueLabel')"
         @update:model-value="handleValueUpdate"
       />
       <Visibility :is-hidden="detail.isHidden" @toggle="handleToggleVisibility" />
@@ -66,7 +66,7 @@ const handleRemove = () => {
     </div>
     <UInput
       :model-value="detail.url || ''"
-      placeholder="URL (optional)"
+      :placeholder="$t('editor.form.urlOptional')"
       class="w-full"
       @update:model-value="handleUrlUpdate"
     />
