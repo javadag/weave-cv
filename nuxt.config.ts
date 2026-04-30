@@ -52,7 +52,12 @@ export default defineNuxtConfig({
     }
   },
   css: ["~/assets/css/tailwind.css"],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      sourcemap: false
+    }
+  },
   supabase: {
     types: "~/types/database.types.ts",
     redirectOptions: {
