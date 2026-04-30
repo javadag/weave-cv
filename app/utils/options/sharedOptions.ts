@@ -37,3 +37,15 @@ export const iconStyleOptions: { label: string; value: TIconStyle }[] = [
   { label: "Outline Rounded", value: "outlineRounded" },
   { label: "Outline Square", value: "outlineSquare" }
 ]
+
+export const photoPositionOptions: { label: string; value: "left" | "right" | "top" }[] = [
+  { label: "Left", value: "left" },
+  { label: "Right", value: "right" },
+  { label: "Top", value: "top" }
+]
+
+export const photoShapeOptions: { label: string; value: "circle" | "rounded" | "square" }[] = [
+  { label: "Circle", value: "circle" },
+  { label: "Rounded", value: "rounded" },
+  { label: "Square", value: "square" }
+]

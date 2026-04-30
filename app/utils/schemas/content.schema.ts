@@ -123,6 +123,8 @@ export type TAdvancedContent = z.infer<typeof AdvancedContentSchema>
 
 export type TCoreSectionType = z.infer<typeof CoreSectionTypeSchema>
 export type TSectionType = z.infer<typeof SectionTypeSchema>
+export type TAdvancedSectionType = z.infer<typeof AdvancedSectionTypeSchema>
+export type TBasicSectionType = z.infer<typeof BasicSectionTypeSchema>
 
 export const AdvancedSectionTypeSchema = z.enum(ADVANCED_SECTION_TYPES)
 export const BasicSectionTypeSchema = z.enum(BASIC_SECTION_TYPES)
@@ -134,6 +136,11 @@ export const SectionTypeSchema = z.union([CoreSectionTypeSchema, OtherSectionTyp
 export const PersonalContentSchema = z.object({
   title: z.string(),
   subtitle: z.string(),
+  photo: z
+    .object({
+      url: z.string().default("")
+    })
+    .default({ url: "" }),
   details: z.array(
     z.object({
       value: z.string(),

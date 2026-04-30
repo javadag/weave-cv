@@ -4,6 +4,7 @@ import SectionFormWrapper from "../SectionFormWrapper.vue"
 import AddDetailForm from "./AddDetailForm.vue"
 import DetailList from "./DetailList.vue"
 import PersonalTitle from "./PersonalTitle.vue"
+import PhotoUpload from "./PhotoUpload.vue"
 
 interface Props {
   section: TPersonalContent
@@ -13,10 +14,11 @@ const props = defineProps<Props>()
 <template>
   <SectionFormWrapper
     :section-id="'personal'"
-    :title="'Personal Information'"
+    :title="$t('editor.form.personalInfo')"
     :is-title-editable="false"
     :is-section-hideable="false"
   >
+    <PhotoUpload />
     <PersonalTitle :title="props.section.title" :subtitle="props.section.subtitle" />
     <div class="space-y-1 mt-4">
       <AddDetailForm />

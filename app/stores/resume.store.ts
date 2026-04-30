@@ -23,14 +23,13 @@ export const useResumeStore = defineStore("resume", {
     },
     updatePersonal(key: keyof TPersonalContent, value: unknown) {
       this.$patch((state) => {
+        if (!state.personal) return
         if (key === "details") {
-          if (state.personal) {
-            state.personal.details = value as TPersonalContent["details"]
-          }
+          state.personal.details = value as TPersonalContent["details"]
+        } else if (key === "photo") {
+          state.personal.photo = value as TPersonalContent["photo"]
         } else {
-          if (state.personal) {
-            state.personal[key] = value as TPersonalContent[typeof key]
-          }
+          state.personal[key] = value as TPersonalContent[typeof key]
         }
       })
     },
