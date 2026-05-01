@@ -14,16 +14,20 @@ export default defineNuxtConfig({
     "nuxt-tiptap-editor",
     "@nuxt/image",
     "@vueuse/motion/nuxt",
-    "@nuxtjs/i18n"
+    "@nuxtjs/i18n",
+    "@nuxt/fonts"
   ],
   i18n: {
-    baseUrl: "https://weavecv.com",
+    baseUrl: "https://weavecv.app",
     strategy: "no_prefix",
     defaultLocale: "en",
     locales: [
       { code: "en", language: "en-US", name: "English", file: "en.json", dir: "ltr" },
       { code: "fa", language: "fa-IR", name: "Persian (فارسی)", file: "fa.json", dir: "rtl" }
     ],
+    experimental: {
+      typedOptionsAndMessages: "all"
+    },
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "weave-cv:language",
