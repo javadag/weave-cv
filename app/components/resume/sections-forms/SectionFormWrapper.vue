@@ -22,14 +22,14 @@ const props = withDefaults(
 </script>
 
 <template>
-  <UCollapsible class="grid group gap-2 bg-muted p-2 rounded-lg border border-muted/50">
+  <UCollapsible class="group bg-muted border-muted/50 grid gap-2 rounded-lg border p-2">
     <UButton
       trailing-icon="i-lucide-chevron-down"
       :ui="{
         trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
       }"
       variant="ghost"
-      class="text-base group p-0 w-full font-semibold flex items-center active:bg-inherit hover:bg-inherit text-default"
+      class="group text-default flex w-full items-center p-0 text-base font-semibold hover:bg-inherit active:bg-inherit"
       block
     >
       {{ props.title || capitalize(props.sectionId.split("-")[0] ?? "Section") }}

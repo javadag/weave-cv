@@ -87,7 +87,7 @@ const renderSection = (sectionId: string, section: TCoreSection) =>
   <ResumeSectionsFormsSkeleton v-if="loading" />
   <div
     v-else
-    class="flex flex-col gap-3 h-full hide-scrollbar bg-default overflow-y-auto rounded-xl border border-default/30 p-4"
+    class="hide-scrollbar bg-default border-default/30 flex h-full flex-col gap-3 overflow-y-auto rounded-xl border p-4"
   >
     <PersonalSectionForm v-if="personal" :section="personal" />
     <component :is="() => renderSection(key, section)" v-for="[key, section] in orderedSections" :key="key" />

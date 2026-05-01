@@ -58,7 +58,7 @@ const handleExport = () => {
     :class="[
       !props.disabled && !exporting && 'hover:bg-elevated/50 hover:shadow-sm',
       exporting && '[&_svg]:animate-spin',
-      (props.disabled || exporting) && 'opacity-50 cursor-not-allowed'
+      (props.disabled || exporting) && 'cursor-not-allowed opacity-50'
     ]"
     @click="handleExport"
   >

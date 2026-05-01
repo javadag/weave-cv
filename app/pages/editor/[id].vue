@@ -14,6 +14,7 @@ import { loadLocalFont } from "~/utils/preview/core/fontUtils"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
 
+const { t } = useI18n()
 const route = useRoute()
 
 const id = computed(() => route.params.id as string)
@@ -25,33 +26,18 @@ const { configs } = storeToRefs(configsStore)
 const { setConfigs } = configsStore
 
 const pageTitle = computed(() => {
-  return resumeStore.title ? `Edit ${resumeStore.title} - Weave CV` : "Resume Editor - Weave CV"
+  return resumeStore.title ? t("seo.editor.titleEdit", { title: resumeStore.title }) : t("seo.editor.titleDefault")
 })
 
-useHead({
+useSeoMeta({
   title: pageTitle,
-  meta: [
-    {
-      name: "description",
-      content: "Edit and customize your resume. Update content, adjust styling, and preview your resume in real-time."
-    },
-    {
-      property: "og:title",
-      content: pageTitle
-    },
-    {
-      property: "og:description",
-      content: "Edit and customize your resume. Update content, adjust styling, and preview your resume in real-time."
-    },
-    {
-      property: "og:url",
-      content: `/editor/${id.value}`
-    },
-    {
-      name: "robots",
-      content: "noindex, nofollow"
-    }
-  ]
+  description: () => t("seo.editor.description"),
+  ogTitle: pageTitle,
+  ogDescription: () => t("seo.editor.description"),
+  ogUrl: `/editor/${id.value}`,
+  twitterTitle: pageTitle,
+  twitterDescription: () => t("seo.editor.description"),
+  robots: "noindex, nofollow"
 })
 
 const { pending } = useFetch<Tables<"resumes">>(`/api/resumes/${id.value}`, {
@@ -111,22 +97,22 @@ const isXlScreen = breakpoints.greaterOrEqual("xl")
 
 <template>
   <ClientOnly>
-    <div class="w-full flex flex-col gap-4 max-h-[calc(100dvh-88px)] overflow-hidden">
+    <div class="flex max-h-[calc(100dvh-88px)] w-full flex-col gap-4 overflow-hidden">
       <ZoomIndicator :scale="scale" />
       <ResumeHeader />
       <div v-if="isXlScreen" class="overflow-hidden">
-        <SplitterGroup direction="horizontal" class="flex gap-1 h-full">
+        <SplitterGroup direction="horizontal" class="flex h-full gap-1">
           <SplitterPanel :min-size="20" :default-size="25" :max-size="35">
             <ResumeSectionsForms :loading="pending" />
           </SplitterPanel>
-          <SplitterResizeHandle class="w-3 rounded-2xl bg-default/70 flex justify-center items-center">
+          <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
             <UIcon name="i-lucide-grip-vertical" class="text-primary" />
           </SplitterResizeHandle>
           <SplitterPanel :min-size="20" class="relative">
             <ResumePreviewSkeleton v-if="pending" />
             <ResumePreview v-else :scale="scale" @update:scale="scale = $event" />
           </SplitterPanel>
-          <SplitterResizeHandle class="w-3 rounded-2xl bg-default/70 flex justify-center items-center">
+          <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
             <UIcon name="i-lucide-grip-vertical" class="text-primary size-5" />
           </SplitterResizeHandle>
           <SplitterPanel :min-size="20" :default-size="20" :max-size="30">

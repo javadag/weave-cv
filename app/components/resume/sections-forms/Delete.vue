@@ -35,11 +35,11 @@ const handleCancel = () => {
       />
     </UTooltip>
     <template #content>
-      <div class="p-3 space-y-3">
-        <p class="text-sm text-default">{{ $t('editor.form.deleteConfirm') }}</p>
+      <div class="space-y-3 p-3">
+        <p class="text-default text-sm">{{ $t("editor.form.deleteConfirm") }}</p>
         <div class="flex justify-end gap-2">
-          <UButton size="sm" color="neutral" variant="ghost" @click="handleCancel">{{ $t('common.cancel') }}</UButton>
-          <UButton size="sm" color="error" @click="handleDelete">{{ $t('common.delete') }}</UButton>
+          <UButton size="sm" color="neutral" variant="ghost" @click="handleCancel">{{ $t("common.cancel") }}</UButton>
+          <UButton size="sm" color="error" @click="handleDelete">{{ $t("common.delete") }}</UButton>
         </div>
       </div>
     </template>

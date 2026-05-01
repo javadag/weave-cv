@@ -71,7 +71,11 @@ const handleEdit = () => {
 <template>
   <div class="flex flex-col gap-2">
     <div :class="['flex items-center gap-2 duration-200', props.isVisible ? 'opacity-100' : 'opacity-50']">
-      <IconPicker :model-value="currentIcon" :label="$t('editor.form.iconLabel')" @update:model-value="handleIconUpdate" />
+      <IconPicker
+        :model-value="currentIcon"
+        :label="$t('editor.form.iconLabel')"
+        @update:model-value="handleIconUpdate"
+      />
       <UInput v-if="isEditing" v-model="localValue" size="sm" />
 
       <div v-else :class="props.class" v-html="localValue"></div>

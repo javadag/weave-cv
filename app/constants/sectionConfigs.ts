@@ -8,5 +8,8 @@ export const SECTION_CONFIGS_CONFIG: Record<TCoreSectionType, SectionConfigOptio
 ) as Record<TCoreSectionType, SectionConfigOption[]>
 
 export const SECTION_DISPLAY_CONFIG: Record<TCoreSectionType, { label: string; icon: string }> = Object.fromEntries(
-  Object.entries(SECTIONS_REGISTRY).map(([key, descriptor]) => [key, { label: descriptor.label, icon: descriptor.icon }])
+  Object.entries(SECTIONS_REGISTRY).map(([key, descriptor]) => [
+    key,
+    { label: descriptor.label, icon: descriptor.icon }
+  ])
 ) as Record<TCoreSectionType, { label: string; icon: string }>

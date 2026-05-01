@@ -7,25 +7,22 @@ import ResumeGrid from "~/components/dashboard/ResumeGrid.vue"
 import { useResumeCount } from "~/composables/useResumeCount"
 import { MAX_RESUMES } from "~/constants/config"
 
+const { t } = useI18n()
+
 definePageMeta({ layout: "dashboard" })
 
+useSeoMeta({
+  title: () => t("seo.dashboardIndex.title"),
+  description: () => t("seo.dashboardIndex.description"),
+  ogTitle: () => t("seo.dashboardIndex.title"),
+  ogDescription: () => t("seo.dashboardIndex.description"),
+  ogUrl: "/dashboard",
+  twitterTitle: () => t("seo.dashboardIndex.title"),
+  twitterDescription: () => t("seo.dashboardIndex.description")
+})
+
 useHead({
-  title: "My Resumes - Weave CV",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Manage and edit your resumes. Create new resumes, update existing ones, and organize your professional documents."
-    },
-    { property: "og:title", content: "My Resumes - Weave CV" },
-    {
-      property: "og:description",
-      content:
-        "Manage and edit your resumes. Create new resumes, update existing ones, and organize your professional documents."
-    },
-    { property: "og:url", content: "/dashboard" },
-    { name: "robots", content: "noindex, nofollow" }
-  ]
+  meta: [{ name: "robots", content: "noindex, nofollow" }]
 })
 
 const { resumes, count, pending, error, refresh } = useResumeCount()
@@ -34,10 +31,10 @@ const hasReachedLimit = computed(() => count.value >= MAX_RESUMES)
 
 <template>
   <div class="w-full">
-    <div class="flex justify-between items-end flex-wrap gap-4 mb-6">
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div class="flex-1">
-        <h1 class="text-2xl font-bold tracking-tight text-default">{{ $t("dashboard.myResumes.title") }}</h1>
-        <p class="text-muted text-sm mt-1">{{ $t("dashboard.myResumes.subtitle") }}</p>
+        <h1 class="text-default text-2xl font-bold tracking-tight">{{ $t("dashboard.myResumes.title") }}</h1>
+        <p class="text-muted mt-1 text-sm">{{ $t("dashboard.myResumes.subtitle") }}</p>
       </div>
       <ImportResumeButton :disabled="hasReachedLimit" @created="() => refresh()" />
       <CreateResumeButton :disabled="hasReachedLimit" @created="() => refresh()" />
@@ -49,7 +46,7 @@ const hasReachedLimit = computed(() => count.value >= MAX_RESUMES)
       icon="i-lucide-alert-triangle"
       :title="$t('dashboard.myResumes.limitTitle')"
       :description="$t('dashboard.myResumes.limitDesc', { max: MAX_RESUMES })"
-      class="mb-6 text-primary"
+      class="text-primary mb-6"
     />
     <UAlert
       v-if="error"

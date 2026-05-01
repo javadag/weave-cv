@@ -44,8 +44,8 @@ const features = computed(() => [
 </script>
 
 <template>
-  <section id="features" class="border-y border-default bg-muted py-20 sm:py-28">
-    <div class="mx-auto max-w-compact px-6 lg:px-12">
+  <section id="features" class="border-default bg-muted border-y py-20 sm:py-28">
+    <div class="max-w-compact mx-auto px-6 lg:px-12">
       <div
         v-motion
         :initial="{ opacity: 0, y: 20 }"
@@ -54,14 +54,14 @@ const features = computed(() => [
         class="mb-16 text-center"
       >
         <span
-          class="inline-flex items-center gap-1.5 rounded-full border border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary"
+          class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
         >
           {{ $t("features.badge") }}
         </span>
-        <h2 class="mt-5 text-4xl font-bold tracking-[-0.03em] text-highlighted sm:text-5xl text-balance">
+        <h2 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
           {{ $t("features.title") }}
         </h2>
-        <p class="mx-auto mt-4 max-w-[600px] text-lg leading-relaxed text-muted">
+        <p class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
           {{ $t("features.subtitle") }}
         </p>
       </div>
@@ -74,20 +74,20 @@ const features = computed(() => [
           :initial="{ opacity: 0, y: 20 }"
           :visible="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut', delay: index * 80 } }"
           :visible-once="true"
-          class="feat-card cursor-pointer rounded-2xl border border-default bg-default dark:bg-elevated p-7"
+          class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
         >
           <div
-            class="feat-icon mb-[18px] flex size-12 items-center justify-center rounded-xl text-xl font-bold text-white will-change-transform"
+            class="feat-icon mb-4.5 flex size-12 items-center justify-center rounded-xl text-xl font-bold text-white will-change-transform"
             :class="
               f.tone === 'primary'
-                ? 'bg-gradient-to-br from-primary-500 to-primary-700'
-                : 'bg-gradient-to-br from-primary-300 to-primary-400'
+                ? 'from-primary-500 to-primary-700 bg-linear-to-br'
+                : 'from-primary-300 to-primary-400 bg-linear-to-br'
             "
           >
             <UIcon :name="f.icon" />
           </div>
-          <h3 class="mb-2 text-lg font-bold tracking-[-0.01em] text-highlighted">{{ f.title }}</h3>
-          <p class="text-sm leading-relaxed text-muted">{{ f.body }}</p>
+          <h3 class="text-highlighted mb-2 text-lg font-bold tracking-[-0.01em]">{{ f.title }}</h3>
+          <p class="text-muted text-sm leading-relaxed">{{ f.body }}</p>
         </div>
       </div>
     </div>

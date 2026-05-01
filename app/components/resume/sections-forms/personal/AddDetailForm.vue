@@ -80,26 +80,26 @@ const resetForm = () => {
 
 <template>
   <div class="flex items-center justify-between">
-    <span class="text-sm font-medium text-default">{{ $t('editor.form.contactDetails') }}</span>
+    <span class="text-default text-sm font-medium">{{ $t("editor.form.contactDetails") }}</span>
     <UButton variant="ghost" :disabled="isAddingDetail" size="sm" icon="i-lucide-plus" @click="isAddingDetail = true">
-      {{ $t('editor.form.addDetail') }}
+      {{ $t("editor.form.addDetail") }}
     </UButton>
   </div>
-  <div v-if="isAddingDetail" class="p-3 space-y-3 border border-muted rounded-lg">
+  <div v-if="isAddingDetail" class="border-muted space-y-3 rounded-lg border p-3">
     <div class="grid grid-cols-2 gap-2">
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm font-medium text-muted">{{ $t('editor.form.category') }}</span>
+        <span class="text-muted text-sm font-medium">{{ $t("editor.form.category") }}</span>
         <USelect v-model="form.type" :items="categoryOptions" :placeholder="$t('editor.form.category')" />
       </div>
       <div class="flex flex-col gap-1.5">
-        <span class="text-sm font-medium text-muted">{{ $t('editor.form.detailType') }}</span>
+        <span class="text-muted text-sm font-medium">{{ $t("editor.form.detailType") }}</span>
         <USelect v-model="form.key" :items="detailOptions" :placeholder="$t('editor.form.detailType')" />
       </div>
     </div>
     <UInput v-model="form.value" class="w-full" :placeholder="$t('editor.form.enterValue')" @keyup.enter="addDetail" />
     <div class="flex gap-2">
-      <UButton size="sm" @click="addDetail">{{ $t('editor.form.add') }}</UButton>
-      <UButton variant="ghost" size="sm" @click="closeForm">{{ $t('common.cancel') }}</UButton>
+      <UButton size="sm" @click="addDetail">{{ $t("editor.form.add") }}</UButton>
+      <UButton variant="ghost" size="sm" @click="closeForm">{{ $t("common.cancel") }}</UButton>
     </div>
   </div>
 </template>

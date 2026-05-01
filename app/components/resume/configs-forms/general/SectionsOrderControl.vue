@@ -115,13 +115,13 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
 
 <template>
   <ConfigWrapper :title="$t('editor.configs.sectionsOrder')">
-    <div v-if="isTwoColumnLayout" class="gap-2 items-start justify-between grid grid-cols-2 mt-2">
+    <div v-if="isTwoColumnLayout" class="mt-2 grid grid-cols-2 items-start justify-between gap-2">
       <VueDraggable
         ref="leftColumnRef"
         v-model="leftColumnSectionsRef"
         group="columns"
         :animation="150"
-        class="flex flex-col justify-start items-start flex-1 gap-4 h-full bg-accented/30 rounded-lg p-2"
+        class="bg-accented/30 flex h-full flex-1 flex-col items-start justify-start gap-4 rounded-lg p-2"
         @update="updateTwoColumnSections"
         @add="updateTwoColumnSections"
         @remove="updateTwoColumnSections"
@@ -129,7 +129,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         <div
           v-for="[key, section] in leftColumnSectionsRef"
           :key="key"
-          class="flex items-center gap-2 w-full p-2 rounded-lg cursor-move bg-muted"
+          class="bg-muted flex w-full cursor-move items-center gap-2 rounded-lg p-2"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground" />
           <span class="text-sm font-medium capitalize">{{ section.title || section.type }}</span>
@@ -140,7 +140,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         v-model="rightColumnSectionsRef"
         group="columns"
         :animation="150"
-        class="flex flex-col justify-start items-start flex-1 h-full gap-4 bg-accented/30 rounded-lg p-2"
+        class="bg-accented/30 flex h-full flex-1 flex-col items-start justify-start gap-4 rounded-lg p-2"
         @update="updateTwoColumnSections"
         @add="updateTwoColumnSections"
         @remove="updateTwoColumnSections"
@@ -148,7 +148,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         <div
           v-for="[key, section] in rightColumnSectionsRef"
           :key="key"
-          class="flex items-center gap-2 w-full p-2 rounded-lg cursor-move bg-muted"
+          class="bg-muted flex w-full cursor-move items-center gap-2 rounded-lg p-2"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground" />
           <span class="text-sm font-medium capitalize">{{ section.title || section.type }}</span>
@@ -160,13 +160,13 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
       ref="singleColumnRef"
       v-model="singleColumnSectionsRef"
       :animation="150"
-      class="flex flex-col justify-start items-start flex-1 h-full gap-4 bg-accented/30 rounded-lg p-2"
+      class="bg-accented/30 flex h-full flex-1 flex-col items-start justify-start gap-4 rounded-lg p-2"
       @update="updateSingleColumnSections"
     >
       <div
         v-for="[key, section] in singleColumnSectionsRef"
         :key="key"
-        class="flex items-center gap-2 w-full p-2 rounded-lg cursor-move bg-muted"
+        class="bg-muted flex w-full cursor-move items-center gap-2 rounded-lg p-2"
       >
         <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground" />
         <span class="text-sm font-medium capitalize">{{ section.title || section.type }}</span>

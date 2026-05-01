@@ -1,30 +1,18 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-useHead({
-  title: "Create Account - Weave CV",
-  meta: [
-    {
-      name: "description",
-      content: "Create a free account on Weave CV to start building professional resumes. Sign up with email or Google."
-    },
-    {
-      property: "og:title",
-      content: "Create Account - Weave CV"
-    },
-    {
-      property: "og:description",
-      content: "Create a free account on Weave CV to start building professional resumes. Sign up with email or Google."
-    },
-    {
-      property: "og:url",
-      content: "/register"
-    },
-    {
-      name: "robots",
-      content: "noindex, nofollow"
-    }
-  ]
+useSeoMeta({
+  title: () => t("seo.register.title"),
+  description: () => t("seo.register.description"),
+  ogTitle: () => t("seo.register.title"),
+  ogDescription: () => t("seo.register.description"),
+  ogUrl: "/register",
+  twitterTitle: () => t("seo.register.title"),
+  twitterDescription: () => t("seo.register.description"),
+  robots: {
+    nofollow: true,
+    noindex: true
+  }
 })
 
 const supabase = useSupabaseClient()
@@ -112,13 +100,19 @@ const signUpWithGithub = async () => {
 <template>
   <div class="flex items-center justify-center">
     <div class="relative w-full max-w-md">
-      <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-toned mb-2">{{ $t("auth.register.title") }}</h1>
+      <div class="mb-8 text-center">
+        <h1 class="text-toned mb-2 text-3xl font-bold">{{ $t("auth.register.title") }}</h1>
         <p class="text-muted">{{ $t("auth.register.subtitle") }}</p>
       </div>
       <UCard class="bg-default/70 shadow-2xl">
         <UForm :state="formState" class="space-y-3" @submit="signUpWithPassword">
-          <UAlert v-if="error" color="error" variant="soft" :title="$t('userDropdown.errorTitle')" :description="error" />
+          <UAlert
+            v-if="error"
+            color="error"
+            variant="soft"
+            :title="$t('userDropdown.errorTitle')"
+            :description="error"
+          />
 
           <UFormField :label="$t('auth.register.emailLabel')" name="email" required>
             <UInput
@@ -164,13 +158,15 @@ const signUpWithGithub = async () => {
             {{ loading ? $t("auth.register.creating") : $t("auth.register.createBtn") }}
           </UButton>
           <div
-            class="relative flex justify-center after:z-[-1] items-center after:content-[''] after:absolute after:top-1/2 after:inset-0 after:border-t after:border-muted"
+            class="after:border-muted relative flex items-center justify-center after:absolute after:inset-0 after:top-1/2 after:z-[-1] after:border-t after:content-['']"
           >
-            <span class="px-2 relative flex justify-center text-sm text-muted">{{ $t("auth.register.orContinueWith") }}</span>
+            <span class="text-muted relative flex justify-center px-2 text-sm">{{
+              $t("auth.register.orContinueWith")
+            }}</span>
           </div>
           <UButton color="neutral" variant="outline" size="lg" block @click="signUpWithGoogle">
             <span
-              class="text-xs size-5 bg-gradient-to-r from-blue-500 to-red-500 rounded-sm flex items-center justify-center font-bold text-inverted"
+              class="text-inverted flex size-5 items-center justify-center rounded-sm bg-linear-to-r from-blue-500 to-red-500 text-xs font-bold"
               >G</span
             >
             {{ $t("auth.register.withGoogle") }}
@@ -185,9 +181,9 @@ const signUpWithGithub = async () => {
           </UButton>
         </UForm>
       </UCard>
-      <p class="text-center mt-8 text-sm text-muted">
+      <p class="text-muted mt-8 text-center text-sm">
         {{ $t("auth.register.haveAccount") }}
-        <ULink class="font-medium text-primary" to="/login"> {{ $t("auth.register.signInHere") }} </ULink>
+        <ULink class="text-primary font-medium" to="/login"> {{ $t("auth.register.signInHere") }} </ULink>
       </p>
     </div>
   </div>

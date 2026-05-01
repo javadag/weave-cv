@@ -33,7 +33,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.typography')" icon="i-lucide-type" :collapsible="true" :default-expanded="true">
+  <ConfigsContainer
+    :title="$t('editor.configs.typography')"
+    icon="i-lucide-type"
+    :collapsible="true"
+    :default-expanded="true"
+  >
     <ConfigWrapper variant="grid">
       <SelectItem
         v-model="configs.general.typography.fontFamily"

@@ -83,18 +83,18 @@ watch(modelValue, (isOpen) => {
         <template #header>
           <div class="flex items-center gap-3">
             <div
-              class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center"
+              class="bg-primary/10 dark:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
             >
-              <UIcon name="i-lucide-file-text" class="w-5 h-5 text-primary" />
+              <UIcon name="i-lucide-file-text" class="text-primary h-5 w-5" />
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-default">{{ $t("createResume.modalTitle") }}</h3>
-              <p class="text-sm text-muted mt-1">{{ $t("createResume.modalSubtitle") }}</p>
+              <h3 class="text-default text-lg font-semibold">{{ $t("createResume.modalTitle") }}</h3>
+              <p class="text-muted mt-1 text-sm">{{ $t("createResume.modalSubtitle") }}</p>
             </div>
           </div>
         </template>
         <div class="py-2">
-          <div class="flex flex-wrap items-start max-h-[700px] overflow-scroll justify-start gap-4">
+          <div class="flex max-h-175 flex-wrap items-start justify-start gap-4 overflow-scroll">
             <button
               v-for="template in TEMPLATES"
               :key="template.id"
@@ -107,44 +107,46 @@ watch(modelValue, (isOpen) => {
               :class="[
                 'group relative flex flex-col items-center justify-between rounded-lg border-2 p-4 text-left transition-all duration-200 hover:shadow-lg',
                 selectedTemplate?.id === template.id
-                  ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                  ? 'border-primary bg-primary/5 ring-primary/20 ring-2'
                   : 'border-default/20 hover:border-primary/40 bg-default/50',
-                isCreating && 'opacity-50 cursor-not-allowed'
+                isCreating && 'cursor-not-allowed opacity-50'
               ]"
               @click="handleTemplateSelect(template)"
             >
               <div v-if="template.screenshot">
-                <img :src="template.screenshot" alt="Template Screenshot" class="w-full h-full object-cover" />
+                <img :src="template.screenshot" alt="Template Screenshot" class="h-full w-full object-cover" />
               </div>
               <div
                 v-else
-                class="size-full rounded-md mb-3 flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5"
+                class="from-primary/20 to-primary/5 mb-3 flex size-full items-center justify-center overflow-hidden rounded-md bg-linear-to-br"
               >
                 <div class="text-center">
-                  <UIcon name="i-lucide-layout-template" class="w-8 h-8 text-primary/60 mx-auto mb-2" />
-                  <p class="text-xs text-primary/60 font-medium">{{ template.name }}</p>
+                  <UIcon name="i-lucide-layout-template" class="text-primary/60 mx-auto mb-2 h-8 w-8" />
+                  <p class="text-primary/60 text-xs font-medium">{{ template.name }}</p>
                 </div>
               </div>
               <div class="space-y-1">
                 <div class="flex items-center gap-2">
-                  <h4 class="font-semibold text-default">{{ template.name }}</h4>
+                  <h4 class="text-default font-semibold">{{ template.name }}</h4>
                   <UIcon
                     v-if="selectedTemplate?.id === template.id"
                     name="i-lucide-check-circle"
-                    class="w-4 h-4 text-primary"
+                    class="text-primary h-4 w-4"
                   />
                 </div>
-                <p class="text-sm text-muted line-clamp-2">{{ template.description }}</p>
+                <p class="text-muted line-clamp-2 text-sm">{{ template.description }}</p>
               </div>
             </button>
           </div>
-          <div v-if="!selectedTemplate" class="mt-4 p-3 rounded-lg bg-muted/50 border border-default/20">
-            <p class="text-sm text-muted text-center">{{ $t("createResume.selectHint") }}</p>
+          <div v-if="!selectedTemplate" class="bg-muted/50 border-default/20 mt-4 rounded-lg border p-3">
+            <p class="text-muted text-center text-sm">{{ $t("createResume.selectHint") }}</p>
           </div>
         </div>
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton color="neutral" variant="ghost" :disabled="isCreating" @click="handleCancel"> {{ $t("common.cancel") }} </UButton>
+            <UButton color="neutral" variant="ghost" :disabled="isCreating" @click="handleCancel">
+              {{ $t("common.cancel") }}
+            </UButton>
             <UButton
               color="primary"
               :disabled="!selectedTemplate || isCreating"

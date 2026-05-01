@@ -25,10 +25,18 @@ const subtitleModel = computed({
 <template>
   <div class="space-y-3">
     <div class="flex items-end gap-2">
-      <TextInput v-model="titleModel" :label="$t('editor.form.titleLabel')" :placeholder="$t('editor.form.enterTitle')" />
+      <TextInput
+        v-model="titleModel"
+        :label="$t('editor.form.titleLabel')"
+        :placeholder="$t('editor.form.enterTitle')"
+      />
     </div>
     <div class="flex items-end gap-2">
-      <TextInput v-model="subtitleModel" :label="$t('editor.form.subtitleLabel')" :placeholder="$t('editor.form.enterSubtitle')" />
+      <TextInput
+        v-model="subtitleModel"
+        :label="$t('editor.form.subtitleLabel')"
+        :placeholder="$t('editor.form.enterSubtitle')"
+      />
     </div>
   </div>
 </template>

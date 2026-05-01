@@ -18,10 +18,7 @@ const footerCols = computed(() => [
   },
   {
     h: t("footer.colCompany"),
-    items: [
-      { label: t("footer.linkAbout"), to: "/about" },
-      { label: t("footer.linkContact"), href: `mailto:${CONTACT_EMAIL}` }
-    ]
+    items: [{ label: t("footer.linkContact"), href: `mailto:${CONTACT_EMAIL}` }]
   },
   {
     h: t("footer.colLegal"),
@@ -46,14 +43,14 @@ const socials = [
 ]
 </script>
 <template>
-  <footer class="border-t border-default bg-default">
-    <div class="mx-auto max-w-compact px-6 pb-8 pt-16 lg:px-12">
+  <footer class="border-default bg-default border-t">
+    <div class="max-w-compact mx-auto px-6 pt-16 pb-8 lg:px-12">
       <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
         <div>
           <NuxtLink to="/" class="flex items-center gap-2.5">
             <NuxtImg src="/images/logo.webp" alt="Weave CV" width="144" height="48" format="webp" class="h-9 w-auto" />
           </NuxtLink>
-          <p class="mt-4 max-w-[280px] text-sm leading-relaxed text-muted">
+          <p class="text-muted mt-4 max-w-70 text-sm leading-relaxed">
             {{ $t("footer.tagline") }}
           </p>
           <div class="mt-5 flex gap-2">
@@ -63,7 +60,7 @@ const socials = [
               :href="s.href"
               target="_blank"
               rel="noopener noreferrer"
-              class="footer-social flex size-9 items-center justify-center rounded-lg border border-muted text-muted transition-colors duration-200 hover:border-accented hover:text-highlighted"
+              class="footer-social border-muted text-muted hover:border-accented hover:text-highlighted flex size-9 items-center justify-center rounded-lg border transition-colors duration-200"
               :aria-label="s.label"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -73,15 +70,15 @@ const socials = [
           </div>
         </div>
         <div v-for="col in footerCols" :key="col.h">
-          <div class="mb-4 text-xs font-bold uppercase tracking-widest text-highlighted">
+          <div class="text-highlighted mb-4 text-xs font-bold tracking-widest uppercase">
             {{ col.h }}
           </div>
           <div class="flex flex-col gap-2.5">
             <template v-for="item in col.items" :key="item.label">
               <NuxtLink
-                v-if="item.to"
+                v-if="'to' in item"
                 :to="item.to"
-                class="footer-link text-sm text-muted hover:text-highlighted transition-colors duration-200"
+                class="footer-link text-muted hover:text-highlighted text-sm transition-colors duration-200"
                 >{{ item.label }}</NuxtLink
               >
               <a
@@ -89,7 +86,7 @@ const socials = [
                 :href="item.href"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="footer-link text-sm text-muted hover:text-highlighted transition-colors duration-200"
+                class="footer-link text-muted hover:text-highlighted text-sm transition-colors duration-200"
                 >{{ item.label }}</a
               >
             </template>
@@ -97,20 +94,20 @@ const socials = [
         </div>
       </div>
       <div
-        class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-default pt-7 text-xs text-muted"
+        class="border-default text-muted mt-14 flex flex-wrap items-center justify-between gap-4 border-t pt-7 text-xs"
       >
         <div class="flex flex-wrap items-center gap-4">
           <span>{{ $t("footer.copyright", { year: currentYear }) }}</span>
           <NuxtLink
             to="/changelog"
-            class="footer-link inline-flex items-center gap-1.5 rounded-md border border-default bg-elevated px-2 py-0.5 font-mono text-[11px] text-muted transition-colors duration-200 hover:border-accented hover:text-highlighted"
+            class="footer-link border-default bg-elevated text-muted hover:border-accented hover:text-highlighted inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] transition-colors duration-200"
           >
             v{{ APP_VERSION }}
           </NuxtLink>
         </div>
         <i18n-t keypath="footer.madeWith" tag="div" class="flex items-center gap-1">
           <template #heart>
-            <span class="mx-0.5 text-primary">♥</span>
+            <span class="text-primary mx-0.5">♥</span>
           </template>
         </i18n-t>
       </div>

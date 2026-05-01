@@ -25,7 +25,7 @@ const model = computed({
 <template>
   <UFormField
     :label="props.label"
-    :class="props.labelVariant === 'inline' ? 'flex items-center gap-2 justify-between' : ''"
+    :class="props.labelVariant === 'inline' ? 'flex items-center justify-between gap-2' : ''"
     :ui="{ label: 'text-sm text-muted ', container: `basis-1/2 ${props.labelVariant === 'inline' ? 'mt-0' : ''}` }"
   >
     <USelect

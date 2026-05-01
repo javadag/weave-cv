@@ -4,7 +4,6 @@
     "dashboard": "Dashboard"
   },
   "hero": {
-    "badge": "{version} - now with RTL support",
     "titleStart": "The résumé builder that",
     "titleHighlight": "actually gets you hired.",
     "subtitle": "Pick a template, drop in your story, export a perfect PDF, full design control, ATS-friendly by default and free.",
@@ -39,18 +38,14 @@
     "badge": "Templates",
     "titleLine1": "Pick a starting point.",
     "titleLine2": "Make it yours.",
-    "subtitle": "Scroll to browse — the rows drift in opposite directions as you move down the page. Every template is ATS-tested and printable.",
-    "seeAll": "See all templates →",
-    "useTemplate": "Use this template →",
-    "use": "Use →"
+    "subtitle": "Scroll to browse — the rows drift in opposite directions as you move down the page. Every template is ATS-tested and printable."
   },
   "cta": {
     "badge": "Free forever · No credit card",
     "titleLine1": "Start your résumé.",
     "titleLine2": "Land the job.",
-    "subtitle": "Pick a template, add your story, export the PDF — in under ten minutes. No signup wall, no upsell, no catch.",
+    "subtitle": "Pick a template, add your story, export the PDF — in under ten minutes. No pay wall, no catch.",
     "buildBtn": "Build my résumé — free",
-    "examplesBtn": "See examples",
     "stat1": "7-min average build",
     "stat2": "Polished templates",
     "stat3": "Pixel-perfect PDF",
@@ -429,5 +424,305 @@
     "errorEmpty": "Please enter a new password",
     "errorShort": "Password must be at least 8 characters",
     "errorMatch": "Passwords do not match"
+  },
+  "faqPage": {
+    "badge": "Help center",
+    "title": "Stuck on something?",
+    "subtitle": "Start here.",
+    "description": "Ten questions cover almost everything. If you can't find what you need, email us — a real human reads every message.",
+    "browse": "Browse",
+    "allQuestions": "All questions",
+    "article": "article",
+    "articles": "articles",
+    "stillStuck": "Still stuck?",
+    "stillStuckDesc": "We answer every email within 48 hours.",
+    "emailUs": "Email us. A human will reply.",
+    "emailDesc": "~48h average response. Bug reports, feature ideas, or just a hello — all welcome.",
+    "topics": [
+      {
+        "icon": "i-lucide-download",
+        "title": "Exporting",
+        "body": "PDF, fonts, page breaks",
+        "count": "3 articles",
+        "cat": "export"
+      },
+      {
+        "icon": "i-lucide-edit",
+        "title": "Editing",
+        "body": "Sections, layout, content",
+        "count": "3 articles",
+        "cat": "editing"
+      },
+      {
+        "icon": "i-lucide-table-cells-merge",
+        "title": "Templates",
+        "body": "Switching, ATS, custom",
+        "count": "2 articles",
+        "cat": "templates"
+      },
+      {
+        "icon": "i-lucide-user",
+        "title": "Account & data",
+        "body": "Storage, deletion, plans",
+        "count": "2 articles",
+        "cat": "account"
+      }
+    ],
+    "categories": [
+      {
+        "id": "all",
+        "label": "All",
+        "icon": "i-lucide-all"
+      },
+      {
+        "id": "export",
+        "label": "Exporting",
+        "icon": "i-lucide-download"
+      },
+      {
+        "id": "editing",
+        "label": "Editing",
+        "icon": "i-lucide-edit"
+      },
+      {
+        "id": "templates",
+        "label": "Templates",
+        "icon": "i-lucide-table-cells-merge"
+      },
+      {
+        "id": "account",
+        "label": "Account",
+        "icon": "i-lucide-user"
+      }
+    ],
+    "items": [
+      {
+        "id": 1,
+        "cat": "export",
+        "q": "How do I export my résumé as a PDF?",
+        "content": "Hit the Download button at the top right of the editor. The same file is what recruiters and ATS systems will see."
+      },
+      {
+        "id": 2,
+        "cat": "editing",
+        "q": "Can I add custom sections that aren't in the template?",
+        "content": "Not currently. However, you can modify existing sections and add additional ones as needed."
+      },
+      {
+        "id": 3,
+        "cat": "editing",
+        "q": "How do I switch between one-column and two-column layouts?",
+        "content": "Open the Layout panel. Toggle Two columns on and choose which sections live in the sidebar. The change is non-destructive — toggle back any time without losing content."
+      },
+      {
+        "id": 4,
+        "cat": "templates",
+        "q": "Can I switch templates without re-typing everything?",
+        "content": "Yes — your content lives separately from the template. Open Templates in the toolbar, hover any template, and click Try this."
+      },
+      {
+        "id": 5,
+        "cat": "templates",
+        "q": "Are all templates ATS-friendly?",
+        "content": "Yes. Every template uses standard PDF text (not images), proper section headings, and a single linear reading order under the hood — even the two-column ones."
+      },
+      {
+        "id": 6,
+        "cat": "account",
+        "q": "How many résumés can I have on the free plan?",
+        "content": "Up to {max} active résumés per account, each with unlimited revisions. There's no premium plan that unlocks more — if you need a fourth, delete one you're not using."
+      },
+      {
+        "id": 7,
+        "cat": "account",
+        "q": "Where is my data stored, and can I delete it?",
+        "content": "Your résumés are stored on our servers in the EU (Frankfurt). You can delete any individual résumé at any time, or wipe your whole account from Settings → Account → Delete account. Deletion is permanent and immediate — we don't hold soft copies."
+      },
+      {
+        "id": 8,
+        "cat": "editing",
+        "q": "Can I work on my résumé offline?",
+        "content": "Partially. The editor caches your current document so you can keep editing without a connection — changes sync the moment you're back online. Exports require a connection (we render PDFs server-side for consistent fonts)."
+      },
+      {
+        "id": 9,
+        "cat": "export",
+        "q": "Can I export to Word (.docx) or plain text?",
+        "content": "Not yet. We deliberately ship only PDF for now — it's the only format where what you see is exactly what the recruiter gets. Word export is on the roadmap for late 2026."
+      }
+    ]
+  },
+  "termsPage": {
+    "badge": "Legal",
+    "lastUpdated": "Last updated April 12, 2026",
+    "title": "Terms of Service",
+    "subtitle": "The rules of the road for using Weave CV. We've kept the legalese to a minimum and the principles fair.",
+    "gistLabel": "THE GIST",
+    "gist": "\"You own your content. We host it. The service is free, provided as-is, and either party can walk away at any time. Don't do anything illegal or abusive with it. That's pretty much it.\"",
+    "contents": "Contents",
+    "legalQuestion": "Got a legal question?",
+    "sections": [
+      {
+        "id": "agreement",
+        "title": "The agreement",
+        "body": "By creating an account or using Weave CV, you agree to these Terms of Service. If you don't agree, please don't use the service. We tried to keep the legalese to a minimum."
+      },
+      {
+        "id": "service",
+        "title": "What the service is",
+        "body": "Weave CV is a web-based résumé builder. You write content, choose a template, and export a PDF. The service is offered free of charge for personal use, with no premium tier.\nWe reserve the right to limit, suspend, or shut down the service. If we shut it down, we'll give you at least 60 days' notice and a tool to export everything."
+      },
+      {
+        "id": "account",
+        "title": "Your account",
+        "body": "You're responsible for keeping your password safe. One person, one account — don't share credentials with others. You must be at least 16 years old to use Weave CV (or the minimum age in your jurisdiction, whichever is higher).\nWe may suspend accounts that abuse the service — see Acceptable Use below — but we'll always tell you why and give you a way to export your data first."
+      },
+      {
+        "id": "content",
+        "title": "Your content",
+        "body": "You own your résumé content. Full stop. We claim no rights over what you create. The only license you grant us is the technical one we need to display, store, and export your content on your behalf.\nIf you delete a résumé or your account, that license ends immediately and we delete the content."
+      },
+      {
+        "id": "use",
+        "title": "Acceptable use",
+        "body": "Don't use Weave CV to:\n\n  Create fraudulent résumés or impersonate someone else.\n  Upload illegal content, malware, or anything that infringes someone else's rights.\n  Probe, scrape, or attempt to break the service or other users' accounts.\n  Resell, sublicense, or repackage Weave CV as your own product.\n"
+      },
+      {
+        "id": "ip",
+        "title": "Our intellectual property",
+        "body": "The Weave CV name, logo, and brand assets are ours.\nTemplates are released under CC BY 4.0: free to use and modify, including commercially, with attribution."
+      },
+      {
+        "id": "availability",
+        "title": "Service availability",
+        "body": "We aim for 99.5% uptime but do not guarantee it. The service is provided \"as is\" without warranties of any kind. We're a small team running a free product — please plan accordingly and keep local PDF copies of important résumés."
+      },
+      {
+        "id": "liability",
+        "title": "Limitation of liability",
+        "body": "To the maximum extent permitted by law, Weave CV is not liable for indirect, incidental, or consequential damages arising from your use of the service — including lost job opportunities, lost data, or lost time.\nUnder no circumstances will we be liable for any loss, damage, or injury that results from a third-party's use of Weave CV."
+      },
+      {
+        "id": "termination",
+        "title": "Termination",
+        "body": "You can delete your account any time from Settings → Account → Delete account. Deletion is immediate and irreversible.\nWe may terminate accounts that violate these terms, with notice unless the violation is severe (e.g. fraud, abuse). On termination, your access ends and your data is deleted within 30 days."
+      },
+      {
+        "id": "changes",
+        "title": "Changes to these terms",
+        "body": "We may update these terms occasionally. Material changes are emailed to all users at least 30 days before they take effect. If you keep using Weave CV after the change date, you're accepting the new terms."
+      }
+    ]
+  },
+  "privacyPage": {
+    "badge": "Legal",
+    "lastUpdated": "Last updated April 12, 2026",
+    "title": "Privacy Policy",
+    "subtitle": "What we collect, what we don't, and what you can do about it. No dark patterns, no hidden defaults.",
+    "contents": "Contents",
+    "legalQuestion": "Questions about this policy?",
+    "tldr": [
+      {
+        "k": "No selling",
+        "v": "We don't sell or rent your data — full stop."
+      },
+      {
+        "k": "No AI training",
+        "v": "Your résumé never trains a model."
+      },
+      {
+        "k": "One-click delete",
+        "v": "Wipe your account permanently any time."
+      }
+    ],
+    "sections": [
+      {
+        "id": "overview",
+        "title": "Overview",
+        "body": "This Privacy Policy explains what data Weave CV collects, how we use it, and what choices you have. We wrote it in plain English on purpose — if anything is unclear, email us and we'll rewrite it.\nThe short version: we only collect what we need to make the product work, we never sell your data, we never train AI models on it, and you can delete everything at any time."
+      },
+      {
+        "id": "collected",
+        "title": "What we collect",
+        "body": "We collect three categories of data:\n\n  Account data — your email address and a hashed password, or a Google/GitHub OAuth identifier if you sign in that way.\n  Résumé content — everything you type into the editor (work history, education, skills, contact details).\n  Usage data — anonymized page views, error logs, and which template you used. We do not use third-party analytics; this is collected by our own server.\n\nWe do not collect: precise location, contacts, browser history, advertising identifiers, or any data from cookies beyond the one session cookie that keeps you logged in."
+      },
+      {
+        "id": "use",
+        "title": "How we use it",
+        "body": "Your account data lets you log in. Your résumé content is rendered into the editor and exported as PDFs when you ask for one. Usage data helps us fix bugs and decide what to build next.\nWe do not use your résumé content to train machine-learning models, share it with partners, sell it to recruiters, or surface it in search."
+      },
+      {
+        "id": "rights",
+        "title": "Your rights",
+        "body": "Under the GDPR (and equivalent laws elsewhere), you have the right to:\n\n  Rectify — edit anything in the editor, any time.\n  Delete — wipe individual résumés or your whole account from Settings → Account. Deletion is immediate and permanent.\n  Object — opt out of any non-essential processing by emailing us.\n"
+      },
+      {
+        "id": "retention",
+        "title": "How long we keep it",
+        "body": "Active résumés are kept until you delete them. Account data is kept until you delete your account."
+      },
+      {
+        "id": "cookies",
+        "title": "Cookies & tracking",
+        "body": "We use exactly one cookie: weave_session, a first-party session token that keeps you signed in. It expires after 30 days of inactivity.\nNo advertising cookies, no third-party trackers, no fingerprinting, no Google Analytics."
+      }
+    ]
+  },
+  "seo": {
+    "index": {
+      "title": "Weave CV - Create Professional Resumes",
+      "description": "Create professional resumes with ease. Build, edit, and download your resume in minutes with Weave CV."
+    },
+    "changelog": {
+      "title": "Changelog — Weave CV",
+      "description": "Track every change shipped to Weave CV — features, fixes, and improvements."
+    },
+    "login": {
+      "title": "Sign In - Weave CV",
+      "description": "Sign in to your Weave CV account to access and manage your resumes."
+    },
+    "dashboardIndex": {
+      "title": "My Resumes - Weave CV",
+      "description": "Manage and edit your resumes. Create new resumes, update existing ones, and organize your professional documents."
+    },
+    "terms": {
+      "title": "Terms of Service — Weave CV",
+      "description": "The rules of the road for using Weave CV."
+    },
+    "register": {
+      "title": "Create Account - Weave CV",
+      "description": "Create a free account on Weave CV to start building professional resumes. Sign up with email or Google."
+    },
+    "privacy": {
+      "title": "Privacy Policy — Weave CV",
+      "description": "What we collect, what we don't, and what you can do about it."
+    },
+    "faq": {
+      "title": "Help & FAQ — Weave CV",
+      "description": "Answers to the most common questions about exporting, editing, templates, and your account."
+    },
+    "editor": {
+      "titleEdit": "Edit {title} - Weave CV",
+      "titleDefault": "Resume Editor - Weave CV",
+      "description": "Edit and customize your resume. Update content, adjust styling, and preview your resume in real-time."
+    },
+    "resetPassword": {
+      "title": "Set New Password - Weave CV"
+    },
+    "forgotPassword": {
+      "title": "Reset Password - Weave CV"
+    },
+    "confirm": {
+      "title": "Confirming Account - Weave CV"
+    },
+    "dashboardSettings": {
+      "title": "Settings - Weave CV"
+    },
+    "dashboardProfile": {
+      "title": "Profile - Weave CV"
+    },
+    "dashboardAccount": {
+      "title": "Account - Weave CV"
+    }
   }
 }

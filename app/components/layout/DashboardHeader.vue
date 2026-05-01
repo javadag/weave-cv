@@ -10,8 +10,8 @@ const isRtl = computed(() => locale.value === "fa")
 </script>
 
 <template>
-  <header class="h-16 bg-default/80 border-b border-default backdrop-blur">
-    <div class="mx-auto h-full max-w-compact w-full flex justify-between items-center px-6">
+  <header class="bg-default/80 border-default h-16 border-b backdrop-blur">
+    <div class="max-w-compact mx-auto flex h-full w-full items-center justify-between px-6">
       <UButton
         :icon="isRtl ? 'i-lucide-panel-right' : 'i-lucide-panel-left'"
         color="neutral"

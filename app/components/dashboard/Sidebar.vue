@@ -53,7 +53,7 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
     <template #header>
       <Logo />
       <UButton
-        class="me-0 ms-auto sm:hidden"
+        class="ms-auto me-0 sm:hidden"
         color="neutral"
         variant="ghost"
         icon="i-lucide-x"

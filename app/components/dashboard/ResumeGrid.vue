@@ -18,7 +18,7 @@ const hasReachedLimit = computed(() => props.resumeCount >= MAX_RESUMES)
 </script>
 
 <template>
-  <div class="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
     <ResumeCard
       v-for="resume in resumes"
       :key="resume.id"

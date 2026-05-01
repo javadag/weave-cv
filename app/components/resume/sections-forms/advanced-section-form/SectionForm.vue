@@ -84,13 +84,13 @@ const handleReorder = (_event: SortableEvent) => {
           :section-type="props.sectionType"
           :is-advanced-section="isAdvancedSection"
           :content="content"
-          class="relative group"
+          class="group relative"
           @delete="handleDeleteContent(content.id)"
         />
       </VueDraggable>
       <UButton
         v-if="!isSummarySection"
-        class="flex justify-center items-center"
+        class="flex items-center justify-center"
         variant="subtle"
         @click="handleAddContent"
       >

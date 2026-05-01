@@ -22,7 +22,7 @@ const signInWithGoogle = async () => {
 <template>
   <UButton color="neutral" variant="outline" size="lg" block @click="signInWithGoogle">
     <span
-      class="text-xs size-5 bg-gradient-to-r from-blue-500 to-red-500 rounded-sm flex items-center justify-center font-bold text-inverted"
+      class="text-inverted flex size-5 items-center justify-center rounded-sm bg-linear-to-r from-blue-500 to-red-500 text-xs font-bold"
       >G</span
     >
     {{ $t("common.withGoogle") }}

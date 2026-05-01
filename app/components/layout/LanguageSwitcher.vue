@@ -22,6 +22,9 @@ const currentCode = computed(() => locale.value.toUpperCase())
       color="neutral"
       variant="ghost"
       class="gap-1.5"
+      :ui="{
+        leadingIcon: 'size-4.5'
+      }"
     >
       <span class="text-xs font-semibold tracking-wide">{{ currentCode }}</span>
     </UButton>

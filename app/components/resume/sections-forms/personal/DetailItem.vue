@@ -52,7 +52,7 @@ const handleRemove = () => {
 </script>
 
 <template>
-  <div class="space-y-2 p-2 border border-muted/40 rounded-md">
+  <div class="border-muted/40 space-y-2 rounded-md border p-2">
     <div class="flex items-center gap-2">
       <UInput
         :model-value="detail.value"

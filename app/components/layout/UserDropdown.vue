@@ -58,13 +58,13 @@ const menuItems = computed(() => [
 
 <template>
   <UDropdownMenu v-if="user" :items="menuItems" :popper="{ placement: 'bottom-end' }">
-    <UButton color="neutral" variant="ghost" size="sm" class="gap-2 rounded-full border border-muted px-1.5">
-      <UAvatar v-if="userAvatar" :src="userAvatar" :alt="userEmail" size="xs" class="ring-2 ring-default/20" />
-      <UAvatar v-else :alt="userEmail" size="xs" class="ring-2 ring-default/20 bg-primary text-primary-foreground">
+    <UButton color="neutral" variant="ghost" size="sm" class="border-muted gap-2 rounded-full border px-1.5">
+      <UAvatar v-if="userAvatar" :src="userAvatar" :alt="userEmail" size="xs" class="ring-default/20 ring-2" />
+      <UAvatar v-else :alt="userEmail" size="xs" class="ring-default/20 bg-primary text-primary-foreground ring-2">
         {{ userInitials }}
       </UAvatar>
-      <span class="hidden sm:inline font-medium text-[13px]">{{ userEmail }}</span>
-      <UIcon name="i-lucide-chevron-down" class="w-4 h-4 text-muted" />
+      <span class="hidden text-[13px] font-medium sm:inline">{{ userEmail }}</span>
+      <UIcon name="i-lucide-chevron-down" class="text-muted h-4 w-4" />
     </UButton>
   </UDropdownMenu>
 </template>

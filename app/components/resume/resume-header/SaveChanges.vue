@@ -32,13 +32,13 @@ const handleManualSave = async () => {
 </script>
 
 <template>
-  <div v-if="!isOnline" class="hidden sm:flex items-center gap-1.5 px-2">
-    <UIcon name="i-lucide-wifi-off" class="w-3.5 h-3.5 text-orange-400 flex-shrink-0" />
-    <span class="text-xs text-orange-400 whitespace-nowrap">
-      {{ hasPendingOfflineChanges ? $t('editor.header.changesQueued') : $t('editor.header.offline') }}
+  <div v-if="!isOnline" class="hidden items-center gap-1.5 px-2 sm:flex">
+    <UIcon name="i-lucide-wifi-off" class="h-3.5 w-3.5 flex-shrink-0 text-orange-400" />
+    <span class="text-xs whitespace-nowrap text-orange-400">
+      {{ hasPendingOfflineChanges ? $t("editor.header.changesQueued") : $t("editor.header.offline") }}
     </span>
   </div>
-  <span v-else-if="savedAtLabel && !isSaving" class="hidden sm:inline text-xs text-muted px-2 whitespace-nowrap">
+  <span v-else-if="savedAtLabel && !isSaving" class="text-muted hidden px-2 text-xs whitespace-nowrap sm:inline">
     {{ savedAtLabel }}
   </span>
 
@@ -49,10 +49,10 @@ const handleManualSave = async () => {
     variant="solid"
     size="lg"
     icon="i-lucide-save"
-    :class="[isSaving ? 'opacity-70 cursor-not-allowed' : '']"
+    :class="[isSaving ? 'cursor-not-allowed opacity-70' : '']"
     @click="handleManualSave"
   >
-    <span class="hidden sm:inline">{{ isSaving ? $t('editor.header.saving') : $t('editor.header.saveChanges') }}</span>
-    <span class="sm:hidden">{{ isSaving ? $t('editor.header.saving') : $t('editor.header.save') }}</span>
+    <span class="hidden sm:inline">{{ isSaving ? $t("editor.header.saving") : $t("editor.header.saveChanges") }}</span>
+    <span class="sm:hidden">{{ isSaving ? $t("editor.header.saving") : $t("editor.header.save") }}</span>
   </UButton>
 </template>

@@ -64,7 +64,12 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.layout')" icon="i-lucide-grid" :collapsible="true" :default-expanded="true">
+  <ConfigsContainer
+    :title="$t('editor.configs.layout')"
+    icon="i-lucide-grid"
+    :collapsible="true"
+    :default-expanded="true"
+  >
     <!-- <SelectItem
       :model-value="configs.general.layout.language"
       label="Language"

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { CONTACT_EMAIL } from "~/constants/config"
 
+const { t } = useI18n()
+
 useHead({
-  title: "Set New Password - Weave CV",
+  title: () => t("seo.resetPassword.title"),
   meta: [{ name: "robots", content: "noindex, nofollow" }]
 })
-
-const { t } = useI18n()
 const route = useRoute()
 const supabase = useSupabaseClient()
 
@@ -20,13 +20,8 @@ const formError = ref("")
 let authListener: ReturnType<typeof supabase.auth.onAuthStateChange> | null = null
 
 onMounted(() => {
-  // Snapshot before the listener clears it via router.replace
   const arrivedWithCode = !!route.query.code
 
-  // @nuxtjs/supabase exchanges the PKCE code in a plugin before the component
-  // mounts, so PASSWORD_RECOVERY may have already fired. onAuthStateChange
-  // immediately fires INITIAL_SESSION with the already-established session —
-  // treat that as the recovery signal when we know we arrived with a code.
   authListener = supabase.auth.onAuthStateChange((event, session) => {
     if (event === "PASSWORD_RECOVERY" || (event === "INITIAL_SESSION" && session && arrivedWithCode)) {
       status.value = "ready"
@@ -87,13 +82,20 @@ const submit = async () => {
     <div class="relative w-full max-w-md">
       <template v-if="status === 'error'">
         <div class="mb-8 text-center">
-          <h1 class="mb-2 text-3xl font-bold text-toned">{{ $t("resetPassword.expiredTitle") }}</h1>
+          <h1 class="text-toned mb-2 text-3xl font-bold">{{ $t("resetPassword.expiredTitle") }}</h1>
           <p class="text-muted">{{ $t("resetPassword.expiredSubtitle") }}</p>
         </div>
         <UCard class="bg-default/70 shadow-2xl">
           <div class="space-y-3">
-            <UAlert color="error" variant="soft" :title="$t('resetPassword.invalidAlertTitle')" :description="errorDescription" />
-            <UButton to="/forgot-password" color="primary" size="lg" block>{{ $t("resetPassword.requestNewLink") }}</UButton>
+            <UAlert
+              color="error"
+              variant="soft"
+              :title="$t('resetPassword.invalidAlertTitle')"
+              :description="errorDescription"
+            />
+            <UButton to="/forgot-password" color="primary" size="lg" block>{{
+              $t("resetPassword.requestNewLink")
+            }}</UButton>
             <UButton :to="`mailto:${CONTACT_EMAIL}`" color="neutral" variant="ghost" size="lg" block>
               {{ $t("resetPassword.contactSupport") }}
             </UButton>
@@ -105,22 +107,28 @@ const submit = async () => {
         <div class="text-center">
           <div class="mb-4 flex justify-center">
             <span
-              class="inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent text-primary"
+              class="text-primary inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent"
             />
           </div>
-          <h1 class="mb-2 text-xl font-semibold text-highlighted">{{ $t("resetPassword.verifying") }}</h1>
-          <p class="text-sm text-muted">{{ $t("resetPassword.redirecting") }}</p>
+          <h1 class="text-highlighted mb-2 text-xl font-semibold">{{ $t("resetPassword.verifying") }}</h1>
+          <p class="text-muted text-sm">{{ $t("resetPassword.redirecting") }}</p>
         </div>
       </template>
 
       <template v-else>
         <div class="mb-8 text-center">
-          <h1 class="mb-2 text-3xl font-bold text-toned">{{ $t("resetPassword.title") }}</h1>
+          <h1 class="text-toned mb-2 text-3xl font-bold">{{ $t("resetPassword.title") }}</h1>
           <p class="text-muted">{{ $t("resetPassword.subtitle") }}</p>
         </div>
         <UCard class="bg-default/70 shadow-2xl">
           <UForm :state="formState" class="space-y-3" @submit="submit">
-            <UAlert v-if="formError" color="error" variant="soft" :title="$t('common.error')" :description="formError" />
+            <UAlert
+              v-if="formError"
+              color="error"
+              variant="soft"
+              :title="$t('common.error')"
+              :description="formError"
+            />
             <UFormField :label="$t('resetPassword.passwordLabel')" name="password" required>
               <UInput
                 v-model="formState.password"

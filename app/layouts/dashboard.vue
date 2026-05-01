@@ -6,7 +6,7 @@ const open = ref(true)
 </script>
 
 <template>
-  <div class="flex min-h-dvh flex-col bg-muted">
+  <div class="bg-muted flex min-h-dvh flex-col">
     <div class="flex flex-1">
       <DashboardSidebar v-model:open="open" />
       <div class="flex-1">

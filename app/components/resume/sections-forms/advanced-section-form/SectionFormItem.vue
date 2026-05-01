@@ -43,10 +43,10 @@ const handleToggleVisibility = () => {
     <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground handle cursor-move" />
     <button
       type="button"
-      class="flex flex-1 items-center hover:bg-accented/80 duration-150 bg-accented/50 rounded-md p-2 divide-x divide-accented [&>*]:px-2 [&>*]:text-sm"
+      class="hover:bg-accented/80 bg-accented/50 divide-accented flex flex-1 items-center divide-x rounded-md p-2 duration-150 [&>*]:px-2 [&>*]:text-sm"
       @click="isEditing = !isEditing"
     >
-      <span class="font-bold line-clamp-1">{{
+      <span class="line-clamp-1 font-bold">{{
         content.title ||
         ("subtitle" in content && content.subtitle) ||
         ("location" in content ? content.location : "") ||

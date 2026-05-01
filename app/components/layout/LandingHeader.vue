@@ -8,8 +8,8 @@ const user = useSupabaseUser()
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-default/80 backdrop-blur-md border-b border-default h-16">
-    <div class="mx-auto h-full flex max-w-compact items-center justify-between px-6 lg:px-12">
+  <header class="bg-default/80 border-default sticky top-0 z-50 h-16 border-b backdrop-blur-md">
+    <div class="max-w-compact mx-auto flex h-full items-center justify-between px-6 lg:px-12">
       <div class="flex items-center gap-10">
         <Logo />
         <nav class="hidden items-center gap-7 lg:flex">
@@ -17,7 +17,7 @@ const user = useSupabaseUser()
             v-for="link in navLinks"
             :key="link.label"
             :to="link.to"
-            class="nav-link relative text-sm font-medium text-muted transition-colors duration-200 hover:text-highlighted"
+            class="nav-link text-muted hover:text-highlighted relative text-sm font-medium transition-colors duration-200"
             >{{ link.label }}</NuxtLink
           >
         </nav>
@@ -26,13 +26,13 @@ const user = useSupabaseUser()
         <NuxtLink
           v-if="!user"
           :to="'/login'"
-          class="nav-link relative text-sm font-medium text-muted transition-colors duration-200 hover:text-highlighted"
+          class="nav-link text-muted hover:text-highlighted relative text-sm font-medium transition-colors duration-200"
           >{{ $t("nav.signIn") }}</NuxtLink
         >
         <NuxtLink
           v-else
           to="/dashboard"
-          class="lh-btn-dashboard inline-flex items-center rounded-[10px] bg-zinc-900 dark:bg-zinc-100 px-[18px] py-2.5 text-sm font-semibold text-white dark:text-zinc-900 transition-colors duration-200 hover:bg-zinc-700 dark:hover:bg-white"
+          class="lh-btn-dashboard inline-flex items-center rounded-[10px] bg-zinc-900 px-4.5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
         >
           {{ $t("nav.dashboard") }}
         </NuxtLink>

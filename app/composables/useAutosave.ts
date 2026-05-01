@@ -72,14 +72,21 @@ export function useAutosave(resumeId: Ref<string>) {
   }
 
   // Track dirty state — skip changes from initial store population
-  watch([title, personal, core, configs], () => {
-    if (!initialized) return
-    isDirty.value = true
-  }, { deep: true })
+  watch(
+    [title, personal, core, configs],
+    () => {
+      if (!initialized) return
+      isDirty.value = true
+    },
+    { deep: true }
+  )
 
   // Mark initialized once the first real data load completes
   watch([personal, core], ([p, c]) => {
-    if (p && c && !initialized) nextTick(() => { initialized = true })
+    if (p && c && !initialized)
+      nextTick(() => {
+        initialized = true
+      })
   })
 
   onMounted(() => {

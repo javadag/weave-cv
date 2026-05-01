@@ -1,9 +1,9 @@
 <template>
-  <div class="text-center py-12">
-    <div class="mx-auto size-24 bg-muted rounded-full flex items-center justify-center border border-default/20 mb-6">
-      <UIcon name="i-lucide-file-text" class="size-12 text-muted" />
+  <div class="py-12 text-center">
+    <div class="bg-muted border-default/20 mx-auto mb-6 flex size-24 items-center justify-center rounded-full border">
+      <UIcon name="i-lucide-file-text" class="text-muted size-12" />
     </div>
-    <h3 class="text-xl font-semibold text-default mb-2">{{ $t("emptyState.title") }}</h3>
+    <h3 class="text-default mb-2 text-xl font-semibold">{{ $t("emptyState.title") }}</h3>
     <p class="text-muted mb-6">{{ $t("emptyState.subtitle") }}</p>
   </div>
 </template>

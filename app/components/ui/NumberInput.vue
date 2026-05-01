@@ -28,7 +28,7 @@ const model = computed({
 <template>
   <UFormField
     :label="props.label"
-    :class="props.labelVariant === 'inline' ? 'flex flex-row justify-between items-center gap-2' : ''"
+    :class="props.labelVariant === 'inline' ? 'flex flex-row items-center justify-between gap-2' : ''"
     :ui="{ label: 'text-sm font-medium text-muted line-clamp-1', container: 'basis-1/2' }"
   >
     <UInputNumber v-model="model" :disabled="disabled" :min="props.min" :max="props.max" :step="props.step" size="sm" />

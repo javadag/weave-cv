@@ -63,7 +63,7 @@ const model = computed({
               v-for="icon in filteredIcons"
               :key="icon"
               type="button"
-              class="flex items-center justify-center p-2 rounded hover:bg-muted transition-colors border border-transparent hover:border-default"
+              class="hover:bg-muted hover:border-default flex items-center justify-center rounded border border-transparent p-2 transition-colors"
               :class="{ 'bg-primary/10 border-primary': modelValue === icon }"
               :title="icon"
               @click="selectIcon(icon)"
@@ -71,9 +71,9 @@ const model = computed({
               <span v-html="getIcon(icon, 20) || ''" />
             </button>
           </div>
-          <div v-if="filteredIcons.length === 0" class="text-center py-4 text-sm text-muted">No icons found</div>
+          <div v-if="filteredIcons.length === 0" class="text-muted py-4 text-center text-sm">No icons found</div>
         </div>
-        <div class="mt-2 pt-2 border-t border-muted">
+        <div class="border-muted mt-2 border-t pt-2">
           <UInput
             v-model="model"
             placeholder="Or enter icon name manually"

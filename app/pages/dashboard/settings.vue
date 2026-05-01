@@ -4,7 +4,7 @@ definePageMeta({ layout: "dashboard" })
 const { t, locale, locales, setLocale } = useI18n()
 
 useHead({
-  title: () => `${t("dashboard.settings.title")} - Weave CV`,
+  title: () => t("seo.dashboardSettings.title"),
   meta: [{ name: "robots", content: "noindex, nofollow" }]
 })
 
@@ -31,22 +31,22 @@ const languageOptions = computed(() =>
 <template>
   <div class="max-w-6xl">
     <div class="mb-6">
-      <h1 class="text-2xl font-bold tracking-tight text-default">{{ $t("dashboard.settings.title") }}</h1>
-      <p class="text-muted text-sm mt-1">{{ $t("dashboard.settings.subtitle") }}</p>
+      <h1 class="text-default text-2xl font-bold tracking-tight">{{ $t("dashboard.settings.title") }}</h1>
+      <p class="text-muted mt-1 text-sm">{{ $t("dashboard.settings.subtitle") }}</p>
     </div>
 
     <UCard class="mb-4">
       <template #header>
         <div>
-          <h2 class="text-base font-semibold text-default">{{ $t("dashboard.settings.appearanceTitle") }}</h2>
-          <p class="text-sm text-muted mt-0.5">{{ $t("dashboard.settings.appearanceSubtitle") }}</p>
+          <h2 class="text-default text-base font-semibold">{{ $t("dashboard.settings.appearanceTitle") }}</h2>
+          <p class="text-muted mt-0.5 text-sm">{{ $t("dashboard.settings.appearanceSubtitle") }}</p>
         </div>
       </template>
       <ClientOnly>
         <div class="flex items-center justify-between gap-4 py-1">
           <div>
-            <div class="text-sm font-semibold text-default">{{ $t("dashboard.settings.darkMode") }}</div>
-            <div class="text-sm text-muted">{{ $t("dashboard.settings.darkModeDesc") }}</div>
+            <div class="text-default text-sm font-semibold">{{ $t("dashboard.settings.darkMode") }}</div>
+            <div class="text-muted text-sm">{{ $t("dashboard.settings.darkModeDesc") }}</div>
           </div>
           <USwitch v-model="isDark" size="md" />
         </div>
@@ -59,12 +59,12 @@ const languageOptions = computed(() =>
     <UCard>
       <template #header>
         <div>
-          <h2 class="text-base font-semibold text-default">{{ $t("dashboard.settings.languageTitle") }}</h2>
-          <p class="text-sm text-muted mt-0.5">{{ $t("dashboard.settings.languageSubtitle") }}</p>
+          <h2 class="text-default text-base font-semibold">{{ $t("dashboard.settings.languageTitle") }}</h2>
+          <p class="text-muted mt-0.5 text-sm">{{ $t("dashboard.settings.languageSubtitle") }}</p>
         </div>
       </template>
-      <div class="max-w-xs flex flex-col gap-1.5">
-        <label for="language-select" class="text-sm font-medium text-default">
+      <div class="flex max-w-xs flex-col gap-1.5">
+        <label for="language-select" class="text-default text-sm font-medium">
           {{ $t("dashboard.settings.languageLabel") }}
         </label>
         <USelect id="language-select" v-model="language" :items="languageOptions" value-key="value" />

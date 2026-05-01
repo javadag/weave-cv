@@ -48,22 +48,25 @@ const handleCancel = () => {
         <template #header>
           <div class="flex items-center gap-3">
             <div
-              class="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center"
+              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/20"
             >
-              <UIcon name="i-lucide-alert-triangle" class="w-5 h-5 text-red-600 dark:text-red-400" />
+              <UIcon name="i-lucide-alert-triangle" class="h-5 w-5 text-red-600 dark:text-red-400" />
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-default">{{ $t("deleteResumeModal.title") }}</h3>
-              <p class="text-sm text-muted mt-1">{{ $t("deleteResumeModal.subtitle") }}</p>
+              <h3 class="text-default text-lg font-semibold">{{ $t("deleteResumeModal.title") }}</h3>
+              <p class="text-muted mt-1 text-sm">{{ $t("deleteResumeModal.subtitle") }}</p>
             </div>
           </div>
         </template>
-        <p class="text-sm text-default">
-          {{ $t("deleteResumeModal.messagePart1") }} <strong>{{ resume.title }}</strong>{{ $t("deleteResumeModal.messagePart2") }}
+        <p class="text-default text-sm">
+          {{ $t("deleteResumeModal.messagePart1") }} <strong>{{ resume.title }}</strong
+          >{{ $t("deleteResumeModal.messagePart2") }}
         </p>
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton color="neutral" variant="ghost" :disabled="isDeleting" @click="handleCancel"> {{ $t("common.cancel") }} </UButton>
+            <UButton color="neutral" variant="ghost" :disabled="isDeleting" @click="handleCancel">
+              {{ $t("common.cancel") }}
+            </UButton>
             <UButton color="error" :loading="isDeleting" @click="handleDelete"> {{ $t("common.delete") }} </UButton>
           </div>
         </template>

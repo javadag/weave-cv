@@ -8,10 +8,10 @@ const user = useSupabaseUser()
 </script>
 <template>
   <div
-    class="w-full relative grid min-h-dvh mx-auto grid-rows-[auto_1fr] after:content-[''] after:absolute after:top-0 after:z-[-2] after:size-full after:bg-[radial-gradient(#ddd_1px,#efefef_1px)] after:[background-size:16px_16px] dark:after:bg-[radial-gradient(#3b3b3b_1px,#222226_1px)] dark:after:[background-size:20px_20px]"
+    class="relative mx-auto grid min-h-dvh w-full grid-rows-[auto_1fr] after:absolute after:top-0 after:z-[-2] after:size-full after:bg-[radial-gradient(#ddd_1px,#efefef_1px)] after:bg-size-[16px_16px] after:content-[''] dark:after:bg-[radial-gradient(#3b3b3b_1px,#222226_1px)] dark:after:bg-size-[20px_20px]"
   >
-    <header class="backdrop-blur-md border-b border-default bg-default/80 h-16">
-      <div class="mx-auto max-w-compact px-6 lg:px-12 h-full flex justify-between items-center">
+    <header class="border-default bg-default/80 h-16 border-b backdrop-blur-md">
+      <div class="max-w-compact mx-auto flex h-full items-center justify-between px-6 lg:px-12">
         <Logo />
         <div class="flex items-center gap-3">
           <UserDropdown v-if="user" />
@@ -20,7 +20,7 @@ const user = useSupabaseUser()
         </div>
       </div>
     </header>
-    <main class="w-full mx-auto [&>div]:h-full max-w-compact py-4 px-3 sm:px-5 md:px-8 lg:px-10">
+    <main class="max-w-compact mx-auto w-full px-3 py-4 sm:px-5 md:px-8 [&>div]:h-full">
       <slot />
     </main>
   </div>

@@ -121,7 +121,7 @@ const resetStyles = () => {
 </script>
 
 <template>
-  <div v-if="editor" class="flex items-center flex-wrap gap-4 bg-muted rounded-lg p-2">
+  <div v-if="editor" class="bg-muted flex flex-wrap items-center gap-4 rounded-lg p-2">
     <ToolbarButton
       icon="i-lucide-bold"
       tooltip="Bold"
@@ -169,7 +169,7 @@ const resetStyles = () => {
       @click="toggleOrderedList"
     />
 
-    <div class="w-px h-6 bg-border" />
+    <div class="bg-border h-6 w-px" />
 
     <ToolbarButton
       icon="i-lucide-align-left"
@@ -203,7 +203,7 @@ const resetStyles = () => {
       @click="setTextAlign('justify')"
     />
 
-    <div class="w-px h-6 bg-border" />
+    <div class="bg-border h-6 w-px" />
 
     <ToolbarButton icon="i-lucide-rotate-ccw" tooltip="Reset Styles" @click="resetStyles" />
   </div>

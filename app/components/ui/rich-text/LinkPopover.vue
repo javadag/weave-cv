@@ -37,14 +37,14 @@ const handleKeyup = (event: KeyboardEvent) => {
 
 <template>
   <UPopover :open="isOpen" @update:open="(value) => emit('update:isOpen', value)">
-    <UTooltip text="Link" class="flex justify-center items-center">
+    <UTooltip text="Link" class="flex items-center justify-center">
       <button :class="{ 'is-active': isActive }" aria-label="Link" @click="openLinkPanel">
         <UIcon name="i-lucide-link" />
       </button>
     </UTooltip>
 
     <template #content>
-      <div class="p-3 flex items-center gap-2">
+      <div class="flex items-center gap-2 p-3">
         <UInput
           ref="linkInputRef"
           :model-value="linkUrl"

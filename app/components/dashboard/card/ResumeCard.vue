@@ -59,10 +59,10 @@ const handleDuplicateClick = async () => {
 </script>
 
 <template>
-  <UCard class="hover:shadow-lg transition-shadow duration-200">
+  <UCard class="transition-shadow duration-200 hover:shadow-lg">
     <template #header>
-      <div class="flex justify-between items-start">
-        <h3 class="text-lg font-semibold text-default truncate">
+      <div class="flex items-start justify-between">
+        <h3 class="text-default truncate text-lg font-semibold">
           {{ resume.title }}
         </h3>
         <UDropdownMenu

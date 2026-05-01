@@ -28,11 +28,11 @@ const handleDelete = () => {
 </script>
 
 <template>
-  <div class="flex items-center justify-between gap-3 border-b border-muted pb-2 mb-3">
-    <div class="flex items-center gap-2 min-w-0 flex-1">
-      <div v-if="props.isTitleEditable" class="flex items-center gap-2 min-w-0 flex-1">
+  <div class="border-muted mb-3 flex items-center justify-between gap-3 border-b pb-2">
+    <div class="flex min-w-0 flex-1 items-center gap-2">
+      <div v-if="props.isTitleEditable" class="flex min-w-0 flex-1 items-center gap-2">
         <InlineEditor
-          class="text-sm font-medium min-w-0 flex-1"
+          class="min-w-0 flex-1 text-sm font-medium"
           :is-visible="props.isTitleVisible"
           :value="props.sectionTitle"
           :section-id="props.sectionId"
@@ -47,7 +47,7 @@ const handleDelete = () => {
       </div>
       <span v-else class="text-sm font-medium">{{ props.sectionTitle }}</span>
     </div>
-    <div v-if="props.isSectionHideable" class="flex items-center gap-2 shrink-0">
+    <div v-if="props.isSectionHideable" class="flex shrink-0 items-center gap-2">
       <Visibility
         :is-hidden="!props.isSectionVisible"
         :tooltip="props.isSectionVisible ? $t('editor.form.hideSection') : $t('editor.form.showSection')"

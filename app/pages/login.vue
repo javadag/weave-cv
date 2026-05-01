@@ -4,30 +4,14 @@ import GoogleSignIn from "~/components/auth/GoogleSignIn.vue"
 
 const { t } = useI18n()
 
-useHead({
-  title: "Sign In - Weave CV",
-  meta: [
-    {
-      name: "description",
-      content: "Sign in to your Weave CV account to access and manage your resumes."
-    },
-    {
-      property: "og:title",
-      content: "Sign In - Weave CV"
-    },
-    {
-      property: "og:description",
-      content: "Sign in to your Weave CV account to access and manage your resumes."
-    },
-    {
-      property: "og:url",
-      content: "/login"
-    },
-    {
-      name: "robots",
-      content: "noindex, nofollow"
-    }
-  ]
+useSeoMeta({
+  title: () => t("seo.login.title"),
+  description: () => t("seo.login.description"),
+  ogTitle: () => t("seo.login.title"),
+  ogDescription: () => t("seo.login.description"),
+  ogUrl: "/login",
+  twitterTitle: () => t("seo.login.title"),
+  twitterDescription: () => t("seo.login.description")
 })
 
 const user = useSupabaseUser()
@@ -81,13 +65,19 @@ const signInWithPassword = async () => {
 <template>
   <div class="flex items-center justify-center">
     <div class="relative w-full max-w-md">
-      <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-toned mb-2">{{ $t("auth.login.title") }}</h1>
+      <div class="mb-8 text-center">
+        <h1 class="text-toned mb-2 text-3xl font-bold">{{ $t("auth.login.title") }}</h1>
         <p class="text-muted">{{ $t("auth.login.subtitle") }}</p>
       </div>
       <UCard class="bg-default/70 shadow-2xl">
         <UForm :state="formState" class="space-y-3" @submit="signInWithPassword">
-          <UAlert v-if="error" color="error" variant="soft" :title="$t('userDropdown.errorTitle')" :description="error" />
+          <UAlert
+            v-if="error"
+            color="error"
+            variant="soft"
+            :title="$t('userDropdown.errorTitle')"
+            :description="error"
+          />
 
           <UFormField :label="$t('auth.login.emailLabel')" name="email" required>
             <UInput
@@ -111,7 +101,7 @@ const signInWithPassword = async () => {
             />
           </UFormField>
           <div class="flex justify-end">
-            <ULink class="text-xs text-muted hover:text-primary transition-colors" to="/forgot-password">
+            <ULink class="text-muted hover:text-primary text-xs transition-colors" to="/forgot-password">
               {{ $t("auth.login.forgotPassword") }}
             </ULink>
           </div>
@@ -119,17 +109,19 @@ const signInWithPassword = async () => {
             {{ loading ? $t("auth.login.signingIn") : $t("auth.login.signInBtn") }}
           </UButton>
           <div
-            class="relative flex justify-center after:z-[-1] items-center after:content-[''] after:absolute after:top-1/2 after:inset-0 after:border-t after:border-muted"
+            class="after:border-muted relative flex items-center justify-center after:absolute after:inset-0 after:top-1/2 after:z-[-1] after:border-t after:content-['']"
           >
-            <span class="px-2 relative flex justify-center text-sm bg-default text-muted">{{ $t("auth.login.orContinueWith") }}</span>
+            <span class="bg-default text-muted relative flex justify-center px-2 text-sm">{{
+              $t("auth.login.orContinueWith")
+            }}</span>
           </div>
           <GoogleSignIn />
           <GitHubSignIn @error="(msg: string) => (error = msg)" />
         </UForm>
       </UCard>
-      <p class="text-center mt-8 text-sm text-muted">
+      <p class="text-muted mt-8 text-center text-sm">
         {{ $t("auth.login.noAccount") }}
-        <ULink class="font-medium text-primary" to="/register"> {{ $t("auth.login.signUpFree") }} </ULink>
+        <ULink class="text-primary font-medium" to="/register"> {{ $t("auth.login.signUpFree") }} </ULink>
       </p>
     </div>
   </div>

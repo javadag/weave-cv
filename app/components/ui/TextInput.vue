@@ -18,7 +18,7 @@ const model = computed({
 
 <template>
   <UFormField
-    :class="props.labelVariant === 'inline' ? 'flex flex-row justify-between items-center gap-2' : 'w-full'"
+    :class="props.labelVariant === 'inline' ? 'flex flex-row items-center justify-between gap-2' : 'w-full'"
     :label="props.label"
     :ui="{ label: 'text-sm font-medium text-muted', container: 'basis-1/2' }"
   >

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 definePageMeta({ layout: "dashboard" })
 
-useHead({
-  title: "Profile - Weave CV",
-  meta: [{ name: "robots", content: "noindex, nofollow" }]
-})
-
 const { t } = useI18n()
 const user = useSupabaseUser()
+
+useHead({
+  title: () => t("seo.dashboardProfile.title"),
+  meta: [{ name: "robots", content: "noindex, nofollow" }]
+})
 
 const userEmail = computed(() => user.value?.email || "")
 const fullName = computed(
@@ -36,31 +36,31 @@ const fields = computed(() => [
 <template>
   <div class="max-w-6xl">
     <div class="mb-6">
-      <h1 class="text-2xl font-bold tracking-tight text-default">{{ $t("dashboard.profile.title") }}</h1>
-      <p class="text-muted text-sm mt-1">{{ $t("dashboard.profile.subtitle") }}</p>
+      <h1 class="text-default text-2xl font-bold tracking-tight">{{ $t("dashboard.profile.title") }}</h1>
+      <p class="text-muted mt-1 text-sm">{{ $t("dashboard.profile.subtitle") }}</p>
     </div>
 
     <UCard>
-      <div class="flex items-center gap-6 flex-wrap">
-        <UAvatar v-if="userAvatar" :src="userAvatar" :alt="userEmail" size="3xl" class="ring-2 ring-default/20" />
+      <div class="flex flex-wrap items-center gap-6">
+        <UAvatar v-if="userAvatar" :src="userAvatar" :alt="userEmail" size="3xl" class="ring-default/20 ring-2" />
         <UAvatar
           v-else
           :alt="userEmail"
           size="3xl"
-          class="ring-2 ring-default/20 bg-primary text-primary-foreground text-xl font-semibold"
+          class="ring-default/20 bg-primary text-primary-foreground text-xl font-semibold ring-2"
         >
           {{ userInitials }}
         </UAvatar>
-        <div class="flex-1 min-w-[240px] grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+        <div class="grid min-w-60 flex-1 grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
           <div v-for="f in fields" :key="f.label">
-            <div class="text-[11px] uppercase tracking-[0.06em] text-dimmed font-semibold mb-1">{{ f.label }}</div>
-            <div class="text-base font-medium text-default break-all">{{ f.value }}</div>
+            <div class="text-dimmed mb-1 text-[11px] font-semibold tracking-[0.06em] uppercase">{{ f.label }}</div>
+            <div class="text-default text-base font-medium break-all">{{ f.value }}</div>
           </div>
         </div>
       </div>
     </UCard>
 
-    <div class="mt-3 text-xs text-dimmed flex items-center gap-1.5">
+    <div class="text-dimmed mt-3 flex items-center gap-1.5 text-xs">
       <UIcon name="i-lucide-lock" class="size-3.5" />
       {{ $t("dashboard.profile.readOnlyNote") }}
     </div>

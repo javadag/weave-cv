@@ -1,7 +1,4 @@
-import type {
-  TAdvancedSectionConfigs,
-  TBasicSectionConfigs
-} from "~/utils/schemas/configs/sectionsConfigs.schema"
+import type { TAdvancedSectionConfigs, TBasicSectionConfigs } from "~/utils/schemas/configs/sectionsConfigs.schema"
 import type {
   TAdvancedContent,
   TAdvancedSectionType,

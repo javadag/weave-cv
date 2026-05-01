@@ -86,10 +86,10 @@ const handleDone = () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 rounded-lg p-3 w-full bg-accented/40">
-    <div class="flex justify-between items-center gap-2">
-      <span class="text-lg font-semibold line-clamp-1"
-        >{{ $t('editor.form.edit') }}
+  <div class="bg-accented/40 flex w-full flex-col gap-4 rounded-lg p-3">
+    <div class="flex items-center justify-between gap-2">
+      <span class="line-clamp-1 text-lg font-semibold"
+        >{{ $t("editor.form.edit") }}
         {{
           content.title ||
           ("subtitle" in content && content.subtitle) ||
@@ -100,7 +100,7 @@ const handleDone = () => {
       <UButton size="sm" variant="soft" color="primary" :leading-icon="'i-lucide-check'" @click="handleDone" />
     </div>
     <div class="space-y-3">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <TextInput
           v-if="hasField('title')"
           :model-value="getStringFieldValue('title')"
@@ -132,7 +132,7 @@ const handleDone = () => {
             class="self-start"
             @click="clearDate('startDate')"
           >
-            {{ $t('editor.form.clearDate') }}
+            {{ $t("editor.form.clearDate") }}
           </UButton>
         </div>
         <div v-if="hasField('endDate') || hasField('present')" class="flex flex-col gap-2">

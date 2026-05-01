@@ -1,13 +1,13 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useHead({
-  title: "Reset Password - Weave CV",
+  title: () => t("seo.forgotPassword.title"),
   meta: [{ name: "robots", content: "noindex, nofollow" }]
 })
 
 const user = useSupabaseUser()
 if (user.value) navigateTo("/dashboard")
-
-const { t } = useI18n()
 const supabase = useSupabaseClient()
 const email = ref("")
 const loading = ref(false)
@@ -39,7 +39,7 @@ const submit = async () => {
   <div class="flex items-center justify-center">
     <div class="relative w-full max-w-md">
       <div class="mb-8 text-center">
-        <h1 class="mb-2 text-3xl font-bold text-toned">{{ $t("forgotPassword.title") }}</h1>
+        <h1 class="text-toned mb-2 text-3xl font-bold">{{ $t("forgotPassword.title") }}</h1>
         <p class="text-muted">{{ $t("forgotPassword.subtitle") }}</p>
       </div>
 
@@ -48,14 +48,14 @@ const submit = async () => {
         <template v-if="sent">
           <div class="py-4 text-center">
             <div class="mb-4 flex justify-center">
-              <span class="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <span class="bg-primary/10 text-primary flex size-14 items-center justify-center rounded-full">
                 <UIcon name="i-lucide-mail-check" class="size-7" />
               </span>
             </div>
-            <h2 class="mb-2 text-lg font-semibold text-highlighted">{{ $t("forgotPassword.sentTitle") }}</h2>
-            <p class="mb-1 text-sm text-muted">{{ $t("forgotPassword.sentLinkTo") }}</p>
-            <p class="mb-4 font-medium text-highlighted">{{ email }}</p>
-            <p class="text-sm text-muted">{{ $t("forgotPassword.sentHint") }}</p>
+            <h2 class="text-highlighted mb-2 text-lg font-semibold">{{ $t("forgotPassword.sentTitle") }}</h2>
+            <p class="text-muted mb-1 text-sm">{{ $t("forgotPassword.sentLinkTo") }}</p>
+            <p class="text-highlighted mb-4 font-medium">{{ email }}</p>
+            <p class="text-muted text-sm">{{ $t("forgotPassword.sentHint") }}</p>
           </div>
         </template>
 
@@ -80,9 +80,9 @@ const submit = async () => {
         </template>
       </UCard>
 
-      <p class="mt-8 text-center text-sm text-muted">
+      <p class="text-muted mt-8 text-center text-sm">
         {{ $t("forgotPassword.remembered") }}
-        <ULink class="font-medium text-primary" to="/login">{{ $t("forgotPassword.signIn") }}</ULink>
+        <ULink class="text-primary font-medium" to="/login">{{ $t("forgotPassword.signIn") }}</ULink>
       </p>
     </div>
   </div>

@@ -13,7 +13,7 @@ withDefaults(
 
 <template>
   <div>
-    <h4 class="text-sm font-medium text-default mb-1">{{ title }}</h4>
+    <h4 class="text-default mb-1 text-sm font-medium">{{ title }}</h4>
     <div v-if="variant === 'grid'" class="grid grid-cols-2 gap-2">
       <slot />
     </div>

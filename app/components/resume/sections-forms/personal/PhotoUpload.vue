@@ -39,16 +39,16 @@ const previewStyles = computed(() => ({
 </script>
 
 <template>
-  <div class="flex items-center gap-3 p-3 border border-dashed border-muted rounded-lg">
+  <div class="border-muted flex items-center gap-3 rounded-lg border border-dashed p-3">
     <img v-if="photoUrl" :src="photoUrl" :style="previewStyles" alt="Profile photo" />
     <div
       v-else
-      class="flex items-center justify-center flex-shrink-0 rounded-lg bg-elevated"
+      class="bg-elevated flex flex-shrink-0 items-center justify-center rounded-lg"
       style="width: 56px; height: 56px"
     >
       <UIcon name="i-lucide-user" class="text-muted text-2xl" />
     </div>
-    <div class="flex flex-col gap-1.5 flex-1">
+    <div class="flex flex-1 flex-col gap-1.5">
       <input ref="fileInput" type="file" accept="image/*" class="hidden" @change="onFileChange" />
       <UButton size="sm" variant="outline" @click="triggerUpload">
         {{ $t("editor.form.uploadPhoto") }}

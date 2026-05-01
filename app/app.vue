@@ -4,7 +4,7 @@ const head = useLocaleHead({ seo: true })
 useHead(() => ({
   htmlAttrs: {
     lang: head.value.htmlAttrs?.lang,
-    dir: head.value.htmlAttrs?.dir as 'ltr' | 'rtl' | 'auto' | undefined
+    dir: head.value.htmlAttrs?.dir as "ltr" | "rtl" | "auto" | undefined
   }
 }))
 </script>

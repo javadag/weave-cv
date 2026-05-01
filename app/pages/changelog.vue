@@ -2,23 +2,23 @@
 import { marked } from "marked"
 import changelogContent from "~~/CHANGELOG.md?raw"
 
+const { t } = useI18n()
+
 definePageMeta({
   layout: "landing"
 })
 
-useHead({
-  title: "Changelog — Weave CV",
-  meta: [
-    {
-      name: "description",
-      content: "Track every change shipped to Weave CV — features, fixes, and improvements."
-    }
-  ]
+useSeoMeta({
+  title: () => t("seo.changelog.title"),
+  description: () => t("seo.changelog.description"),
+  ogTitle: () => t("seo.changelog.title"),
+  ogDescription: () => t("seo.changelog.description"),
+  ogUrl: "/changelog",
+  twitterTitle: () => t("seo.changelog.title"),
+  twitterDescription: () => t("seo.changelog.description")
 })
 
-const html = computed(() =>
-  marked.parse(changelogContent, { gfm: true, breaks: false, async: false }) as string
-)
+const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: false, async: false }) as string)
 </script>
 
 <template>
@@ -32,16 +32,16 @@ const html = computed(() =>
         class="mb-12"
       >
         <span
-          class="inline-flex items-center gap-1.5 rounded-full border border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary"
+          class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
         >
           Changelog
         </span>
-        <h1 class="mt-5 text-balance text-4xl font-bold tracking-[-0.03em] text-highlighted sm:text-5xl">
+        <h1 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
           What's new in Weave CV
         </h1>
-        <p class="mt-4 max-w-xl text-base leading-relaxed text-dimmed">
-          Every feature, fix, and refinement we've shipped. Generated from our git history — see something missing?
-          Let us know.
+        <p class="text-dimmed mt-4 max-w-xl text-base leading-relaxed">
+          Every feature, fix, and refinement we've shipped. Generated from our git history — see something missing? Let
+          us know.
         </p>
       </header>
 
@@ -131,7 +131,9 @@ const html = computed(() =>
   border-radius: 4px;
   background: color-mix(in srgb, var(--ui-border) 50%, transparent);
   text-decoration: none;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
 }
 .changelog-prose :deep(a:hover) {
   color: var(--ui-primary);

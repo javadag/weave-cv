@@ -32,16 +32,20 @@ export const PersonalConfigsSchema = z.object({
   variant: VariantSimple.default("stacked"),
   align: z.enum(["left", "center", "right"]).default("center"),
   bottomSpace: z.number().min(0).max(100).default(32),
-  photo: z.object({
-    visible: z.boolean().default(true),
-    position: z.enum(["left", "right", "top"]).default("left"),
-    shape: z.enum(["circle", "rounded", "square"]).default("circle"),
-    size: z.number().min(40).max(200).default(80),
-    border: z.object({
-      width: z.number().min(0).max(10).default(0),
-      color: z.string().default("#000000")
-    }).default({ width: 0, color: "#000000" })
-  }).default({ visible: true, position: "left", shape: "circle", size: 80, border: { width: 0, color: "#000000" } }),
+  photo: z
+    .object({
+      visible: z.boolean().default(true),
+      position: z.enum(["left", "right", "top"]).default("left"),
+      shape: z.enum(["circle", "rounded", "square"]).default("circle"),
+      size: z.number().min(40).max(200).default(80),
+      border: z
+        .object({
+          width: z.number().min(0).max(10).default(0),
+          color: z.string().default("#000000")
+        })
+        .default({ width: 0, color: "#000000" })
+    })
+    .default({ visible: true, position: "left", shape: "circle", size: 80, border: { width: 0, color: "#000000" } }),
   main: z.object({
     variant: VariantSimple.default("inline"),
     title: z.object({

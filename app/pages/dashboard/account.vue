@@ -3,8 +3,10 @@ import DeleteAccountModal from "~/components/dashboard/DeleteAccountModal.vue"
 
 definePageMeta({ layout: "dashboard" })
 
+const { t } = useI18n()
+
 useHead({
-  title: "Account - Weave CV",
+  title: () => t("seo.dashboardAccount.title"),
   meta: [{ name: "robots", content: "noindex, nofollow" }]
 })
 
@@ -14,15 +16,15 @@ const isModalOpen = ref(false)
 <template>
   <div class="max-w-6xl">
     <div class="mb-6">
-      <h1 class="text-2xl font-bold tracking-tight text-default">{{ $t("dashboard.account.title") }}</h1>
-      <p class="text-muted text-sm mt-1">{{ $t("dashboard.account.subtitle") }}</p>
+      <h1 class="text-default text-2xl font-bold tracking-tight">{{ $t("dashboard.account.title") }}</h1>
+      <p class="text-muted mt-1 text-sm">{{ $t("dashboard.account.subtitle") }}</p>
     </div>
 
-    <div class="rounded-xl border border-error/30 bg-gradient-to-b from-error/10 to-transparent">
-      <div class="flex items-center justify-between gap-4 p-5 flex-wrap">
+    <div class="border-error/30 from-error/10 rounded-xl border bg-linear-to-b to-transparent">
+      <div class="flex flex-wrap items-center justify-between gap-4 p-5">
         <div class="min-w-0">
-          <div class="text-sm font-semibold text-default">{{ $t("dashboard.account.deleteTitle") }}</div>
-          <div class="text-sm text-muted mt-0.5">
+          <div class="text-default text-sm font-semibold">{{ $t("dashboard.account.deleteTitle") }}</div>
+          <div class="text-muted mt-0.5 text-sm">
             {{ $t("dashboard.account.deleteDesc") }}
           </div>
         </div>
@@ -32,8 +34,8 @@ const isModalOpen = ref(false)
       </div>
     </div>
 
-    <div class="mt-4 rounded-lg border border-default bg-elevated p-4 text-sm text-muted flex gap-2.5 items-start">
-      <UIcon name="i-lucide-alert-triangle" class="size-4 shrink-0 mt-0.5" />
+    <div class="border-default bg-elevated text-muted mt-4 flex items-start gap-2.5 rounded-lg border p-4 text-sm">
+      <UIcon name="i-lucide-alert-triangle" class="mt-0.5 size-4 shrink-0" />
       <p>{{ $t("dashboard.account.warningNote") }}</p>
     </div>
 

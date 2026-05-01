@@ -17,18 +17,18 @@ const titleModel = computed({
 
 <template>
   <div
-    class="relative flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-default"
+    class="bg-default relative flex flex-col items-stretch justify-between gap-3 rounded-xl p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4"
   >
-    <div class="flex items-center gap-2 flex-1 min-w-0">
+    <div class="flex min-w-0 flex-1 items-center gap-2">
       <UButton
         to="/dashboard"
         variant="ghost"
         color="neutral"
         size="lg"
         icon="i-lucide-arrow-left"
-        class="hidden lg:flex flex-shrink-0"
+        class="hidden flex-shrink-0 lg:flex"
       >
-        <span class="hidden xl:inline">{{ $t('editor.header.dashboard') }}</span>
+        <span class="hidden xl:inline">{{ $t("editor.header.dashboard") }}</span>
       </UButton>
       <UInput
         v-model="titleModel"
@@ -43,11 +43,11 @@ const titleModel = computed({
         }"
       >
         <template #trailing>
-          <span class="text-xs text-muted hidden sm:inline">{{ titleModel.length }}/50</span>
+          <span class="text-muted hidden text-xs sm:inline">{{ titleModel.length }}/50</span>
         </template>
       </UInput>
     </div>
-    <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+    <div class="flex flex-shrink-0 items-center gap-2 sm:gap-3">
       <UButton
         color="neutral"
         variant="outline"
@@ -55,10 +55,10 @@ const titleModel = computed({
         icon="i-lucide-layout-template"
         @click="isTemplateModalOpen = true"
       >
-        <span class="hidden sm:inline">{{ $t('editor.header.changeTemplate') }}</span>
+        <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
       </UButton>
       <div
-        class="flex items-center rounded-lg bg-elevated/50 p-1 gap-1 sm:gap-2 border border-muted shadow-sm backdrop-blur-sm"
+        class="bg-elevated/50 border-muted flex items-center gap-1 rounded-lg border p-1 shadow-sm backdrop-blur-sm sm:gap-2"
       >
         <SaveChanges @saving="saving = $event" />
         <Download :disabled="saving" />

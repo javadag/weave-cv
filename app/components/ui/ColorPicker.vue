@@ -159,7 +159,7 @@ const chip = computed(() => ({ backgroundColor: localColor.value }))
   <UPopover>
     <UButton :disabled="props.disabled" :label="label" color="neutral" size="sm" variant="outline">
       <template #leading>
-        <span :style="chip" class="size-4 rounded-full shrink-0" />
+        <span :style="chip" class="size-4 shrink-0 rounded-full" />
       </template>
     </UButton>
     <template #content>
@@ -175,11 +175,11 @@ const chip = computed(() => ({ backgroundColor: localColor.value }))
               placeholder="#000000"
               maxlength="7"
               :error="!!validationError"
-              class="font-mono"
+              class=""
               @blur="handleHexBlur"
             />
           </div>
-          <p v-if="validationError" class="text-xs text-red-500 dark:text-red-400 px-1">
+          <p v-if="validationError" class="px-1 text-xs text-red-500 dark:text-red-400">
             {{ validationError }}
           </p>
         </div>

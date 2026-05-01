@@ -42,24 +42,28 @@ const handleCancel = () => {
       <UCard>
         <template #header>
           <div class="flex items-center gap-3">
-            <div class="shrink-0 size-10 rounded-full bg-error/10 flex items-center justify-center">
-              <UIcon name="i-lucide-alert-triangle" class="size-5 text-error" />
+            <div class="bg-error/10 flex size-10 shrink-0 items-center justify-center rounded-full">
+              <UIcon name="i-lucide-alert-triangle" class="text-error size-5" />
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-default">{{ $t("deleteAccountModal.title") }}</h3>
-              <p class="text-sm text-muted mt-0.5">{{ $t("deleteAccountModal.subtitle") }}</p>
+              <h3 class="text-default text-lg font-semibold">{{ $t("deleteAccountModal.title") }}</h3>
+              <p class="text-muted mt-0.5 text-sm">{{ $t("deleteAccountModal.subtitle") }}</p>
             </div>
           </div>
         </template>
-        <p class="text-sm text-default">
+        <p class="text-default text-sm">
           {{ $t("deleteAccountModal.messagePart1") }}
           <strong>{{ $t("deleteAccountModal.messageStrong") }}</strong>
           {{ $t("deleteAccountModal.messagePart2") }}
         </p>
         <template #footer>
           <div class="flex justify-end gap-3">
-            <UButton color="neutral" variant="ghost" :disabled="isDeleting" @click="handleCancel">{{ $t("common.cancel") }}</UButton>
-            <UButton color="error" :loading="isDeleting" @click="handleDelete">{{ $t("deleteAccountModal.title") }}</UButton>
+            <UButton color="neutral" variant="ghost" :disabled="isDeleting" @click="handleCancel">{{
+              $t("common.cancel")
+            }}</UButton>
+            <UButton color="error" :loading="isDeleting" @click="handleDelete">{{
+              $t("deleteAccountModal.title")
+            }}</UButton>
           </div>
         </template>
       </UCard>

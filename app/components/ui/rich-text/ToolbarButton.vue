@@ -25,7 +25,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <UTooltip :text="tooltip" class="flex justify-center items-center">
+  <UTooltip :text="tooltip" class="flex items-center justify-center">
     <button
       :disabled="disabled"
       :class="{ 'is-active': isActive }"

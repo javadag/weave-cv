@@ -70,7 +70,11 @@ function getString(field: string): string {
     <NumberInput
       v-if="!props.exclude?.includes('fontSize')"
       :model-value="getNumber(fontSizeFieldName)"
-      :label="fontSizeFieldName === 'fontSizeMultiplier' ? $t('editor.configs.fontSizeMultiplier') : $t('editor.configs.fontSize')"
+      :label="
+        fontSizeFieldName === 'fontSizeMultiplier'
+          ? $t('editor.configs.fontSizeMultiplier')
+          : $t('editor.configs.fontSize')
+      "
       label-variant="stacked"
       :min="fontSizeConstraints?.min"
       :max="fontSizeConstraints?.max"

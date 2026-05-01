@@ -15,7 +15,7 @@ const props = defineProps<Props>()
     }"
     :icon="props.icon"
     variant="ghost"
-    class="text-sm group p-0 shadow-none w-full font-semibold flex items-center active:bg-inherit hover:bg-inherit text-default"
+    class="group text-default flex w-full items-center p-0 text-sm font-semibold shadow-none hover:bg-inherit active:bg-inherit"
     block
   >
     {{ props.title }}

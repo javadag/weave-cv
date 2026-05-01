@@ -4,38 +4,21 @@ import FeaturesSection from "~/components/landing/home/FeaturesSection.vue"
 import HeroSection from "~/components/landing/home/HeroSection.vue"
 import TemplatesSection from "~/components/landing/home/TemplatesSection.vue"
 
+const { t } = useI18n()
+
+
 definePageMeta({
   layout: "landing"
 })
 
-useHead({
-  title: "Weave CV - Create Professional Resumes",
-  meta: [
-    {
-      name: "description",
-      content: "Create professional resumes with ease. Build, edit, and download your resume in minutes with Weave CV."
-    },
-    {
-      property: "og:title",
-      content: "Weave CV - Create Professional Resumes"
-    },
-    {
-      property: "og:description",
-      content: "Create professional resumes with ease. Build, edit, and download your resume in minutes with Weave CV."
-    },
-    {
-      property: "og:url",
-      content: "/"
-    },
-    {
-      name: "twitter:title",
-      content: "Weave CV - Create Professional Resumes"
-    },
-    {
-      name: "twitter:description",
-      content: "Create professional resumes with ease. Build, edit, and download your resume in minutes with Weave CV."
-    }
-  ]
+useSeoMeta({
+  title: () => t("seo.index.title"),
+  description: () => t("seo.index.description"),
+  ogTitle: () => t("seo.index.title"),
+  ogDescription: () => t("seo.index.description"),
+  ogUrl: "/",
+  twitterTitle: () => t("seo.index.title"),
+  twitterDescription: () => t("seo.index.description")
 })
 </script>
 
