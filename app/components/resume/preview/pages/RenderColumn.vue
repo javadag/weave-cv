@@ -16,13 +16,16 @@ const { configs } = storeToRefs(configsStore)
 const layout = computed(() => configs.value.general.layout)
 const colors = computed(() => configs.value.general.colors)
 
-const { left, right } = getColumnColors(colors.value, layout.value.personalPosition)
+const { left, right } = getColumnColors(colors.value, layout.value.personalPosition, layout.value.rtl)
 const columnColors = computed<ColumnColorsContext>(() => (side === "left" ? left : right))
 const hasUniformBackground = computed(() => left.bgColor === right.bgColor || layout.value.personalPosition === "top")
 
 const columnStyles = computed<CSSProperties>(() => {
   const isSideLayout = layout.value.personalPosition === "left" || layout.value.personalPosition === "right"
-  const width = side === "left" ? layout.value.columnsWidth.left : layout.value.columnsWidth.right
+  const widthConfig = layout.value.rtl
+    ? { left: layout.value.columnsWidth.right, right: layout.value.columnsWidth.left }
+    : { left: layout.value.columnsWidth.left, right: layout.value.columnsWidth.right }
+  const width = side === "left" ? widthConfig.left : widthConfig.right
 
   const verticalPadding = isSideLayout ? calculateHeaderMargin(layout.value.verticalMargin) : 0
   const horizontalPadding = isSideLayout ? layout.value.horizontalMargin : 0

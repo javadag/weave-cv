@@ -157,7 +157,14 @@ const chip = computed(() => ({ backgroundColor: localColor.value }))
 
 <template>
   <UPopover>
-    <UButton :disabled="props.disabled" :label="label" color="neutral" size="sm" variant="outline">
+    <UButton
+      :disabled="props.disabled"
+      :label="label"
+      color="neutral"
+      size="sm"
+      variant="outline"
+      :ui="{ label: 'text-2sm' }"
+    >
       <template #leading>
         <span :style="chip" class="size-4 shrink-0 rounded-full" />
       </template>

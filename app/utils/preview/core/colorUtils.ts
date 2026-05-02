@@ -2,7 +2,7 @@
 
 import type { TColors } from "~/utils/schemas/configs/generalConfigs.schema"
 
-export function getColumnColors(colors: TColors, personalPosition: string) {
+export function getColumnColors(colors: TColors, personalPosition: string, isRtl: boolean = false) {
   let leftColumnColors = {
     accentColor: "#ffffff",
     textColor: "#ffffff",
@@ -17,9 +17,17 @@ export function getColumnColors(colors: TColors, personalPosition: string) {
   leftColumnColors = colors.primary
   rightColumnColors = colors.secondary
 
-  if (personalPosition === "left") {
+  const adjustedPosition = isRtl
+    ? personalPosition === "left"
+      ? "right"
+      : personalPosition === "right"
+        ? "left"
+        : personalPosition
+    : personalPosition
+
+  if (adjustedPosition === "left") {
     return { left: leftColumnColors, right: rightColumnColors }
-  } else if (personalPosition === "right") {
+  } else if (adjustedPosition === "right") {
     return { left: rightColumnColors, right: leftColumnColors }
   } else {
     return { left: rightColumnColors, right: rightColumnColors }

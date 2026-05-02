@@ -37,7 +37,7 @@ const basePaddingStyles = computed(() => ({
   paddingTop: isPersonalOnTop.value ? `${layout.value.verticalMargin}mm` : undefined,
   paddingInlineEnd: isPersonalOnTop.value ? `${layout.value.horizontalMargin}mm` : undefined,
   paddingInlineStart: isPersonalOnTop.value ? `${layout.value.horizontalMargin}mm` : undefined,
-  backgroundColor: colors.value.primary.bgColor,
+  backgroundColor: isPersonalOnTop.value ? colors.value.primary.bgColor : "transparent",
   paddingBottom: `${personalConfigs.value.bottomSpace}px`,
   whiteSpace: "pre-wrap" as const,
   textAlign: personalConfigs.value.align

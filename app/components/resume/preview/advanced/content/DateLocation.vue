@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type CSSProperties } from "vue"
+import { computed, ref, type CSSProperties, nextTick, onMounted } from "vue"
 import type { TAdvancedSectionVariant } from "~/utils/schemas/shared.schema"
 import AdvancedDate from "./date-location/AdvancedDate.vue"
 import AdvancedLocation from "./date-location/AdvancedLocation.vue"
@@ -43,20 +43,34 @@ const getElement = (ref: HTMLElement | { $el?: HTMLElement } | null): HTMLElemen
 const checkWrapAndHandleSpacer = () => {
   if (!dateRef.value || !locationRef.value) return
 
-  const dateElement = getElement(dateRef.value)
-  const locationElement = getElement(locationRef.value)
+  // Use requestAnimationFrame to ensure we measure AFTER the browser layout pass
+  requestAnimationFrame(() => {
+    const dateElement = getElement(dateRef.value)
+    const locationElement = getElement(locationRef.value)
 
-  const dateTop = dateElement!.getBoundingClientRect().top
-  const locationTop = locationElement!.getBoundingClientRect().top
-  const wrapped = locationTop > dateTop
+    if (!dateElement || !locationElement) return
 
-  if (wrapped === isWrapped.value) return
+    const dateTop = dateElement.getBoundingClientRect().top
+    const locationTop = locationElement.getBoundingClientRect().top
 
-  isWrapped.value = wrapped
+    // If both are exactly the same and very small/zero, it might still be too early
+    // but usually, if they are at the same top, it just means they haven't wrapped.
+    const wrapped = locationTop > dateTop
+
+    if (wrapped === isWrapped.value) return
+    isWrapped.value = wrapped
+  })
 }
 
 useResizeObserver(containerRef, () => {
   checkWrapAndHandleSpacer()
+})
+
+onMounted(() => {
+  // Wait for sub-components and layout to settle
+  nextTick(() => {
+    checkWrapAndHandleSpacer()
+  })
 })
 
 const containerStyles = computed<CSSProperties>(() => ({
@@ -77,10 +91,6 @@ const spacerStyles = computed<CSSProperties>(() => ({
 
 <template>
   <div ref="containerRef" :style="[containerStyles, props.style]">
-    <span
-      v-if="isWrapped && (position === 'contentFirst' || position === 'stacked' || position === 'columns')"
-      :style="{ paddingInline: `0.5em`, whiteSpace: 'pre' }"
-    />
     <AdvancedDate
       ref="dateRef"
       :position="position"
@@ -88,6 +98,11 @@ const spacerStyles = computed<CSSProperties>(() => ({
       :end-date="endDate"
       :present="present"
       :show-date-day="showDateDay"
+    />
+
+    <span
+      v-if="isWrapped && (position === 'contentFirst' || position === 'stacked' || position === 'columns')"
+      :style="{ paddingInline: `0.5em`, whiteSpace: 'pre' }"
     />
     <span v-if="!isWrapped && (startDate || endDate)" ref="sepratorRef" :style="spacerStyles">|</span>
 

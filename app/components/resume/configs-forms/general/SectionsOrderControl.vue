@@ -11,9 +11,7 @@ const { configs } = storeToRefs(configsStore)
 const resumeStore = useResumeStore()
 const { core } = storeToRefs(resumeStore)
 
-const isTwoColumnLayout = computed(() => {
-  return configs.value.general.layout.columns === "2"
-})
+const isTwoColumnLayout = computed(() => configs.value.general.layout.columns === "2")
 
 const sections = computed(() => {
   const sectionOrder = configs.value.general.layout.order.oneCol || []
@@ -115,7 +113,11 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
 
 <template>
   <ConfigWrapper :title="$t('editor.configs.sectionsOrder')">
-    <div v-if="isTwoColumnLayout" class="mt-2 grid grid-cols-2 items-start justify-between gap-2">
+    <div
+      v-if="isTwoColumnLayout"
+      :class="{ 'flex-row-reverse': configs.general.layout.rtl }"
+      class="mt-2 flex items-start justify-between gap-2"
+    >
       <VueDraggable
         ref="leftColumnRef"
         v-model="leftColumnSectionsRef"
@@ -132,7 +134,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
           class="bg-default flex w-full cursor-move items-center gap-2 rounded-lg p-2"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground shrink-0" />
-          <span class="line-clamp-1 text-xs font-medium capitalize">{{ section.title || section.type }}</span>
+          <span class="text-xs font-medium break-all capitalize">{{ section.title || section.type }}</span>
         </div>
       </VueDraggable>
       <VueDraggable
@@ -151,7 +153,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
           class="bg-default flex w-full cursor-move items-center gap-2 rounded-lg p-2"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground shrink-0" />
-          <span class="line-clamp-1 text-xs font-medium capitalize">{{ section.title || section.type }}</span>
+          <span class="text-xs font-medium break-all capitalize">{{ section.title || section.type }}</span>
         </div>
       </VueDraggable>
     </div>
