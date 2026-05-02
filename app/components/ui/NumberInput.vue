@@ -29,7 +29,7 @@ const model = computed({
   <UFormField
     :label="props.label"
     :class="props.labelVariant === 'inline' ? 'flex flex-row items-center justify-between gap-2' : ''"
-    :ui="{ label: 'text-sm font-medium text-muted line-clamp-1', container: 'basis-1/2' }"
+    :ui="{ label: 'text-2sm font-medium text-muted line-clamp-1', container: 'basis-1/2' }"
   >
     <UInputNumber v-model="model" :disabled="disabled" :min="props.min" :max="props.max" :step="props.step" size="sm" />
   </UFormField>

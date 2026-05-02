@@ -3,6 +3,7 @@ import { CONTACT_EMAIL } from "~/constants/config"
 
 definePageMeta({ layout: "landing" })
 
+const { tm, rt, t } = useI18n()
 useSeoMeta({
   title: () => t("seo.privacy.title"),
   description: () => t("seo.privacy.description")
@@ -18,8 +19,6 @@ interface TldrItem {
   k: string
   v: string
 }
-
-const { tm, rt, t } = useI18n()
 
 const sections = computed<Section[]>(() => {
   const items = (tm("privacyPage.sections") as unknown as Section[]) || []
@@ -59,7 +58,6 @@ watch(
 
     if (!newSections || newSections.length === 0) return
 
-    // CHECK IF INTERSECTION OBSERVER IS READY AND DEFINED
     if (!globalThis.IntersectionObserver) return
 
     const observer = new IntersectionObserver(
@@ -143,7 +141,7 @@ watch(
               }}</span>
               <h2 class="text-highlighted text-[28px] font-bold tracking-[-0.02em]">{{ s.title }}</h2>
             </div>
-            <div class="prose-legal text-muted whitespace-pre-wrap">{{ s.body }}</div>
+            <div class="text-muted whitespace-pre-wrap">{{ s.body }}</div>
           </div>
 
           <div

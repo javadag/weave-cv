@@ -38,13 +38,13 @@ const applyModel = computed({
     :collapsible="true"
     :default-expanded="true"
   >
-    <ConfigWrapper :title="$t('editor.configs.applyAccent')" variant="grid">
+    <ConfigWrapper :title="$t('editor.configs.applyAccent')" variant="stacked">
       <USelectMenu
         v-model="applyModel"
         multiple
         :items="applyableColorItemsOptions"
-        class="w-48"
         option-attribute="label"
+        size="sm"
         value-attribute="value"
       />
     </ConfigWrapper>

@@ -26,7 +26,7 @@ const handleUpdate = (key: string, value: unknown) => {
     :collapsible="true"
     :default-expanded="true"
   >
-    <ConfigWrapper variant="grid">
+    <ConfigWrapper variant="stacked">
       <ToggleInput
         v-model="configs.general.links.underline"
         :label="$t('editor.configs.underline')"

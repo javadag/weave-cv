@@ -34,11 +34,6 @@ const columnsOptions = createOptionsFromEnum(
 const personalPositionOptions = createOptionsFromEnum(PersonalPosition.options, capitalize)
 const listTypeOptions = createOptionsFromEnum(ListType.options, capitalize)
 
-/* const languageOptions = [
-  { label: "English", value: "en" },
-  { label: "Farsi", value: "fa" }
-] */
-
 const handleColumnWidthUpdate = (side: "left" | "right", value: number) => {
   const newValue = Math.max(0, Math.min(100, value))
   const otherSide = side === "left" ? "right" : "left"
@@ -70,12 +65,6 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
     :collapsible="true"
     :default-expanded="true"
   >
-    <!-- <SelectItem
-      :model-value="configs.general.layout.language"
-      label="Language"
-      :options="languageOptions"
-      @update:model-value="(value) => handleUpdate('language', value)"
-    />  -->
     <ToggleInput
       v-model="configs.general.layout.rtl"
       :label="$t('editor.configs.rtl')"

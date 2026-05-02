@@ -3,6 +3,7 @@ import { CONTACT_EMAIL } from "~/constants/config"
 
 definePageMeta({ layout: "landing" })
 
+const { tm, rt, t } = useI18n()
 useSeoMeta({
   title: () => t("seo.terms.title"),
   description: () => t("seo.terms.description")
@@ -13,8 +14,6 @@ interface Section {
   title: string
   body: string
 }
-
-const { tm, rt, t } = useI18n()
 
 const sections = computed<Section[]>(() => {
   const items = (tm("termsPage.sections") as unknown as Section[]) || []
@@ -43,6 +42,8 @@ watch(
     await nextTick()
 
     if (!newSections || newSections.length === 0) return
+
+    if (!globalThis.IntersectionObserver) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -124,7 +125,7 @@ watch(
               }}</span>
               <h2 class="text-[28px] font-bold tracking-[-0.02em] text-zinc-900 dark:text-zinc-50">{{ s.title }}</h2>
             </div>
-            <div class="prose-legal text-muted whitespace-pre-wrap">{{ s.body }}</div>
+            <div class="text-muted whitespace-pre-wrap">{{ s.body }}</div>
           </div>
 
           <div

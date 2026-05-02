@@ -26,7 +26,7 @@ const titleModel = computed({
         color="neutral"
         size="lg"
         icon="i-lucide-arrow-left"
-        class="hidden flex-shrink-0 lg:flex"
+        class="hidden shrink-0 lg:flex"
       >
         <span class="hidden xl:inline">{{ $t("editor.header.dashboard") }}</span>
       </UButton>
@@ -47,18 +47,21 @@ const titleModel = computed({
         </template>
       </UInput>
     </div>
-    <div class="flex flex-shrink-0 items-center gap-2 sm:gap-3">
+    <div class="flex shrink-0 items-center gap-2 sm:gap-3">
       <UButton
         color="neutral"
         variant="outline"
         size="lg"
         icon="i-lucide-layout-template"
+        :ui="{
+          leadingIcon: 'size-4'
+        }"
         @click="isTemplateModalOpen = true"
       >
         <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
       </UButton>
       <div
-        class="bg-elevated/50 border-muted flex items-center gap-1 rounded-lg border p-1 shadow-sm backdrop-blur-sm sm:gap-2"
+        class="bg-elevated/50 border-muted flex items-center gap-1 rounded-lg border p-0.5 backdrop-blur-sm sm:gap-2"
       >
         <SaveChanges @saving="saving = $event" />
         <Download :disabled="saving" />

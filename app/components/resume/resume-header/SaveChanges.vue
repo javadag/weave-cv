@@ -33,7 +33,7 @@ const handleManualSave = async () => {
 
 <template>
   <div v-if="!isOnline" class="hidden items-center gap-1.5 px-2 sm:flex">
-    <UIcon name="i-lucide-wifi-off" class="h-3.5 w-3.5 flex-shrink-0 text-orange-400" />
+    <UIcon name="i-lucide-wifi-off" class="h-3.5 w-3.5 shrink-0 text-orange-400" />
     <span class="text-xs whitespace-nowrap text-orange-400">
       {{ hasPendingOfflineChanges ? $t("editor.header.changesQueued") : $t("editor.header.offline") }}
     </span>
@@ -45,10 +45,13 @@ const handleManualSave = async () => {
   <UButton
     :loading="isSaving"
     :disabled="isSaving"
-    color="primary"
-    variant="solid"
-    size="lg"
+    color="neutral"
+    variant="ghost"
+    size="md"
     icon="i-lucide-save"
+    :ui="{
+      leadingIcon: 'size-4'
+    }"
     :class="[isSaving ? 'cursor-not-allowed opacity-70' : '']"
     @click="handleManualSave"
   >

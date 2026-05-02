@@ -59,9 +59,9 @@ watch(modelValue, (isOpen) => {
         <template #header>
           <div class="flex items-center gap-3">
             <div
-              class="bg-primary/10 dark:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
+              class="bg-primary/10 dark:bg-primary/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
             >
-              <UIcon name="i-lucide-layout-template" class="text-primary h-5 w-5" />
+              <UIcon name="i-lucide-layout-template" class="text-primary size-5" />
             </div>
             <div>
               <h3 class="text-default text-lg font-semibold">{{ $t("editor.template.title") }}</h3>

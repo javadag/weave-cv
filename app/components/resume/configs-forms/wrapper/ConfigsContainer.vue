@@ -14,11 +14,14 @@ const isOpen = ref(false)
 <template>
   <UCollapsible
     v-model:is-open="isOpen"
-    class="bg-muted border-default/10 data-[state=open]:ring-primary/30 flex flex-col gap-3 rounded-lg border p-2 duration-500 data-[state=open]:ring-2"
+    class="bg-default border-muted flex flex-col rounded-lg border duration-500"
+    :ui="{
+      content: 'p-2'
+    }"
   >
     <ConfigsHeader :title="props.title" :icon="props.icon" />
     <template #content>
-      <div class="divide-muted/40 divide-y pt-1 [&>*]:py-2">
+      <div class="divide-muted/40 divide-y *:py-2 *:first:pt-0 *:last:pb-0">
         <slot />
       </div>
     </template>

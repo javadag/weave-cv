@@ -331,8 +331,16 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
     label: "Projects",
     icon: "i-lucide-folder-open",
     fields: [
-      { field: "title", label: "Role/Organization", placeholder: "e.g. Lead Developer" },
-      { field: "subtitle", label: "Project Name", placeholder: "e.g. E-commerce Platform" },
+      {
+        field: "title",
+        label: "editor.form.project.title.label",
+        placeholder: "editor.form.project.title.placeholder"
+      },
+      {
+        field: "subtitle",
+        label: "editor.form.project.subtitle.label",
+        placeholder: "editor.form.project.subtitle.placeholder"
+      },
       { field: "startDate", label: "Start Date", placeholder: "e.g. 2021-01-01" },
       { field: "endDate", label: "End Date", placeholder: "e.g. 2021-12-31" },
       { field: "showDateDay", label: "Full Date" },

@@ -6,7 +6,6 @@ import MobileEditorControls from "~/components/resume/editor/MobileEditorControl
 import SectionsSlideover from "~/components/resume/editor/SectionsSlideover.vue"
 import ResumePreview from "~/components/resume/preview/ResumePreview.vue"
 import ResumePreviewSkeleton from "~/components/resume/preview/ResumePreviewSkeleton.vue"
-import ZoomIndicator from "~/components/resume/preview/ZoomIndicator.vue"
 import ResumeHeader from "~/components/resume/resume-header/ResumeHeader.vue"
 import ResumeSectionsForms from "~/components/resume/sections-forms/ResumeSectionsForms.vue"
 import type { Tables } from "~/types/database.types"
@@ -98,7 +97,6 @@ const isXlScreen = breakpoints.greaterOrEqual("xl")
 <template>
   <ClientOnly>
     <div class="flex max-h-[calc(100dvh-88px)] w-full flex-col gap-4 overflow-hidden">
-      <ZoomIndicator :scale="scale" />
       <ResumeHeader />
       <div v-if="isXlScreen" class="overflow-hidden">
         <SplitterGroup direction="horizontal" class="flex h-full gap-1">
@@ -109,6 +107,14 @@ const isXlScreen = breakpoints.greaterOrEqual("xl")
             <UIcon name="i-lucide-grip-vertical" class="text-primary" />
           </SplitterResizeHandle>
           <SplitterPanel :min-size="20" class="relative">
+            <span class="text-toned mb-2 flex w-full items-center justify-center text-center text-xs tracking-wider">
+              {{ $t("editor.header.preview") }}
+              <span class="text-muted ms-2 flex items-center justify-center"
+                >{{ configs.general.layout.size }}
+                <UIcon name="i-lucide-dot" class="size-4" />
+                {{ Math.round(scale * 100) }}%</span
+              ></span
+            >
             <ResumePreviewSkeleton v-if="pending" />
             <ResumePreview v-else :scale="scale" @update:scale="scale = $event" />
           </SplitterPanel>
@@ -122,6 +128,14 @@ const isXlScreen = breakpoints.greaterOrEqual("xl")
       </div>
 
       <div v-else class="relative size-full">
+        <span class="text-toned mb-2 flex w-full items-center justify-center text-center text-xs tracking-wider">
+          Preview
+          <span class="text-muted ms-2 flex items-center justify-center"
+            >{{ configs.general.layout.size }}
+            <UIcon name="i-lucide-dot" class="size-4" />
+            {{ Math.round(scale * 100) }}%</span
+          >
+        </span>
         <ResumePreviewSkeleton v-if="pending" :is-responsive="true" />
         <ResumePreview v-else :scale="scale" :is-responsive="true" @update:scale="scale = $event" />
         <MobileEditorControls

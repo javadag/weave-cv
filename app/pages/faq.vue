@@ -3,6 +3,7 @@ import { CONTACT_EMAIL } from "~/constants/config"
 
 definePageMeta({ layout: "landing" })
 
+const { rt, tm, t } = useI18n()
 useSeoMeta({
   title: () => t("seo.faq.title"),
   description: () => t("seo.faq.description")
@@ -30,8 +31,6 @@ interface TopicCard {
   count: string
   cat: string
 }
-
-const { rt, tm, t } = useI18n()
 
 const faqs = computed<FAQ[]>(() => {
   const items = tm("faqPage.items") as unknown as FAQ[]

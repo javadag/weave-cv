@@ -22,9 +22,9 @@ const model = computed({
   <USwitch
     v-model="model"
     :label="props.label"
-    size="sm"
+    size="xs"
     :ui="{
-      label: 'text-sm font-medium text-muted',
+      label: 'text-2sm font-medium text-muted',
       root: props.style === 'center' ? 'flex justify-between items-center gap-2' : ''
     }"
   />

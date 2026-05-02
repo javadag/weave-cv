@@ -73,7 +73,7 @@ const handleDateChange = (date: CalendarDate | null) => {
 </script>
 
 <template>
-  <UFormField :label="props.label" :required="props.required" :ui="{ label: 'text-sm font-medium text-muted' }">
+  <UFormField :label="props.label" :required="props.required" :ui="{ label: 'text-2sm font-medium text-muted' }">
     <UPopover :disabled="props.disabled">
       <UButton
         :color="props.buttonColor"

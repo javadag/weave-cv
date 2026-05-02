@@ -262,11 +262,12 @@
       "dashboard": "داشبورد",
       "resumeTitle": "عنوان رزومه",
       "changeTemplate": "تغییر قالب",
-      "saveChanges": "ذخیره تغییرات",
+      "saveChanges": "ذخیره",
       "saving": "درحال ذخیره...",
       "save": "ذخیره",
       "downloadPdf": "دانلود PDF",
       "generating": "درحال تولید...",
+      "preview": "پیش نمایش",
       "download": "دانلود",
       "offline": "آفلاین",
       "changesQueued": "تغییرات در صف هستند",
@@ -402,7 +403,8 @@
       "deleteSection": "حذف بخش",
       "iconLabel": "نماد",
       "clearDate": "پاک کردن تاریخ",
-      "edit": "ویرایش"
+      "edit": "ویرایش",
+      "role/organization": "نقش/سازمان"
     }
   },
   "resetPassword": {
@@ -472,7 +474,7 @@
       {
         "id": "all",
         "label": "همه",
-        "icon": "i-lucide-all"
+        "icon": "i-lucide-rows-4"
       },
       {
         "id": "export",

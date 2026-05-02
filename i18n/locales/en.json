@@ -56,7 +56,7 @@
   "footer": {
     "tagline": "The honest, no-nonsense résumé builder. Free, forever.",
     "copyright": "© {year} Weave CV. All rights reserved.",
-    "madeWith": "Made with {heart} for job seekers everywhere · MIT licensed",
+    "madeWith": "Made with {heart} for job seekers everywhere",
     "colProduct": "Product",
     "colResources": "Resources",
     "colCompany": "Company",
@@ -262,11 +262,12 @@
       "dashboard": "Dashboard",
       "resumeTitle": "Resume Title",
       "changeTemplate": "Change Template",
-      "saveChanges": "Save Changes",
+      "saveChanges": "Save",
       "saving": "Saving...",
       "save": "Save",
       "downloadPdf": "Download PDF",
       "generating": "Generating...",
+      "preview": "Preview",
       "download": "Download",
       "offline": "Offline",
       "changesQueued": "Changes queued",
@@ -402,7 +403,17 @@
       "deleteSection": "Delete section",
       "iconLabel": "Icon",
       "clearDate": "Clear date",
-      "edit": "Edit"
+      "edit": "Edit",
+      "project": {
+        "title": {
+          "label": "Role/Organization",
+          "placeholder": "e.g. Lead Developer"
+        },
+        "subtitle": {
+          "label": "Project Name",
+          "placeholder": "e.g. E-commerce Platform"
+        }
+      }
     }
   },
   "resetPassword": {
@@ -472,7 +483,7 @@
       {
         "id": "all",
         "label": "All",
-        "icon": "i-lucide-all"
+        "icon": "i-lucide-rows-4"
       },
       {
         "id": "export",

@@ -86,9 +86,9 @@ const handleDone = () => {
 </script>
 
 <template>
-  <div class="bg-accented/40 flex w-full flex-col gap-4 rounded-lg p-3">
+  <div class="bg-accented/40 border-primary/30 flex w-full flex-col gap-4 rounded-lg border p-3">
     <div class="flex items-center justify-between gap-2">
-      <span class="line-clamp-1 text-lg font-semibold"
+      <span class="line-clamp-1 text-sm font-semibold"
         >{{ $t("editor.form.edit") }}
         {{
           content.title ||
@@ -104,15 +104,15 @@ const handleDone = () => {
         <TextInput
           v-if="hasField('title')"
           :model-value="getStringFieldValue('title')"
-          :label="getFieldConfig('title').label"
-          :placeholder="getFieldConfig('title').placeholder || 'test'"
+          :label="$t(getFieldConfig('title').label)"
+          :placeholder="$t(getFieldConfig('title').placeholder || '')"
           @update:model-value="(value) => handleFieldUpdate('title', value)"
         />
         <TextInput
           v-if="hasField('subtitle')"
           :model-value="getStringFieldValue('subtitle')"
-          :label="getFieldConfig('subtitle').label"
-          :placeholder="getFieldConfig('subtitle').placeholder"
+          :label="$t(getFieldConfig('subtitle').label)"
+          :placeholder="$t(getFieldConfig('subtitle').placeholder || '')"
           @update:model-value="(value) => handleFieldUpdate('subtitle', value)"
         />
       </div>
