@@ -115,6 +115,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
   <ConfigWrapper :title="$t('editor.configs.sectionsOrder')">
     <div
       v-if="isTwoColumnLayout"
+      dir="ltr"
       :class="{ 'flex-row-reverse': configs.general.layout.rtl }"
       class="mt-2 flex items-start justify-between gap-2"
     >
