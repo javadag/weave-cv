@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type CSSProperties, nextTick, onMounted } from "vue"
+import { computed, nextTick, onMounted, ref, type CSSProperties } from "vue"
 import type { TAdvancedSectionVariant } from "~/utils/schemas/shared.schema"
 import AdvancedDate from "./date-location/AdvancedDate.vue"
 import AdvancedLocation from "./date-location/AdvancedLocation.vue"
@@ -53,9 +53,7 @@ const checkWrapAndHandleSpacer = () => {
     const dateTop = dateElement.getBoundingClientRect().top
     const locationTop = locationElement.getBoundingClientRect().top
 
-    // If both are exactly the same and very small/zero, it might still be too early
-    // but usually, if they are at the same top, it just means they haven't wrapped.
-    const wrapped = locationTop > dateTop
+    const wrapped = locationTop - 5 > dateTop
 
     if (wrapped === isWrapped.value) return
     isWrapped.value = wrapped

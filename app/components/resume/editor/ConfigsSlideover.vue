@@ -18,7 +18,14 @@ const modelValue = computed({
 </script>
 
 <template>
-  <USlideover v-model:open="modelValue" side="right" :title="$t('editor.slideover.settings')">
+  <USlideover
+    v-model:open="modelValue"
+    side="right"
+    :title="$t('editor.slideover.settings')"
+    :ui="{
+      body: 'sm:p-0 p-0'
+    }"
+  >
     <template #body>
       <ResumeConfigsForms />
     </template>

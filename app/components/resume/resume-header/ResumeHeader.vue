@@ -61,7 +61,7 @@ const titleModel = computed({
         <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
       </UButton>
       <div
-        class="bg-elevated/50 border-muted flex items-center gap-1 rounded-lg border p-0.5 backdrop-blur-sm sm:gap-2"
+        class="bg-elevated/50 border-muted flex items-center gap-1 overflow-hidden rounded-lg border p-0 backdrop-blur-sm sm:gap-2"
       >
         <SaveChanges @saving="saving = $event" />
         <Download :disabled="saving" />

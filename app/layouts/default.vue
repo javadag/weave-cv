@@ -4,7 +4,12 @@ import Logo from "~/components/layout/Logo.vue"
 import Theme from "~/components/layout/Theme.vue"
 import UserDropdown from "~/components/layout/UserDropdown.vue"
 
+const AUTH_PAGES = new Set(["/login", "/reset-password", "/forgot-password", "/register", "/confirm-email"])
+
 const user = useSupabaseUser()
+const route = useRoute()
+
+const isAuthPage = computed(() => AUTH_PAGES.has(route.path))
 </script>
 <template>
   <div
@@ -14,7 +19,7 @@ const user = useSupabaseUser()
       <div class="max-w-compact mx-auto flex h-full items-center justify-between px-6 lg:px-12">
         <Logo />
         <div class="flex items-center gap-3">
-          <UserDropdown v-if="user" />
+          <UserDropdown v-if="user && !isAuthPage" />
           <LanguageSwitcher />
           <Theme />
         </div>

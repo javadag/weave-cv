@@ -138,7 +138,7 @@ onUnmounted(() => {
           :style="iconConfig.type"
           :color="textColor"
         />
-        <span class="inline-flex items-center text-center leading-none">
+        <span class="inline-flex items-center text-center">
           {{ item.value }}
         </span>
         <StyledIcon
