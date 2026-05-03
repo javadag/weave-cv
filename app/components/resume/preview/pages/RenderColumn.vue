@@ -16,9 +16,16 @@ const { configs } = storeToRefs(configsStore)
 const layout = computed(() => configs.value.general.layout)
 const colors = computed(() => configs.value.general.colors)
 
-const { left, right } = getColumnColors(colors.value, layout.value.personalPosition, layout.value.rtl)
-const columnColors = computed<ColumnColorsContext>(() => (side === "left" ? left : right))
-const hasUniformBackground = computed(() => left.bgColor === right.bgColor || layout.value.personalPosition === "top")
+const bothColumnColors = computed(() =>
+  getColumnColors(colors.value, layout.value.personalPosition, layout.value.rtl)
+)
+const columnColors = computed<ColumnColorsContext>(() =>
+  side === "left" ? bothColumnColors.value.left : bothColumnColors.value.right
+)
+const hasUniformBackground = computed(() =>
+  bothColumnColors.value.left.bgColor === bothColumnColors.value.right.bgColor ||
+  layout.value.personalPosition === "top"
+)
 
 const columnStyles = computed<CSSProperties>(() => {
   const isSideLayout = layout.value.personalPosition === "left" || layout.value.personalPosition === "right"

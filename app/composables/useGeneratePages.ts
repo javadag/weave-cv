@@ -35,7 +35,8 @@ export function useGeneratePages(sectionsOrder: Ref<TSectionsOrder>) {
       () => unref(sectionsOrder),
       core,
       () => configs.value.general.layout.verticalMargin,
-      () => configs.value.general.layout.horizontalMargin
+      () => configs.value.general.layout.horizontalMargin,
+      () => configs.value.general.layout.size
     ],
     updatePages,
     {

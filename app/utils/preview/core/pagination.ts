@@ -219,5 +219,12 @@ export function paginate({ blocks, page }: IProcessPagesProps) {
     }
   }
 
-  return pages
+  const filteredPages = pages.filter((page) =>
+    page.some((el) => {
+      if ("id" in el) return true
+      if ("left" in el && "right" in el) return (el as { left: unknown[]; right: unknown[] }).left.length > 0 || (el as { left: unknown[]; right: unknown[] }).right.length > 0
+      return false
+    })
+  )
+  return filteredPages.length > 0 ? filteredPages : [[]]
 }
