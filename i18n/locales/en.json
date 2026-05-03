@@ -384,6 +384,8 @@
       "personalInfo": "Personal Information",
       "uploadPhoto": "Upload Photo",
       "removePhoto": "Remove Photo",
+      "photoSizeError": "File size exceeds 128kb limit",
+      "photoDimensionError": "Image dimensions are too large (max 256x256)",
       "titleLabel": "Title",
       "enterTitle": "Enter your title",
       "subtitleLabel": "Subtitle",

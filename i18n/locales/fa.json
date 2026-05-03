@@ -384,6 +384,8 @@
       "personalInfo": "اطلاعات شخصی",
       "uploadPhoto": "بارگذاری عکس",
       "removePhoto": "حذف عکس",
+      "photoSizeError": "حجم فایل بیش از ۱۲۸ کیلوبایت است",
+      "photoDimensionError": "ابعاد تصویر بیش از حد بزرگ است (حداکثر ۲۵۶x۲۵۶ پیکسل)",
       "titleLabel": "عنوان",
       "enterTitle": "عنوان خود را وارد کنید",
       "subtitleLabel": "عنوان فرعی",

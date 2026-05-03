@@ -6,23 +6,55 @@ const { updatePersonal } = resumeStore
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 
+const { t } = useI18n()
+const toast = useToast()
+
 const photoUrl = computed(() => personal.value?.photo?.url ?? "")
 const photoShape = computed(() => configs.value.personal.photo.shape)
 
 const fileInput = ref<HTMLInputElement | null>(null)
+
+const MAX_FILE_SIZE = 128 * 1024 // 128kb
+const MAX_DIMENSION = 256
 
 const triggerUpload = () => fileInput.value?.click()
 
 const onFileChange = (event: Event) => {
   const file = (event.target as HTMLInputElement).files?.[0]
   if (!file) return
+
+  // Reset input value to allow uploading the same file again if it was removed
+  if (fileInput.value) fileInput.value.value = ""
+
+  // Check file size
+  if (file.size > MAX_FILE_SIZE) {
+    toast.add({
+      title: t("common.error"),
+      description: t("editor.form.photoSizeError"),
+      color: "error"
+    })
+    return
+  }
+
   const reader = new FileReader()
   reader.addEventListener("load", (e) => {
     const dataUrl = e.target?.result as string
-    updatePersonal("photo", { url: dataUrl })
+
+    const img = new Image()
+    img.addEventListener("load", () => {
+      if (img.width > MAX_DIMENSION || img.height > MAX_DIMENSION) {
+        toast.add({
+          title: t("common.error"),
+          description: t("editor.form.photoDimensionError"),
+          color: "error"
+        })
+        return
+      }
+      updatePersonal("photo", { url: dataUrl })
+    })
+    img.src = dataUrl
   })
   reader.readAsDataURL(file)
-  if (fileInput.value) fileInput.value.value = ""
 }
 
 const removePhoto = () => {
