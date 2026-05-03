@@ -15,7 +15,8 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@vueuse/motion/nuxt",
     "@nuxtjs/i18n",
-    "@nuxt/fonts"
+    "@nuxt/fonts",
+    "@nuxtjs/sitemap"
   ],
   i18n: {
     baseUrl: "https://weavecv.app",
@@ -100,5 +101,12 @@ export default defineNuxtConfig({
         }
       ]
     }
+  },
+  site: {
+    url: "https://weavecv.app",
+    name: "Weave CV"
+  },
+  sitemap: {
+    exclude: ["/dashboard/**", "/editor/**", "/confirm", "/reset-password"]
   }
 })

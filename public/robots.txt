@@ -1,2 +1,7 @@
 User-Agent: *
-Disallow:
+Disallow: /dashboard/
+Disallow: /editor/
+Disallow: /confirm
+Disallow: /reset-password
+
+Sitemap: https://weavecv.app/sitemap.xml
