@@ -1,4 +1,35 @@
 
+## v2.6.0
+
+[compare changes](https://github.com/JavadAg/weave-cv/compare/v2.5.0...v2.6.0)
+
+### 🚀 Enhancements
+
+- Add prettier plugin,changed to google fonts ([31f12af](https://github.com/JavadAg/weave-cv/commit/31f12af))
+
+### 🩹 Fixes
+
+- **i18n:** Add missing translations and fix file formatting ([741077b](https://github.com/JavadAg/weave-cv/commit/741077b))
+- Refined elements, added more translation ([e4faecd](https://github.com/JavadAg/weave-cv/commit/e4faecd))
+- 2col rtl issue, date location wrapping ([81bed7d](https://github.com/JavadAg/weave-cv/commit/81bed7d))
+- Order control rtl ([1b3d719](https://github.com/JavadAg/weave-cv/commit/1b3d719))
+- Tailwind lint errors ([af64c04](https://github.com/JavadAg/weave-cv/commit/af64c04))
+- Column size and colors on template switch ([e91f179](https://github.com/JavadAg/weave-cv/commit/e91f179))
+- Date/location wrap calculation ([57a405d](https://github.com/JavadAg/weave-cv/commit/57a405d))
+
+### 💅 Refactors
+
+- Adjust template modal size ([c5b4503](https://github.com/JavadAg/weave-cv/commit/c5b4503))
+
+### 🏡 Chore
+
+- Clean up dead styles ([53aed66](https://github.com/JavadAg/weave-cv/commit/53aed66))
+- Clean up dead styles" ([3977a9b](https://github.com/JavadAg/weave-cv/commit/3977a9b))
+
+### ❤️ Contributors
+
+- Javadag <j.aghebati93@gmail.com>
+
 ## v2.5.0
 
 [compare changes](https://github.com/JavadAg/weave-cv/compare/v2.4.0...v2.5.0)
