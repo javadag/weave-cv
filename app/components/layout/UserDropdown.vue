@@ -63,7 +63,7 @@ const menuItems = computed(() => [
       <UAvatar v-else :alt="userEmail" size="xs" class="ring-default/20 bg-primary text-primary-foreground ring-2">
         {{ userInitials }}
       </UAvatar>
-      <span class="hidden text-[13px] font-medium sm:inline">{{ userEmail }}</span>
+      <span class="text-2sm hidden font-medium sm:inline">{{ userEmail }}</span>
       <UIcon name="i-lucide-chevron-down" class="text-muted h-4 w-4" />
     </UButton>
   </UDropdownMenu>

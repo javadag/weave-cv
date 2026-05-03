@@ -84,7 +84,7 @@ watch(
       class="pointer-events-none absolute -top-60 -right-48 h-180 w-180 rounded-full bg-[radial-gradient(circle,rgba(251,146,60,0.16),transparent_70%)] blur-[20px] dark:bg-[radial-gradient(circle,rgba(245,158,11,0.10),transparent_70%)]"
     />
     <section class="max-w-compact relative mx-auto px-6 pt-18 pb-14 lg:px-12">
-      <div class="text-muted mb-6 flex items-center gap-2.5 text-[13px] font-semibold tracking-[0.04em] uppercase">
+      <div class="text-muted text-2sm mb-6 flex items-center gap-2.5 font-semibold tracking-[0.04em] uppercase">
         <span class="text-primary">◆</span>
         <span>{{ $t("privacyPage.badge") }}</span>
         <span class="opacity-40">/</span>
@@ -106,7 +106,7 @@ watch(
             <span class="text-primary text-sm">✓</span>
             <span class="text-highlighted text-sm font-bold">{{ item.k }}</span>
           </div>
-          <p class="text-muted text-[13px] leading-relaxed">{{ item.v }}</p>
+          <p class="text-muted text-2sm leading-relaxed">{{ item.v }}</p>
         </div>
       </div>
     </section>
@@ -121,7 +121,7 @@ watch(
               v-for="(s, i) in sections"
               :key="s.id"
               :href="`#${s.id}`"
-              class="toc-link border-l-2 py-1.5 pl-3.5 text-[13px] leading-snug transition-colors duration-150"
+              class="toc-link text-2sm border-l-2 py-1.5 pl-3.5 leading-snug transition-colors duration-150"
               :class="
                 activeSection === s.id
                   ? 'border-l-primary text-primary font-semibold'
@@ -136,7 +136,7 @@ watch(
         <article class="text-highlighted max-w-180 text-base leading-[1.7]">
           <div v-for="(s, i) in sections" :id="s.id" :key="s.id" class="mb-14 scroll-mt-8">
             <div class="mb-4 flex items-baseline gap-3">
-              <span class="text-primary text-[13px] font-semibold tracking-[0.04em]">{{
+              <span class="text-primary text-2sm font-semibold tracking-[0.04em]">{{
                 String(i + 1).padStart(2, "0")
               }}</span>
               <h2 class="text-highlighted text-[28px] font-bold tracking-[-0.02em]">{{ s.title }}</h2>

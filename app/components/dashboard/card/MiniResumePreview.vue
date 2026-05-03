@@ -75,13 +75,13 @@ const firstExperience = computed(() => {
     </div>
     <div class="flex flex-1 items-start bg-white p-4">
       <div v-if="summaryContent" class="w-full">
-        <p class="m-0 line-clamp-3 text-[13px] leading-6 text-gray-700">{{ summaryContent }}</p>
+        <p class="text-2sm m-0 line-clamp-3 leading-6 text-gray-700">{{ summaryContent }}</p>
       </div>
       <div v-else-if="firstExperience" class="w-full">
-        <p class="m-0 line-clamp-3 text-[13px] leading-6 text-gray-700">{{ firstExperience }}</p>
+        <p class="text-2sm m-0 line-clamp-3 leading-6 text-gray-700">{{ firstExperience }}</p>
       </div>
       <div v-else class="w-full">
-        <p class="m-0 text-[13px] leading-6 text-gray-700 italic">No content yet</p>
+        <p class="text-2sm m-0 leading-6 text-gray-700 italic">No content yet</p>
       </div>
     </div>
   </div>

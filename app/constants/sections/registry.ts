@@ -105,14 +105,14 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
       {
         id: "summary-1",
         isHidden: false,
-        title: "Professional Summary",
+        title: "Summary",
         description:
           "<p>Dedicated software engineer with expertise in full-stack development and cloud architecture. Proven track record of delivering scalable solutions and leading technical teams in fast-paced environments. Passionate about creating innovative solutions that solve real-world problems.</p>"
       }
     ],
     singleItem: {
       isHidden: false,
-      title: "Professional Summary",
+      title: "Summary",
       description:
         "<p>Dedicated software engineer with expertise in full-stack development and cloud architecture. Proven track record of delivering scalable solutions and leading technical teams in fast-paced environments.</p>"
     }

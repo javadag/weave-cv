@@ -80,7 +80,7 @@ function catCount(id: string) {
       class="pointer-events-none absolute -top-60 -right-48 h-180 w-180 rounded-full bg-[radial-gradient(circle,rgba(251,146,60,0.16),transparent_70%)] blur-[20px] dark:bg-[radial-gradient(circle,rgba(245,158,11,0.10),transparent_70%)]"
     />
     <section class="max-w-compact relative mx-auto px-6 pt-18 pb-14 lg:px-12">
-      <div class="text-muted mb-6 flex items-center gap-2.5 text-[13px] font-semibold tracking-[0.04em] uppercase">
+      <div class="text-muted text-2sm mb-6 flex items-center gap-2.5 font-semibold tracking-[0.04em] uppercase">
         <span class="text-primary">◆</span>
         <span>{{ $t("faqPage.badge") }}</span>
       </div>
@@ -131,17 +131,17 @@ function catCount(id: string) {
               "
               @click="activeCat = c.id"
             >
-              <span class="text-[13px] opacity-70"><UIcon :name="c.icon" /></span>
+              <span class="text-2sm opacity-70"><UIcon :name="c.icon" /></span>
               {{ c.label }}
               <span class="ml-auto text-xs text-zinc-400 dark:text-zinc-500">{{ catCount(c.id) }}</span>
             </button>
           </div>
           <div class="dark:bg-muted mt-10 rounded-2xl border border-zinc-100 bg-zinc-50 p-5 dark:border-zinc-800">
             <div class="text-highlighted mb-1.5 text-sm font-bold">{{ $t("faqPage.stillStuck") }}</div>
-            <div class="text-muted mb-3.5 text-[13px] leading-relaxed">{{ $t("faqPage.stillStuckDesc") }}</div>
+            <div class="text-muted text-2sm mb-3.5 leading-relaxed">{{ $t("faqPage.stillStuckDesc") }}</div>
             <ULink
               :href="`mailto:${CONTACT_EMAIL}`"
-              class="text-primary inline-flex items-center gap-1.5 text-[13px] font-semibold"
+              class="text-primary text-2sm inline-flex items-center gap-1.5 font-semibold"
             >
               {{ CONTACT_EMAIL }} →
             </ULink>
@@ -152,7 +152,7 @@ function catCount(id: string) {
             <h2 class="text-[32px] font-bold tracking-[-0.02em] text-zinc-900 dark:text-zinc-50">
               {{ activeCat === "all" ? $t("faqPage.allQuestions") : cats.find((c) => c.id === activeCat)?.label }}
             </h2>
-            <span class="text-[13px] text-zinc-400 dark:text-zinc-500">
+            <span class="text-2sm text-zinc-400 dark:text-zinc-500">
               {{ visible.length }} {{ visible.length === 1 ? $t("faqPage.article") : $t("faqPage.articles") }}
             </span>
           </div>
