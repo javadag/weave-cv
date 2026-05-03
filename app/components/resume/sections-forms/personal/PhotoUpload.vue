@@ -43,7 +43,7 @@ const previewStyles = computed(() => ({
     <img v-if="photoUrl" :src="photoUrl" :style="previewStyles" alt="Profile photo" />
     <div
       v-else
-      class="bg-elevated flex flex-shrink-0 items-center justify-center rounded-lg"
+      class="bg-elevated flex shrink-0 items-center justify-center rounded-lg"
       style="width: 56px; height: 56px"
     >
       <UIcon name="i-lucide-user" class="text-muted text-2xl" />

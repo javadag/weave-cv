@@ -77,15 +77,22 @@ watch(modelValue, (isOpen) => {
 </script>
 
 <template>
-  <UModal v-model:open="modelValue" :prevent-close="isCreating" class="max-w-compact">
+  <UModal
+    v-model:open="modelValue"
+    :prevent-close="isCreating"
+    class="max-w-compact"
+    :ui="{
+      content: 'sm:max-w-4xl'
+    }"
+  >
     <template #content>
       <UCard>
         <template #header>
           <div class="flex items-center gap-3">
             <div
-              class="bg-primary/10 dark:bg-primary/20 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
+              class="bg-primary/10 dark:bg-primary/20 flex size-10 shrink-0 items-center justify-center rounded-full"
             >
-              <UIcon name="i-lucide-file-text" class="text-primary h-5 w-5" />
+              <UIcon name="i-lucide-file-text" class="text-primary size-5" />
             </div>
             <div>
               <h3 class="text-default text-lg font-semibold">{{ $t("createResume.modalTitle") }}</h3>
@@ -93,8 +100,8 @@ watch(modelValue, (isOpen) => {
             </div>
           </div>
         </template>
-        <div class="py-2">
-          <div class="flex max-h-175 flex-wrap items-start justify-start gap-4 overflow-scroll">
+        <div>
+          <div class="grid max-h-175 grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2">
             <button
               v-for="template in TEMPLATES"
               :key="template.id"

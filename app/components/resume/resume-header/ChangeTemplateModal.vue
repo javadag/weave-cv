@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { PAPER_SIZES } from "~/constants/papers"
 import { TEMPLATES, type Template } from "~/constants/templates"
 import { reconcileSectionsOrder } from "~/utils/configs/reconcileSectionsOrder"
 
@@ -53,7 +52,13 @@ watch(modelValue, (isOpen) => {
 </script>
 
 <template>
-  <UModal v-model:open="modelValue" class="max-w-compact">
+  <UModal
+    v-model:open="modelValue"
+    class="max-w-compact"
+    :ui="{
+      content: 'sm:max-w-4xl'
+    }"
+  >
     <template #content>
       <UCard>
         <template #header>
@@ -71,17 +76,13 @@ watch(modelValue, (isOpen) => {
         </template>
 
         <div class="py-2">
-          <div class="flex max-h-175 flex-wrap items-start justify-start gap-4 overflow-scroll">
+          <div class="grid max-h-175 grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2">
             <button
               v-for="template in TEMPLATES"
               :key="template.id"
               type="button"
-              :style="{
-                aspectRatio: `${PAPER_SIZES['A4'].w / PAPER_SIZES['A4'].h}`,
-                width: `${PAPER_SIZES['A4'].w * 0.5}mm`
-              }"
               :class="[
-                'group relative flex flex-col items-center justify-between rounded-lg border-2 p-4 text-left transition-all duration-200 hover:shadow-lg',
+                'group relative flex-col items-center justify-between rounded-lg border-2 p-4 text-left transition-all duration-200 hover:shadow-lg',
                 selectedTemplate?.id === template.id
                   ? 'border-primary bg-primary/5 ring-primary/20 ring-2'
                   : 'border-default/20 hover:border-primary/40 bg-default/50'
