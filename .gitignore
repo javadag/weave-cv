@@ -25,3 +25,5 @@ logs
 
 .claude
 .mcp.json
+.vercel
+.env*.local
