@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: "vercel"
   },
+  image: {
+    provider: process.env.GITHUB_ACTIONS ? "vercel" : "ipx"
+  },
   modules: [
     "@nuxtjs/supabase",
     "@nuxt/ui",
