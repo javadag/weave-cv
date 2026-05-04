@@ -1,16 +1,40 @@
 {
   "types": [
-    { "type": "feat", "section": "Features" },
-    { "type": "fix", "section": "Bug Fixes" },
-    { "type": "chore", "hidden": true },
-    { "type": "docs", "hidden": true },
-    { "type": "style", "hidden": true },
-    { "type": "refactor", "hidden": true },
-    { "type": "perf", "hidden": true },
-    { "type": "test", "hidden": true }
-  ],
-  "commitUrlFormat": "",
-  "compareUrlFormat": "",
-  "issueUrlFormat": "",
-  "linkReferences": false
+    {
+      "type": "feat",
+      "section": "✨ Features"
+    },
+    {
+      "type": "fix",
+      "section": "🐛 Bug Fixes"
+    },
+    {
+      "type": "chore",
+      "hidden": true
+    },
+    {
+      "type": "docs",
+      "hidden": false,
+      "section": "📝 Documentation"
+    },
+    {
+      "type": "style",
+      "hidden": false,
+      "section": "💄 Styling"
+    },
+    {
+      "type": "refactor",
+      "hidden": false,
+      "section": "♻️ Code Refactoring"
+    },
+    {
+      "type": "perf",
+      "hidden": false,
+      "section": "⚡️ Performance Improvements"
+    },
+    {
+      "type": "test",
+      "hidden": true
+    }
+  ]
 }
