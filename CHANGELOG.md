@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/JavadAg/weave-cv/compare/v2.0.0...v2.0.1) (2026-05-04)
+
+
+### 🐛 Bug Fixes
+
+* date/location wrapping ([4f71666](https://github.com/JavadAg/weave-cv/commit/4f716664582a0d864be40c290e69b0926830167b))
+* **landing:** motion flash ([fde80ae](https://github.com/JavadAg/weave-cv/commit/fde80ae252e67469adfc75742f5288d9d6ea67d8))
+
 ## 2.0.0 (2026-05-04)
 
 
