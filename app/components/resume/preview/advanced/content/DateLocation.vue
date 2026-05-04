@@ -75,6 +75,7 @@ const containerStyles = computed<CSSProperties>(() => ({
   width: `${props.width}%`,
   paddingBottom: `${0.4 * typography.value.lineHeight * layout.value.sectionGap}px`,
   display: "flex",
+  alignItems: "center",
   flexWrap: "wrap",
   rowGap: `${0.15 * titleFontSize.value}px`,
   ...(props.position === "contentFirst" ? { justifyContent: "flex-end" } : {}),
@@ -89,6 +90,10 @@ const spacerStyles = computed<CSSProperties>(() => ({
 
 <template>
   <div ref="containerRef" :style="[containerStyles, props.style]">
+    <span
+      v-if="isWrapped && (position === 'contentFirst' || position === 'stacked' || position === 'columns')"
+      :style="{ paddingInline: `0.5em`, whiteSpace: 'pre' }"
+    />
     <AdvancedDate
       ref="dateRef"
       :position="position"
@@ -96,14 +101,16 @@ const spacerStyles = computed<CSSProperties>(() => ({
       :end-date="endDate"
       :present="present"
       :show-date-day="showDateDay"
+      :style="
+        isWrapped &&
+        position === 'dateFirst' && {
+          paddingInlineEnd: `1em`,
+          whiteSpace: 'pre-wrap'
+        }
+      "
     />
 
-    <span
-      v-if="isWrapped && (position === 'contentFirst' || position === 'stacked' || position === 'columns')"
-      :style="{ paddingInline: `0.5em`, whiteSpace: 'pre' }"
-    />
     <span v-if="!isWrapped && (startDate || endDate)" ref="sepratorRef" :style="spacerStyles">|</span>
-
     <div style="display: flex; align-items: center">
       <AdvancedLocation ref="locationRef" :position="position" :location="location" />
       <span v-if="isWrapped && position === 'dateFirst'" :style="{ paddingInline: `0.5em`, whiteSpace: 'pre' }" />

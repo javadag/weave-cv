@@ -117,7 +117,7 @@ const handleDone = () => {
         />
       </div>
       <div v-if="hasField('startDate') || hasField('endDate')" class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div v-if="hasField('startDate')" class="flex flex-col gap-2">
+        <div v-if="hasField('startDate')" class="flex flex-col gap-1">
           <DatePicker
             :model-value="getDateFieldValue('startDate')"
             :label="getFieldConfig('startDate').label"
@@ -135,7 +135,7 @@ const handleDone = () => {
             {{ $t("editor.form.clearDate") }}
           </UButton>
         </div>
-        <div v-if="hasField('endDate') || hasField('present')" class="flex flex-col gap-2">
+        <div v-if="hasField('endDate') || hasField('present')" class="flex flex-col gap-1">
           <DatePicker
             v-if="hasField('endDate')"
             :model-value="getDateFieldValue('endDate')"
@@ -144,7 +144,7 @@ const handleDone = () => {
             :placeholder="getFieldConfig('endDate').placeholder"
             @update:model-value="(value) => handleDateUpdate('endDate', value)"
           />
-          <div class="flex flex-col gap-2">
+          <div class="flex flex-col gap-1">
             <UButton
               v-if="hasField('endDate') && getDateFieldValue('endDate')"
               size="xs"
@@ -161,6 +161,7 @@ const handleDone = () => {
               :model-value="getBooleanFieldValue('present')"
               :label="getFieldConfig('present').label"
               :style="'start'"
+              class="py-1"
               @update:model-value="(value) => handleFieldUpdate('present', value)"
             />
           </div>

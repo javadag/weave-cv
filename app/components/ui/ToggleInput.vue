@@ -25,7 +25,7 @@ const model = computed({
     size="xs"
     :ui="{
       label: 'text-2sm font-medium text-muted',
-      root: props.style === 'center' ? 'flex justify-between items-center gap-2' : ''
+      root: props.style === 'center' ? 'flex justify-between items-center gap-2' : 'justify-start'
     }"
   />
 </template>

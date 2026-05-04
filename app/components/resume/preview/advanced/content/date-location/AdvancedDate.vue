@@ -10,6 +10,7 @@ interface Props {
   endDate?: string | null
   present?: boolean
   showDateDay?: boolean
+  style?: CSSProperties | false
 }
 
 const props = defineProps<Props>()
@@ -34,7 +35,10 @@ const endDateDisplay = computed(() => (props.present ? "Present" : endDateFormat
 
 const dateStyles = computed<CSSProperties>(() => ({
   color: color.value,
-  textAlign: getTextAlign(props.position)
+  textAlign: getTextAlign(props.position),
+  wordBreak: "break-all",
+  minWidth: 0,
+  ...props.style
 }))
 </script>
 
