@@ -66,6 +66,7 @@
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "puppeteer": "^24.29.0",
+    "sharp": "^0.34.5",
     "standard-version": "^9.5.0"
   }
 }
