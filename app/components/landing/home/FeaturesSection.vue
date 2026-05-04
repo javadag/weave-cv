@@ -46,11 +46,10 @@ const features = computed(() => [
 <template>
   <section id="features" class="border-default bg-muted border-y py-20 sm:py-28">
     <div class="max-w-compact mx-auto px-6 lg:px-12">
-      <div
-        v-motion
+      <Motion
+        is="div"
         :initial="{ opacity: 0, y: 20 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-        :visible-once="true"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
         class="mb-16 text-center"
       >
         <span
@@ -64,16 +63,15 @@ const features = computed(() => [
         <p class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
           {{ $t("features.subtitle") }}
         </p>
-      </div>
+      </Motion>
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div
+        <Motion
+          is="div"
           v-for="(f, index) in features"
           :key="f.title"
-          v-motion
           :initial="{ opacity: 0, y: 20 }"
-          :visible="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut', delay: index * 80 } }"
-          :visible-once="true"
+          :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut', delay: index * 80 } }"
           class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
         >
           <div
@@ -88,7 +86,7 @@ const features = computed(() => [
           </div>
           <h3 class="text-highlighted mb-2 text-lg font-bold tracking-[-0.01em]">{{ f.title }}</h3>
           <p class="text-muted text-sm leading-relaxed">{{ f.body }}</p>
-        </div>
+        </Motion>
       </div>
     </div>
   </section>

@@ -31,8 +31,8 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
     <div class="max-w-compact relative mx-auto px-6 lg:px-12">
       <div class="grid items-center gap-14 lg:grid-cols-2">
         <div class="flex flex-col">
-          <div
-            v-motion
+          <Motion
+            is="div"
             :initial="{ opacity: 0, y: 14 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
           >
@@ -42,9 +42,9 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
               <span class="animate-landing-pulse bg-primary inline-block size-1.5 rounded-full" />
               {{ APP_VERSION }}
             </span>
-          </div>
-          <h1
-            v-motion
+          </Motion>
+          <Motion
+            is="h1"
             :initial="{ opacity: 0, y: 14 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 80 } }"
             class="text-highlighted mt-6 text-[3.5rem] leading-[1.05] font-bold tracking-[-0.04em] text-balance lg:text-[4.5rem] rtl:leading-tight"
@@ -53,17 +53,17 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
             <span class="from-brand-gradient-from to-brand-gradient-to bg-linear-to-br bg-clip-text text-transparent">
               {{ $t("hero.titleHighlight") }}
             </span>
-          </h1>
-          <p
-            v-motion
+          </Motion>
+          <Motion
+            is="p"
             :initial="{ opacity: 0, y: 14 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 160 } }"
             class="text-muted mt-6 max-w-135 text-lg leading-relaxed"
           >
             {{ $t("hero.subtitle") }}
-          </p>
-          <div
-            v-motion
+          </Motion>
+          <Motion
+            is="div"
             :initial="{ opacity: 0, y: 14 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 240 } }"
             class="mt-9 flex flex-wrap gap-3"
@@ -80,9 +80,9 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
             >
               {{ $t("hero.browseBtn") }}
             </NuxtLink>
-          </div>
-          <div
-            v-motion
+          </Motion>
+          <Motion
+            is="div"
             :initial="{ opacity: 0, y: 14 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 320 } }"
             class="text-muted mt-9 flex flex-wrap gap-6 text-sm"
@@ -100,10 +100,10 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
               </svg>
               {{ b }}
             </div>
-          </div>
+          </Motion>
         </div>
-        <div
-          v-motion
+        <Motion
+          is="div"
           dir="ltr"
           :initial="{ opacity: 0, scale: 0.97, y: 8 }"
           :enter="{ opacity: 1, scale: 1, y: 0, transition: { duration: 800, ease: 'easeOut', delay: 100 } }"
@@ -212,7 +212,7 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
             </svg>
             {{ $t("hero.atsCheck") }}
           </div>
-        </div>
+        </Motion>
       </div>
     </div>
   </section>

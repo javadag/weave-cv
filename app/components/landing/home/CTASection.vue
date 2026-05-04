@@ -6,11 +6,10 @@ const quickStats = computed(() => [t("cta.stat1"), t("cta.stat2"), t("cta.stat3"
 <template>
   <section class="bg-default px-6 pb-20 sm:pb-28 lg:px-12">
     <div class="max-w-compact mx-auto">
-      <div
-        v-motion
+      <Motion
+        is="div"
         :initial="{ opacity: 0, y: 24 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-        :visible-once="true"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
         class="cta-card from-primary-700 to-primary-500 dark:from-primary-600 dark:to-primary-400 relative overflow-hidden rounded-3xl bg-linear-to-br px-8 py-20 text-center shadow-[0_40px_80px_-30px_rgba(234,88,12,0.45)] transition-transform duration-500 hover:scale-[100.4%] sm:px-14 sm:py-24 dark:shadow-[0_40px_80px_-30px_rgba(245,158,11,0.3)]"
       >
         <div
@@ -66,7 +65,7 @@ const quickStats = computed(() => [t("cta.stat1"), t("cta.stat2"), t("cta.stat3"
             <span v-for="s in quickStats" :key="s">{{ s }}</span>
           </div>
         </div>
-      </div>
+      </Motion>
     </div>
   </section>
 </template>

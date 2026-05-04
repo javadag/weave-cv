@@ -45,11 +45,10 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
 
 <template>
   <section ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center py-24">
-    <div
-      v-motion
+    <Motion
+      is="div"
       :initial="{ opacity: 0, y: 20 }"
-      :visible="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-      :visible-once="true"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
       class="max-w-compact mx-auto mb-10 flex w-full items-end justify-between px-6 lg:px-12"
     >
       <div>
@@ -65,7 +64,7 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
           {{ $t("templates.subtitle") }}
         </p>
       </div>
-    </div>
+    </Motion>
     <div
       class="relative flex w-full flex-col items-center justify-center overflow-hidden"
       style="transform: translateZ(0)"

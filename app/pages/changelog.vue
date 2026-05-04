@@ -24,11 +24,10 @@ const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: 
 <template>
   <main class="bg-default py-20 sm:py-28">
     <div class="mx-auto max-w-3xl px-6 lg:px-8">
-      <header
-        v-motion
+      <Motion
+        is="header"
         :initial="{ opacity: 0, y: 20 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 600, ease: 'easeOut' } }"
-        :visible-once="true"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600, ease: 'easeOut' } }"
         class="mb-12"
       >
         <span
@@ -43,13 +42,12 @@ const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: 
           Every feature, fix, and refinement we've shipped. Generated from our git history — see something missing? Let
           us know.
         </p>
-      </header>
+      </Motion>
 
-      <article
-        v-motion
+      <Motion
+        is="article"
         :initial="{ opacity: 0, y: 20 }"
-        :visible="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 100 } }"
-        :visible-once="true"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 100 } }"
         class="changelog-prose"
         v-html="html"
       />
