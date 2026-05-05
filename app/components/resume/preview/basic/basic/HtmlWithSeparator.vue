@@ -10,106 +10,91 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const shouldRenderNode = (node: Node): boolean => {
-  const nodeName = node.nodeName.toLowerCase()
+const { linkStyles } = useLinkConfigs()
 
-  if (nodeName === "p" || nodeName === "li") {
-    const children = [...node.childNodes]
-    if (children.length === 0) return false
-    const firstChild = children[0]
-    if (firstChild && firstChild.nodeName.toLowerCase() === "br") return false
-    if (children.every((child) => !child.textContent?.trim())) return false
-  }
-
-  return true
+const SEPARATOR_CHARS: Record<TSeparator, string> = {
+  pipe: " | ",
+  dash: " — ",
+  slash: " / ",
+  dot: " • ",
+  comma: ", ",
+  none: " "
 }
 
-const processNode = (node: Node, isFirst: boolean, index: number): VNode | string | null => {
-  const nodeName = node.nodeName.toLowerCase()
+function isNodeEmpty(node: Node): boolean {
+  const name = node.nodeName.toLowerCase()
+  if (name !== "p" && name !== "li") return false
+  const children = [...node.childNodes]
+  if (children.length === 0) return true
+  if (children[0]?.nodeName.toLowerCase() === "br") return true
+  return children.every((c) => !c.textContent?.trim())
+}
 
-  if (node.nodeType === Node.TEXT_NODE) {
-    return node.textContent
+type ProcessResult = VNode | string | null
+
+function processNode(
+  node: Node,
+  isFirst: boolean,
+  sep: string,
+  styles: typeof linkStyles.value
+): ProcessResult {
+  if (node.nodeType === Node.TEXT_NODE) return node.textContent
+
+  const name = node.nodeName.toLowerCase()
+  const childResults = [...node.childNodes]
+    .map((child, i) => processNode(child, isFirst && i === 0, sep, styles))
+    .filter((c): c is VNode | string => c !== null)
+
+  if (name === "li") {
+    if (isNodeEmpty(node)) return null
+    const content = h(Fragment, childResults)
+    return isFirst ? content : h("span", [sep, content])
   }
 
-  const childNodes = [...node.childNodes]
-    .map((child, childIndex) => processNode(child, isFirst && childIndex === 0, childIndex))
-    .filter((child) => child !== null)
-
-  if (/* nodeName === "p" || */ nodeName === "li") {
-    if (!shouldRenderNode(node)) return null
-
-    const children = [...node.childNodes]
-      .map((child, childIndex) => processNode(child, false, childIndex))
-      .filter((child) => child !== null)
-
-    const content = h(Fragment, children)
-
-    return isFirst ? content : h("span", { key: `delimiter-${index}-${Math.random()}` }, [", ", content])
-  }
-
-  switch (nodeName) {
+  switch (name) {
     case "strong": {
-      return h("strong", { key: `strong-${index}`, style: { fontWeight: "bold" } }, childNodes)
+      return h("strong", { style: { fontWeight: "bold" } }, childResults)
     }
     case "em": {
-      return h("em", { key: `em-${index}`, style: { fontStyle: "italic" } }, childNodes)
+      return h("em", { style: { fontStyle: "italic" } }, childResults)
     }
     case "u": {
-      return h("u", { key: `u-${index}`, style: { textDecoration: "underline" } }, childNodes)
+      return h("u", { style: { textDecoration: "underline" } }, childResults)
     }
     case "a": {
       const href = (node as HTMLAnchorElement).getAttribute("href")
+      if (!href) return h("span", childResults)
       return h(
         "span",
-        {
-          key: `a-wrapper-${index}`,
-          style: {
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.2em"
-          }
-        },
+        { style: { display: "inline-flex", alignItems: "center", gap: "0.2em" } },
         [
-          h(
-            "a",
-            {
-              key: `a-${index}`,
-              target: "_blank",
-              href: href,
-              rel: "noopener noreferrer",
-              style: {
-                color: "inherit",
-                textDecoration: "none"
-              }
-            },
-            childNodes
-          ),
-          h(LinkIcon, { key: `link-icon-${index}`, usage: "description", isInBubble: false })
+          h("a", { href, target: "_blank", rel: "noopener noreferrer", style: styles }, childResults),
+          h(LinkIcon)
         ]
       )
     }
     default: {
-      return childNodes.length > 0 ? h(Fragment, { key: `line-${index}` }, childNodes) : null
+      return childResults.length > 0 ? h(Fragment, childResults) : null
     }
   }
 }
 
 const renderContent = computed(() => {
-  if (!props.html) return () => null
+  const html = props.html
+  const sep = SEPARATOR_CHARS[props.separator] ?? ", "
+  const styles = linkStyles.value
+
+  if (!html) return () => null
 
   return () => {
     try {
-      const parser = new DOMParser()
-      const parsedDoc = parser.parseFromString(props.html, "text/html")
-
-      const nodes = [...parsedDoc.body.childNodes]
-        .map((node, index) => processNode(node, index === 0, index))
-        .filter((node) => node !== null)
-
+      const doc = new DOMParser().parseFromString(html, "text/html")
+      const nodes = [...doc.body.childNodes]
+        .map((node, i) => processNode(node, i === 0, sep, styles))
+        .filter((n): n is VNode | string => n !== null)
       return h(Fragment, nodes)
-    } catch (error) {
-      console.error("Error parsing HTML:", error)
-      return h("span", props.html)
+    } catch {
+      return h("span", html)
     }
   }
 })

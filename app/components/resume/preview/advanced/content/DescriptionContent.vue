@@ -19,7 +19,7 @@ const contentLayout = computed(() => configs.value.general.layout.contentLayout)
 const typographyConfigs = computed(() => configs.value.general.typography)
 const layoutConfigs = computed(() => configs.value.general.layout)
 
-const htmlTransformers = computed(() => useHtmlTransformers())
+const htmlTransformers = useHtmlTransformers()
 
 const vNodes = computed(() => {
   return props.html ? convertHtmlToVNodes(props.html, htmlTransformers.value) : []

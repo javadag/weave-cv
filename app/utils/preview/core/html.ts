@@ -138,17 +138,23 @@ function computeTextStyles({ tagName, inlineStyles = {} }: TextStyleOptions) {
 
 const SUPPORTED_TEXT_TAGS = ["p", "em", "u", "strong", "ul", "ol"] as const
 
-export function createVNodeFromHtmlTag(element: Element, children: VNode[]): VNode | null {
+export interface LinkStyleOptions {
+  textDecoration: string
+  textUnderlineOffset: string
+  color: string
+}
+
+export function createVNodeFromHtmlTag(
+  element: Element,
+  children: VNode[],
+  linkStyles?: LinkStyleOptions
+): VNode | null {
   const tagName = element.tagName.toLowerCase()
   const href = element.getAttribute("href") || ""
   const styleAttribute = element.getAttribute("style") || ""
 
   const inlineStyles = parseInlineStyles(styleAttribute)
-
-  const styles = computeTextStyles({
-    tagName,
-    inlineStyles
-  })
+  const styles = computeTextStyles({ tagName, inlineStyles })
 
   if (SUPPORTED_TEXT_TAGS.includes(tagName as (typeof SUPPORTED_TEXT_TAGS)[number])) {
     return h(tagName, { style: styles }, children)
@@ -163,15 +169,17 @@ export function createVNodeFromHtmlTag(element: Element, children: VNode[]): VNo
       return h("span", { style: styles }, children)
     }
 
+    const anchorStyles = { ...styles, ...linkStyles }
+
     return h(
       "a",
       {
         target: "_blank",
         href,
         rel: "noopener noreferrer",
-        style: styles
+        style: anchorStyles
       },
-      [h("span", null, children), h(LinkIcon, { usage: "description" })]
+      [h("span", null, children), h(LinkIcon)]
     )
   }
 
