@@ -27,6 +27,7 @@ export interface FieldConfig {
 export type SectionConfigOption =
   | "variant"
   | "separator"
+  | "titleStyle"
   | "titleSubtitleVariant"
   | "dateLocationVariant"
   | "subTitleFirst"
@@ -86,7 +87,7 @@ const ADVANCED_DATE_FIRST: TAdvancedSectionConfigs = {
   linkInTitle: true
 }
 
-const BASIC_OPTIONS: SectionConfigOption[] = ["variant", "separator", "grids", "typography"]
+const BASIC_OPTIONS: SectionConfigOption[] = ["variant", "separator", "grids", "titleStyle", "typography"]
 const ADVANCED_OPTIONS: SectionConfigOption[] = [
   "variant",
   "separator",

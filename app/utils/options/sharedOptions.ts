@@ -44,6 +44,13 @@ export const photoPositionOptions: { label: string; value: "left" | "right" | "t
   { label: "Top", value: "top" }
 ]
 
+export const titleStyleOptions: { label: string; value: "colon" | "bracket" | "dash" | "none" }[] = [
+  { label: "Colon", value: "colon" },
+  { label: "Bracket", value: "bracket" },
+  { label: "Dash", value: "dash" },
+  { label: "None", value: "none" }
+]
+
 export const photoShapeOptions: { label: string; value: "circle" | "rounded" | "square" }[] = [
   { label: "Circle", value: "circle" },
   { label: "Rounded", value: "rounded" },

@@ -2,7 +2,7 @@
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import { SECTION_CONFIGS_CONFIG, SECTION_DISPLAY_CONFIG } from "~/constants/sectionConfigs"
-import { separatorOptions, variantOptions } from "~/utils/options/sharedOptions"
+import { separatorOptions, titleStyleOptions, variantOptions } from "~/utils/options/sharedOptions"
 import { BasicSectionTypeSchema } from "~/utils/schemas/content.schema"
 import type { TSeparator, TVariant } from "~/utils/schemas/shared.schema"
 import ConfigsContainer from "../wrapper/ConfigsContainer.vue"
@@ -59,6 +59,13 @@ const getConfigValue = (sectionType: string, key: string) => {
           :label="$t('editor.configs.separator')"
           :options="separatorOptions"
           @update:model-value="(value) => handleUpdate(sectionType, 'separator', value as TSeparator)"
+        />
+        <SelectItem
+          v-if="SECTION_CONFIGS_CONFIG[sectionType].includes('titleStyle')"
+          :model-value="getConfigValue(sectionType, 'titleStyle') as string"
+          :label="$t('editor.configs.titleStyle')"
+          :options="titleStyleOptions"
+          @update:model-value="(value) => handleUpdate(sectionType, 'titleStyle', value)"
         />
       </ConfigWrapper>
     </ConfigsContainer>
