@@ -37,7 +37,7 @@ const handleEdit = (id: string) => {
         :resume-title="props.resume.title"
       />
     </div>
-    <div class="text-muted flex items-center justify-between text-xs">
+    <div class="text-muted flex flex-wrap items-center justify-between gap-1.5 text-xs">
       <span>{{ $t("resumeCard.createdAt", { date: formatDate(props.resume.created_at) }) }}</span>
       <span v-if="props.resume.updated_at !== props.resume.created_at">
         {{ $t("resumeCard.updatedAt", { date: formatDate(props.resume.updated_at) }) }}

@@ -59,7 +59,13 @@ const handleDuplicateClick = async () => {
 </script>
 
 <template>
-  <UCard class="transition-shadow duration-200 hover:shadow-lg">
+  <UCard class="relative transition-shadow duration-200 hover:shadow-lg">
+    <div
+      v-if="isDuplicating"
+      class="bg-background/50 absolute inset-0 z-10 flex items-center justify-center backdrop-blur-[1px]"
+    >
+      <UIcon name="i-lucide-loader-2" class="text-primary h-8 w-8 animate-spin" />
+    </div>
     <template #header>
       <div class="flex items-start justify-between">
         <h3 class="text-default truncate text-lg font-semibold">
@@ -83,7 +89,13 @@ const handleDuplicateClick = async () => {
           ]"
           size="sm"
         >
-          <UButton color="neutral" variant="ghost" icon="i-lucide-ellipsis-vertical" size="sm" />
+          <UButton
+            color="neutral"
+            variant="ghost"
+            icon="i-lucide-ellipsis-vertical"
+            size="sm"
+            :loading="isDuplicating"
+          />
         </UDropdownMenu>
       </div>
     </template>
