@@ -7,16 +7,10 @@ interface Props {
   title: string
   url?: string
   isInlineLayout: boolean
-  isLinkIconNextToTitle?: boolean
   titleConfig: TLayout["contentLayout"]["title"]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  isLinkIconNextToTitle: false,
-  url: ""
-})
-
-const showLinkIcon = computed(() => props.url && props.isLinkIconNextToTitle)
+const props = defineProps<Props>()
 
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
@@ -34,5 +28,5 @@ const titleStyles = computed<CSSProperties>(() => {
 })
 </script>
 <template v-if="title">
-  <span :style="titleStyles">{{ title }}<LinkIcon v-if="showLinkIcon" /></span>
+  <span :style="titleStyles">{{ title }}<LinkIcon v-if="url" /></span>
 </template>

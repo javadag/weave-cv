@@ -18,7 +18,8 @@ const AdvancedSectionConfigsSchema = z.object({
   separator: Separator,
   titleSubtitleVariant: VariantSimple,
   dateLocationVariant: VariantSimple,
-  subTitleFirst: z.boolean()
+  subTitleFirst: z.boolean(),
+  linkInTitle: z.boolean().default(true)
 })
 
 const BasicSectionConfigsSchema = z.object({

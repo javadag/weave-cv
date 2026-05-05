@@ -61,6 +61,12 @@ const advancedVariantOptions = AdvancedSectionVariant.options.map((option) => ({
           :label="$t('editor.configs.subtitleFirst')"
           @update:model-value="(value) => handleUpdate(sectionType, 'subTitleFirst', value)"
         />
+        <ToggleInput
+          v-if="SECTION_CONFIGS_CONFIG[sectionType].includes('linkInTitle')"
+          :model-value="getConfigValue(sectionType, 'linkInTitle') as boolean"
+          :label="$t('editor.configs.linkInTitle')"
+          @update:model-value="(value) => handleUpdate(sectionType, 'linkInTitle', value)"
+        />
       </ConfigWrapper>
     </ConfigsContainer>
   </template>

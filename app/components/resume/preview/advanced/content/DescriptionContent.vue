@@ -5,12 +5,10 @@ import { convertHtmlToVNodes } from "~/utils/preview/core/html"
 
 interface Props {
   html: string
-  isProfileSection?: boolean
   isLast?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isProfileSection: false,
   isLast: false
 })
 
@@ -27,7 +25,7 @@ const vNodes = computed(() => {
   return props.html ? convertHtmlToVNodes(props.html, htmlTransformers.value) : []
 })
 
-const hasIndentation = computed(() => !props.isProfileSection && contentLayout.value.indent > 0)
+const hasIndentation = computed(() => contentLayout.value.indent > 0)
 const paddingInlineStart = computed(() => (hasIndentation.value ? `${contentLayout.value.indent}px` : undefined))
 
 const containerStyles = computed(() => ({

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, toRef } from "vue"
+import { computed, toRef } from "vue"
 import { useLinkConfigs } from "~/composables/useLinkConfigs"
 import type { AdvancedSectionTypeSchema } from "~/utils/schemas/content.schema"
 import { ColumnColorsKey } from "../../pages/columnColorsContext"
@@ -16,8 +16,6 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
-const containerRef = ref<HTMLDivElement>()
 
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
@@ -39,24 +37,21 @@ const containerStyles = computed(() => ({
 }))
 
 const { isLink, linkAttributes, linkStyles } = useLinkConfigs(toRef(props, "url"))
-
-const subTitleFirst = computed(() => sectionConfigs.value.subTitleFirst)
 </script>
 
 <template>
-  <div ref="containerRef" :style="containerStyles">
+  <div :style="containerStyles">
     <component
-      :is="isLink && subTitleFirst ? 'a' : 'span'"
+      :is="isLink && sectionConfigs.linkInTitle ? 'a' : 'span'"
       v-if="title"
-      :style="isLink && subTitleFirst ? linkStyles : {}"
-      v-bind="isLink && subTitleFirst ? linkAttributes : {}"
+      :style="isLink && sectionConfigs.linkInTitle ? linkStyles : {}"
+      v-bind="isLink && sectionConfigs.linkInTitle ? linkAttributes : {}"
     >
       <Title
         :is-inline-layout="sectionConfigs.titleSubtitleVariant === 'inline'"
         :title-config="titleConfig"
         :title="title"
-        :url="url"
-        :is-link-icon-next-to-title="subTitleFirst"
+        :url="isLink && sectionConfigs.linkInTitle ? url : undefined"
       />
     </component>
     <span
@@ -65,16 +60,15 @@ const subTitleFirst = computed(() => sectionConfigs.value.subTitleFirst)
       >,
     </span>
     <component
-      :is="isLink && !subTitleFirst ? 'a' : 'span'"
+      :is="isLink && !sectionConfigs.linkInTitle ? 'a' : 'span'"
       v-if="subtitle"
-      :style="isLink && !subTitleFirst ? linkStyles : {}"
-      v-bind="isLink && !subTitleFirst ? linkAttributes : {}"
+      :style="isLink && !sectionConfigs.linkInTitle ? linkStyles : {}"
+      v-bind="isLink && !sectionConfigs.linkInTitle ? linkAttributes : {}"
     >
       <Subtitle
         :subtitle="subtitle"
-        :url="url"
+        :url="isLink && !sectionConfigs.linkInTitle ? url : undefined"
         :subtitle-config="subtitleConfig"
-        :is-link-icon-next-to-title="subTitleFirst"
       />
     </component>
   </div>

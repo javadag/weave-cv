@@ -30,6 +30,7 @@ export type SectionConfigOption =
   | "titleSubtitleVariant"
   | "dateLocationVariant"
   | "subTitleFirst"
+  | "linkInTitle"
   | "grids"
   | "typography"
 
@@ -63,7 +64,8 @@ const ADVANCED_STACKED: TAdvancedSectionConfigs = {
   separator: "pipe",
   dateLocationVariant: "stacked",
   titleSubtitleVariant: "stacked",
-  subTitleFirst: false
+  subTitleFirst: false,
+  linkInTitle: true
 }
 
 const ADVANCED_CONTENT_FIRST: TAdvancedSectionConfigs = {
@@ -71,7 +73,8 @@ const ADVANCED_CONTENT_FIRST: TAdvancedSectionConfigs = {
   separator: "pipe",
   dateLocationVariant: "stacked",
   titleSubtitleVariant: "stacked",
-  subTitleFirst: false
+  subTitleFirst: false,
+  linkInTitle: true
 }
 
 const ADVANCED_DATE_FIRST: TAdvancedSectionConfigs = {
@@ -79,7 +82,8 @@ const ADVANCED_DATE_FIRST: TAdvancedSectionConfigs = {
   separator: "pipe",
   dateLocationVariant: "stacked",
   titleSubtitleVariant: "stacked",
-  subTitleFirst: false
+  subTitleFirst: false,
+  linkInTitle: true
 }
 
 const BASIC_OPTIONS: SectionConfigOption[] = ["variant", "separator", "grids", "typography"]
@@ -89,6 +93,7 @@ const ADVANCED_OPTIONS: SectionConfigOption[] = [
   "titleSubtitleVariant",
   "dateLocationVariant",
   "subTitleFirst",
+  "linkInTitle",
   "typography"
 ]
 

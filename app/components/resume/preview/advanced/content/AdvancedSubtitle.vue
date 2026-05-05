@@ -6,13 +6,10 @@ import LinkIcon from "./LinkIcon.vue"
 interface Props {
   subtitle: string
   url?: string
-  isLinkIconNextToTitle?: boolean
   subtitleConfig: TLayout["contentLayout"]["subtitle"]
 }
 
 const props = defineProps<Props>()
-
-const showLinkIcon = computed(() => props.url && !props.isLinkIconNextToTitle)
 
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
@@ -32,6 +29,6 @@ const subtitleStyles = computed<CSSProperties>(() => {
 <template v-if="subtitle">
   <span :style="subtitleStyles">
     {{ subtitle }}
-    <LinkIcon v-if="showLinkIcon" usage="EntryTitle" />
+    <LinkIcon v-if="url" usage="EntryTitle" />
   </span>
 </template>
