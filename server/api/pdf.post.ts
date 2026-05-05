@@ -5,6 +5,7 @@ import type { LaunchOptions } from "puppeteer-core"
 import { PAPER_SIZES, type TPaperSize } from "~/constants/papers"
 import { buildFontCss } from "~/utils/preview/core/fontUtils"
 import { requireAuth } from "../utils/auth"
+import { checkRateLimit } from "../utils/rateLimit"
 
 let tailwindCssCache: string | null = null
 
@@ -63,7 +64,9 @@ const loadTailwindCss = async (baseUrl?: string) => {
 }
 
 export default defineEventHandler(async (event) => {
-  await requireAuth(event)
+  const user = await requireAuth(event)
+  // 10 PDF exports per 10 minutes per user — each spawns a headless browser
+  checkRateLimit(`pdf:${user.id}`, 10, 10 * 60 * 1000)
 
   let browser:
     | Awaited<ReturnType<typeof import("puppeteer").launch>>

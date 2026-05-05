@@ -1,6 +1,7 @@
 import Groq from "groq-sdk"
 import { TEMPLATE_MINIMALIST } from "~/constants/templates"
 import { requireAuth } from "../../utils/auth"
+import { checkRateLimit } from "../../utils/rateLimit"
 
 const PROMPT = `You are a resume parser. Extract structured data from the resume text below and return ONLY valid JSON matching this exact schema (use empty strings/arrays for missing fields, never null for strings):
 
@@ -263,7 +264,9 @@ function buildContent(parsed: any) {
 }
 
 export default defineEventHandler(async (event) => {
-  await requireAuth(event)
+  const user = await requireAuth(event)
+  // 5 AI parses per hour per user — each call hits a paid external API
+  checkRateLimit(`ai:${user.id}`, 5, 60 * 60 * 1000)
 
   const { text } = await readBody<{ text: string }>(event)
 
