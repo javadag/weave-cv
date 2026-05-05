@@ -72,7 +72,7 @@ const previewStyles = computed(() => ({
 
 <template>
   <div class="border-muted flex items-center gap-3 rounded-lg border border-dashed p-3">
-    <img v-if="photoUrl" :src="photoUrl" :style="previewStyles" alt="Profile photo" />
+    <NuxtImg v-if="photoUrl" :src="photoUrl" :style="previewStyles" alt="Profile photo" />
     <div
       v-else
       class="bg-elevated flex shrink-0 items-center justify-center rounded-lg"

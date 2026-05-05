@@ -90,7 +90,7 @@ watch(modelValue, (isOpen) => {
               @click="handleTemplateSelect(template)"
             >
               <div v-if="template.screenshot">
-                <img :src="template.screenshot" alt="Template Screenshot" class="h-full w-full object-cover" />
+                <NuxtImg :src="template.screenshot" alt="Template Screenshot" class="h-full w-full object-cover" />
               </div>
               <div
                 v-else
