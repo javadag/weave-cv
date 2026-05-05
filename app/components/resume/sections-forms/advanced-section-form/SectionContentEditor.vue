@@ -83,20 +83,22 @@ const clearDate = (field: "startDate" | "endDate") => {
 const handleDone = () => {
   emit("closeEdit")
 }
+
+const isSummary = computed(() => props.sectionType === "summary")
 </script>
 
 <template>
   <div class="bg-accented/40 border-primary/30 flex w-full flex-col gap-4 rounded-lg border p-3">
-    <div class="flex items-center justify-between gap-2">
-      <span class="line-clamp-1 text-sm font-semibold"
-        >{{ $t("editor.form.edit") }}
+    <div v-if="!isSummary" class="flex items-center justify-between gap-2">
+      <span class="line-clamp-1 text-sm font-semibold">
+        {{ $t("editor.form.edit") }}
         {{
           content.title ||
           ("subtitle" in content && content.subtitle) ||
           ("location" in content ? content.location : "") ||
           ""
-        }}</span
-      >
+        }}
+      </span>
       <UButton size="sm" variant="soft" color="primary" :leading-icon="'i-lucide-check'" @click="handleDone" />
     </div>
     <div class="space-y-3">

@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import type { TPersonalContent } from "~/utils/schemas/content.schema"
+import type { TPersonalContent, DetailKey } from "~/utils/schemas/content.schema"
+import { DETAILS_CATALOG } from "~/utils/schemas/content.schema"
 import Delete from "../Delete.vue"
 import Visibility from "../Visibility.vue"
+
+type DetailConfig = { label: string; icon: string; urlTemplate?: string }
 
 interface Props {
   detail: TPersonalContent["details"][0]
@@ -11,8 +14,18 @@ interface Props {
 const props = defineProps<Props>()
 const { personal, updatePersonal } = useResumeStore()
 
+const getDetailConfig = (): DetailConfig | null => {
+  const type = props.detail.type
+  for (const category of Object.values(DETAILS_CATALOG)) {
+    if (type in category) {
+      return (category as Partial<Record<DetailKey, DetailConfig>>)[type] ?? null
+    }
+  }
+  return null
+}
+
 const updateDetails = (updater: (details: TPersonalContent["details"]) => TPersonalContent["details"]) => {
-  const updatedDetails = updater([...personal.details])
+  const updatedDetails = updater([...personal!.details])
   updatePersonal("details", updatedDetails)
 }
 
@@ -30,7 +43,17 @@ const handleUrlUpdate = (url: string) => {
   updateDetails((details) => {
     const detail = details[props.index]
     if (detail) {
-      detail.url = url || undefined
+      const config = getDetailConfig()
+      let finalUrl = url || undefined
+
+      if (finalUrl && config?.urlTemplate) {
+        const prefix = config.urlTemplate.split("{value}")[0]
+        if (prefix && !finalUrl.startsWith(prefix) && !finalUrl.includes("://")) {
+          finalUrl = config.urlTemplate.replace("{value}", finalUrl)
+        }
+      }
+
+      detail.url = finalUrl
     }
     return details
   })

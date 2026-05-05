@@ -23,7 +23,7 @@ const subtitleModel = computed({
 </script>
 
 <template>
-  <div class="space-y-3">
+  <div class="space-y-3 pt-3">
     <div class="flex items-end gap-2">
       <TextInput
         v-model="titleModel"

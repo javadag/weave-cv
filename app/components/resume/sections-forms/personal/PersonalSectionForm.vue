@@ -20,7 +20,7 @@ const props = defineProps<Props>()
   >
     <PhotoUpload />
     <PersonalTitle :title="props.section.title" :subtitle="props.section.subtitle" />
-    <div class="mt-4 space-y-1">
+    <div class="mt-3 space-y-1">
       <AddDetailForm />
       <DetailList />
     </div>

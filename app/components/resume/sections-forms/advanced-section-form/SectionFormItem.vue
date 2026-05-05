@@ -27,10 +27,12 @@ const { updateContent } = useResumeStore()
 const handleToggleVisibility = () => {
   updateContent(`${props.sectionId}.contents.${props.content.id}.isHidden`, !props.content.isHidden)
 }
+
+const isSummary = computed(() => props.sectionType === "summary")
 </script>
 
 <template>
-  <template v-if="isEditing">
+  <template v-if="isEditing || isSummary">
     <SectionContentEditor
       :section-id="props.sectionId"
       :is-advanced-section="props.isAdvancedSection"

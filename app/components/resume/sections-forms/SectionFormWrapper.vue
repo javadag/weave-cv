@@ -41,14 +41,14 @@ const handleDelete = () => {
         trailingIcon: 'group-data-[state=open]:rotate-180 size-4 transition-transform duration-200'
       }"
       variant="ghost"
-      class="group text-default bg-muted border-muted hover:bg-muted active:bg-muted flex w-full items-center justify-between rounded-lg p-2 text-sm font-semibold data-[state=open]:rounded-b-none data-[state=open]:border-b"
+      class="group text-default bg-muted border-muted hover:bg-muted active:bg-muted flex h-10 w-full items-center justify-between rounded-lg p-2 text-sm font-semibold data-[state=open]:rounded-b-none data-[state=open]:border-b"
       block
     >
       <div class="flex w-full items-center justify-between">
         {{ props.title || capitalize(props.sectionId.split("-")[0] ?? "Section") }}
         <div
           v-if="props.isSectionHideable"
-          class="flex shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+          class="flex shrink-0 items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100"
         >
           <Visibility
             size="xs"

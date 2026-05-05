@@ -4,7 +4,7 @@ import DetailItem from "./DetailItem.vue"
 const resumeStore = useResumeStore()
 const { personal } = storeToRefs(resumeStore)
 
-const details = computed(() => personal.value.details)
+const details = computed(() => personal.value?.details || [])
 </script>
 
 <template>
