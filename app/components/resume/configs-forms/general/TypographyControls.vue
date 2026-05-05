@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import NumberInput from "~/components/ui/NumberInput.vue"
-import SelectItem from "~/components/ui/SelectItem.vue"
-import { FONT_OPTIONS, type TFontFamily } from "~/constants/fonts"
-import { loadLocalFont, preloadLocalFont } from "~/utils/preview/core/fontUtils"
+import FontPicker from "./FontPicker.vue"
+import { loadFont, preloadFont } from "~/utils/preview/core/fontUtils"
 import { ContentLayoutSchema, TypographySchema } from "~/utils/schemas/configs/generalConfigs.schema"
 import { PersonalConfigsSchema } from "~/utils/schemas/configs/sectionsConfigs.schema"
 import { extractNumberConstraintsFromPath } from "~/utils/schemas/schemaExtractors"
@@ -16,8 +15,7 @@ const { updateConfig } = configsStore
 
 const handleUpdate = async (key: string, value: unknown) => {
   if (key === "fontFamily") {
-    loadLocalFont(value as TFontFamily)
-
+    loadFont(value as string)
     updateConfig(`general.typography.fontFamily`, value)
   } else {
     updateConfig(`general.typography.${key}`, value)
@@ -28,7 +26,7 @@ const fontSizeConstraints = extractNumberConstraintsFromPath(TypographySchema, "
 const lineHeightConstraints = extractNumberConstraintsFromPath(TypographySchema, "lineHeight")
 
 onMounted(async () => {
-  await preloadLocalFont(configs.value.general.typography.fontFamily)
+  await preloadFont(configs.value.general.typography.fontFamily)
 })
 </script>
 
@@ -40,11 +38,9 @@ onMounted(async () => {
     :default-expanded="true"
   >
     <ConfigWrapper variant="grid">
-      <SelectItem
+      <FontPicker
         v-model="configs.general.typography.fontFamily"
-        label-variant="stacked"
         :label="$t('editor.configs.fontFamily')"
-        :options="FONT_OPTIONS.map((option) => ({ label: option.label, value: option.value }))"
         @update:model-value="(v) => handleUpdate('fontFamily', v)"
       />
       <NumberInput

@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import type { LaunchOptions } from "puppeteer-core"
-import type { TFontFamily } from "~/constants/fonts"
 import { PAPER_SIZES, type TPaperSize } from "~/constants/papers"
 import { buildFontCss } from "~/utils/preview/core/fontUtils"
 import { requireAuth } from "../utils/auth"
@@ -72,7 +71,7 @@ export default defineEventHandler(async (event) => {
     | undefined
 
   try {
-    const body = (await readBody(event)) as { html: string; format: TPaperSize; fontFamily: TFontFamily }
+    const body = (await readBody(event)) as { html: string; format: TPaperSize; fontFamily: string }
     const { html, format, fontFamily } = body
 
     if (!html) {
@@ -114,7 +113,7 @@ export default defineEventHandler(async (event) => {
     const host = getHeader(event, "host") || "localhost:3000"
     const protocol = getHeader(event, "x-forwarded-proto") || (host.includes("localhost") ? "http" : "https")
     const baseUrl = `${protocol}://${host}`
-    const fontCss = buildFontCss(fontFamily as TFontFamily, baseUrl)
+    const fontCss = buildFontCss(fontFamily, baseUrl)
 
     const tailwindCss = await loadTailwindCss(baseUrl)
 

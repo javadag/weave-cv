@@ -9,7 +9,7 @@ import ResumePreviewSkeleton from "~/components/resume/preview/ResumePreviewSkel
 import ResumeHeader from "~/components/resume/resume-header/ResumeHeader.vue"
 import ResumeSectionsForms from "~/components/resume/sections-forms/ResumeSectionsForms.vue"
 import type { Tables } from "~/types/database.types"
-import { loadLocalFont } from "~/utils/preview/core/fontUtils"
+import { loadFont } from "~/utils/preview/core/fontUtils"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
 
@@ -59,7 +59,7 @@ const { pending } = useFetch<Tables<"resumes">>(`/api/resumes/${id.value}`, {
 watch(
   () => configs.value.general.typography.fontFamily,
   (fontFamily) => {
-    loadLocalFont(fontFamily)
+    loadFont(fontFamily)
   },
   { immediate: true }
 )

@@ -1,4 +1,5 @@
 import { CURRENT_SCHEMA_VERSION } from "~/constants/config"
+import { FONT_SLUG_MIGRATION_MAP } from "~/constants/fonts"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
 
@@ -11,15 +12,26 @@ export type MigrationResult = {
   migrated: boolean
 }
 
-/**
- * Migration from version 1 to version 2
- * This is a template for future migrations
- * Uncomment and add to MIGRATIONS map when version 2 is needed
- */
-// function migrateFromV1ToV2(configs: unknown, content: unknown): MigrationResult {}
+function migrateFromV1ToV2(configs: unknown, content: unknown): MigrationResult {
+  const c = configs as { general?: { typography?: { fontFamily?: string } } } | null
+
+  if (c?.general?.typography?.fontFamily) {
+    const oldSlug = c.general.typography.fontFamily
+    const displayName = FONT_SLUG_MIGRATION_MAP[oldSlug]
+    if (displayName) {
+      c.general.typography.fontFamily = displayName
+    }
+  }
+
+  return {
+    configs: c as TConfigs,
+    content: content as { personal: TPersonalContent; core: TCoreSections },
+    migrated: true,
+  }
+}
 
 const MIGRATIONS = new Map<string, (configs: unknown, content: unknown) => MigrationResult>([
-  // ["1->2", migrateFromV1ToV2],
+  ["1->2", migrateFromV1ToV2],
 ])
 
 export function migrateResumeData(schemaVersion: number, configs: unknown | null, content: unknown | null) {

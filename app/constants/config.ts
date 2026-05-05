@@ -2,7 +2,8 @@ import pkg from "../../package.json"
 
 /**
  * Schema version history:
- * - Version 1: Initial version (current)
+ * - Version 1: Initial version
+ * - Version 2: fontFamily stored as display name (e.g. "Inter") instead of slug (e.g. "inter")
  *
  * When updating the version, you should:
  * 1. Increment CURRENT_SCHEMA_VERSION
@@ -11,7 +12,7 @@ import pkg from "../../package.json"
  * 4. Update this documentation
  */
 
-export const CURRENT_SCHEMA_VERSION = 1
+export const CURRENT_SCHEMA_VERSION = 2
 
 // App version is the single source of truth in package.json so `pnpm release:*`
 // (changelogen) bumps it and the UI follows automatically.

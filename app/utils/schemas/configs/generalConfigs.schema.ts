@@ -1,5 +1,4 @@
 import { z } from "zod"
-import { FONT_OPTIONS } from "~/constants/fonts"
 import { PAPER_SIZES, type TPaperSize } from "~/constants/papers"
 import { DateFormat, FontCase, FontStyle, FontWeight, LinkIconType, ListType, PersonalPosition } from "../shared.schema"
 
@@ -95,7 +94,7 @@ export const LinksSchema = z.object({
 })
 
 export const TypographySchema = z.object({
-  fontFamily: z.enum(FONT_OPTIONS.map((option) => option.value)).default("sourcesanspro"),
+  fontFamily: z.string().min(1).default("Inter"),
   fontSize: z.number().min(6).max(24).default(12),
   lineHeight: z.number().min(1).max(2).default(1.1)
 })
