@@ -373,7 +373,8 @@
       "grids": "شبکه‌ها",
       "titleVariant": "نوع عنوان",
       "titleStyle": "سبک عنوان",
-      "subtitleFirst": "عنوان فرعی اول"
+      "subtitleFirst": "عنوان فرعی اول",
+      "linkInTitle": "لینک درون عنوان"
     },
     "form": {
       "contactDetails": "اطلاعات تماس",

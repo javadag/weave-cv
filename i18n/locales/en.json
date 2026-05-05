@@ -373,7 +373,8 @@
       "grids": "Grids",
       "titleVariant": "Title Variant",
       "titleStyle": "Title Style",
-      "subtitleFirst": "Subtitle First"
+      "subtitleFirst": "Subtitle First",
+      "linkInTitle": "Link in Title"
     },
     "form": {
       "contactDetails": "Contact Details",

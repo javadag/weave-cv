@@ -6,7 +6,7 @@ const { configs } = storeToRefs(configsStore)
 
 const height = computed(() => {
   const verticalMargin = configs.value.general.layout.verticalMargin
-  const spacingHeight = 0.4 * verticalMargin
+  const spacingHeight = 0.2 * verticalMargin
 
   return `${spacingHeight}mm`
 })

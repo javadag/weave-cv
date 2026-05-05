@@ -49,7 +49,7 @@ const containerStyle = computed<CSSProperties>(() => ({
   textTransform: headingConfigs.value.fontCase,
   fontSize: `${typographyConfigs.value.fontSize * headingConfigs.value.fontSizeMultiplier}pt`,
   color: headingColor.value,
-  paddingBottom: `${0.3 * typographyConfigs.value.lineHeight * layoutConfigs.value.sectionGap}px`
+  paddingBottom: `${0.5 * typographyConfigs.value.lineHeight * layoutConfigs.value.sectionGap}px`
 }))
 
 const headingVariant = computed(() => headingConfigs.value.variant)
