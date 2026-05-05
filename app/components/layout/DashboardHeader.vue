@@ -15,6 +15,7 @@ const isRtl = computed(() => locale.value === "fa")
       <UButton
         :icon="isRtl ? 'i-lucide-panel-right' : 'i-lucide-panel-left'"
         color="neutral"
+        class="lg:invisible"
         variant="ghost"
         :aria-label="$t('common.toggleSidebar')"
         @click="open = !open"
