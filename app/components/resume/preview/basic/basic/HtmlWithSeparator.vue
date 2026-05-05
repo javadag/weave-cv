@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, Fragment, h } from "vue"
 import type { TSeparator } from "~/utils/schemas/shared.schema"
+import { sanitizeHtml } from "~/utils/preview/core/html"
 import LinkIcon from "../../advanced/content/LinkIcon.vue"
 
 interface Props {
@@ -88,7 +89,7 @@ const renderContent = computed(() => {
 
   return () => {
     try {
-      const doc = new DOMParser().parseFromString(html, "text/html")
+      const doc = new DOMParser().parseFromString(sanitizeHtml(html), "text/html")
       const nodes = [...doc.body.childNodes]
         .map((node, i) => processNode(node, i === 0, sep, styles))
         .filter((n): n is VNode | string => n !== null)

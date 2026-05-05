@@ -27,7 +27,8 @@ type NodeTraversalResult = VNode | string | null
 function traverseDomNode(node: Node, transformers: HtmlNodeTransformer[]): NodeTraversalResult {
   if (node.nodeType === Node.TEXT_NODE) {
     const text = node.textContent
-    return text?.trim() ? text : null
+    // Keep spaces between inline elements; only drop pure newline/carriage-return artifacts
+    return text && /[^\n\r]/.test(text) ? text : null
   }
 
   if (node.nodeType === Node.ELEMENT_NODE) {
@@ -114,20 +115,19 @@ function computeTextStyles({ tagName, inlineStyles = {} }: TextStyleOptions) {
 
   Object.assign(styles, inlineStyles)
 
-  // Handle semantic tag styles (only if not already set by inline styles)
-  if (tagName && !styles.fontWeight && !styles.fontStyle && !styles.textDecoration) {
+  if (tagName) {
     const normalizedTag = tagName.toLowerCase()
     switch (normalizedTag) {
       case "strong": {
-        styles.fontWeight = "bold"
+        if (!styles.fontWeight) styles.fontWeight = "bold"
         break
       }
       case "em": {
-        styles.fontStyle = "italic"
+        if (!styles.fontStyle) styles.fontStyle = "italic"
         break
       }
       case "u": {
-        styles.textDecoration = "underline"
+        if (!styles.textDecoration) styles.textDecoration = "underline"
         break
       }
     }
@@ -138,7 +138,7 @@ function computeTextStyles({ tagName, inlineStyles = {} }: TextStyleOptions) {
 
 const SUPPORTED_TEXT_TAGS = ["p", "em", "u", "strong", "ul", "ol"] as const
 
-export interface LinkStyleOptions {
+interface LinkStyleOptions {
   textDecoration: string
   textUnderlineOffset: string
   color: string
