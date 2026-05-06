@@ -27,7 +27,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-1",
     name: "Noir Executive",
     description: "Charcoal and gold — authoritative and refined for C-suite and senior leadership",
-    screenshot: "/images/templates/1.png",
+    screenshot: "/images/templates/1.webp",
     configs: {
       general: {
         colors: {
@@ -78,7 +78,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-2",
     name: "Frost",
     description: "Near-white monochrome with no color accents — maximum clarity, zero distraction",
-    screenshot: "/images/templates/2.png",
+    screenshot: "/images/templates/2.webp",
     configs: {
       general: {
         colors: {
@@ -121,7 +121,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-3",
     name: "Ocean",
     description: "Deep teal sidebar with personal info on the left — sharp contrast for tech and consulting",
-    screenshot: "/images/templates/3.png",
+    screenshot: "/images/templates/3.webp",
     configs: {
       general: {
         colors: {
@@ -166,6 +166,9 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
           variant: "stacked",
           separator: "dot",
           icon: { type: "outlineRounded", size: 12 }
+        },
+        photo: {
+          position: "top"
         }
       }
     }
@@ -176,7 +179,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-4",
     name: "Crimson Law",
     description: "Deep crimson with serif typography — traditional authority for law, finance, and policy",
-    screenshot: "/images/templates/4.png",
+    screenshot: "/images/templates/4.webp",
     configs: {
       general: {
         colors: {
@@ -226,7 +229,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-5",
     name: "Sage Scholar",
     description: "Sage green accents with full-page single column — built for academic CVs and research roles",
-    screenshot: "/images/templates/5.png",
+    screenshot: "/images/templates/5.webp",
     configs: {
       general: {
         colors: {
@@ -282,7 +285,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-6",
     name: "Coral Studio",
     description: "Warm coral energy with pill headings — vivid and expressive for design and marketing",
-    screenshot: "/images/templates/6.png",
+    screenshot: "/images/templates/6.webp",
     configs: {
       general: {
         colors: {
@@ -336,7 +339,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-7",
     name: "Midnight Code",
     description: "GitHub-dark palette with monospace font — built for developers and software engineers",
-    screenshot: "/images/templates/7.png",
+    screenshot: "/images/templates/7.webp",
     configs: {
       general: {
         colors: {
@@ -395,7 +398,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-8",
     name: "Amber Consult",
     description: "Dark amber and gold for business advisory and management consulting roles",
-    screenshot: "/images/templates/8.png",
+    screenshot: "/images/templates/8.webp",
     configs: {
       general: {
         colors: {
@@ -447,7 +450,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-9",
     name: "Silver Side",
     description: "Cool gray with personal info on the right sidebar — restrained and corporate",
-    screenshot: "/images/templates/9.png",
+    screenshot: "/images/templates/9.webp",
     configs: {
       general: {
         colors: {
@@ -502,7 +505,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-10",
     name: "Violet Flow",
     description: "Deep violet with pill headings on a single-column layout — warm and human for HR and nonprofits",
-    screenshot: "/images/templates/10.png",
+    screenshot: "/images/templates/10.webp",
     configs: {
       general: {
         colors: {
@@ -550,7 +553,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Steel Draft",
     description:
       "Steel navy with precise border headings and square bullets — structured for engineering and architecture",
-    screenshot: "/images/templates/11.png",
+    screenshot: "/images/templates/11.webp",
     configs: {
       general: {
         colors: {
@@ -604,7 +607,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-12",
     name: "Rose Ink",
     description: "Hot pink with italic subtitles and underline headings — editorial and expressive for media and PR",
-    screenshot: "/images/templates/12.png",
+    screenshot: "/images/templates/12.webp",
     configs: {
       general: {
         colors: {
@@ -656,7 +659,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-13",
     name: "Terra",
     description: "Warm dark brown with generous spacing — grounded and human for nonprofits and education",
-    screenshot: "/images/templates/13.png",
+    screenshot: "/images/templates/13.webp",
     configs: {
       general: {
         colors: {
@@ -699,7 +702,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-14",
     name: "Emerald Health",
     description: "Deep emerald with mint accents — clean and trusted for healthcare, biotech, and life sciences",
-    screenshot: "/images/templates/14.png",
+    screenshot: "/images/templates/14.webp",
     configs: {
       general: {
         colors: {
@@ -750,7 +753,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Graphite Flash",
     description:
       "Near-black with electric yellow accents and left sidebar — bold and unconventional for senior designers",
-    screenshot: "/images/templates/15.png",
+    screenshot: "/images/templates/15.webp",
     configs: {
       general: {
         colors: {
@@ -807,7 +810,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Sky Connect",
     description:
       "Sky blue with centered header and pill headings — open and energetic for sales and business development",
-    screenshot: "/images/templates/16.png",
+    screenshot: "/images/templates/16.webp",
     configs: {
       general: {
         colors: {
@@ -862,7 +865,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Indigo Strategy",
     description:
       "Rich indigo with personal info on the right sidebar — analytical and strategic for finance and consulting",
-    screenshot: "/images/templates/17.png",
+    screenshot: "/images/templates/17.webp",
     configs: {
       general: {
         colors: {
@@ -918,7 +921,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     id: "template-18",
     name: "Press Print",
     description: "Pure black and white with Times New Roman — timeless, universal, and printer-perfect",
-    screenshot: "/images/templates/18.png",
+    screenshot: "/images/templates/18.webp",
     configs: {
       general: {
         colors: {
@@ -962,7 +965,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Sunset Brand",
     description:
       "Orange-red with a narrow left sidebar — fiery and directional for creative directors and brand strategists",
-    screenshot: "/images/templates/19.png",
+    screenshot: "/images/templates/19.webp",
     configs: {
       general: {
         colors: {
@@ -1019,7 +1022,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Mint Start",
     description:
       "Fresh teal with a centered single-column layout — inviting and clear for fresh graduates and junior roles",
-    screenshot: "/images/templates/20.png",
+    screenshot: "/images/templates/20.webp",
     configs: {
       general: {
         colors: {
@@ -1067,7 +1070,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Plum Authority",
     description:
       "Deep plum with personal info on the right sidebar — distinguished and weighty for law and senior academia",
-    screenshot: "/images/templates/21.png",
+    screenshot: "/images/templates/21.webp",
     configs: {
       general: {
         colors: {
@@ -1124,7 +1127,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Nordic",
     description:
       "Dark blue-gray with vertical-border headings and no icon clutter — clean Scandinavian professionalism",
-    screenshot: "/images/templates/22.png",
+    screenshot: "/images/templates/22.webp",
     configs: {
       general: {
         colors: {
@@ -1177,7 +1180,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Rust Ops",
     description:
       "Rust orange with square bullets and border headings — grounded and pragmatic for operations and product roles",
-    screenshot: "/images/templates/23.png",
+    screenshot: "/images/templates/23.webp",
     configs: {
       general: {
         colors: {
@@ -1233,7 +1236,7 @@ const TEMPLATE_SPECS: TemplateSpec[] = [
     name: "Dusk Data",
     description:
       "Deep purple with left sidebar and date-colored accents — analytical and modern for data science and ML",
-    screenshot: "/images/templates/24.png",
+    screenshot: "/images/templates/24.webp",
     configs: {
       general: {
         colors: {

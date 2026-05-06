@@ -4,14 +4,11 @@ import TemplateCarouselCard from "./TemplateCarouselCard.vue"
 
 const SHIFT = 450
 
-const base = TEMPLATES.slice(0, 6).map((t, i) => ({
+const base = TEMPLATES.map((t) => ({
   id: t.id,
   name: t.name,
-  screenshot: `/images/templates/${i + 1}.png`
+  screenshot: t.screenshot
 }))
-
-const rowA = [...base, ...base]
-const rowB = [...base.toReversed(), ...base.toReversed()]
 
 // scrollProgress: 0 = section entering viewport from bottom
 //                 0.5 = section centred in viewport
@@ -44,7 +41,7 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
 </script>
 
 <template>
-  <section ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center py-24">
+  <section ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center pt-24">
     <Motion
       is="div"
       :initial="{ opacity: 0, y: 20 }"
@@ -66,7 +63,7 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
       </div>
     </Motion>
     <div
-      class="relative flex w-full flex-col items-center justify-center overflow-hidden"
+      class="relative flex w-full flex-col items-center justify-center overflow-hidden pb-24"
       style="transform: translateZ(0)"
     >
       <div
@@ -82,14 +79,24 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
         class="flex gap-4 transition-transform duration-80 ease-out will-change-transform sm:gap-5"
         :style="{ transform: `translate3d(${offsetA}px, 0, 0)` }"
       >
-        <TemplateCarouselCard v-for="(t, i) in rowA" :key="'a' + i" :name="t.name" :screenshot="t.screenshot" />
+        <TemplateCarouselCard
+          v-for="(t, i) in base.slice(0, 12)"
+          :key="'a' + i"
+          :name="t.name"
+          :screenshot="t.screenshot"
+        />
       </div>
       <!-- Row B -->
       <div
         class="mt-4 flex gap-4 transition-transform duration-80 ease-out will-change-transform sm:mt-5 sm:gap-5"
         :style="{ transform: `translate3d(${offsetB}px, 0, 0)` }"
       >
-        <TemplateCarouselCard v-for="(t, i) in rowB" :key="'b' + i" :name="t.name" :screenshot="t.screenshot" />
+        <TemplateCarouselCard
+          v-for="(t, i) in base.slice(12)"
+          :key="'b' + i"
+          :name="t.name"
+          :screenshot="t.screenshot"
+        />
       </div>
     </div>
   </section>

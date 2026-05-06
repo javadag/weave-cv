@@ -38,7 +38,7 @@ export const PersonalConfigsSchema = z.object({
       visible: z.boolean().default(true),
       position: z.enum(["left", "right", "top"]).default("left"),
       shape: z.enum(["circle", "rounded", "square"]).default("circle"),
-      size: z.number().min(40).max(200).default(80),
+      size: z.number().min(40).max(200).default(100),
       border: z
         .object({
           width: z.number().min(0).max(10).default(0),
