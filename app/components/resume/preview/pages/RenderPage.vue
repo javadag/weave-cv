@@ -8,6 +8,7 @@ const typography = computed(() => configs.value.general.typography)
 
 const pageStyles = computed<CSSProperties>(() => {
   const paperSize = PAPER_SIZES[configs.value.general.layout.size]
+  const isTopPersonal = configs.value.general.layout.personalPosition === "top"
 
   return {
     position: "relative",
@@ -22,7 +23,8 @@ const pageStyles = computed<CSSProperties>(() => {
     fontVariantLigatures: "none",
     width: `${paperSize.w}mm`,
     height: `${paperSize.h}mm`,
-    direction: configs.value.general.layout.rtl ? "rtl" : "ltr"
+    direction: configs.value.general.layout.rtl ? "rtl" : "ltr",
+    backgroundColor: isTopPersonal ? configs.value.general.colors.primary.bgColor : undefined
   }
 })
 </script>
