@@ -1,5 +1,5 @@
 import Groq from "groq-sdk"
-import { TEMPLATE_MINIMALIST } from "~/constants/templates"
+import { TEMPLATES } from "~/constants/templates"
 import { requireAuth } from "../../utils/auth"
 import { checkRateLimit } from "../../utils/rateLimit"
 
@@ -94,8 +94,85 @@ function normalizeUrl(raw: string, base: string): string | undefined {
   return `${base}${raw.replace(/^\//, "")}`
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function buildContent(parsed: any) {
+interface ParsedExperience {
+  title?: string
+  company?: string
+  location?: string
+  startDate?: string
+  endDate?: string
+  present?: boolean
+  description?: string
+}
+
+interface ParsedEducation {
+  degree?: string
+  institution?: string
+  location?: string
+  startDate?: string
+  endDate?: string
+  present?: boolean
+  description?: string
+}
+
+interface ParsedProject {
+  title?: string
+  subtitle?: string
+  url?: string
+  startDate?: string
+  endDate?: string
+  present?: boolean
+  description?: string
+}
+
+interface ParsedSkill {
+  category?: string
+  items?: string
+}
+
+interface ParsedLanguage {
+  name?: string
+  proficiency?: string
+}
+
+interface ParsedCertificate {
+  title?: string
+  issuer?: string
+}
+
+interface ParsedCourse {
+  title?: string
+  provider?: string
+  date?: string
+}
+
+interface ParsedAward {
+  title?: string
+  issuer?: string
+  date?: string
+  description?: string
+}
+
+interface ParsedResume {
+  name?: string
+  jobTitle?: string
+  email?: string
+  phone?: string
+  location?: string
+  linkedin?: string
+  github?: string
+  website?: string
+  summary?: string
+  experiences?: ParsedExperience[]
+  educations?: ParsedEducation[]
+  projects?: ParsedProject[]
+  skills?: ParsedSkill[]
+  languages?: ParsedLanguage[]
+  certificates?: ParsedCertificate[]
+  courses?: ParsedCourse[]
+  awards?: ParsedAward[]
+}
+
+function buildContent(parsed: ParsedResume) {
   const personal = {
     title: parsed.name ?? "",
     subtitle: parsed.jobTitle ?? "",
@@ -136,7 +213,7 @@ function buildContent(parsed: any) {
       title: "Experience",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.experiences ?? []).map((e: any) => ({
+      contents: (parsed.experiences ?? []).map((e: ParsedExperience) => ({
         id: uid(),
         isHidden: false,
         title: e.title ?? "",
@@ -154,7 +231,7 @@ function buildContent(parsed: any) {
       title: "Education",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.educations ?? []).map((e: any) => ({
+      contents: (parsed.educations ?? []).map((e: ParsedEducation) => ({
         id: uid(),
         isHidden: false,
         title: e.degree ?? "",
@@ -172,7 +249,7 @@ function buildContent(parsed: any) {
       title: "Projects",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.projects ?? []).map((p: any) => ({
+      contents: (parsed.projects ?? []).map((p: ParsedProject) => ({
         id: uid(),
         isHidden: false,
         title: p.title ?? "",
@@ -191,7 +268,7 @@ function buildContent(parsed: any) {
       title: "Skills",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.skills ?? []).map((s: any) => ({
+      contents: (parsed.skills ?? []).map((s: ParsedSkill) => ({
         id: uid(),
         isHidden: false,
         title: s.category ?? "Skills",
@@ -203,7 +280,7 @@ function buildContent(parsed: any) {
       title: "Languages",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.languages ?? []).map((l: any) => ({
+      contents: (parsed.languages ?? []).map((l: ParsedLanguage) => ({
         id: uid(),
         isHidden: false,
         title: l.name ?? "",
@@ -215,7 +292,7 @@ function buildContent(parsed: any) {
       title: "Certificates",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.certificates ?? []).map((c: any) => ({
+      contents: (parsed.certificates ?? []).map((c: ParsedCertificate) => ({
         id: uid(),
         isHidden: false,
         title: c.title ?? "",
@@ -227,7 +304,7 @@ function buildContent(parsed: any) {
       title: "Courses",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.courses ?? []).map((c: any) => ({
+      contents: (parsed.courses ?? []).map((c: ParsedCourse) => ({
         id: uid(),
         isHidden: false,
         title: c.title ?? "",
@@ -245,7 +322,7 @@ function buildContent(parsed: any) {
       title: "Awards",
       isTitleVisible: true,
       isSectionVisible: true,
-      contents: (parsed.awards ?? []).map((a: any) => ({
+      contents: (parsed.awards ?? []).map((a: ParsedAward) => ({
         id: uid(),
         isHidden: false,
         title: a.title ?? "",
@@ -287,7 +364,7 @@ export default defineEventHandler(async (event) => {
   // Truncate to avoid exceeding context (30k chars covers any real CV)
   const truncated = text.length > 30_000 ? text.slice(0, 30_000) : text
 
-  let parsed: unknown
+  let parsed: ParsedResume
   try {
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
@@ -300,7 +377,7 @@ export default defineEventHandler(async (event) => {
     })
     const raw = completion.choices[0]?.message?.content
     if (!raw) throw new Error("Empty response from model")
-    parsed = JSON.parse(raw)
+    parsed = JSON.parse(raw) as ParsedResume
   } catch (error) {
     console.error(error)
     throw createError({ statusCode: 422, statusMessage: "Could not parse resume — try a text-based PDF" })
@@ -309,8 +386,8 @@ export default defineEventHandler(async (event) => {
   const content = buildContent(parsed)
 
   return {
-    title: (parsed as { name?: string }).name || "Imported Resume",
+    title: parsed.name || "Imported Resume",
     content,
-    configs: TEMPLATE_MINIMALIST.configs
+    configs: TEMPLATES[0]!.configs
   }
 })
