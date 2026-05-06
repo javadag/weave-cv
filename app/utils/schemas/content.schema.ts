@@ -42,6 +42,18 @@ export const DETAILS_CATALOG = {
     website: {
       label: "Website",
       icon: "globe"
+    },
+    stackoverflow: {
+      label: "Stack Overflow",
+      icon: "code"
+    },
+    medium: {
+      label: "Medium",
+      icon: "book"
+    },
+    slack: {
+      label: "Slack",
+      icon: "message-square"
     }
   },
   social: {
@@ -60,6 +72,22 @@ export const DETAILS_CATALOG = {
     reddit: {
       label: "Reddit",
       icon: "circle-user"
+    },
+    telegram: {
+      label: "Telegram",
+      icon: "send"
+    },
+    discord: {
+      label: "Discord",
+      icon: "message-circle"
+    },
+    whatsapp: {
+      label: "WhatsApp",
+      icon: "phone"
+    },
+    mastodon: {
+      label: "Mastodon",
+      icon: "globe"
     }
   },
   creative: {
@@ -88,6 +116,10 @@ export const DETAILS_CATALOG = {
     twitch: {
       label: "Twitch",
       icon: "video"
+    },
+    tiktok: {
+      label: "TikTok",
+      icon: "music"
     }
   },
   finance: {
@@ -226,6 +258,10 @@ const CoreSectionSchema = z.discriminatedUnion("type", [
   BaseSectionFields.extend({
     type: z.literal("courses"),
     contents: z.array(AdvancedContentSchema)
+  }),
+  BaseSectionFields.extend({
+    type: z.literal("custom"),
+    contents: z.array(BasicContentSchema)
   })
 ])
 
