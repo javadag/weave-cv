@@ -25,9 +25,7 @@ const handleExport = () => {
       content: {
         personal: personal.value,
         core: core.value
-      },
-      exportedAt: new Date().toISOString(),
-      version: "1.0.0"
+      }
     }
 
     const jsonString = JSON.stringify(exportData, null, 2)
