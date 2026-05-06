@@ -14,6 +14,16 @@ const titleModel = computed({
   get: () => title.value,
   set: (v: string) => resumeStore.setTitle(v)
 })
+
+const undoRedo = inject<{
+  canUndo: Ref<boolean>
+  canRedo: Ref<boolean>
+  undo: () => void
+  redo: () => void
+}>("undoRedo")
+
+const canUndo = computed(() => undoRedo?.canUndo.value ?? false)
+const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
 </script>
 
 <template>
@@ -49,6 +59,26 @@ const titleModel = computed({
       </UInput>
     </div>
     <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+      <div v-if="undoRedo" class="border-muted flex items-center gap-0.5 rounded-lg border p-0.5">
+        <UButton
+          variant="ghost"
+          color="neutral"
+          size="sm"
+          icon="i-lucide-undo-2"
+          :disabled="!canUndo"
+          :title="$t('editor.header.undo')"
+          @click="undoRedo.undo()"
+        />
+        <UButton
+          variant="ghost"
+          color="neutral"
+          size="sm"
+          icon="i-lucide-redo-2"
+          :disabled="!canRedo"
+          :title="$t('editor.header.redo')"
+          @click="undoRedo.redo()"
+        />
+      </div>
       <UButton
         color="neutral"
         variant="outline"

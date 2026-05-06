@@ -274,7 +274,9 @@
       "savedTitle": "Saved",
       "savedDesc": "Changes saved successfully",
       "saveErrorDesc": "Failed to save. Please try again.",
-      "offlineDesc": "Changes will sync when you're back online"
+      "offlineDesc": "Changes will sync when you're back online",
+      "undo": "Undo (Ctrl+Z)",
+      "redo": "Redo (Ctrl+Y)"
     },
     "template": {
       "title": "Change Template",
