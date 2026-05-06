@@ -110,7 +110,7 @@ const spacerStyles = computed<CSSProperties>(() => ({
       "
     />
 
-    <span v-if="!isWrapped && (startDate || endDate)" ref="sepratorRef" :style="spacerStyles">|</span>
+    <span v-if="!isWrapped && (startDate || endDate) && location" ref="sepratorRef" :style="spacerStyles">|</span>
     <div style="display: flex; align-items: center">
       <AdvancedLocation ref="locationRef" :position="position" :location="location" />
       <span v-if="isWrapped && position === 'dateFirst'" :style="{ paddingInline: `0.5em`, whiteSpace: 'pre' }" />

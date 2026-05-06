@@ -50,7 +50,7 @@ const contentStyle = computed<CSSProperties>(() => ({
   width: "100%",
   display: "flex",
   wordBreak: "break-word",
-  flexDirection: displayMode.value === "columns" || displayMode.value === "stacked" ? ("column" as const) : undefined
+  flexDirection: "column"
 }))
 
 const contentLayoutWidth = computed(() =>
@@ -62,42 +62,46 @@ const contentLayoutWidth = computed(() =>
 <template>
   <div v-if="content && !isContentEmpty(content)" ref="elementRef" :style="contentStyle">
     <template v-if="displayMode === 'contentFirst'">
-      <TitleSubtitle
-        :width="contentLayoutWidth.left"
-        :title="titleSubTitle[0]"
-        :subtitle="titleSubTitle[1]"
-        :url="content.url"
-        :is-in-column="false"
-        :section-type="sectionType"
-      />
-      <DateLocation
-        :width="contentLayoutWidth.right"
-        :position="displayMode"
-        :start-date="content.startDate"
-        :end-date="content.endDate"
-        :location="content.location"
-        :present="content.present"
-        :show-date-day="content.showDateDay"
-      />
+      <div style="display: flex">
+        <TitleSubtitle
+          :width="contentLayoutWidth.left"
+          :title="titleSubTitle[0]"
+          :subtitle="titleSubTitle[1]"
+          :url="content.url"
+          :is-in-column="false"
+          :section-type="sectionType"
+        />
+        <DateLocation
+          :width="contentLayoutWidth.right"
+          :position="displayMode"
+          :start-date="content.startDate"
+          :end-date="content.endDate"
+          :location="content.location"
+          :present="content.present"
+          :show-date-day="content.showDateDay"
+        />
+      </div>
     </template>
     <template v-if="displayMode === 'dateFirst'">
-      <DateLocation
-        :width="contentLayoutWidth.left"
-        :position="displayMode"
-        :start-date="content.startDate"
-        :end-date="content.endDate"
-        :location="content.location"
-        :present="content.present"
-        :show-date-day="content.showDateDay"
-      />
-      <TitleSubtitle
-        :width="contentLayoutWidth.right"
-        :title="titleSubTitle[0]"
-        :subtitle="titleSubTitle[1]"
-        :url="content.url"
-        :is-in-column="false"
-        :section-type="sectionType"
-      />
+      <div style="display: flex">
+        <DateLocation
+          :width="contentLayoutWidth.left"
+          :position="displayMode"
+          :start-date="content.startDate"
+          :end-date="content.endDate"
+          :location="content.location"
+          :present="content.present"
+          :show-date-day="content.showDateDay"
+        />
+        <TitleSubtitle
+          :width="contentLayoutWidth.right"
+          :title="titleSubTitle[0]"
+          :subtitle="titleSubTitle[1]"
+          :url="content.url"
+          :is-in-column="false"
+          :section-type="sectionType"
+        />
+      </div>
     </template>
     <template v-if="displayMode === 'stacked'">
       <div :style="{ display: 'flex', justifyContent: 'space-between' }">
@@ -136,6 +140,71 @@ const contentLayoutWidth = computed(() =>
         :present="content.present"
         :show-date-day="content.showDateDay"
       />
+    </template>
+
+    <template v-for="(subRole, index) in content.subRoles" :key="index">
+      <template v-if="subRole.title">
+        <template v-if="displayMode === 'contentFirst'">
+          <div style="display: flex">
+            <TitleSubtitle
+              :width="contentLayoutWidth.left"
+              :title="subRole.title"
+              :is-in-column="false"
+              :section-type="sectionType"
+            />
+            <DateLocation
+              :width="contentLayoutWidth.right"
+              :position="displayMode"
+              :start-date="subRole.startDate"
+              :end-date="subRole.endDate"
+              :present="subRole.present"
+              :show-date-day="subRole.showDateDay"
+            />
+          </div>
+        </template>
+        <template v-else-if="displayMode === 'dateFirst'">
+          <div style="display: flex">
+            <DateLocation
+              :width="contentLayoutWidth.left"
+              :position="displayMode"
+              :start-date="subRole.startDate"
+              :end-date="subRole.endDate"
+              :present="subRole.present"
+              :show-date-day="subRole.showDateDay"
+            />
+            <TitleSubtitle
+              :width="contentLayoutWidth.right"
+              :title="subRole.title"
+              :is-in-column="false"
+              :section-type="sectionType"
+            />
+          </div>
+        </template>
+        <template v-else-if="displayMode === 'stacked'">
+          <div :style="{ display: 'flex', justifyContent: 'space-between' }">
+            <TitleSubtitle :title="subRole.title" :is-in-column="false" :section-type="sectionType" />
+            <DateLocation
+              :position="displayMode"
+              :style="{ display: 'flex', justifyContent: 'flex-end', alignItems: 'start' }"
+              :start-date="subRole.startDate"
+              :end-date="subRole.endDate"
+              :present="subRole.present"
+              :show-date-day="subRole.showDateDay"
+            />
+          </div>
+        </template>
+        <template v-else-if="displayMode === 'columns'">
+          <TitleSubtitle :title="subRole.title" :is-in-column="true" :section-type="sectionType" />
+          <DateLocation
+            v-if="subRole.startDate || subRole.endDate"
+            :position="displayMode"
+            :start-date="subRole.startDate"
+            :end-date="subRole.endDate"
+            :present="subRole.present"
+            :show-date-day="subRole.showDateDay"
+          />
+        </template>
+      </template>
     </template>
   </div>
 </template>

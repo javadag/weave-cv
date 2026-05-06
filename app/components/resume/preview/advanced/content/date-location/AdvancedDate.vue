@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, type CSSProperties } from "vue"
 import { ColumnColorsKey } from "~/components/resume/preview/pages/columnColorsContext"
-import { getTextAlign } from "~/utils/preview/core/entryUtils"
 import { fmtDate } from "~/utils/preview/html/shared"
 
 interface Props {
@@ -37,6 +36,12 @@ const endDateFormatted = computed(() =>
   fmtDate(props.endDate, layout.value.dateFormat, { hideDay: hideDay.value, locale: language.value })
 )
 const endDateDisplay = computed(() => (props.present ? "Present" : endDateFormatted.value))
+
+const getTextAlign = (position: string) => {
+  if (position === "dateLocationRight") return "right"
+  if (position === "stacked") return "end"
+  return
+}
 
 const dateStyles = computed<CSSProperties>(() => ({
   color: color.value,

@@ -4,7 +4,7 @@ import RichTextEditor from "~/components/ui/rich-text/RichTextEditor.vue"
 import TextInput from "~/components/ui/TextInput.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import { SECTION_FIELDS_CONFIG, type EditorField } from "~/constants/sectionFields"
-import type { TAdvancedContent, TBasicContent, TCoreSectionType } from "~/utils/schemas/content.schema"
+import type { TAdvancedContent, TBasicContent, TCoreSectionType, TSubRole } from "~/utils/schemas/content.schema"
 
 interface Props {
   sectionId: string
@@ -17,6 +17,28 @@ const emit = defineEmits(["closeEdit"])
 
 const { updateContent } = useResumeStore()
 const { language } = useLocaleInfo()
+
+const advancedContent = computed(() =>
+  props.isAdvancedSection ? (props.content as TAdvancedContent) : null
+)
+
+const subRoles = computed(() => advancedContent.value?.subRoles ?? [])
+
+const subRolePath = (index: number, field: keyof TSubRole) =>
+  `${props.sectionId}.contents.${props.content.id}.subRoles.${index}.${field}`
+
+const addSubRole = () => {
+  const updated: TSubRole[] = [
+    ...subRoles.value,
+    { title: "", startDate: null, endDate: null, present: false, showDateDay: true }
+  ]
+  updateContent(`${props.sectionId}.contents.${props.content.id}.subRoles`, updated)
+}
+
+const removeSubRole = (index: number) => {
+  const updated = subRoles.value.filter((_, i) => i !== index)
+  updateContent(`${props.sectionId}.contents.${props.content.id}.subRoles`, updated)
+}
 
 const sectionFieldsConfig = computed(() => SECTION_FIELDS_CONFIG[props.sectionType])
 
@@ -201,6 +223,84 @@ const isSummary = computed(() => props.sectionType === "summary")
         :placeholder="getFieldConfig('description').placeholder"
         @update:content="(htmlContent) => handleFieldUpdate('description', htmlContent)"
       />
+
+      <div v-if="hasField('subRoles')" class="flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium">Additional Roles</span>
+          <UButton size="xs" variant="soft" color="primary" leading-icon="i-lucide-plus" @click="addSubRole">
+            Add Role
+          </UButton>
+        </div>
+        <div
+          v-for="(subRole, index) in subRoles"
+          :key="index"
+          class="bg-accented/20 border-primary/20 flex flex-col gap-3 rounded-md border p-3"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-muted text-xs">Role {{ index + 1 }}</span>
+            <UButton
+              size="xs"
+              variant="ghost"
+              color="error"
+              leading-icon="i-lucide-trash-2"
+              @click="removeSubRole(index)"
+            />
+          </div>
+          <TextInput
+            :model-value="subRole.title"
+            label="Job Title"
+            placeholder="e.g. Senior Software Engineer"
+            @update:model-value="(value) => updateContent(subRolePath(index, 'title'), value)"
+          />
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <div class="flex flex-col gap-1">
+              <DatePicker
+                :model-value="subRole.startDate"
+                label="Start Date"
+                :locale="language"
+                @update:model-value="(value) => updateContent(subRolePath(index, 'startDate'), value)"
+              />
+              <UButton
+                v-if="subRole.startDate"
+                size="xs"
+                variant="ghost"
+                color="neutral"
+                class="self-start"
+                @click="updateContent(subRolePath(index, 'startDate'), null)"
+              >
+                {{ $t("editor.form.clearDate") }}
+              </UButton>
+            </div>
+            <div class="flex flex-col gap-1">
+              <DatePicker
+                :model-value="subRole.endDate"
+                label="End Date"
+                :disabled="subRole.present"
+                :locale="language"
+                @update:model-value="(value) => updateContent(subRolePath(index, 'endDate'), value)"
+              />
+              <UButton
+                v-if="subRole.endDate"
+                size="xs"
+                variant="ghost"
+                color="neutral"
+                class="self-start"
+                :disabled="subRole.present"
+                @click="updateContent(subRolePath(index, 'endDate'), null)"
+              >
+                {{ $t("editor.form.clearDate") }}
+              </UButton>
+              <ToggleInput
+                :model-value="subRole.present"
+                label="Present"
+                :style="'start'"
+                class="py-1"
+                @update:model-value="(value) => updateContent(subRolePath(index, 'present'), value)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

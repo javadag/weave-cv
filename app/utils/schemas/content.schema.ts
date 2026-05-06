@@ -120,6 +120,7 @@ const DETAIL_KEYS = Object.values(DETAILS_CATALOG).flatMap((category) => Object.
 export type TPersonalContent = z.infer<typeof PersonalContentSchema>
 export type TBasicContent = z.infer<typeof BasicContentSchema>
 export type TAdvancedContent = z.infer<typeof AdvancedContentSchema>
+export type TAdvancedContentInput = z.input<typeof AdvancedContentSchema>
 
 export type TCoreSectionType = z.infer<typeof CoreSectionTypeSchema>
 export type TSectionType = z.infer<typeof SectionTypeSchema>
@@ -158,6 +159,16 @@ const BasicContentSchema = z.object({
   description: z.string(),
   url: z.url().optional()
 })
+export const SubRoleSchema = z.object({
+  title: z.string().default(""),
+  startDate: z.string().nullable().default(null),
+  endDate: z.string().nullable().default(null),
+  present: z.boolean().default(false),
+  showDateDay: z.boolean().default(true)
+})
+
+export type TSubRole = z.infer<typeof SubRoleSchema>
+
 const AdvancedContentSchema = z.object({
   id: z.string(),
   isHidden: z.boolean(),
@@ -169,7 +180,8 @@ const AdvancedContentSchema = z.object({
   showDateDay: z.boolean().default(true),
   location: z.string().optional(),
   description: z.string(),
-  url: z.url().optional()
+  url: z.url().optional(),
+  subRoles: z.array(SubRoleSchema).default([])
 })
 
 const BaseSectionFields = z.object({

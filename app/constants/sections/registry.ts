@@ -1,6 +1,6 @@
 import type { TAdvancedSectionConfigs, TBasicSectionConfigs } from "~/utils/schemas/configs/sectionsConfigs.schema"
 import type {
-  TAdvancedContent,
+  TAdvancedContentInput,
   TAdvancedSectionType,
   TBasicContent,
   TBasicSectionType,
@@ -17,6 +17,7 @@ export type EditorField =
   | "present"
   | "location"
   | "showDateDay"
+  | "subRoles"
 
 export interface FieldConfig {
   field: EditorField
@@ -54,8 +55,8 @@ export interface AdvancedSectionDescriptor extends CommonDescriptor {
   type: TAdvancedSectionType
   kind: "advanced"
   defaultConfig: TAdvancedSectionConfigs
-  dummyData: TAdvancedContent[]
-  singleItem: Omit<TAdvancedContent, "id">
+  dummyData: TAdvancedContentInput[]
+  singleItem: Omit<TAdvancedContentInput, "id">
 }
 
 export type SectionDescriptor = BasicSectionDescriptor | AdvancedSectionDescriptor
@@ -240,7 +241,8 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
       { field: "showDateDay", label: "Full Date" },
       { field: "location", label: "Location", placeholder: "e.g. San Francisco, CA" },
       { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      { field: "url", label: "URL", placeholder: "e.g. https://example.com" },
+      { field: "subRoles", label: "Additional Roles" }
     ],
     configOptions: ADVANCED_OPTIONS,
     defaultConfig: ADVANCED_STACKED,

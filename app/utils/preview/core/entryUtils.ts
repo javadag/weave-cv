@@ -1,7 +1,6 @@
 import type { TAdvancedContent, TBasicContent } from "~/utils/schemas/content.schema"
 import type { TAdvancedSectionVariant } from "~/utils/schemas/shared.schema"
 
-// es
 export const determineDisplayMode = ({
   columns,
   displayMode
@@ -20,17 +19,13 @@ export const determineDisplayMode = ({
   return "columns"
 }
 
-// Ss
 export const isContentEmpty = (content: TAdvancedContent | TBasicContent) => {
   if (!content) return true
 
   const { id, isHidden, ...rest } = content
 
-  return Object.values(rest).every((value) => !value)
-}
-
-export const getTextAlign = (position: string) => {
-  if (position === "dateLocationRight") return "right"
-  if (position === "stacked") return "end"
-  return
+  return Object.values(rest).every((value) => {
+    if (Array.isArray(value)) return value.length === 0
+    return !value
+  })
 }
