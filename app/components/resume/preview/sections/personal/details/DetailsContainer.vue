@@ -24,7 +24,7 @@ const layoutMode = computed(() => {
 </script>
 
 <template>
-  <StackedDetails v-if="layoutMode === 'stacked'" :align="personalConfigs.align" />
+  <StackedDetails v-if="layoutMode === 'stacked'" />
   <GridDetails v-else-if="layoutMode === 'grid'" />
-  <InlineDetails v-else :align="personalConfigs.align" />
+  <InlineDetails v-else />
 </template>

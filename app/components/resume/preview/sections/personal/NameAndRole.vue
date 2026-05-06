@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CSSProperties } from "vue"
+import { alignToFlex } from "~/utils/preview/helpers"
 
 interface Props {
   isSameLine: boolean
@@ -15,6 +15,7 @@ const { configs } = storeToRefs(configsStore)
 const colors = computed(() => configs.value.general.colors)
 const personalConfigs = computed(() => configs.value.personal)
 const mainConfigs = computed(() => personalConfigs.value.main)
+const layout = computed(() => configs.value.general.layout)
 
 const color = computed(() =>
   colors.value.apply.includes("name") ? colors.value.primary.accentColor : colors.value.primary.textColor
@@ -22,33 +23,36 @@ const color = computed(() =>
 
 const isStacked = computed(() => mainConfigs.value.variant === "stacked")
 
-const containerStyles = computed<CSSProperties>(() => ({
-  color: color.value,
-  display: "flex",
-  flexDirection: isStacked.value ? "column" : "row",
-  alignItems: isStacked.value ? personalConfigs.value.align : "center",
-  justifyContent: isStacked.value ? "flex-start" : personalConfigs.value.align,
-  paddingBottom: isSameLine ? undefined : `${mainConfigs.value.bottomSpace}px`
-}))
-
-const nameStyles = computed<CSSProperties>(() => ({
-  fontSize: `${personalConfigs.value.main.title.fontSize}pt`,
-  fontWeight: personalConfigs.value.main.title.fontWeight,
-  marginInlineEnd: isStacked.value ? "0" : "0.3em"
-}))
-
-const jobTitleStyles = computed<CSSProperties>(() => ({
-  fontWeight: personalConfigs.value.main.subtitle.fontWeight,
-  fontSize: `${personalConfigs.value.main.subtitle.fontSize}pt`
-}))
+const alignFlex = computed(() => alignToFlex(personalConfigs.value.align, layout.value.rtl))
 </script>
 
 <template>
-  <div :style="containerStyles">
-    <span :style="nameStyles">
+  <div
+    :style="{
+      color,
+      display: 'flex',
+      flexDirection: isStacked ? 'column' : 'row',
+      alignItems: isStacked ? alignFlex : 'center',
+      justifyContent: isStacked ? 'center' : alignFlex,
+      paddingBottom: isSameLine ? undefined : `${mainConfigs.bottomSpace}px`
+    }"
+  >
+    <span
+      :style="{
+        fontSize: `${personalConfigs.main.title.fontSize}pt`,
+        fontWeight: personalConfigs.main.title.fontWeight,
+        marginInlineEnd: isStacked ? '0' : '0.3em'
+      }"
+    >
       {{ personal?.title }}
     </span>
-    <span v-if="personal?.subtitle" :style="jobTitleStyles">
+    <span
+      v-if="personal?.subtitle"
+      :style="{
+        fontWeight: personalConfigs.main.subtitle.fontWeight,
+        fontSize: `${personalConfigs.main.subtitle.fontSize}pt`
+      }"
+    >
       {{ personal?.subtitle }}
     </span>
   </div>

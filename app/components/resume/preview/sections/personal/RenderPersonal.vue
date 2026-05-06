@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue"
+import { alignToFlex } from "~/utils/preview/helpers"
 import DetailsContainer from "./details/DetailsContainer.vue"
 import NameAndRole from "./NameAndRole.vue"
 import PersonalPhoto from "./PersonalPhoto.vue"
@@ -24,14 +25,15 @@ const showPhoto = computed(() => !!photoUrl.value && photoConfig.value.visible)
 const isPhotoSide = computed(() => showPhoto.value && photoConfig.value.position !== "top")
 const isPhotoTop = computed(() => showPhoto.value && photoConfig.value.position === "top")
 
-const justifyContent = computed(() =>
-  personalConfigs.value.align === "center"
-    ? "center"
-    : (personalConfigs.value.align === "left" && !layout.value.rtl) ||
-        (personalConfigs.value.align === "right" && layout.value.rtl)
-      ? "flex-start"
-      : "flex-end"
+const flexDirection = computed<CSSProperties["flex-direction"]>(() =>
+  personalConfigs.value.variant === "stacked" ? "column" : "row"
 )
+
+const alignFlex = computed(() => alignToFlex(personalConfigs.value.align, layout.value.rtl))
+
+const justifyContent = computed(() => (flexDirection.value === "column" ? "center" : alignFlex.value))
+
+const alignItems = computed(() => (flexDirection.value === "row" ? "center" : alignFlex.value))
 
 const basePaddingStyles = computed(() => ({
   paddingTop: isPersonalOnTop.value ? `${layout.value.verticalMargin}mm` : undefined,
@@ -47,8 +49,9 @@ const basePaddingStyles = computed(() => ({
 const containerStyles = computed<CSSProperties>(() => ({
   ...basePaddingStyles.value,
   display: "flex",
-  flexDirection: personalConfigs.value.variant === "stacked" ? "column" : "row",
+  flexDirection: flexDirection.value,
   justifyContent: justifyContent.value,
+  alignItems: alignItems.value,
   gap: personalConfigs.value.variant === "inline" ? "1em" : undefined
 }))
 
@@ -67,21 +70,16 @@ const topPhotoOuterStyles = computed<CSSProperties>(() => ({
   ...basePaddingStyles.value,
   display: "flex",
   flexDirection: "column",
-  alignItems:
-    personalConfigs.value.align === "center"
-      ? "center"
-      : (personalConfigs.value.align === "left" && !layout.value.rtl) ||
-          (personalConfigs.value.align === "right" && layout.value.rtl)
-        ? "flex-start"
-        : "flex-end"
+  alignItems: alignFlex.value
 }))
 
 // Inner content when photo is present (holds NameAndRole + DetailsContainer)
 const innerContentStyles = computed<CSSProperties>(() => ({
   display: "flex",
-  flexDirection: personalConfigs.value.variant === "stacked" ? "column" : "row",
+  flexDirection: flexDirection.value,
   textAlign: personalConfigs.value.align,
   justifyContent: justifyContent.value,
+  alignItems: alignItems.value,
   gap: personalConfigs.value.variant === "inline" ? "1em" : undefined,
   flex: "1",
   minWidth: 0

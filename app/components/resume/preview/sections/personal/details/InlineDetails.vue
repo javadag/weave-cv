@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, onUpdated, ref, watch } from "vue"
+import { computed, ref } from "vue"
 import { SOLID_ICONS } from "~/constants/solidIcons"
+import { alignToFlex } from "~/utils/preview/helpers"
 import DetailWrapper from "./DetailWrapper.vue"
 import StyledIcon from "./StyledIcon.vue"
-
-interface Props {
-  align: "left" | "center" | "right"
-}
-const props = defineProps<Props>()
 
 const resumeStore = useResumeStore()
 const { personal } = storeToRefs(resumeStore)
@@ -25,101 +21,20 @@ const detailItems = computed(() => {
   return personal.value?.details.filter((item) => item.value && !item.isHidden) ?? []
 })
 
-let resizeObserver: ResizeObserver | null = null
+useInlineSeparators(containerRef, detailItems)
 
-const adjustSeparatorVisibility = () => {
-  const container = containerRef.value
-  if (!container) return
-
-  const children = [...container.children] as HTMLElement[]
-  if (children.length === 0) return
-
-  for (const child of children) {
-    if (child.classList?.contains("separator")) {
-      child.style.visibility = "visible"
-      child.style.opacity = "1"
-    }
-  }
-
-  const firstElement = children[0]
-  if (!firstElement) return
-
-  let previousTop = firstElement.offsetTop
-  let previousElement = firstElement
-
-  for (let i = 1; i < children.length; i++) {
-    const currentElement = children[i]
-    if (!currentElement) continue
-
-    const currentTop = currentElement.offsetTop
-
-    if (previousTop !== undefined && Math.abs(currentTop - previousTop) > 5) {
-      if (previousElement?.classList?.contains("separator")) {
-        previousElement.style.visibility = "hidden"
-        previousElement.style.opacity = "0"
-      }
-      if (currentElement.classList?.contains("separator")) {
-        currentElement.style.visibility = "hidden"
-        currentElement.style.opacity = "0"
-      }
-    }
-
-    previousTop = currentTop
-    previousElement = currentElement
-  }
-}
-
-const updateSeparators = () => {
-  nextTick(() => {
-    adjustSeparatorVisibility()
-  })
-}
-
-const setupResizeObserver = () => {
-  if (containerRef.value && !resizeObserver) {
-    resizeObserver = new ResizeObserver(updateSeparators)
-    resizeObserver.observe(containerRef.value)
-    updateSeparators()
-  }
-}
-
-onMounted(() => {
-  setupResizeObserver()
-})
-
-watch(containerRef, (newContainer) => {
-  if (newContainer && !resizeObserver) {
-    setupResizeObserver()
-  } else if (!newContainer && resizeObserver) {
-    resizeObserver.disconnect()
-    resizeObserver = null
-  }
-})
-
-watch(
-  detailItems,
-  () => {
-    updateSeparators()
-  },
-  { deep: true }
-)
-
-onUpdated(() => {
-  updateSeparators()
-})
-
-onUnmounted(() => {
-  if (resizeObserver) {
-    resizeObserver.disconnect()
-    resizeObserver = null
-  }
-})
+const alignFlex = computed(() => alignToFlex(configs.value.personal.align, configs.value.general.layout.rtl))
 </script>
 
 <template>
   <div
     ref="containerRef"
-    :style="{ justifyContent: props.align, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }"
+    :style="{
+      justifyContent: alignFlex,
+      display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center'
+    }"
   >
     <template v-for="(item, index) in detailItems" :key="`wrapper${index}`">
       <DetailWrapper

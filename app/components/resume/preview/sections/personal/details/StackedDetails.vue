@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { SOLID_ICONS } from "~/constants/solidIcons"
+import { alignToFlex } from "~/utils/preview/helpers"
 import DetailWrapper from "./DetailWrapper.vue"
 import StyledIcon from "./StyledIcon.vue"
-
-interface Props {
-  align: "left" | "center" | "right"
-}
-const props = defineProps<Props>()
 
 const resumeStore = useResumeStore()
 const { personal } = storeToRefs(resumeStore)
@@ -21,6 +17,8 @@ const textColor = computed(() => configs.value.general.colors.primary.textColor)
 const detailItems = computed(() => {
   return personal.value?.details.filter((item) => item.value && !item.isHidden) ?? []
 })
+
+const alignFlex = computed(() => alignToFlex(configs.value.personal.align, configs.value.general.layout.rtl))
 </script>
 <template>
   <div
@@ -46,8 +44,7 @@ const detailItems = computed(() => {
           display: 'flex',
           alignItems: 'center',
           gap: iconConfig.visible ? '0.5em' : '0',
-          textAlign: props.align,
-          justifyContent: props.align === 'center' ? 'center' : props.align === 'right' ? 'flex-end' : 'flex-start',
+          justifyContent: alignFlex,
           overflowWrap: 'anywhere',
           width: '100%'
         }"

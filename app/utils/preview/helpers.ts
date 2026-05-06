@@ -97,6 +97,15 @@ export function getSectionIconNameWithCustom(sectionType: string, customIcons?: 
   return getSectionIconName(sectionType)
 }
 
+export function alignToFlex(
+  align: "left" | "center" | "right",
+  rtl: boolean
+): "flex-start" | "center" | "flex-end" {
+  if (align === "center") return "center"
+  const isStart = (align === "left") !== rtl
+  return isStart ? "flex-start" : "flex-end"
+}
+
 export const sanitizeRichHtml = (html: string) =>
   DOMPurify.sanitize(html, {
     ALLOWED_TAGS: [
