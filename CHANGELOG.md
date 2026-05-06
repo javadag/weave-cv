@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/JavadAg/weave-cv/compare/v2.1.0...v2.2.0) (2026-05-06)
+
+
+### 🐛 Bug Fixes
+
+* adjust decoration offset, export icon size ([54f5453](https://github.com/JavadAg/weave-cv/commit/54f54535ae5520ec414ec2c753561f86f898c1ad))
+
+
+### ✨ Features
+
+* add custom section ([07e465d](https://github.com/JavadAg/weave-cv/commit/07e465de562d867ccd1595d0d61d97ed7e3354bf))
+* add more details item ([4225198](https://github.com/JavadAg/weave-cv/commit/42251984c79fbcb33dc50a7d4386b295057d2682))
+* add sub roles for experience ([7eadee6](https://github.com/JavadAg/weave-cv/commit/7eadee632955e4417cd1e0ad3df53cc9efc47527))
+* add undo/redo ([fc2ad43](https://github.com/JavadAg/weave-cv/commit/fc2ad434c56d6fc7555bc17575b51dae675400f4))
+* bring back JSON export ([6b2e0c3](https://github.com/JavadAg/weave-cv/commit/6b2e0c324c7ed565300f1a4f54f91b6b18417f80))
+
 ## [2.1.0](https://github.com/JavadAg/weave-cv/compare/v2.0.2...v2.1.0) (2026-05-06)
 
 
