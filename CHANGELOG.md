@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/JavadAg/weave-cv/compare/v2.0.2...v2.1.0) (2026-05-06)
+
+
+### ♻️ Code Refactoring
+
+* improved html parsing ([cb71a63](https://github.com/JavadAg/weave-cv/commit/cb71a63edf72de178e364002fe0ca08e069d638b))
+* improved resume card, increased resumes to 4 ([215f13b](https://github.com/JavadAg/weave-cv/commit/215f13b14435b795ee0d33184d0532bc2c9dccc2))
+* integrate controls with contents ([24c56e7](https://github.com/JavadAg/weave-cv/commit/24c56e7f1ef3aa8176c98e43971167b4828acc05))
+
+
+### ✨ Features
+
+* add link position config for advanced sections ([63bbfb3](https://github.com/JavadAg/weave-cv/commit/63bbfb314a8f183adf62c12bac954626c80bb787))
+* add missing title control ([2490b54](https://github.com/JavadAg/weave-cv/commit/2490b545b06b799fce41b139062490a669852490))
+* add rate limit for ai parse and pdf generation ([9e1eb93](https://github.com/JavadAg/weave-cv/commit/9e1eb936eeda6ba0a9c37d260d9ea14ac10e027b))
+* added new templates ([1cd9aa4](https://github.com/JavadAg/weave-cv/commit/1cd9aa4fca4e5ecada3a27fa207ff5c475ae815b))
+* **resume:** google font support ([4cfebb9](https://github.com/JavadAg/weave-cv/commit/4cfebb93332ecfcc4352bee1e98fca78722a9f07))
+
+
+### 🐛 Bug Fixes
+
+* adjust spacing, add missing key ([9511b82](https://github.com/JavadAg/weave-cv/commit/9511b82c08082061f789df6f942703e55e936b2d))
+* bg color bleed in resume ([f4fcef2](https://github.com/JavadAg/weave-cv/commit/f4fcef25832a0915815b0a86ace783f4ff723953))
+* border control wrapping ([301e95a](https://github.com/JavadAg/weave-cv/commit/301e95a086a64d3b0e18ffb0047ba859cee07bb9))
+* **editor:** summary item visibility, details item link ([ce878fc](https://github.com/JavadAg/weave-cv/commit/ce878fcbb1d11a4854552e06aa3338c6d3cb71cf))
+* links in content ([057cbdf](https://github.com/JavadAg/weave-cv/commit/057cbdf1408d52a4ccfc9cbd168a4b0fd8fad8dd))
+* loading visibility ([6e3dd41](https://github.com/JavadAg/weave-cv/commit/6e3dd41f20845d0709ab847204b79654774edea9))
+* personal data position ([f727752](https://github.com/JavadAg/weave-cv/commit/f72775225f5b114a07119dd9d66951278c520fc6))
+* resume image, adjust template section images ([289a677](https://github.com/JavadAg/weave-cv/commit/289a67744b8654a84bc2aa35cae6aaf844a8b649))
+* sidebar button position ([50956ea](https://github.com/JavadAg/weave-cv/commit/50956ea889d3078f9736cf035c18b731ffc7b87e))
+* template images ([59236b1](https://github.com/JavadAg/weave-cv/commit/59236b1a45772e3d2f8a11cacd9a69f8c4bd0035))
+* types ([0ded449](https://github.com/JavadAg/weave-cv/commit/0ded44933a72615e2576c78f7206e183ecfa14ea))
+* use nuxt img component ([b3947dc](https://github.com/JavadAg/weave-cv/commit/b3947dcaa86d86837fedcaf57343e8687ceab9e4))
+
 ### [2.0.2](https://github.com/JavadAg/weave-cv/compare/v2.0.1...v2.0.2) (2026-05-04)
 
 
