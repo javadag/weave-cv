@@ -34,37 +34,34 @@ const sanitizeFormat = (format: string, options?: { hideDay?: boolean }) => {
   return result.replaceAll(/\s{2,}/g, " ").trim() || "YYYY-MM"
 }
 
-export const fmtDate = (iso: string | null | undefined, format: string, options?: { hideDay?: boolean }) => {
+export const fmtDate = (
+  iso: string | null | undefined,
+  format: string,
+  options?: { hideDay?: boolean; locale?: string }
+) => {
   if (!iso) return ""
 
   const date = new Date(iso)
-  const year = date.getFullYear()
-  const month = date.getMonth()
-  const day = date.getDate()
-
+  const locale = options?.locale ?? "en-US"
+  // Persian locale uses the Jalali/Shamsi calendar system
+  const calLocale = locale.startsWith("fa") ? `${locale}-u-ca-persian` : locale
   const effectiveFormat = sanitizeFormat(format, options)
 
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ]
-  const shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const fmt = (opts: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(calLocale, opts).formatToParts(date)
+  const part = (parts: Intl.DateTimeFormatPart[], type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((p) => p.type === type)?.value ?? ""
+
+  const yearFull = part(fmt({ year: "numeric" }), "year")
+  const monthLong = part(fmt({ month: "long" }), "month")
+  const monthShrt = part(fmt({ month: "short" }), "month")
+  const monthNum = part(fmt({ month: "2-digit" }), "month")
+  const dayNum = part(fmt({ day: "2-digit" }), "day")
 
   return effectiveFormat
-    .replaceAll("YYYY", year.toString())
-    .replaceAll("YY", year.toString().slice(-2))
-    .replaceAll("MMMM", monthNames[month] || "")
-    .replaceAll("MMM", shortMonthNames[month] || "")
-    .replaceAll("MM", (month + 1).toString().padStart(2, "0"))
-    .replaceAll("DD", day.toString().padStart(2, "0"))
+    .replaceAll("YYYY", yearFull)
+    .replaceAll("YY", yearFull.slice(-2))
+    .replaceAll("MMMM", monthLong)
+    .replaceAll("MMM", monthShrt)
+    .replaceAll("MM", monthNum)
+    .replaceAll("DD", dayNum)
 }

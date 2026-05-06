@@ -8,11 +8,11 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { locale } = useI18n()
+const { language } = useLocaleInfo()
 
 const formatDate = (dateString: string | null) => {
   if (!dateString) return ""
-  return new Date(dateString).toLocaleDateString(locale.value === "fa" ? "fa-IR" : "en-US", {
+  return new Date(dateString).toLocaleDateString(language.value, {
     year: "numeric",
     month: "short",
     day: "numeric"

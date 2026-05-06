@@ -3,16 +3,6 @@ interface Props {
   isResponsive?: boolean
 }
 defineProps<Props>()
-
-/* const pageStyles = computed(() => {
-  const paperSize = PAPER_SIZES.A4
-  return {
-    width: `${paperSize.w}mm`,
-    minWidth: `${paperSize.w}mm`,
-    height: `${paperSize.h}mm`,
-    minHeight: `${paperSize.h}mm`
-  }
-}) */
 </script>
 
 <template>

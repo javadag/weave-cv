@@ -16,6 +16,7 @@ const props = defineProps<Props>()
 const emit = defineEmits(["closeEdit"])
 
 const { updateContent } = useResumeStore()
+const { language } = useLocaleInfo()
 
 const sectionFieldsConfig = computed(() => SECTION_FIELDS_CONFIG[props.sectionType])
 
@@ -124,6 +125,7 @@ const isSummary = computed(() => props.sectionType === "summary")
             :model-value="getDateFieldValue('startDate')"
             :label="getFieldConfig('startDate').label"
             :placeholder="getFieldConfig('startDate').placeholder"
+            :locale="language"
             @update:model-value="(value) => handleDateUpdate('startDate', value)"
           />
           <UButton
@@ -144,6 +146,7 @@ const isSummary = computed(() => props.sectionType === "summary")
             :label="getFieldConfig('endDate').label"
             :disabled="getBooleanFieldValue('present')"
             :placeholder="getFieldConfig('endDate').placeholder"
+            :locale="language"
             @update:model-value="(value) => handleDateUpdate('endDate', value)"
           />
           <div class="flex flex-col gap-1">

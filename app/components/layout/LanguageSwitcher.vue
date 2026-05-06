@@ -7,7 +7,7 @@ const items = computed<DropdownMenuItem[]>(() =>
   (locales.value as { code: string; name: string }[]).map((l) => ({
     label: l.name,
     icon: l.code === locale.value ? "i-lucide-check" : undefined,
-    onSelect: () => setLocale(l.code as "en" | "fa")
+    onSelect: () => setLocale(l.code as typeof locale.value)
   }))
 )
 

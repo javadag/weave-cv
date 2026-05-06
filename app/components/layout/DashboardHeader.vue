@@ -5,8 +5,7 @@ import UserDropdown from "~/components/layout/UserDropdown.vue"
 
 const open = defineModel<boolean>("open")
 const user = useSupabaseUser()
-const { locale } = useI18n()
-const isRtl = computed(() => locale.value === "fa")
+const { isRtl } = useLocaleInfo()
 </script>
 
 <template>

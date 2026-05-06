@@ -5,8 +5,8 @@ import Logo from "../layout/Logo.vue"
 
 const open = defineModel<boolean>("open", { default: false })
 
-const { t, locale } = useI18n()
-const isRtl = computed(() => locale.value === "fa")
+const { t } = useI18n()
+const { isRtl } = useLocaleInfo()
 const { count } = useResumeCount()
 const supabase = useSupabaseClient()
 const router = useRouter()
@@ -46,7 +46,7 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
     collapsible="offcanvas"
     :side="isRtl ? 'right' : 'left'"
     :ui="{
-      container: 'h-full',
+      container: 'h-full border-e',
       body: 'py-4'
     }"
   >
