@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import ConfigWrapper from "~/components/resume/configs-forms/wrapper/ConfigWrapper.vue"
 import ColorPicker from "~/components/ui/ColorPicker.vue"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
-import ConfigWrapper from "~/components/resume/configs-forms/wrapper/ConfigWrapper.vue"
 import {
   alignOptions,
   iconAlignOptions,
@@ -57,23 +57,21 @@ const handleUpdate = (key: string, value: unknown) => {
         :disabled="!configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.size', value)"
       />
-      <ConfigWrapper variant="grid">
-        <NumberInput
-          v-model="configs.personal.photo.border.width"
-          :label="$t('editor.configs.photoBorderWidth')"
-          :min="0"
-          :max="10"
-          :disabled="!configs.personal.photo.visible"
-          @update:model-value="(value) => handleUpdate('photo.border.width', value)"
-        />
-        <ColorPicker
-          v-model="configs.personal.photo.border.color"
-          :label="$t('editor.configs.photoBorderColor')"
-          :color="configs.personal.photo.border.color"
-          :disabled="!configs.personal.photo.visible"
-          @update:model-value="(value) => handleUpdate('photo.border.color', value)"
-        />
-      </ConfigWrapper>
+      <NumberInput
+        v-model="configs.personal.photo.border.width"
+        :label="$t('editor.configs.photoBorderWidth')"
+        :min="0"
+        :max="10"
+        :disabled="!configs.personal.photo.visible"
+        @update:model-value="(value) => handleUpdate('photo.border.width', value)"
+      />
+      <ColorPicker
+        v-model="configs.personal.photo.border.color"
+        :label="$t('editor.configs.photoBorderColor')"
+        :color="configs.personal.photo.border.color"
+        :disabled="!configs.personal.photo.visible"
+        @update:model-value="(value) => handleUpdate('photo.border.color', value)"
+      />
     </ConfigWrapper>
     <ConfigWrapper :title="$t('editor.configs.layout')">
       <SelectItem
