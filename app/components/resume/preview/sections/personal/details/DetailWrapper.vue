@@ -19,6 +19,7 @@ const combinedStyle = computed<CSSProperties>(() => ({
   color: configs.value.general.colors.primary.textColor,
   minWidth: "0",
   textDecorationLine: configs.value.personal.details.underline && hasUrl.value ? "underline" : "none",
+  textUnderlineOffset: "0.15em",
   textDecorationColor: configs.value.personal.details.color,
   ...props.style
 }))

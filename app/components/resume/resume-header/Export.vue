@@ -51,13 +51,15 @@ const handleExport = () => {
     :disabled="props.disabled || exporting"
     color="neutral"
     variant="ghost"
-    size="lg"
     :icon="exporting ? 'i-lucide-loader-2' : 'i-lucide-file-code'"
     :class="[
       !props.disabled && !exporting && 'hover:bg-elevated/50 hover:shadow-sm',
       exporting && '[&_svg]:animate-spin',
       (props.disabled || exporting) && 'cursor-not-allowed opacity-50'
     ]"
+    :ui="{
+      leadingIcon: 'size-4'
+    }"
     @click="handleExport"
   >
     <span class="hidden sm:inline">{{ exporting ? "Exporting..." : "Export JSON" }}</span>
