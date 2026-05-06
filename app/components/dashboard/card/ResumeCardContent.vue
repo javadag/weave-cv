@@ -24,9 +24,9 @@ const handleEdit = (id: string) => {
 }
 </script>
 <template>
-  <div class="space-y-3">
+  <div class="flex h-full min-h-65 flex-col gap-3">
     <div
-      class="hover:border-primary border-muted/20 cursor-pointer overflow-hidden rounded-lg border shadow-sm duration-300"
+      class="hover:border-primary border-muted/20 flex flex-1 cursor-pointer flex-col overflow-hidden rounded-lg border shadow-sm duration-300"
       @click="handleEdit(props.resume.id)"
     >
       <MiniResumePreview
@@ -37,7 +37,7 @@ const handleEdit = (id: string) => {
         :resume-title="props.resume.title"
       />
     </div>
-    <div class="text-muted flex flex-wrap items-center justify-between gap-1.5 text-xs">
+    <div class="text-muted mt-auto mb-0 flex flex-wrap items-center justify-between gap-1.5 text-xs">
       <span>{{ $t("resumeCard.createdAt", { date: formatDate(props.resume.created_at) }) }}</span>
       <span v-if="props.resume.updated_at !== props.resume.created_at">
         {{ $t("resumeCard.updatedAt", { date: formatDate(props.resume.updated_at) }) }}

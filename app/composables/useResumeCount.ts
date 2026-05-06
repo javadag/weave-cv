@@ -4,6 +4,7 @@ export const useResumeCount = () => {
   const { data, pending, error, refresh } = useFetch<TResume[]>("/api/resumes", {
     method: "GET",
     lazy: true,
+    server: false,
     key: "dashboard-resumes"
   })
 

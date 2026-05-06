@@ -59,12 +59,18 @@ const handleDuplicateClick = async () => {
 </script>
 
 <template>
-  <UCard class="relative transition-shadow duration-200 hover:shadow-lg">
+  <UCard
+    class="relative flex flex-col transition-shadow duration-200 hover:shadow-lg"
+    :ui="{
+      header: 'sm:px-4 py-3',
+      body: 'sm:p-3 flex-1'
+    }"
+  >
     <div
       v-if="isDuplicating"
       class="bg-background/50 absolute inset-0 z-10 flex items-center justify-center backdrop-blur-[1px]"
     >
-      <UIcon name="i-lucide-loader-2" class="text-primary h-8 w-8 animate-spin" />
+      <UIcon name="i-lucide-loader-2" class="text-primary size-8 animate-spin" />
     </div>
     <template #header>
       <div class="flex items-start justify-between">
