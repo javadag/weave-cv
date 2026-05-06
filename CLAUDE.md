@@ -53,6 +53,10 @@ The codebase was recently refactored to eliminate parallel section/template regi
 
 The `personal` section is intentionally NOT in `SECTIONS_REGISTRY` (its shape differs); see `DETAILS_CATALOG` in `content.schema.ts` for the personal-details registry.
 
+### layout.order — dual entry format
+
+`configs.general.layout.order.oneCol` and `configs.general.layout.order.twoCol.{left,right}` are `string[]` arrays whose entries are **either** bare section type names (`"summary"`, `"experiences"`) or full section IDs (`"summary-f786a33e-c761-4aeb-accd-b94d76c5bdad"`). The default values from the schema use type names; once a user reorders sections in the editor, `reconcileSectionsOrder` writes full IDs instead. Any code that reads these arrays must handle both formats: look up by ID in `core` first, then fall back to matching by `section.type`.
+
 ### Adding things — file count
 
 | Change | Files to edit |
