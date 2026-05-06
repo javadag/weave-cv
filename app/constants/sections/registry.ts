@@ -473,5 +473,31 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
       description:
         "<ul><li><p>Mastered advanced React concepts including hooks, context, and performance optimization</p></li><li><p>Built complex applications using modern React ecosystem tools</p></li></ul>"
     }
+  },
+  custom: {
+    type: "custom",
+    kind: "basic",
+    label: "Custom Section",
+    icon: "i-lucide-file-text",
+    fields: [
+      { field: "title", label: "Title", placeholder: "e.g. Publication title" },
+      { field: "description", label: "Description", placeholder: "Enter details..." },
+      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+    ],
+    configOptions: BASIC_OPTIONS,
+    defaultConfig: { variant: "stacked", grids: 1, separator: "pipe", titleStyle: "none" },
+    dummyData: [
+      {
+        id: "custom-1",
+        isHidden: false,
+        title: "Item Title",
+        description: "<p>Add a description for this item.</p>"
+      }
+    ],
+    singleItem: {
+      isHidden: false,
+      title: "",
+      description: "<p></p>"
+    }
   }
 }

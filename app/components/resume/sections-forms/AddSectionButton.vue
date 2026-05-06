@@ -11,7 +11,8 @@ const availableSectionTypes = computed(() => {
   const allSectionTypes: TCoreSectionType[] = [...ADVANCED_SECTION_TYPES, ...BASIC_SECTION_TYPES]
   const existingTypes = new Set(Object.values(core?.value || {}).map((section) => section.type))
 
-  return allSectionTypes.filter((type) => !existingTypes.has(type))
+  // "custom" is always available since multiple custom sections are allowed
+  return allSectionTypes.filter((type) => type === "custom" || !existingTypes.has(type))
 })
 
 const showAddSectionModal = ref(false)

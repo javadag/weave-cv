@@ -83,5 +83,6 @@ export const SectionsConfigsSchema = z.object({
   educations: AdvancedSectionConfigsSchema,
   projects: AdvancedSectionConfigsSchema,
   languages: BasicSectionConfigsSchema,
-  courses: AdvancedSectionConfigsSchema
+  courses: AdvancedSectionConfigsSchema,
+  custom: BasicSectionConfigsSchema
 })
