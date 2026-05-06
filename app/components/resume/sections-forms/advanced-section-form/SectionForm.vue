@@ -2,6 +2,7 @@
 import { ref, watch } from "vue"
 import { VueDraggable, type SortableEvent } from "vue-draggable-plus"
 import { ADVANCED_SECTION_ITEM, BASIC_SECTION_ITEM } from "~/constants/singleContent"
+import { SECTION_CONFIGS_CONFIG } from "~/constants/sectionConfigs"
 import type {
   BasicSectionTypeSchema,
   TAdvancedContent,
@@ -11,6 +12,7 @@ import type {
 } from "~/utils/schemas/content.schema"
 import { AdvancedSectionTypeSchema } from "~/utils/schemas/content.schema"
 import SectionFormWrapper from "../SectionFormWrapper.vue"
+import SectionConfigControls from "../SectionConfigControls.vue"
 import SectionFormItem from "./SectionFormItem.vue"
 
 interface Props {
@@ -24,6 +26,7 @@ const { updateContent } = useResumeStore()
 
 const isAdvancedSection = computed(() => AdvancedSectionTypeSchema.safeParse(props.sectionType).success)
 const isSummarySection = computed(() => props.sectionType === "summary")
+const hasConfigOptions = computed(() => (SECTION_CONFIGS_CONFIG[props.sectionType]?.length ?? 0) > 0)
 
 const sectionContentsRef = ref([...props.section.contents])
 
@@ -66,7 +69,11 @@ const handleReorder = (_event: SortableEvent) => {
     :section-type="props.sectionType"
     :is-section-visible="props.section.isSectionVisible"
     :is-title-visible="props.section.isTitleVisible"
+    :show-settings="hasConfigOptions"
   >
+    <template v-if="hasConfigOptions" #settings>
+      <SectionConfigControls :section-type="props.sectionType" />
+    </template>
     <div class="flex flex-col gap-3">
       <VueDraggable
         v-model="sectionContentsRef"

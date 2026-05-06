@@ -3,6 +3,7 @@ import type { TPersonalContent } from "~/utils/schemas/content.schema"
 import SectionFormWrapper from "../SectionFormWrapper.vue"
 import AddDetailForm from "./AddDetailForm.vue"
 import DetailList from "./DetailList.vue"
+import PersonalConfigControls from "./PersonalConfigControls.vue"
 import PersonalTitle from "./PersonalTitle.vue"
 import PhotoUpload from "./PhotoUpload.vue"
 
@@ -17,7 +18,11 @@ const props = defineProps<Props>()
     :title="$t('editor.form.personalInfo')"
     :is-title-editable="false"
     :is-section-hideable="false"
+    :show-settings="true"
   >
+    <template #settings>
+      <PersonalConfigControls />
+    </template>
     <PhotoUpload />
     <PersonalTitle :title="props.section.title" :subtitle="props.section.subtitle" />
     <div class="mt-3 space-y-1">

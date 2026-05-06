@@ -3,6 +3,7 @@ import ColorPicker from "~/components/ui/ColorPicker.vue"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
+import ConfigWrapper from "~/components/resume/configs-forms/wrapper/ConfigWrapper.vue"
 import {
   alignOptions,
   iconAlignOptions,
@@ -14,8 +15,6 @@ import {
   variantSimpleOptions
 } from "~/utils/options/sharedOptions"
 import type { TAlign, TIconStyle, TSeparator, TSide, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
-import ConfigsContainer from "../wrapper/ConfigsContainer.vue"
-import ConfigWrapper from "../wrapper/ConfigWrapper.vue"
 
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
@@ -27,7 +26,7 @@ const handleUpdate = (key: string, value: unknown) => {
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.personalDetails')" icon="i-lucide-user">
+  <div class="space-y-3 p-1">
     <ConfigWrapper :title="$t('editor.configs.photo')">
       <ToggleInput
         v-model="configs.personal.photo.visible"
@@ -37,6 +36,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.photo.position"
         :label="$t('editor.configs.photoPosition')"
+        label-variant="stacked"
         :options="photoPositionOptions"
         :disabled="!configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.position', value as 'left' | 'right' | 'top')"
@@ -44,6 +44,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.photo.shape"
         :label="$t('editor.configs.photoShape')"
+        label-variant="stacked"
         :options="photoShapeOptions"
         :disabled="!configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.shape', value as 'circle' | 'rounded' | 'square')"
@@ -78,12 +79,14 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.variant"
         :label="$t('editor.configs.variant')"
+        label-variant="stacked"
         :options="variantSimpleOptions"
         @update:model-value="(value) => handleUpdate('variant', value as TVariantSimple)"
       />
       <SelectItem
         v-model="configs.personal.align"
         :label="$t('editor.configs.alignment')"
+        label-variant="stacked"
         :options="alignOptions"
         @update:model-value="(value) => handleUpdate('align', value as TAlign)"
       />
@@ -99,6 +102,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.main.variant"
         :label="$t('editor.configs.variant')"
+        label-variant="stacked"
         :options="variantSimpleOptions"
         @update:model-value="(value) => handleUpdate('main.variant', value as TVariantSimple)"
       />
@@ -128,12 +132,14 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.details.variant"
         :label="$t('editor.configs.variant')"
+        label-variant="stacked"
         :options="variantOptions"
         @update:model-value="(value) => handleUpdate('details.variant', value as TVariant)"
       />
       <SelectItem
         v-model="configs.personal.details.separator"
         :label="$t('editor.configs.separator')"
+        label-variant="stacked"
         :options="separatorOptions"
         @update:model-value="(value) => handleUpdate('details.separator', value as TSeparator)"
       />
@@ -147,6 +153,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.details.icon.align"
         :label="$t('editor.configs.iconAlignment')"
+        label-variant="stacked"
         :options="iconAlignOptions"
         :disabled="!configs.personal.details.icon.visible"
         @update:model-value="(value) => handleUpdate('details.icon.align', value as TSide)"
@@ -154,6 +161,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <SelectItem
         v-model="configs.personal.details.icon.type"
         :label="$t('editor.configs.iconStyle')"
+        label-variant="stacked"
         :options="iconStyleOptions"
         :disabled="!configs.personal.details.icon.visible"
         @update:model-value="(value) => handleUpdate('details.icon.type', value as TIconStyle)"
@@ -167,5 +175,5 @@ const handleUpdate = (key: string, value: unknown) => {
         @update:model-value="(value) => handleUpdate('details.icon.size', value)"
       />
     </ConfigWrapper>
-  </ConfigsContainer>
+  </div>
 </template>

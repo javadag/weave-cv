@@ -14,18 +14,26 @@ const props = withDefaults(
     isSectionVisible?: boolean
     isTitleVisible?: boolean
     isTitleEditable?: boolean
+    showSettings?: boolean
   }>(),
   {
     isTitleEditable: true,
     isSectionHideable: true,
-    sectionType: undefined
+    sectionType: undefined,
+    showSettings: false
   }
 )
 
+const { t } = useI18n()
 const { updateContent, removeSection } = useResumeStore()
 const handleDelete = () => {
   removeSection(props.sectionId)
 }
+
+const tabItems = computed(() => [
+  { label: t("editor.form.content"), slot: "content" },
+  { label: t("editor.settings"), slot: "settings" }
+])
 </script>
 
 <template>
@@ -71,7 +79,19 @@ const handleDelete = () => {
         :is-section-visible="props.isSectionVisible"
         :is-title-visible="props.isTitleVisible"
       />
-      <slot />
+      <template v-if="props.showSettings">
+        <UTabs :items="tabItems" size="sm" class="mt-1">
+          <template #content>
+            <slot />
+          </template>
+          <template #settings>
+            <slot name="settings" />
+          </template>
+        </UTabs>
+      </template>
+      <template v-else>
+        <slot />
+      </template>
     </template>
   </UCollapsible>
 </template>

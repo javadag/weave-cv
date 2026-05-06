@@ -377,6 +377,7 @@
       "linkInTitle": "Link in Title"
     },
     "form": {
+      "content": "Content",
       "contactDetails": "Contact Details",
       "addDetail": "Add Detail",
       "category": "Category",
