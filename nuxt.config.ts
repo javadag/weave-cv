@@ -79,6 +79,7 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
+    "/": { prerender: true },
     "/editor/**": {
       ssr: false
     }
@@ -113,6 +114,7 @@ export default defineNuxtConfig({
     name: "Weave CV"
   },
   sitemap: {
+    zeroRuntime: true,
     exclude: ["/dashboard/**", "/editor/**", "/confirm", "/reset-password"]
   }
 })

@@ -9,6 +9,7 @@ useHead({
 })
 
 const route = useRoute()
+const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
 const errorDescription = ref<string>((route.query.error_description as string) || (route.query.error as string) || "")
@@ -16,10 +17,53 @@ const errorDescription = ref<string>((route.query.error_description as string) |
 // Email passed from register page — means user just signed up and needs to confirm
 const pendingEmail = route.query.email as string | undefined
 
-// Detected from hash on mount — what kind of link the user clicked
+// Detected on mount — what kind of link the user clicked
 const hashType = ref<"signup" | "recovery" | null>(null)
 
-onMounted(() => {
+const resendCooldown = ref(0)
+const resendSuccess = ref(false)
+const resendError = ref("")
+let cooldownTimer: ReturnType<typeof setInterval> | null = null
+
+const resendEmail = async () => {
+  if (!pendingEmail || resendCooldown.value > 0) return
+  resendSuccess.value = false
+  resendError.value = ""
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email: pendingEmail,
+    options: { emailRedirectTo: `${globalThis.location.origin}/confirm` }
+  })
+  if (error) {
+    resendError.value = error.message
+  } else {
+    resendSuccess.value = true
+    resendCooldown.value = 60
+    cooldownTimer = setInterval(() => {
+      resendCooldown.value--
+      if (resendCooldown.value <= 0 && cooldownTimer) {
+        clearInterval(cooldownTimer)
+        cooldownTimer = null
+      }
+    }, 1000)
+  }
+}
+
+onUnmounted(() => {
+  if (cooldownTimer) clearInterval(cooldownTimer)
+})
+
+onMounted(async () => {
+  // PKCE flow: Supabase sends ?code= for email confirmation / OAuth callback
+  const code = route.query.code as string | undefined
+  if (code) {
+    hashType.value = "signup"
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    if (error) errorDescription.value = error.message
+    return
+  }
+
+  // Legacy implicit flow: hash-based token from older Supabase projects
   const hash = globalThis.location.hash
   if (!hash) return
   const p = new URLSearchParams(hash.slice(1))
@@ -53,62 +97,90 @@ watch(
 <template>
   <div class="flex min-h-[60vh] items-center justify-center px-6">
     <div class="w-full max-w-md text-center">
-      <!-- Error state -->
-      <template v-if="hasError">
-        <UAlert
-          color="error"
-          variant="soft"
-          :title="$t('confirmPage.errorTitle')"
-          :description="errorDescription"
-          class="mb-5 text-left"
-        />
-        <div class="flex flex-col gap-2">
-          <UButton to="/login" color="primary" size="lg" block>{{ $t("confirmPage.tryAgain") }}</UButton>
-          <UButton :to="`mailto:${CONTACT_EMAIL}`" color="neutral" variant="ghost" size="lg" block>
-            {{ $t("confirmPage.contactSupport") }}
-          </UButton>
-        </div>
-      </template>
-
-      <!-- Check inbox — user just registered, hasn't clicked the link yet -->
-      <template v-else-if="pendingEmail && !hashType">
-        <div class="mb-5 flex justify-center">
-          <span class="bg-primary/10 text-primary flex size-14 items-center justify-center rounded-full">
-            <UIcon name="i-lucide-mail" class="size-7" />
-          </span>
-        </div>
-        <h1 class="text-highlighted mb-2 text-2xl font-bold">{{ $t("confirmPage.checkInbox") }}</h1>
-        <p class="text-muted mb-1 text-sm">{{ $t("confirmPage.sentLinkTo") }}</p>
-        <p class="text-highlighted mb-6 font-medium">{{ pendingEmail }}</p>
-        <p class="text-muted text-sm">
-          {{ $t("confirmPage.clickLinkHint") }}
-        </p>
-        <p class="text-muted mt-6 text-xs">
-          {{ $t("confirmPage.wrongEmail") }}
-          <ULink to="/register" class="text-primary font-medium">{{ $t("confirmPage.signUpAgain") }}</ULink>
-        </p>
-      </template>
-
-      <!-- Verifying email link (hash token being processed by supabase-js) -->
-      <template v-else-if="hashType === 'signup'">
-        <div class="mb-4 flex justify-center">
-          <span
-            class="text-primary inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent"
+      <UCard class="bg-default/70 shadow-2xl">
+        <!-- Error state -->
+        <template v-if="hasError">
+          <UAlert
+            color="error"
+            variant="soft"
+            :title="$t('confirmPage.errorTitle')"
+            :description="errorDescription"
+            class="mb-5 text-left"
           />
-        </div>
-        <h1 class="text-highlighted mb-2 text-xl font-semibold">{{ $t("confirmPage.verifyingEmail") }}</h1>
-        <p class="text-muted text-sm">{{ $t("confirmPage.redirecting") }}</p>
-      </template>
+          <div class="flex flex-col gap-2">
+            <UButton to="/login" color="primary" size="lg" block>{{ $t("confirmPage.tryAgain") }}</UButton>
+            <UButton :to="`mailto:${CONTACT_EMAIL}`" color="neutral" variant="ghost" size="lg" block>
+              {{ $t("confirmPage.contactSupport") }}
+            </UButton>
+          </div>
+        </template>
 
-      <!-- OAuth / generic waiting state -->
-      <template v-else>
-        <div class="mb-4 flex justify-center">
-          <span
-            class="text-primary inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent"
-          />
-        </div>
-        <p class="text-muted text-sm">{{ $t("confirmPage.completing") }}</p>
-      </template>
+        <!-- Check inbox — user just registered, hasn't clicked the link yet -->
+        <template v-else-if="pendingEmail && !hashType">
+          <div class="mb-5 flex justify-center">
+            <span class="bg-primary/10 text-primary flex size-14 items-center justify-center rounded-full">
+              <UIcon name="i-lucide-mail" class="size-7" />
+            </span>
+          </div>
+          <h1 class="text-highlighted mb-2 text-2xl font-bold">{{ $t("confirmPage.checkInbox") }}</h1>
+          <p class="text-muted mb-1 text-sm">{{ $t("confirmPage.sentLinkTo") }}</p>
+          <p class="text-highlighted mb-6 font-medium">{{ pendingEmail }}</p>
+          <p class="text-muted text-sm">
+            {{ $t("confirmPage.clickLinkHint") }}
+          </p>
+
+          <div class="mt-5 flex flex-col gap-2">
+            <UAlert
+              v-if="resendSuccess"
+              color="success"
+              variant="soft"
+              :description="$t('confirmPage.resendSent')"
+            />
+            <UAlert
+              v-if="resendError"
+              color="error"
+              variant="soft"
+              :description="resendError"
+            />
+            <UButton
+              color="neutral"
+              variant="outline"
+              size="lg"
+              block
+              :disabled="resendCooldown > 0"
+              @click="resendEmail"
+            >
+              {{ resendCooldown > 0 ? $t("confirmPage.resendCooldown", { seconds: resendCooldown }) : $t("confirmPage.resendBtn") }}
+            </UButton>
+          </div>
+
+          <p class="text-muted mt-6 text-xs">
+            {{ $t("confirmPage.wrongEmail") }}
+            <ULink to="/register" class="text-primary font-medium">{{ $t("confirmPage.signUpAgain") }}</ULink>
+          </p>
+        </template>
+
+        <!-- Verifying email link (hash token being processed by supabase-js) -->
+        <template v-else-if="hashType === 'signup'">
+          <div class="mb-4 flex justify-center">
+            <span
+              class="text-primary inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent"
+            />
+          </div>
+          <h1 class="text-highlighted mb-2 text-xl font-semibold">{{ $t("confirmPage.verifyingEmail") }}</h1>
+          <p class="text-muted text-sm">{{ $t("confirmPage.redirecting") }}</p>
+        </template>
+
+        <!-- OAuth / generic waiting state -->
+        <template v-else>
+          <div class="mb-4 flex justify-center">
+            <span
+              class="text-primary inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent"
+            />
+          </div>
+          <p class="text-muted text-sm">{{ $t("confirmPage.completing") }}</p>
+        </template>
+      </UCard>
     </div>
   </div>
 </template>

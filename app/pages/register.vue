@@ -126,23 +126,17 @@ const signUpWithGithub = async () => {
           </UFormField>
 
           <UFormField :label="$t('auth.register.passwordLabel')" name="password" required>
-            <UInput
+            <AuthPasswordInput
               v-model="formState.password"
-              type="password"
               :placeholder="$t('auth.register.passwordPlaceholder')"
-              size="lg"
-              class="w-full"
               :disabled="loading"
             />
           </UFormField>
 
           <UFormField :label="$t('auth.register.confirmPasswordLabel')" name="confirmPassword" required>
-            <UInput
+            <AuthPasswordInput
               v-model="formState.confirmPassword"
-              type="password"
               :placeholder="$t('auth.register.confirmPasswordPlaceholder')"
-              size="lg"
-              class="w-full"
               :disabled="loading"
             />
           </UFormField>
