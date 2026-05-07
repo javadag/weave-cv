@@ -30,7 +30,7 @@ const subRolePath = (index: number, field: keyof TSubRole) =>
 const addSubRole = () => {
   const updated: TSubRole[] = [
     ...subRoles.value,
-    { title: "", startDate: null, endDate: null, present: false, showDateDay: true }
+    { title: "", subtitle: "", startDate: null, endDate: null, present: false, showDateDay: true }
   ]
   updateContent(`${props.sectionId}.contents.${props.content.id}.subRoles`, updated)
 }
@@ -246,12 +246,20 @@ const isSummary = computed(() => props.sectionType === "summary")
               @click="removeSubRole(index)"
             />
           </div>
-          <TextInput
-            :model-value="subRole.title"
-            label="Job Title"
-            placeholder="e.g. Senior Software Engineer"
-            @update:model-value="(value) => updateContent(subRolePath(index, 'title'), value)"
-          />
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <TextInput
+              :model-value="subRole.title"
+              label="Job Title"
+              placeholder="e.g. Senior Software Engineer"
+              @update:model-value="(value) => updateContent(subRolePath(index, 'title'), value)"
+            />
+            <TextInput
+              :model-value="subRole.subtitle"
+              label="Subtitle"
+              placeholder="e.g. Full-time"
+              @update:model-value="(value) => updateContent(subRolePath(index, 'subtitle'), value)"
+            />
+          </div>
           <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <div class="flex flex-col gap-1">
               <DatePicker
@@ -299,6 +307,13 @@ const isSummary = computed(() => props.sectionType === "summary")
               />
             </div>
           </div>
+          <ToggleInput
+            :model-value="subRole.showDateDay"
+            label="Full Date"
+            :style="'start'"
+            class="py-1"
+            @update:model-value="(value) => updateContent(subRolePath(index, 'showDateDay'), value)"
+          />
         </div>
       </div>
     </div>

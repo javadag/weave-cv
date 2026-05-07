@@ -149,6 +149,7 @@ const contentLayoutWidth = computed(() =>
             <TitleSubtitle
               :width="contentLayoutWidth.left"
               :title="subRole.title"
+              :subtitle="subRole.subtitle"
               :is-in-column="false"
               :section-type="sectionType"
             />
@@ -175,6 +176,7 @@ const contentLayoutWidth = computed(() =>
             <TitleSubtitle
               :width="contentLayoutWidth.right"
               :title="subRole.title"
+              :subtitle="subRole.subtitle"
               :is-in-column="false"
               :section-type="sectionType"
             />
@@ -182,7 +184,7 @@ const contentLayoutWidth = computed(() =>
         </template>
         <template v-else-if="displayMode === 'stacked'">
           <div :style="{ display: 'flex', justifyContent: 'space-between' }">
-            <TitleSubtitle :title="subRole.title" :is-in-column="false" :section-type="sectionType" />
+            <TitleSubtitle :title="subRole.title" :subtitle="subRole.subtitle" :is-in-column="false" :section-type="sectionType" />
             <DateLocation
               :position="displayMode"
               :style="{ display: 'flex', justifyContent: 'flex-end', alignItems: 'start' }"
@@ -194,7 +196,7 @@ const contentLayoutWidth = computed(() =>
           </div>
         </template>
         <template v-else-if="displayMode === 'columns'">
-          <TitleSubtitle :title="subRole.title" :is-in-column="true" :section-type="sectionType" />
+          <TitleSubtitle :title="subRole.title" :subtitle="subRole.subtitle" :is-in-column="true" :section-type="sectionType" />
           <DateLocation
             v-if="subRole.startDate || subRole.endDate"
             :position="displayMode"

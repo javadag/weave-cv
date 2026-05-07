@@ -193,6 +193,7 @@ const BasicContentSchema = z.object({
 })
 export const SubRoleSchema = z.object({
   title: z.string().default(""),
+  subtitle: z.string().default(""),
   startDate: z.string().nullable().default(null),
   endDate: z.string().nullable().default(null),
   present: z.boolean().default(false),
