@@ -239,7 +239,10 @@
     "signUpAgain": "دوباره ثبت‌نام کن",
     "verifyingEmail": "در حال تأیید ایمیل…",
     "redirecting": "یک لحظه صبر کن، تا دوست داریم منتقلت کنیم.",
-    "completing": "درحال تکمیل ورود…"
+    "completing": "درحال تکمیل ورود…",
+    "resendBtn": "ارسال مجدد ایمیل تأیید",
+    "resendCooldown": "ارسال مجدد در {seconds} ثانیه",
+    "resendSent": "ایمیل ارسال شد! صندوق ورودی خود را بررسی کن."
   },
   "forgotPassword": {
     "title": "بازنشانی رمز عبور",

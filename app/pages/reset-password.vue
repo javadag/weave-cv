@@ -130,22 +130,16 @@ const submit = async () => {
               :description="formError"
             />
             <UFormField :label="$t('resetPassword.passwordLabel')" name="password" required>
-              <UInput
+              <AuthPasswordInput
                 v-model="formState.password"
-                type="password"
                 :placeholder="$t('resetPassword.passwordPlaceholder')"
-                size="lg"
-                class="w-full"
                 :disabled="loading"
               />
             </UFormField>
             <UFormField :label="$t('resetPassword.confirmPasswordLabel')" name="confirmPassword" required>
-              <UInput
+              <AuthPasswordInput
                 v-model="formState.confirmPassword"
-                type="password"
                 :placeholder="$t('resetPassword.confirmPasswordPlaceholder')"
-                size="lg"
-                class="w-full"
                 :disabled="loading"
               />
             </UFormField>

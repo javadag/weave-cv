@@ -239,7 +239,10 @@
     "signUpAgain": "Sign up again",
     "verifyingEmail": "Verifying your email…",
     "redirecting": "Hold tight, you'll be redirected in a moment.",
-    "completing": "Completing sign-in…"
+    "completing": "Completing sign-in…",
+    "resendBtn": "Resend confirmation email",
+    "resendCooldown": "Resend in {seconds}s",
+    "resendSent": "Email sent! Check your inbox."
   },
   "forgotPassword": {
     "title": "Reset password",

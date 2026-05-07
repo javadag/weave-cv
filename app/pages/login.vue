@@ -91,12 +91,9 @@ const signInWithPassword = async () => {
           </UFormField>
 
           <UFormField :label="$t('auth.login.passwordLabel')" name="password" required>
-            <UInput
+            <AuthPasswordInput
               v-model="formState.password"
-              type="password"
               :placeholder="$t('auth.login.passwordPlaceholder')"
-              size="lg"
-              class="w-full"
               :disabled="loading"
             />
           </UFormField>
