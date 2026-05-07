@@ -52,7 +52,7 @@ const signInWithPassword = async () => {
     if (signInError) {
       error.value = signInError.message
     } else {
-      await navigateTo("/confirm")
+      await navigateTo("/dashboard")
     }
   } catch {
     error.value = t("auth.login.errorUnexpected")

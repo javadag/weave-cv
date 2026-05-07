@@ -20,7 +20,11 @@ const userInitials = computed(() => {
 
 const userAvatar = computed(() => user.value?.user_metadata?.avatar_url || null)
 
+const isLoggingOut = ref(false)
+
 const handleLogout = async () => {
+  if (isLoggingOut.value) return
+  isLoggingOut.value = true
   try {
     const { error } = await supabase.auth.signOut()
     if (error) throw error
@@ -39,6 +43,8 @@ const handleLogout = async () => {
       description: t("userDropdown.errorDesc"),
       color: "error"
     })
+  } finally {
+    isLoggingOut.value = false
   }
 }
 
@@ -50,7 +56,8 @@ const menuItems = computed(() => [
   },
   {
     label: t("userDropdown.logout"),
-    icon: "i-lucide-log-out",
+    icon: isLoggingOut.value ? "i-lucide-loader-circle" : "i-lucide-log-out",
+    disabled: isLoggingOut.value,
     onSelect: handleLogout
   }
 ])

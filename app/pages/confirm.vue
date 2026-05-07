@@ -9,6 +9,7 @@ useHead({
 })
 
 const route = useRoute()
+const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
 const errorDescription = ref<string>((route.query.error_description as string) || (route.query.error as string) || "")
@@ -16,10 +17,20 @@ const errorDescription = ref<string>((route.query.error_description as string) |
 // Email passed from register page — means user just signed up and needs to confirm
 const pendingEmail = route.query.email as string | undefined
 
-// Detected from hash on mount — what kind of link the user clicked
+// Detected on mount — what kind of link the user clicked
 const hashType = ref<"signup" | "recovery" | null>(null)
 
-onMounted(() => {
+onMounted(async () => {
+  // PKCE flow: Supabase sends ?code= for email confirmation / OAuth callback
+  const code = route.query.code as string | undefined
+  if (code) {
+    hashType.value = "signup"
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    if (error) errorDescription.value = error.message
+    return
+  }
+
+  // Legacy implicit flow: hash-based token from older Supabase projects
   const hash = globalThis.location.hash
   if (!hash) return
   const p = new URLSearchParams(hash.slice(1))
