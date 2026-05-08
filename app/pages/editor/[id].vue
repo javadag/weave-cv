@@ -27,17 +27,6 @@ const { setConfigs } = configsStore
 const { canUndo, canRedo, undo, redo } = useUndoRedo()
 provide("undoRedo", { canUndo, canRedo, undo, redo })
 
-useEventListener("keydown", (e: KeyboardEvent) => {
-  if (!(e.ctrlKey || e.metaKey)) return
-  if (e.key === "z" && !e.shiftKey) {
-    e.preventDefault()
-    undo()
-  } else if (e.key === "y" || (e.key === "z" && e.shiftKey)) {
-    e.preventDefault()
-    redo()
-  }
-})
-
 const pageTitle = computed(() => {
   return resumeStore.title ? t("seo.editor.titleEdit", { title: resumeStore.title }) : t("seo.editor.titleDefault")
 })
