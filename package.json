@@ -11,7 +11,7 @@
     "postinstall": "nuxt prepare",
     "update-types": "bash scripts/update-types.sh",
     "build:pdf-css": "tailwindcss -i app/assets/css/tailwind.css -o public/tailwind-pdf.css --minify",
-    "prepare": "husky install",
+    "prepare": "husky",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
