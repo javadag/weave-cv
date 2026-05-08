@@ -103,9 +103,15 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   summary: {
     type: "summary",
     kind: "basic",
-    label: "Summary",
+    label: "editor.sectionTypes.summary",
     icon: "i-lucide-book-open",
-    fields: [{ field: "description", label: "Description", placeholder: "Enter details..." }],
+    fields: [
+      {
+        field: "description",
+        label: "editor.form.description.label",
+        placeholder: "editor.form.summary.description.placeholder"
+      }
+    ],
     configOptions: [],
     defaultConfig: { variant: "inline", grids: 1, separator: "pipe", titleStyle: "colon" },
     dummyData: [
@@ -127,11 +133,11 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   skills: {
     type: "skills",
     kind: "basic",
-    label: "Skills",
+    label: "editor.sectionTypes.skills",
     icon: "i-lucide-wrench",
     fields: [
-      { field: "title", label: "Skill", placeholder: "e.g. JavaScript" },
-      { field: "description", label: "Description", placeholder: "Enter details..." }
+      { field: "title", label: "editor.form.skill.title.label", placeholder: "editor.form.skill.title.placeholder" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" }
     ],
     configOptions: BASIC_OPTIONS,
     defaultConfig: { variant: "inline", grids: 4, separator: "pipe", titleStyle: "colon" },
@@ -167,11 +173,19 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   languages: {
     type: "languages",
     kind: "basic",
-    label: "Languages",
+    label: "editor.sectionTypes.languages",
     icon: "i-lucide-globe",
     fields: [
-      { field: "title", label: "Language", placeholder: "e.g. English" },
-      { field: "description", label: "Proficiency", placeholder: "e.g. Native, Fluent, Intermediate" }
+      {
+        field: "title",
+        label: "editor.form.language.title.label",
+        placeholder: "editor.form.language.title.placeholder"
+      },
+      {
+        field: "description",
+        label: "editor.form.language.description.label",
+        placeholder: "editor.form.language.description.placeholder"
+      }
     ],
     configOptions: BASIC_OPTIONS,
     defaultConfig: { variant: "stacked", grids: 1, separator: "pipe", titleStyle: "colon" },
@@ -194,12 +208,16 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   certificates: {
     type: "certificates",
     kind: "basic",
-    label: "Certificates",
+    label: "editor.sectionTypes.certificates",
     icon: "i-lucide-award",
     fields: [
-      { field: "title", label: "Certificate", placeholder: "e.g. AWS Certified Developer" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      {
+        field: "title",
+        label: "editor.form.certificate.title.label",
+        placeholder: "editor.form.certificate.title.placeholder"
+      },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" }
     ],
     configOptions: BASIC_OPTIONS,
     defaultConfig: { variant: "inline", grids: 1, separator: "pipe", titleStyle: "dash" },
@@ -230,19 +248,27 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   experiences: {
     type: "experiences",
     kind: "advanced",
-    label: "Experience",
+    label: "editor.sectionTypes.experiences",
     icon: "i-lucide-briefcase",
     fields: [
-      { field: "title", label: "Job Title", placeholder: "e.g. Senior Software Engineer" },
-      { field: "subtitle", label: "Company", placeholder: "e.g. Google" },
-      { field: "startDate", label: "Start Date", placeholder: "e.g. 2020-01-01" },
-      { field: "endDate", label: "End Date", placeholder: "e.g. 2022-12-31" },
-      { field: "present", label: "Present" },
-      { field: "showDateDay", label: "Full Date" },
-      { field: "location", label: "Location", placeholder: "e.g. San Francisco, CA" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" },
-      { field: "subRoles", label: "Additional Roles" }
+      {
+        field: "title",
+        label: "editor.form.experience.title.label",
+        placeholder: "editor.form.experience.title.placeholder"
+      },
+      {
+        field: "subtitle",
+        label: "editor.form.experience.subtitle.label",
+        placeholder: "editor.form.experience.subtitle.placeholder"
+      },
+      { field: "startDate", label: "editor.form.startDate", placeholder: "editor.form.startDatePlaceholder" },
+      { field: "endDate", label: "editor.form.endDate", placeholder: "editor.form.endDatePlaceholder" },
+      { field: "present", label: "editor.form.present" },
+      { field: "showDateDay", label: "editor.form.fullDate" },
+      { field: "location", label: "editor.form.location.label", placeholder: "editor.form.location.placeholder" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" },
+      { field: "subRoles", label: "editor.form.additionalRoles" }
     ],
     configOptions: ADVANCED_OPTIONS,
     defaultConfig: ADVANCED_STACKED,
@@ -291,18 +317,26 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   educations: {
     type: "educations",
     kind: "advanced",
-    label: "Education",
+    label: "editor.sectionTypes.educations",
     icon: "i-lucide-graduation-cap",
     fields: [
-      { field: "title", label: "Degree", placeholder: "e.g. Bachelor of Science" },
-      { field: "subtitle", label: "Institution", placeholder: "e.g. Stanford University" },
-      { field: "startDate", label: "Start Date", placeholder: "e.g. 2016-09-01" },
-      { field: "endDate", label: "End Date", placeholder: "e.g. 2020-05-31" },
-      { field: "present", label: "Present" },
-      { field: "showDateDay", label: "Full Date" },
-      { field: "location", label: "Location", placeholder: "e.g. Stanford, CA" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      {
+        field: "title",
+        label: "editor.form.education.title.label",
+        placeholder: "editor.form.education.title.placeholder"
+      },
+      {
+        field: "subtitle",
+        label: "editor.form.education.subtitle.label",
+        placeholder: "editor.form.education.subtitle.placeholder"
+      },
+      { field: "startDate", label: "editor.form.startDate", placeholder: "editor.form.startDatePlaceholder" },
+      { field: "endDate", label: "editor.form.endDate", placeholder: "editor.form.endDatePlaceholder" },
+      { field: "present", label: "editor.form.present" },
+      { field: "showDateDay", label: "editor.form.fullDate" },
+      { field: "location", label: "editor.form.location.label", placeholder: "editor.form.location.placeholder" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" }
     ],
     configOptions: ADVANCED_OPTIONS,
     defaultConfig: ADVANCED_STACKED,
@@ -336,7 +370,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   projects: {
     type: "projects",
     kind: "advanced",
-    label: "Projects",
+    label: "editor.sectionTypes.projects",
     icon: "i-lucide-folder-open",
     fields: [
       {
@@ -349,12 +383,12 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
         label: "editor.form.project.subtitle.label",
         placeholder: "editor.form.project.subtitle.placeholder"
       },
-      { field: "startDate", label: "Start Date", placeholder: "e.g. 2021-01-01" },
-      { field: "endDate", label: "End Date", placeholder: "e.g. 2021-12-31" },
-      { field: "showDateDay", label: "Full Date" },
-      { field: "location", label: "Location", placeholder: "e.g. San Francisco, CA" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      { field: "startDate", label: "editor.form.startDate", placeholder: "editor.form.startDatePlaceholder" },
+      { field: "endDate", label: "editor.form.endDate", placeholder: "editor.form.endDatePlaceholder" },
+      { field: "showDateDay", label: "editor.form.fullDate" },
+      { field: "location", label: "editor.form.location.label", placeholder: "editor.form.location.placeholder" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" }
     ],
     configOptions: ADVANCED_OPTIONS,
     defaultConfig: ADVANCED_DATE_FIRST,
@@ -389,16 +423,24 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   awards: {
     type: "awards",
     kind: "advanced",
-    label: "Awards",
+    label: "editor.sectionTypes.awards",
     icon: "i-lucide-trophy",
     fields: [
-      { field: "title", label: "Award Name", placeholder: "e.g. Employee of the Year" },
-      { field: "subtitle", label: "Organization", placeholder: "e.g. Tech Corp" },
-      { field: "endDate", label: "Date Received", placeholder: "e.g. 2023-12-31" },
-      { field: "showDateDay", label: "Full Date" },
-      { field: "location", label: "Location", placeholder: "e.g. San Francisco, CA" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      {
+        field: "title",
+        label: "editor.form.award.title.label",
+        placeholder: "editor.form.award.title.placeholder"
+      },
+      {
+        field: "subtitle",
+        label: "editor.form.award.subtitle.label",
+        placeholder: "editor.form.award.subtitle.placeholder"
+      },
+      { field: "endDate", label: "editor.form.award.endDate.label", placeholder: "editor.form.endDatePlaceholder" },
+      { field: "showDateDay", label: "editor.form.fullDate" },
+      { field: "location", label: "editor.form.location.label", placeholder: "editor.form.location.placeholder" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" }
     ],
     configOptions: ADVANCED_OPTIONS,
     defaultConfig: ADVANCED_CONTENT_FIRST,
@@ -433,15 +475,23 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   courses: {
     type: "courses",
     kind: "advanced",
-    label: "Courses",
+    label: "editor.sectionTypes.courses",
     icon: "i-lucide-book",
     fields: [
-      { field: "title", label: "Course Name", placeholder: "e.g. Machine Learning Fundamentals" },
-      { field: "subtitle", label: "Provider", placeholder: "e.g. Coursera" },
-      { field: "endDate", label: "Completion Date", placeholder: "e.g. 2023-06-30" },
-      { field: "showDateDay", label: "Full Date" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      {
+        field: "title",
+        label: "editor.form.course.title.label",
+        placeholder: "editor.form.course.title.placeholder"
+      },
+      {
+        field: "subtitle",
+        label: "editor.form.course.subtitle.label",
+        placeholder: "editor.form.course.subtitle.placeholder"
+      },
+      { field: "endDate", label: "editor.form.course.endDate.label", placeholder: "editor.form.endDatePlaceholder" },
+      { field: "showDateDay", label: "editor.form.fullDate" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" }
     ],
     configOptions: ADVANCED_OPTIONS,
     defaultConfig: ADVANCED_CONTENT_FIRST,
@@ -477,12 +527,12 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   custom: {
     type: "custom",
     kind: "basic",
-    label: "Custom Section",
+    label: "editor.sectionTypes.custom",
     icon: "i-lucide-file-text",
     fields: [
-      { field: "title", label: "Title", placeholder: "e.g. Publication title" },
-      { field: "description", label: "Description", placeholder: "Enter details..." },
-      { field: "url", label: "URL", placeholder: "e.g. https://example.com" }
+      { field: "title", label: "editor.form.custom.title.label", placeholder: "editor.form.custom.title.placeholder" },
+      { field: "description", label: "editor.form.description.label", placeholder: "editor.form.description.placeholder" },
+      { field: "url", label: "editor.form.url.label", placeholder: "editor.form.url.placeholder" }
     ],
     configOptions: BASIC_OPTIONS,
     defaultConfig: { variant: "stacked", grids: 1, separator: "pipe", titleStyle: "none" },

@@ -37,8 +37,8 @@ const handleKeyup = (event: KeyboardEvent) => {
 
 <template>
   <UPopover :open="isOpen" @update:open="(value) => emit('update:isOpen', value)">
-    <UTooltip text="Link" class="flex items-center justify-center">
-      <button :class="{ 'is-active': isActive }" aria-label="Link" @click="openLinkPanel">
+    <UTooltip :text="$t('ui.richText.link')" class="flex items-center justify-center">
+      <button :class="{ 'is-active': isActive }" :aria-label="$t('ui.richText.link')" @click="openLinkPanel">
         <UIcon name="i-lucide-link" />
       </button>
     </UTooltip>
@@ -48,13 +48,13 @@ const handleKeyup = (event: KeyboardEvent) => {
         <UInput
           ref="linkInputRef"
           :model-value="linkUrl"
-          placeholder="https://..."
+          :placeholder="$t('ui.richText.linkPlaceholder')"
           class="w-64"
           @update:model-value="(value) => emit('update:linkUrl', value)"
           @keyup="handleKeyup"
         />
-        <UButton size="sm" @click="applyLink">Apply</UButton>
-        <UButton size="sm" color="neutral" variant="soft" @click="clearLink">Clear</UButton>
+        <UButton size="sm" @click="applyLink">{{ $t('ui.richText.apply') }}</UButton>
+        <UButton size="sm" color="neutral" variant="soft" @click="clearLink">{{ $t('ui.richText.clear') }}</UButton>
       </div>
     </template>
   </UPopover>

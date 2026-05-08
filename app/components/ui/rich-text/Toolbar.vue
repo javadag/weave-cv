@@ -124,7 +124,7 @@ const resetStyles = () => {
   <div v-if="editor" class="bg-muted flex flex-wrap items-center gap-4 rounded-lg p-2">
     <ToolbarButton
       icon="i-lucide-bold"
-      tooltip="Bold"
+      :tooltip="$t('ui.richText.bold')"
       :is-active="editor.isActive('bold')"
       :disabled="!editor.can().chain().focus().toggleBold().run()"
       @click="toggleBold"
@@ -132,7 +132,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-italic"
-      tooltip="Italic"
+      :tooltip="$t('ui.richText.italic')"
       :is-active="editor.isActive('italic')"
       :disabled="!editor.can().chain().focus().toggleItalic().run()"
       @click="toggleItalic"
@@ -147,7 +147,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-strikethrough"
-      tooltip="Strike"
+      :tooltip="$t('ui.richText.strike')"
       :is-active="editor.isActive('strike')"
       :disabled="!editor.can().chain().focus().toggleStrike().run()"
       @click="toggleStrike"
@@ -155,7 +155,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-list"
-      tooltip="Bullet List"
+      :tooltip="$t('ui.richText.bulletList')"
       :is-active="editor.isActive('bulletList')"
       :disabled="!editor.can().chain().focus().toggleBulletList().run()"
       @click="toggleBulletList"
@@ -163,7 +163,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-list-ordered"
-      tooltip="Ordered List"
+      :tooltip="$t('ui.richText.orderedList')"
       :is-active="editor.isActive('orderedList')"
       :disabled="!editor.can().chain().focus().toggleOrderedList().run()"
       @click="toggleOrderedList"
@@ -173,7 +173,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-align-left"
-      tooltip="Align Left"
+      :tooltip="$t('ui.richText.alignLeft')"
       :is-active="editor.isActive({ textAlign: 'left' })"
       :disabled="!editor.can().chain().focus().setTextAlign('left').run()"
       @click="setTextAlign('left')"
@@ -181,7 +181,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-align-center"
-      tooltip="Align Center"
+      :tooltip="$t('ui.richText.alignCenter')"
       :is-active="editor.isActive({ textAlign: 'center' })"
       :disabled="!editor.can().chain().focus().setTextAlign('center').run()"
       @click="setTextAlign('center')"
@@ -189,7 +189,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-align-right"
-      tooltip="Align Right"
+      :tooltip="$t('ui.richText.alignRight')"
       :is-active="editor.isActive({ textAlign: 'right' })"
       :disabled="!editor.can().chain().focus().setTextAlign('right').run()"
       @click="setTextAlign('right')"
@@ -197,7 +197,7 @@ const resetStyles = () => {
 
     <ToolbarButton
       icon="i-lucide-align-justify"
-      tooltip="Justify"
+      :tooltip="$t('ui.richText.justify')"
       :is-active="editor.isActive({ textAlign: 'justify' })"
       :disabled="!editor.can().chain().focus().setTextAlign('justify').run()"
       @click="setTextAlign('justify')"
@@ -205,6 +205,6 @@ const resetStyles = () => {
 
     <div class="bg-border h-6 w-px" />
 
-    <ToolbarButton icon="i-lucide-rotate-ccw" tooltip="Reset Styles" @click="resetStyles" />
+    <ToolbarButton icon="i-lucide-rotate-ccw" :tooltip="$t('ui.richText.resetStyles')" @click="resetStyles" />
   </div>
 </template>

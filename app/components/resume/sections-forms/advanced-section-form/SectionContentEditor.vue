@@ -145,8 +145,8 @@ const isSummary = computed(() => props.sectionType === "summary")
         <div v-if="hasField('startDate')" class="flex flex-col gap-1">
           <DatePicker
             :model-value="getDateFieldValue('startDate')"
-            :label="getFieldConfig('startDate').label"
-            :placeholder="getFieldConfig('startDate').placeholder"
+            :label="$t(getFieldConfig('startDate').label)"
+            :placeholder="$t(getFieldConfig('startDate').placeholder || '')"
             :locale="language"
             @update:model-value="(value) => handleDateUpdate('startDate', value)"
           />
@@ -165,9 +165,9 @@ const isSummary = computed(() => props.sectionType === "summary")
           <DatePicker
             v-if="hasField('endDate')"
             :model-value="getDateFieldValue('endDate')"
-            :label="getFieldConfig('endDate').label"
+            :label="$t(getFieldConfig('endDate').label)"
             :disabled="getBooleanFieldValue('present')"
-            :placeholder="getFieldConfig('endDate').placeholder"
+            :placeholder="$t(getFieldConfig('endDate').placeholder || '')"
             :locale="language"
             @update:model-value="(value) => handleDateUpdate('endDate', value)"
           />
@@ -181,12 +181,12 @@ const isSummary = computed(() => props.sectionType === "summary")
               :disabled="getBooleanFieldValue('present')"
               @click="clearDate('endDate')"
             >
-              Clear date
+              {{ $t("editor.form.clearDate") }}
             </UButton>
             <ToggleInput
               v-if="hasField('present')"
               :model-value="getBooleanFieldValue('present')"
-              :label="getFieldConfig('present').label"
+              :label="$t(getFieldConfig('present').label)"
               :style="'start'"
               class="py-1"
               @update:model-value="(value) => handleFieldUpdate('present', value)"
@@ -197,38 +197,38 @@ const isSummary = computed(() => props.sectionType === "summary")
       <ToggleInput
         v-if="props.isAdvancedSection && hasField('showDateDay')"
         :model-value="getBooleanFieldValue('showDateDay')"
-        :label="getFieldConfig('showDateDay').label"
+        :label="$t(getFieldConfig('showDateDay').label)"
         :style="'start'"
         @update:model-value="(value) => handleFieldUpdate('showDateDay', value)"
       />
       <TextInput
         v-if="hasField('location')"
         :model-value="getStringFieldValue('location')"
-        :label="getFieldConfig('location').label"
-        :placeholder="getFieldConfig('location').placeholder"
+        :label="$t(getFieldConfig('location').label)"
+        :placeholder="$t(getFieldConfig('location').placeholder || '')"
         @update:model-value="(value) => handleFieldUpdate('location', value)"
       />
       <TextInput
         v-if="hasField('url')"
         :model-value="getStringFieldValue('url')"
-        :label="getFieldConfig('url').label"
-        :placeholder="getFieldConfig('url').placeholder"
+        :label="$t(getFieldConfig('url').label)"
+        :placeholder="$t(getFieldConfig('url').placeholder || '')"
         type="url"
         @update:model-value="(value) => handleFieldUpdate('url', value)"
       />
       <RichTextEditor
         v-if="hasField('description')"
         :content="getStringFieldValue('description')"
-        :label="getFieldConfig('description').label"
-        :placeholder="getFieldConfig('description').placeholder"
+        :label="$t(getFieldConfig('description').label)"
+        :placeholder="$t(getFieldConfig('description').placeholder || '')"
         @update:content="(htmlContent) => handleFieldUpdate('description', htmlContent)"
       />
 
       <div v-if="hasField('subRoles')" class="flex flex-col gap-2">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium">Additional Roles</span>
+          <span class="text-sm font-medium">{{ $t("editor.form.additionalRoles") }}</span>
           <UButton size="xs" variant="soft" color="primary" leading-icon="i-lucide-plus" @click="addSubRole">
-            Add Role
+            {{ $t("editor.form.addRole") }}
           </UButton>
         </div>
         <div
@@ -237,7 +237,7 @@ const isSummary = computed(() => props.sectionType === "summary")
           class="bg-accented/20 border-primary/20 flex flex-col gap-3 rounded-md border p-3"
         >
           <div class="flex items-center justify-between gap-2">
-            <span class="text-muted text-xs">Role {{ index + 1 }}</span>
+            <span class="text-muted text-xs">{{ $t("editor.form.roleLabel", { n: index + 1 }) }}</span>
             <UButton
               size="xs"
               variant="ghost"
@@ -249,14 +249,14 @@ const isSummary = computed(() => props.sectionType === "summary")
           <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
             <TextInput
               :model-value="subRole.title"
-              label="Job Title"
-              placeholder="e.g. Senior Software Engineer"
+              :label="$t('editor.form.jobTitle')"
+              :placeholder="$t('editor.form.jobTitlePlaceholder')"
               @update:model-value="(value) => updateContent(subRolePath(index, 'title'), value)"
             />
             <TextInput
               :model-value="subRole.subtitle"
-              label="Subtitle"
-              placeholder="e.g. Full-time"
+              :label="$t('editor.form.subtitleLabel')"
+              :placeholder="$t('editor.form.subtitlePlaceholder')"
               @update:model-value="(value) => updateContent(subRolePath(index, 'subtitle'), value)"
             />
           </div>
@@ -264,7 +264,7 @@ const isSummary = computed(() => props.sectionType === "summary")
             <div class="flex flex-col gap-1">
               <DatePicker
                 :model-value="subRole.startDate"
-                label="Start Date"
+                :label="$t('editor.form.startDate')"
                 :locale="language"
                 @update:model-value="(value) => updateContent(subRolePath(index, 'startDate'), value)"
               />
@@ -282,7 +282,7 @@ const isSummary = computed(() => props.sectionType === "summary")
             <div class="flex flex-col gap-1">
               <DatePicker
                 :model-value="subRole.endDate"
-                label="End Date"
+                :label="$t('editor.form.endDate')"
                 :disabled="subRole.present"
                 :locale="language"
                 @update:model-value="(value) => updateContent(subRolePath(index, 'endDate'), value)"
@@ -300,7 +300,7 @@ const isSummary = computed(() => props.sectionType === "summary")
               </UButton>
               <ToggleInput
                 :model-value="subRole.present"
-                label="Present"
+                :label="$t('editor.form.present')"
                 :style="'start'"
                 class="py-1"
                 @update:model-value="(value) => updateContent(subRolePath(index, 'present'), value)"
@@ -309,7 +309,7 @@ const isSummary = computed(() => props.sectionType === "summary")
           </div>
           <ToggleInput
             :model-value="subRole.showDateDay"
-            label="Full Date"
+            :label="$t('editor.form.fullDate')"
             :style="'start'"
             class="py-1"
             @update:model-value="(value) => updateContent(subRolePath(index, 'showDateDay'), value)"

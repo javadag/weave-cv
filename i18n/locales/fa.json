@@ -289,11 +289,28 @@
       "appliedTitle": "قالب اعمال شد",
       "appliedDesc": "«{name}» اعمال شد — محتوای تو محفوظ مانده"
     },
+    "sectionTypes": {
+      "summary": "خلاصه",
+      "skills": "مهارت‌ها",
+      "languages": "زبان‌ها",
+      "certificates": "گواهینامه‌ها",
+      "experiences": "تجربه کاری",
+      "educations": "تحصیلات",
+      "projects": "پروژه‌ها",
+      "awards": "جوایز",
+      "courses": "دوره‌ها",
+      "custom": "بخش سفارشی"
+    },
     "addSection": {
       "button": "افزودن بخش",
       "modalTitle": "افزودن بخش جدید",
       "modalSubtitle": "نوع بخشی رو انتخاب کن که می‌خوای به رزومه‌ات اضافه کنی",
       "empty": "تمام بخش‌های موجود اضافه شده‌اند."
+    },
+    "export": {
+      "button": "خروجی JSON",
+      "buttonShort": "خروجی",
+      "exporting": "درحال خروجی گرفتن..."
     },
     "slideover": {
       "settings": "تنظیمات رزومه",
@@ -414,7 +431,119 @@
       "iconLabel": "نماد",
       "clearDate": "پاک کردن تاریخ",
       "edit": "ویرایش",
-      "role/organization": "نقش/سازمان"
+      "additionalRoles": "نقش‌های اضافی",
+      "addRole": "افزودن نقش",
+      "roleLabel": "نقش {n}",
+      "jobTitle": "عنوان شغلی",
+      "jobTitlePlaceholder": "مثلاً مهندس ارشد نرم‌افزار",
+      "subtitlePlaceholder": "مثلاً تمام وقت",
+      "startDate": "تاریخ شروع",
+      "startDatePlaceholder": "مثلاً YYYY-MM-DD",
+      "endDate": "تاریخ پایان",
+      "endDatePlaceholder": "مثلاً YYYY-MM-DD",
+      "present": "تاکنون",
+      "fullDate": "تاریخ کامل",
+      "description": {
+        "label": "توضیحات",
+        "placeholder": "جزئیات را وارد کنید..."
+      },
+      "url": {
+        "label": "آدرس اینترنتی",
+        "placeholder": "مثلاً https://example.com"
+      },
+      "location": {
+        "label": "مکان",
+        "placeholder": "مثلاً شهر، کشور"
+      },
+      "summary": {
+        "description": {
+          "placeholder": "خلاصه‌ای کوتاه درباره خودت بنویس..."
+        }
+      },
+      "skill": {
+        "title": {
+          "label": "مهارت",
+          "placeholder": "مثلاً JavaScript"
+        }
+      },
+      "language": {
+        "title": {
+          "label": "زبان",
+          "placeholder": "مثلاً فارسی"
+        },
+        "description": {
+          "label": "سطح تسلط",
+          "placeholder": "مثلاً بومی، روان، متوسط"
+        }
+      },
+      "certificate": {
+        "title": {
+          "label": "گواهینامه",
+          "placeholder": "مثلاً گواهینامه AWS"
+        }
+      },
+      "experience": {
+        "title": {
+          "label": "عنوان شغلی",
+          "placeholder": "مثلاً مهندس ارشد نرم‌افزار"
+        },
+        "subtitle": {
+          "label": "شرکت",
+          "placeholder": "مثلاً گوگل"
+        }
+      },
+      "education": {
+        "title": {
+          "label": "مدرک تحصیلی",
+          "placeholder": "مثلاً کارشناسی علوم کامپیوتر"
+        },
+        "subtitle": {
+          "label": "دانشگاه/مؤسسه",
+          "placeholder": "مثلاً دانشگاه تهران"
+        }
+      },
+      "project": {
+        "title": {
+          "label": "نقش/سازمان",
+          "placeholder": "مثلاً توسعه‌دهنده ارشد"
+        },
+        "subtitle": {
+          "label": "نام پروژه",
+          "placeholder": "مثلاً پلتفرم فروشگاه اینترنتی"
+        }
+      },
+      "award": {
+        "title": {
+          "label": "نام جایزه",
+          "placeholder": "مثلاً کارمند نمونه سال"
+        },
+        "subtitle": {
+          "label": "سازمان",
+          "placeholder": "مثلاً شرکت فناوری"
+        },
+        "endDate": {
+          "label": "تاریخ دریافت"
+        }
+      },
+      "course": {
+        "title": {
+          "label": "نام دوره",
+          "placeholder": "مثلاً مبانی یادگیری ماشین"
+        },
+        "subtitle": {
+          "label": "ارائه‌دهنده",
+          "placeholder": "مثلاً کورسرا"
+        },
+        "endDate": {
+          "label": "تاریخ اتمام"
+        }
+      },
+      "custom": {
+        "title": {
+          "label": "عنوان",
+          "placeholder": "مثلاً عنوان انتشار"
+        }
+      }
     }
   },
   "resetPassword": {
@@ -679,6 +808,47 @@
         "body": "ما دقیقاً از یک کوکی استفاده می‌کنیم: weave_session. این یک توکن داخلی است که باعث می‌شود در سایت «وارد شده» باقی بمانید و پس از ۳۰ روز عدم فعالیت، منقضی می‌شود.\nبدون کوکی‌های تبلیغاتی، بدون ردیاب‌های متفرقه، بدون انگشت‌نگاری دیجیتال (Fingerprinting) و بدون گوگل آنالیتیکس."
       }
     ]
+  },
+  "ui": {
+    "iconPicker": {
+      "selectIcon": "انتخاب نماد...",
+      "searchIcons": "جستجوی نماد...",
+      "noIconsFound": "نمادی یافت نشد",
+      "enterIconManually": "یا نام نماد را دستی وارد کنید"
+    },
+    "richText": {
+      "bold": "ضخیم",
+      "italic": "مورب",
+      "strike": "خط‌خورده",
+      "bulletList": "لیست نقطه‌ای",
+      "orderedList": "لیست شماره‌دار",
+      "alignLeft": "تراز چپ",
+      "alignCenter": "تراز وسط",
+      "alignRight": "تراز راست",
+      "justify": "تراز کامل",
+      "resetStyles": "بازنشانی استایل‌ها",
+      "link": "لینک",
+      "linkPlaceholder": "https://...",
+      "apply": "اعمال",
+      "clear": "پاک کردن"
+    },
+    "fontPicker": {
+      "searchFonts": "جستجوی فونت...",
+      "noFontsFound": "فونتی یافت نشد",
+      "subsets": {
+        "all": "همه",
+        "latin": "لاتین",
+        "latinExt": "لاتین پیشرفته",
+        "arabic": "عربی",
+        "cyrillic": "سیریلیک",
+        "greek": "یونانی",
+        "hebrew": "عبری",
+        "devanagari": "دواناگاری",
+        "vietnamese": "ویتنامی",
+        "korean": "کره‌ای",
+        "thai": "تایلندی"
+      }
+    }
   },
   "seo": {
     "index": {

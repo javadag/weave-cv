@@ -295,6 +295,11 @@
       "modalSubtitle": "Select a section type to add to your resume",
       "empty": "All available sections have been added."
     },
+    "export": {
+      "button": "Export JSON",
+      "buttonShort": "Export",
+      "exporting": "Exporting..."
+    },
     "slideover": {
       "settings": "Resume Settings",
       "sections": "Resume Sections"
@@ -381,6 +386,18 @@
       "subtitleFirst": "Subtitle First",
       "linkInTitle": "Link in Title"
     },
+    "sectionTypes": {
+      "summary": "Summary",
+      "skills": "Skills",
+      "languages": "Languages",
+      "certificates": "Certificates",
+      "experiences": "Experience",
+      "educations": "Education",
+      "projects": "Projects",
+      "awards": "Awards",
+      "courses": "Courses",
+      "custom": "Custom Section"
+    },
     "form": {
       "content": "Content",
       "contactDetails": "Contact Details",
@@ -414,6 +431,77 @@
       "iconLabel": "Icon",
       "clearDate": "Clear date",
       "edit": "Edit",
+      "additionalRoles": "Additional Roles",
+      "addRole": "Add Role",
+      "roleLabel": "Role {n}",
+      "jobTitle": "Job Title",
+      "jobTitlePlaceholder": "e.g. Senior Software Engineer",
+      "subtitlePlaceholder": "e.g. Full-time",
+      "startDate": "Start Date",
+      "startDatePlaceholder": "e.g. YYYY-MM-DD",
+      "endDate": "End Date",
+      "endDatePlaceholder": "e.g. YYYY-MM-DD",
+      "present": "Present",
+      "fullDate": "Full Date",
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter details..."
+      },
+      "url": {
+        "label": "URL",
+        "placeholder": "e.g. https://example.com"
+      },
+      "location": {
+        "label": "Location",
+        "placeholder": "e.g. City, Country"
+      },
+      "summary": {
+        "description": {
+          "placeholder": "Enter a brief summary about yourself..."
+        }
+      },
+      "skill": {
+        "title": {
+          "label": "Skill",
+          "placeholder": "e.g. JavaScript"
+        }
+      },
+      "language": {
+        "title": {
+          "label": "Language",
+          "placeholder": "e.g. English"
+        },
+        "description": {
+          "label": "Proficiency",
+          "placeholder": "e.g. Native, Fluent, Intermediate"
+        }
+      },
+      "certificate": {
+        "title": {
+          "label": "Certificate",
+          "placeholder": "e.g. AWS Certified Developer"
+        }
+      },
+      "experience": {
+        "title": {
+          "label": "Job Title",
+          "placeholder": "e.g. Senior Software Engineer"
+        },
+        "subtitle": {
+          "label": "Company",
+          "placeholder": "e.g. Google"
+        }
+      },
+      "education": {
+        "title": {
+          "label": "Degree",
+          "placeholder": "e.g. Bachelor of Science"
+        },
+        "subtitle": {
+          "label": "Institution",
+          "placeholder": "e.g. Stanford University"
+        }
+      },
       "project": {
         "title": {
           "label": "Role/Organization",
@@ -422,6 +510,38 @@
         "subtitle": {
           "label": "Project Name",
           "placeholder": "e.g. E-commerce Platform"
+        }
+      },
+      "award": {
+        "title": {
+          "label": "Award Name",
+          "placeholder": "e.g. Employee of the Year"
+        },
+        "subtitle": {
+          "label": "Organization",
+          "placeholder": "e.g. Tech Corp"
+        },
+        "endDate": {
+          "label": "Date Received"
+        }
+      },
+      "course": {
+        "title": {
+          "label": "Course Name",
+          "placeholder": "e.g. Machine Learning Fundamentals"
+        },
+        "subtitle": {
+          "label": "Provider",
+          "placeholder": "e.g. Coursera"
+        },
+        "endDate": {
+          "label": "Completion Date"
+        }
+      },
+      "custom": {
+        "title": {
+          "label": "Title",
+          "placeholder": "e.g. Publication title"
         }
       }
     }
@@ -688,6 +808,47 @@
         "body": "We use exactly one cookie: weave_session, a first-party session token that keeps you signed in. It expires after 30 days of inactivity.\nNo advertising cookies, no third-party trackers, no fingerprinting, no Google Analytics."
       }
     ]
+  },
+  "ui": {
+    "iconPicker": {
+      "selectIcon": "Select icon...",
+      "searchIcons": "Search icons...",
+      "noIconsFound": "No icons found",
+      "enterIconManually": "Or enter icon name manually"
+    },
+    "richText": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "strike": "Strike",
+      "bulletList": "Bullet List",
+      "orderedList": "Ordered List",
+      "alignLeft": "Align Left",
+      "alignCenter": "Align Center",
+      "alignRight": "Align Right",
+      "justify": "Justify",
+      "resetStyles": "Reset Styles",
+      "link": "Link",
+      "linkPlaceholder": "https://...",
+      "apply": "Apply",
+      "clear": "Clear"
+    },
+    "fontPicker": {
+      "searchFonts": "Search fonts...",
+      "noFontsFound": "No fonts found",
+      "subsets": {
+        "all": "All",
+        "latin": "Latin",
+        "latinExt": "Latin Ext",
+        "arabic": "Arabic",
+        "cyrillic": "Cyrillic",
+        "greek": "Greek",
+        "hebrew": "Hebrew",
+        "devanagari": "Devanagari",
+        "vietnamese": "Vietnamese",
+        "korean": "Korean",
+        "thai": "Thai"
+      }
+    }
   },
   "seo": {
     "index": {

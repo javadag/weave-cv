@@ -11,20 +11,16 @@ const emit = defineEmits<{ (e: "update:modelValue", value: string): void }>()
 
 const isOpen = ref(false)
 const { fonts, subsets, search, selectedSubset } = useGoogleFonts()
+const { t } = useI18n()
 
-// Subset labels shown in the UI
-const SUBSET_LABELS: Record<string, string> = {
-  all: "All",
-  latin: "Latin",
-  "latin-ext": "Latin Ext",
-  arabic: "Arabic",
-  cyrillic: "Cyrillic",
-  greek: "Greek",
-  hebrew: "Hebrew",
-  devanagari: "Devanagari",
-  vietnamese: "Vietnamese",
-  korean: "Korean",
-  thai: "Thai"
+// Map from subset code (may contain hyphens) to i18n key segment
+const SUBSET_KEY_MAP: Record<string, string> = {
+  "latin-ext": "latinExt"
+}
+
+const subsetLabel = (subset: string) => {
+  const key = SUBSET_KEY_MAP[subset] ?? subset
+  return t(`ui.fontPicker.subsets.${key}`)
 }
 
 // Only show a curated set of subset tabs to keep the UI clean
@@ -79,7 +75,7 @@ const vFontVisible = {
       <template #content>
         <div class="flex flex-col">
           <div class="p-2">
-            <UInput v-model="search" placeholder="Search fonts..." size="sm" icon="i-lucide-search" autofocus />
+            <UInput v-model="search" :placeholder="t('ui.fontPicker.searchFonts')" size="sm" icon="i-lucide-search" autofocus />
           </div>
           <div class="border-muted flex gap-1 overflow-x-auto border-b px-2 pb-2">
             <UButton
@@ -89,7 +85,7 @@ const vFontVisible = {
               :variant="selectedSubset === subset ? 'solid' : 'ghost'"
               @click="selectedSubset = subset"
             >
-              {{ SUBSET_LABELS[subset] ?? subset }}
+              {{ subsetLabel(subset) }}
             </UButton>
           </div>
           <div class="max-h-64 overflow-y-auto">
@@ -107,7 +103,7 @@ const vFontVisible = {
               </span>
               <span class="text-muted shrink-0 text-xs">{{ entry.category }}</span>
             </button>
-            <div v-if="fonts.length === 0" class="text-muted py-6 text-center text-sm">No fonts found</div>
+            <div v-if="fonts.length === 0" class="text-muted py-6 text-center text-sm">{{ t('ui.fontPicker.noFontsFound') }}</div>
           </div>
         </div>
       </template>

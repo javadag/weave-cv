@@ -60,6 +60,6 @@ const isSummary = computed(() => props.sectionType === "summary")
       :is-hidden="content.isHidden"
       :on-toggle="() => handleToggleVisibility()"
     />
-    <Delete v-if="sectionType !== 'summary'" :on-delete="() => emits('delete')" tooltip="Delete" />
+    <Delete v-if="sectionType !== 'summary'" :on-delete="() => emits('delete')" />
   </div>
 </template>

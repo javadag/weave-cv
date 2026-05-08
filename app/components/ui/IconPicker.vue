@@ -45,13 +45,13 @@ const model = computed({
   <UPopover v-model:open="isOpen">
     <UButton :disabled="props.disabled" variant="outline" size="xs">
       <span v-if="selectedIconHtml" v-html="selectedIconHtml" />
-      <span v-else>Select icon...</span>
+      <span v-else>{{ $t('ui.iconPicker.selectIcon') }}</span>
     </UButton>
     <template #content>
       <div class="w-80 p-2">
         <UInput
           v-model="searchQuery"
-          placeholder="Search icons..."
+          :placeholder="$t('ui.iconPicker.searchIcons')"
           size="sm"
           icon="i-lucide-search"
           class="mb-2"
@@ -71,12 +71,12 @@ const model = computed({
               <span v-html="getIcon(icon, 20) || ''" />
             </button>
           </div>
-          <div v-if="filteredIcons.length === 0" class="text-muted py-4 text-center text-sm">No icons found</div>
+          <div v-if="filteredIcons.length === 0" class="text-muted py-4 text-center text-sm">{{ $t('ui.iconPicker.noIconsFound') }}</div>
         </div>
         <div class="border-muted mt-2 border-t pt-2">
           <UInput
             v-model="model"
-            placeholder="Or enter icon name manually"
+            :placeholder="$t('ui.iconPicker.enterIconManually')"
             size="sm"
             class="text-xs"
             @keyup.enter="isOpen = false"

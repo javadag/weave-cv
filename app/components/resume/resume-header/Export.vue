@@ -62,7 +62,7 @@ const handleExport = () => {
     }"
     @click="handleExport"
   >
-    <span class="hidden sm:inline">{{ exporting ? "Exporting..." : "Export JSON" }}</span>
-    <span class="sm:hidden">{{ exporting ? "..." : "Export" }}</span>
+    <span class="hidden sm:inline">{{ exporting ? $t('editor.export.exporting') : $t('editor.export.button') }}</span>
+    <span class="sm:hidden">{{ exporting ? "..." : $t('editor.export.buttonShort') }}</span>
   </UButton>
 </template>
