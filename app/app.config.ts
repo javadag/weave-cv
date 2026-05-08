@@ -10,8 +10,15 @@ export default defineAppConfig({
       }
     },
     input: {
+      variants: {
+        size: {
+          lg: {
+            base: "px-3 py-2 text-sm/5 lg:text-sm/5 gap-2"
+          }
+        }
+      },
       slots: {
-        base: "rounded-lg"
+        base: "rounded-lg autofill:text-sm placeholder:text-sm rtl:placeholder:text-xs"
       }
     },
     card: {

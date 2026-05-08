@@ -28,18 +28,11 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
 
 <template>
   <div
-    class="bg-default relative flex flex-col items-stretch justify-between gap-3 rounded-xl p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4"
+    class="bg-default relative flex flex-col items-stretch justify-between gap-3 rounded-xl p-3 sm:gap-4 sm:p-4 lg:flex-row lg:items-center"
   >
     <div class="flex min-w-0 flex-1 items-center gap-2">
-      <UButton
-        to="/dashboard"
-        variant="ghost"
-        color="neutral"
-        size="lg"
-        icon="i-lucide-arrow-left"
-        class="hidden shrink-0 lg:flex"
-      >
-        <span class="hidden xl:inline">{{ $t("editor.header.dashboard") }}</span>
+      <UButton to="/dashboard" variant="ghost" color="neutral" size="lg" icon="i-lucide-arrow-left">
+        <span class="hidden lg:inline">{{ $t("editor.header.dashboard") }}</span>
       </UButton>
       <UInput
         v-model="titleModel"
@@ -50,7 +43,7 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
         icon="i-heroicons-document-text"
         class="w-full min-w-0"
         :ui="{
-          base: 'pe-11'
+          base: 'pe-2 sm:pe-12'
         }"
       >
         <template #trailing>
@@ -58,7 +51,7 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
         </template>
       </UInput>
     </div>
-    <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+    <div class="flex shrink-0 flex-wrap items-center gap-2 sm:gap-3">
       <div v-if="undoRedo" class="border-muted flex items-center gap-0.5 rounded-lg border p-0.5">
         <UButton
           variant="ghost"

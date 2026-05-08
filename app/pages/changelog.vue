@@ -122,7 +122,6 @@ const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: 
 /* Commit hash links */
 .changelog-prose :deep(a) {
   color: var(--ui-text-dimmed);
-  font-family: ui-monospace, "JetBrains Mono", "Menlo", monospace;
   font-size: 12px;
   padding: 1px 6px;
   margin-left: 4px;
@@ -146,7 +145,6 @@ const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: 
 }
 
 .changelog-prose :deep(code) {
-  font-family: ui-monospace, "JetBrains Mono", monospace;
   font-size: 13px;
   padding: 1px 6px;
   border-radius: 4px;

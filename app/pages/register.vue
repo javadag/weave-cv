@@ -113,7 +113,6 @@ const signUpWithGithub = async () => {
             :title="$t('userDropdown.errorTitle')"
             :description="error"
           />
-
           <UFormField :label="$t('auth.register.emailLabel')" name="email" required>
             <UInput
               v-model="formState.email"
@@ -124,7 +123,6 @@ const signUpWithGithub = async () => {
               :disabled="loading"
             />
           </UFormField>
-
           <UFormField :label="$t('auth.register.passwordLabel')" name="password" required>
             <AuthPasswordInput
               v-model="formState.password"
@@ -132,7 +130,6 @@ const signUpWithGithub = async () => {
               :disabled="loading"
             />
           </UFormField>
-
           <UFormField :label="$t('auth.register.confirmPasswordLabel')" name="confirmPassword" required>
             <AuthPasswordInput
               v-model="formState.confirmPassword"

@@ -73,8 +73,8 @@ const handleDuplicateClick = async () => {
       <UIcon name="i-lucide-loader-2" class="text-primary size-8 animate-spin" />
     </div>
     <template #header>
-      <div class="flex items-start justify-between">
-        <h3 class="text-default truncate text-lg font-semibold">
+      <div class="flex items-center justify-between">
+        <h3 class="text-default truncate text-sm font-semibold sm:text-base md:text-lg">
           {{ resume.title }}
         </h3>
         <UDropdownMenu
