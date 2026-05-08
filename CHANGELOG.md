@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.2](https://github.com/JavadAg/weave-cv/compare/v2.2.1...v2.2.2) (2026-05-08)
+
+
+### 🐛 Bug Fixes
+
+* add more translation ([f7de99b](https://github.com/JavadAg/weave-cv/commit/f7de99bcb7b8b79ab40b0dafa7d7d43bf89c6da4))
+* disable undo shortcuts ([2ef264b](https://github.com/JavadAg/weave-cv/commit/2ef264b85ea5d2347a50c2e1303b8b9603f13040))
+* signup confirm ([fafeb1f](https://github.com/JavadAg/weave-cv/commit/fafeb1f5dad197e83a0f0b0f4218857e59985d26))
+* signup resend email ([5c46395](https://github.com/JavadAg/weave-cv/commit/5c46395ee8f144c0169bb2b47f0e844b1f6e5533))
+* update responsive ([38174b8](https://github.com/JavadAg/weave-cv/commit/38174b8cc67ff94b4944866998340823e6264960))
+
 ### [2.2.1](https://github.com/JavadAg/weave-cv/compare/v2.2.0...v2.2.1) (2026-05-07)
 
 
