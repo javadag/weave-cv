@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/JavadAg/weave-cv/compare/v2.2.2...v2.3.0) (2026-05-09)
+
+
+### ✨ Features
+
+* handling dates for languages ([ff1c458](https://github.com/JavadAg/weave-cv/commit/ff1c45893c9b5f4acb7bd250498c37b5182d1da4))
+
+
+### 🐛 Bug Fixes
+
+* load icons locally ([f55b818](https://github.com/JavadAg/weave-cv/commit/f55b818eb351c2a7e84d220c16f0dd044711e977))
+* style ([108cb6a](https://github.com/JavadAg/weave-cv/commit/108cb6ab0d9e548ee7e4b74bf72079e462ed8a28))
+
 ### [2.2.2](https://github.com/JavadAg/weave-cv/compare/v2.2.1...v2.2.2) (2026-05-08)
 
 
