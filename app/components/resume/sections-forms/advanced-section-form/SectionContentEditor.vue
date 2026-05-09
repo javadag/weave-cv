@@ -16,7 +16,8 @@ const props = defineProps<Props>()
 const emit = defineEmits(["closeEdit"])
 
 const { updateContent } = useResumeStore()
-const { language } = useLocaleInfo()
+const { configs } = storeToRefs(useConfigsStore())
+const language = computed(() => configs.value.general.layout.language)
 
 const advancedContent = computed(() =>
   props.isAdvancedSection ? (props.content as TAdvancedContent) : null

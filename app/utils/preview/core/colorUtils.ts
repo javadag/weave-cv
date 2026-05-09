@@ -17,13 +17,13 @@ export function getColumnColors(colors: TColors, personalPosition: string, isRtl
   leftColumnColors = colors.primary
   rightColumnColors = colors.secondary
 
-  const adjustedPosition = isRtl
+  const adjustedPosition = /* isRtl
     ? personalPosition === "left"
       ? "right"
       : personalPosition === "right"
         ? "left"
         : personalPosition
-    : personalPosition
+    : */ personalPosition
 
   if (adjustedPosition === "left") {
     return { left: leftColumnColors, right: rightColumnColors }

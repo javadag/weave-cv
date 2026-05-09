@@ -309,6 +309,7 @@
       "sections": "Sections",
       "layout": "Layout",
       "rtl": "Right-to-left (RTL)",
+      "resumeLanguage": "Resume Language",
       "dateFormat": "Date format",
       "pageSize": "Page Size",
       "columns": "Columns",

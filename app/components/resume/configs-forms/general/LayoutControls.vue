@@ -25,6 +25,24 @@ const sectionGapConstraints = extractNumberConstraintsFromPath(LayoutSchema, "se
 const verticalMarginConstraints = extractNumberConstraintsFromPath(LayoutSchema, "verticalMargin")
 const horizontalMarginConstraints = extractNumberConstraintsFromPath(LayoutSchema, "horizontalMargin")
 
+const RESUME_LANGUAGE_OPTIONS = [
+  { value: "en", label: "English" },
+  { value: "fa", label: "فارسی (Persian)" },
+  { value: "fr", label: "Français (French)" },
+  { value: "de", label: "Deutsch (German)" },
+  { value: "ar", label: "العربية (Arabic)" },
+  { value: "es", label: "Español (Spanish)" },
+  { value: "it", label: "Italiano (Italian)" },
+  { value: "pt", label: "Português (Portuguese)" },
+  { value: "ru", label: "Русский (Russian)" },
+  { value: "tr", label: "Türkçe (Turkish)" },
+  { value: "zh", label: "中文 (Chinese)" },
+  { value: "ja", label: "日本語 (Japanese)" },
+  { value: "ko", label: "한국어 (Korean)" },
+  { value: "nl", label: "Nederlands (Dutch)" },
+  { value: "pl", label: "Polski (Polish)" }
+]
+
 const dateFormatOptions = createOptionsFromEnum(DateFormat.options)
 const pageSizeOptions = createOptionsFromEnum(Object.keys(PAPER_SIZES) as TPaperSize[], (value) => value)
 const columnsOptions = createOptionsFromEnum(
@@ -71,6 +89,12 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       @update:model-value="(value) => handleUpdate('rtl', value)"
     />
     <SelectItem
+      :model-value="configs.general.layout.language"
+      :label="$t('editor.configs.resumeLanguage')"
+      :options="RESUME_LANGUAGE_OPTIONS"
+      @update:model-value="(value) => handleUpdate('language', value)"
+    />
+    <SelectItem
       v-model="configs.general.layout.dateFormat"
       :label="$t('editor.configs.dateFormat')"
       :options="dateFormatOptions"
@@ -97,10 +121,27 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
     />
     <SelectItem
       :disabled="configs.general.layout.columns === '1'"
-      :model-value="configs.general.layout.personalPosition"
+      :model-value="
+        configs.general.layout.rtl
+          ? configs.general.layout.personalPosition === 'left'
+            ? 'right'
+            : configs.general.layout.personalPosition === 'right'
+              ? 'left'
+              : 'top'
+          : configs.general.layout.personalPosition
+      "
       :label="$t('editor.configs.personalSection')"
       :options="personalPositionOptions"
-      @update:model-value="(value) => handleUpdate('personalPosition', value)"
+      @update:model-value="
+        (value) =>
+          configs.general.layout.rtl
+            ? value === 'left'
+              ? handleUpdate('personalPosition', 'right')
+              : value === 'right'
+                ? handleUpdate('personalPosition', 'left')
+                : handleUpdate('personalPosition', 'top')
+            : handleUpdate('personalPosition', value)
+      "
     />
     <NumberInput
       v-model="configs.general.layout.sectionGap"

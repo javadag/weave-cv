@@ -21,7 +21,6 @@ const layout = computed(() => configs.value.general.layout)
 const colors = computed(() => configs.value.general.colors)
 
 const columnColors = inject(ColumnColorsKey)
-const { language } = useLocaleInfo()
 
 const color = computed(() =>
   colors.value.apply.includes("dates") ? columnColors?.value.accentColor : columnColors?.value.textColor
@@ -30,10 +29,10 @@ const color = computed(() =>
 const hideDay = computed(() => props.showDateDay === false)
 
 const startDateFormatted = computed(() =>
-  fmtDate(props.startDate, layout.value.dateFormat, { hideDay: hideDay.value, locale: language.value })
+  fmtDate(props.startDate, layout.value.dateFormat, { hideDay: hideDay.value, locale: layout.value.language })
 )
 const endDateFormatted = computed(() =>
-  fmtDate(props.endDate, layout.value.dateFormat, { hideDay: hideDay.value, locale: language.value })
+  fmtDate(props.endDate, layout.value.dateFormat, { hideDay: hideDay.value, locale: layout.value.language })
 )
 const endDateDisplay = computed(() => (props.present ? "Present" : endDateFormatted.value))
 
