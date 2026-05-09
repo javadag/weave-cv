@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.1](https://github.com/JavadAg/weave-cv/compare/v2.3.0...v2.3.1) (2026-05-09)
+
+
+### 🐛 Bug Fixes
+
+* template modal ([8d83843](https://github.com/JavadAg/weave-cv/commit/8d83843317ae679d2377f615cf822070bdd36228))
+
 ## [2.3.0](https://github.com/JavadAg/weave-cv/compare/v2.2.2...v2.3.0) (2026-05-09)
 
 
