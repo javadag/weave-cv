@@ -117,14 +117,14 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
       v-if="isTwoColumnLayout"
       dir="ltr"
       :class="{ 'flex-row-reverse': configs.general.layout.rtl }"
-      class="mt-2 flex items-start justify-between gap-2"
+      class="mt-2 flex items-stretch justify-between gap-2"
     >
       <VueDraggable
         ref="leftColumnRef"
         v-model="leftColumnSectionsRef"
         group="columns"
         :animation="150"
-        class="bg-accented/30 flex h-full flex-1 flex-col items-start justify-start gap-2 rounded-lg p-2"
+        class="bg-accented/30 flex flex-1 flex-col items-start justify-start gap-2 rounded-lg p-2"
         @update="updateTwoColumnSections"
         @add="updateTwoColumnSections"
         @remove="updateTwoColumnSections"
@@ -132,7 +132,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         <div
           v-for="[key, section] in leftColumnSectionsRef"
           :key="key"
-          class="bg-default flex w-full cursor-move items-center gap-2 rounded-lg p-2"
+          class="bg-default flex w-full cursor-move items-center gap-1 rounded-lg p-2"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground shrink-0" />
           <span class="text-xs font-medium break-all capitalize">{{ section.title || section.type }}</span>
@@ -143,7 +143,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         v-model="rightColumnSectionsRef"
         group="columns"
         :animation="150"
-        class="bg-accented/30 flex h-full flex-1 flex-col items-start justify-start gap-2 rounded-lg p-2"
+        class="bg-accented/30 flex flex-1 flex-col items-start justify-start gap-2 rounded-lg p-2"
         @update="updateTwoColumnSections"
         @add="updateTwoColumnSections"
         @remove="updateTwoColumnSections"
@@ -151,7 +151,7 @@ const updateSingleColumnSections = (_event: SortableEvent) => {
         <div
           v-for="[key, section] in rightColumnSectionsRef"
           :key="key"
-          class="bg-default flex w-full cursor-move items-center gap-2 rounded-lg p-2"
+          class="bg-default flex w-full cursor-move items-center gap-1 rounded-lg p-2"
         >
           <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground shrink-0" />
           <span class="text-xs font-medium break-all capitalize">{{ section.title || section.type }}</span>

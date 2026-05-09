@@ -28,7 +28,7 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
 
 <template>
   <div
-    class="bg-default relative flex flex-col items-stretch justify-between gap-3 rounded-xl p-3 sm:gap-4 sm:p-4 lg:flex-row lg:items-center"
+    class="bg-default relative flex flex-col items-stretch justify-between gap-2 rounded-xl p-3 sm:gap-3 sm:p-4 lg:flex-row lg:items-center"
   >
     <div class="flex min-w-0 flex-1 items-center gap-2">
       <UButton to="/dashboard" variant="ghost" color="neutral" size="lg" icon="i-lucide-arrow-left">
@@ -84,9 +84,7 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
       >
         <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
       </UButton>
-      <div
-        class="bg-elevated/50 border-muted flex items-center gap-1 overflow-hidden rounded-lg border p-0 backdrop-blur-sm sm:gap-2"
-      >
+      <div class="bg-elevated/50 border-muted flex items-center overflow-hidden rounded-lg border p-0 backdrop-blur-sm">
         <SaveChanges @saving="saving = $event" />
         <Download :disabled="saving" />
         <Export :disabled="saving" />

@@ -68,14 +68,20 @@ const vFontVisible = {
 
 <template>
   <UFormField :label="props.label" :ui="{ label: 'text-2sm text-muted', container: 'mt-0' }">
-    <UPopover v-model:open="isOpen" :ui="{ content: 'w-72 p-0' }">
+    <UPopover v-model:open="isOpen" class="mt-1" :ui="{ content: 'w-72 p-0' }">
       <UButton variant="outline" size="sm" class="w-full justify-between" trailing-icon="i-lucide-chevron-down">
         <span :style="{ fontFamily: `'${modelValue}', sans-serif` }" class="truncate">{{ modelValue }}</span>
       </UButton>
       <template #content>
         <div class="flex flex-col">
           <div class="p-2">
-            <UInput v-model="search" :placeholder="t('ui.fontPicker.searchFonts')" size="sm" icon="i-lucide-search" autofocus />
+            <UInput
+              v-model="search"
+              :placeholder="t('ui.fontPicker.searchFonts')"
+              size="sm"
+              icon="i-lucide-search"
+              autofocus
+            />
           </div>
           <div class="border-muted flex gap-1 overflow-x-auto border-b px-2 pb-2">
             <UButton
@@ -103,7 +109,9 @@ const vFontVisible = {
               </span>
               <span class="text-muted shrink-0 text-xs">{{ entry.category }}</span>
             </button>
-            <div v-if="fonts.length === 0" class="text-muted py-6 text-center text-sm">{{ t('ui.fontPicker.noFontsFound') }}</div>
+            <div v-if="fonts.length === 0" class="text-muted py-6 text-center text-sm">
+              {{ t("ui.fontPicker.noFontsFound") }}
+            </div>
           </div>
         </div>
       </template>

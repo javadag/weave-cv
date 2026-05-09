@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { TEMPLATES, type Template } from "~/constants/templates"
 import { reconcileSectionsOrder } from "~/utils/configs/reconcileSectionsOrder"
+import { loadFont, preloadFont } from "~/utils/preview/core/fontUtils"
 
 const modelValue = defineModel<boolean>({ default: false })
 const selectedTemplate = ref<Template | null>(null)
@@ -14,9 +15,14 @@ const handleTemplateSelect = (template: Template) => {
   selectedTemplate.value = template
 }
 
-const handleApply = () => {
+const handleApply = async () => {
   if (!selectedTemplate.value) return
   const templateConfigs = selectedTemplate.value.configs
+  const newFont = templateConfigs.general?.typography?.fontFamily
+  if (newFont) {
+    loadFont(newFont)
+    await preloadFont(newFont)
+  }
   const reconciledOrder = reconcileSectionsOrder(
     templateConfigs.general.layout.order,
     configsStore.configs.general.layout.order,

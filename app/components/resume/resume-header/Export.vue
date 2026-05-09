@@ -52,17 +52,13 @@ const handleExport = () => {
     color="neutral"
     variant="ghost"
     :icon="exporting ? 'i-lucide-loader-2' : 'i-lucide-file-code'"
-    :class="[
-      !props.disabled && !exporting && 'hover:bg-elevated/50 hover:shadow-sm',
-      exporting && '[&_svg]:animate-spin',
-      (props.disabled || exporting) && 'cursor-not-allowed opacity-50'
-    ]"
+    :class="[exporting && '[&_svg]:animate-spin', (props.disabled || exporting) && 'cursor-not-allowed opacity-50']"
     :ui="{
       leadingIcon: 'size-4'
     }"
     @click="handleExport"
   >
-    <span class="hidden sm:inline">{{ exporting ? $t('editor.export.exporting') : $t('editor.export.button') }}</span>
-    <span class="sm:hidden">{{ exporting ? "..." : $t('editor.export.buttonShort') }}</span>
+    <span class="hidden sm:inline">{{ exporting ? $t("editor.export.exporting") : $t("editor.export.button") }}</span>
+    <span class="sm:hidden">{{ exporting ? "..." : $t("editor.export.buttonShort") }}</span>
   </UButton>
 </template>

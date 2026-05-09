@@ -78,7 +78,7 @@ const iconHtml = computed(() => {
 const iconSize = computed(() => headingConfigs.value.icon?.size || 16)
 </script>
 <template>
-  <div v-if="section?.isTitleVisible && section" ref="elementRef" :style="containerStyle">
+  <div v-if="section?.isTitleVisible && section.title && section" ref="elementRef" :style="containerStyle">
     <component
       :is="heading"
       :section="section"
