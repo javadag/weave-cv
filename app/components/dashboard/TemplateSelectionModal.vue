@@ -101,15 +101,16 @@ watch(modelValue, (isOpen) => {
           </div>
         </template>
         <div>
-          <div class="grid max-h-175 grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2">
+          <div
+            class="grid h-full max-h-[65dvh] grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2"
+          >
             <button
               v-for="template in TEMPLATES"
               :key="template.id"
               type="button"
               :disabled="isCreating"
               :style="{
-                aspectRatio: `${PAPER_SIZES['A4'].w / PAPER_SIZES['A4'].h}`,
-                width: `${PAPER_SIZES['A4'].w * 0.5}mm`
+                aspectRatio: `${PAPER_SIZES['A4'].w / PAPER_SIZES['A4'].h}`
               }"
               :class="[
                 'group relative flex flex-col items-center justify-between rounded-lg border-2 p-4 text-left transition-all duration-200 hover:shadow-lg',
@@ -121,7 +122,7 @@ watch(modelValue, (isOpen) => {
               @click="handleTemplateSelect(template)"
             >
               <div v-if="template.screenshot">
-                <NuxtImg :src="template.screenshot" alt="Template Screenshot" class="h-full w-full object-cover" />
+                <NuxtImg :src="template.screenshot" alt="Template Screenshot" class="size-full object-cover" />
               </div>
               <div
                 v-else

@@ -81,8 +81,8 @@ watch(modelValue, (isOpen) => {
           </div>
         </template>
 
-        <div class="py-2">
-          <div class="grid max-h-175 grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2">
+        <div>
+          <div class="grid max-h-[65dvh] grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2">
             <button
               v-for="template in TEMPLATES"
               :key="template.id"
@@ -96,7 +96,7 @@ watch(modelValue, (isOpen) => {
               @click="handleTemplateSelect(template)"
             >
               <div v-if="template.screenshot">
-                <NuxtImg :src="template.screenshot" alt="Template Screenshot" class="h-full w-full object-cover" />
+                <NuxtImg :src="template.screenshot" alt="Template Screenshot" class="size-full object-cover" />
               </div>
               <div
                 v-else
@@ -119,9 +119,6 @@ watch(modelValue, (isOpen) => {
                 <p class="text-muted line-clamp-2 text-sm">{{ template.description }}</p>
               </div>
             </button>
-          </div>
-          <div v-if="!selectedTemplate" class="bg-muted/50 border-default/20 mt-4 rounded-lg border p-3">
-            <p class="text-muted text-center text-sm">{{ $t("editor.template.selectHint") }}</p>
           </div>
         </div>
 
