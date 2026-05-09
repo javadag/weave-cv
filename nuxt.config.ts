@@ -62,6 +62,12 @@ export default defineNuxtConfig({
       }
     }
   },
+  icon: {
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 512
+    }
+  },
   css: ["~/assets/css/tailwind.css"],
   vite: {
     plugins: [tailwindcss()],
