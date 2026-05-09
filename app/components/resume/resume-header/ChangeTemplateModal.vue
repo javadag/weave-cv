@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TEMPLATES, type Template } from "~/constants/templates"
+import type { Template } from "~/constants/templates"
 import { reconcileSectionsOrder } from "~/utils/configs/reconcileSectionsOrder"
 import { loadFont, preloadFont } from "~/utils/preview/core/fontUtils"
 
@@ -60,13 +60,17 @@ watch(modelValue, (isOpen) => {
 <template>
   <UModal
     v-model:open="modelValue"
-    class="max-w-compact"
     :ui="{
-      content: 'sm:max-w-4xl'
+      content: 'sm:max-w-4xl flex flex-col max-h-[90dvh]'
     }"
   >
     <template #content>
-      <UCard>
+      <UCard
+        :ui="{
+          root: 'flex flex-col flex-1 overflow-hidden',
+          body: 'flex-1 overflow-hidden flex flex-col p-4'
+        }"
+      >
         <template #header>
           <div class="flex items-center gap-3">
             <div
@@ -81,46 +85,10 @@ watch(modelValue, (isOpen) => {
           </div>
         </template>
 
-        <div>
-          <div class="grid max-h-[65dvh] grid-cols-1 items-start justify-start gap-4 overflow-scroll md:grid-cols-2">
-            <button
-              v-for="template in TEMPLATES"
-              :key="template.id"
-              type="button"
-              :class="[
-                'group relative flex-col items-center justify-between rounded-lg border-2 p-4 text-left transition-all duration-200 hover:shadow-lg',
-                selectedTemplate?.id === template.id
-                  ? 'border-primary bg-primary/5 ring-primary/20 ring-2'
-                  : 'border-default/20 hover:border-primary/40 bg-default/50'
-              ]"
-              @click="handleTemplateSelect(template)"
-            >
-              <div v-if="template.screenshot">
-                <NuxtImg :src="template.screenshot" alt="Template Screenshot" class="size-full object-cover" />
-              </div>
-              <div
-                v-else
-                class="from-primary/20 to-primary/5 mb-3 flex size-full items-center justify-center overflow-hidden rounded-md bg-linear-to-br"
-              >
-                <div class="text-center">
-                  <UIcon name="i-lucide-layout-template" class="text-primary/60 mx-auto mb-2 h-8 w-8" />
-                  <p class="text-primary/60 text-xs font-medium">{{ template.name }}</p>
-                </div>
-              </div>
-              <div class="space-y-1">
-                <div class="flex items-center gap-2">
-                  <h4 class="text-default font-semibold">{{ template.name }}</h4>
-                  <UIcon
-                    v-if="selectedTemplate?.id === template.id"
-                    name="i-lucide-check-circle"
-                    class="text-primary h-4 w-4"
-                  />
-                </div>
-                <p class="text-muted line-clamp-2 text-sm">{{ template.description }}</p>
-              </div>
-            </button>
-          </div>
-        </div>
+        <TemplateGrid
+          :selected-template-id="selectedTemplate?.id"
+          @select="handleTemplateSelect"
+        />
 
         <template #footer>
           <div class="flex justify-end gap-3">
