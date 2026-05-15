@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DashboardSidebar from "~/components/dashboard/Sidebar.vue"
+import FeedbackFab from "~/components/feedback/FeedbackFab.vue"
 import DashboardHeader from "~/components/layout/DashboardHeader.vue"
 
 const open = ref(true)
@@ -16,5 +17,6 @@ const open = ref(true)
         </main>
       </div>
     </div>
+    <FeedbackFab />
   </div>
 </template>

@@ -161,6 +161,24 @@
     "errorTitle": "خطا",
     "errorDesc": "خروج با مشکل مواجه شد. لطفاً دوباره امتحان کن."
   },
+  "feedback": {
+    "button": "گزارش باگ",
+    "title": "ارسال بازخورد",
+    "subtitle": "گزارش باگ، پیشنهاد یا سوال — همه‌اش رو می‌خونیم.",
+    "typeLabel": "نوع",
+    "typeBug": "باگ",
+    "typeFeedback": "بازخورد",
+    "typeFeature": "درخواست ویژگی",
+    "emailLabel": "ایمیلت (اختیاری)",
+    "emailHint": "تا بتونیم جواب بدیم.",
+    "messageLabel": "پیام",
+    "messagePlaceholder": "مشکل رو توضیح بده یا نظرت رو با ما در میون بذار…",
+    "submit": "ارسال",
+    "successTitle": "ممنون!",
+    "successDesc": "پیام تو ارسال شد.",
+    "errorTitle": "ارسال نشد",
+    "errorDesc": "لطفاً کمی بعد دوباره امتحان کن."
+  },
   "common": {
     "cancel": "لغو",
     "delete": "حذف",

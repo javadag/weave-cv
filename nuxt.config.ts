@@ -43,6 +43,9 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    resendApiKey: "",
+    feedbackToEmail: "",
+    feedbackFromEmail: "",
     public: {
       motion: {
         directives: {

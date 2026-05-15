@@ -161,6 +161,24 @@
     "errorTitle": "Error",
     "errorDesc": "Failed to log out. Please try again."
   },
+  "feedback": {
+    "button": "Report a bug",
+    "title": "Send feedback",
+    "subtitle": "Bug reports, ideas, and questions all welcome.",
+    "typeLabel": "Type",
+    "typeBug": "Bug",
+    "typeFeedback": "Feedback",
+    "typeFeature": "Feature request",
+    "emailLabel": "Your email (optional)",
+    "emailHint": "So we can reply.",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Describe the issue or share your thoughts…",
+    "submit": "Send",
+    "successTitle": "Thanks!",
+    "successDesc": "Your message has been sent.",
+    "errorTitle": "Couldn't send",
+    "errorDesc": "Please try again in a moment."
+  },
   "common": {
     "cancel": "Cancel",
     "delete": "Delete",

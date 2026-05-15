@@ -44,6 +44,7 @@
     "pinia": "^3.0.3",
     "puppeteer-core": "^24.29.0",
     "reka-ui": "^2.9.6",
+    "resend": "^6.12.3",
     "sortablejs": "^1.15.6",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",

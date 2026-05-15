@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FeedbackFab from "~/components/feedback/FeedbackFab.vue"
 import LanguageSwitcher from "~/components/layout/LanguageSwitcher.vue"
 import Logo from "~/components/layout/Logo.vue"
 import Theme from "~/components/layout/Theme.vue"
@@ -28,5 +29,6 @@ const isAuthPage = computed(() => AUTH_PAGES.has(route.path))
     <main class="max-w-compact mx-auto w-full px-3 py-4 sm:px-5 md:px-8 [&>div]:h-full">
       <slot />
     </main>
+    <FeedbackFab />
   </div>
 </template>
