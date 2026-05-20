@@ -103,7 +103,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   summary: {
     type: "summary",
     kind: "basic",
-    label: "editor.sectionTypes.summary",
+    label: "Summary",
     icon: "i-lucide-book-open",
     fields: [
       {
@@ -133,7 +133,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   skills: {
     type: "skills",
     kind: "basic",
-    label: "editor.sectionTypes.skills",
+    label: "Skills",
     icon: "i-lucide-wrench",
     fields: [
       { field: "title", label: "editor.form.skill.title.label", placeholder: "editor.form.skill.title.placeholder" },
@@ -173,7 +173,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   languages: {
     type: "languages",
     kind: "basic",
-    label: "editor.sectionTypes.languages",
+    label: "Languages",
     icon: "i-lucide-globe",
     fields: [
       {
@@ -208,7 +208,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   certificates: {
     type: "certificates",
     kind: "basic",
-    label: "editor.sectionTypes.certificates",
+    label: "Certificates",
     icon: "i-lucide-award",
     fields: [
       {
@@ -248,7 +248,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   experiences: {
     type: "experiences",
     kind: "advanced",
-    label: "editor.sectionTypes.experiences",
+    label: "Experience",
     icon: "i-lucide-briefcase",
     fields: [
       {
@@ -317,7 +317,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   educations: {
     type: "educations",
     kind: "advanced",
-    label: "editor.sectionTypes.educations",
+    label: "Education",
     icon: "i-lucide-graduation-cap",
     fields: [
       {
@@ -370,7 +370,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   projects: {
     type: "projects",
     kind: "advanced",
-    label: "editor.sectionTypes.projects",
+    label: "Projects",
     icon: "i-lucide-folder-open",
     fields: [
       {
@@ -423,7 +423,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   awards: {
     type: "awards",
     kind: "advanced",
-    label: "editor.sectionTypes.awards",
+    label: "Awards",
     icon: "i-lucide-trophy",
     fields: [
       {
@@ -475,7 +475,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   courses: {
     type: "courses",
     kind: "advanced",
-    label: "editor.sectionTypes.courses",
+    label: "Courses",
     icon: "i-lucide-book",
     fields: [
       {
@@ -527,7 +527,7 @@ export const SECTIONS_REGISTRY: Record<TCoreSectionType, SectionDescriptor> = {
   custom: {
     type: "custom",
     kind: "basic",
-    label: "editor.sectionTypes.custom",
+    label: "Custom Section",
     icon: "i-lucide-file-text",
     fields: [
       { field: "title", label: "editor.form.custom.title.label", placeholder: "editor.form.custom.title.placeholder" },

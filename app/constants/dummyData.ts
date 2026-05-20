@@ -6,6 +6,9 @@ export const DUMMY_TITLE = "Untitled Resume"
 export const DUMMY_PERSONAL_SECTION: TPersonalContent = {
   title: "Sarah Johnson",
   subtitle: "Senior Software Engineer",
+  photo: {
+    url: ""
+  },
   details: [
     { value: "sarah.johnson@email.com", isHidden: false, type: "email", url: "mailto:sarah.johnson@email.com" },
     { value: "+1 555 987 6543", isHidden: false, type: "phone", url: "tel:+15559876543" },

@@ -71,7 +71,7 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
                   <UIcon :name="SECTION_DISPLAY_CONFIG[sectionType].icon" class="text-primary h-5 w-5" />
                 </div>
                 <div class="min-w-0 flex-1">
-                  <h4 class="text-default font-semibold">{{ $t(SECTION_DISPLAY_CONFIG[sectionType].label) }}</h4>
+                  <h4 class="text-default font-semibold">{{ SECTION_DISPLAY_CONFIG[sectionType].label }}</h4>
                   <p class="text-muted mt-0.5 text-sm capitalize">{{ sectionType }}</p>
                 </div>
                 <UIcon
