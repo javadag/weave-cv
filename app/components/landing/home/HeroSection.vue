@@ -74,12 +74,12 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
             >
               <span>✦</span> {{ $t("hero.buildBtn") }}
             </NuxtLink>
-            <NuxtLink
+            <!-- <NuxtLink
               to="/dashboard"
               class="border-muted bg-muted text-highlighted hover:bg-elevated hover:border-accented inline-flex items-center rounded-xl border px-6 py-3.5 text-[15px] font-semibold no-underline transition-colors duration-200"
             >
               {{ $t("hero.browseBtn") }}
-            </NuxtLink>
+            </NuxtLink> -->
           </Motion>
           <Motion
             is="div"

@@ -12,18 +12,26 @@ const route = useRoute()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const errorDescription = ref<string>((route.query.error_description as string) || (route.query.error as string) || "")
+const errorDescription = ref<string>((route.query.error_description as string) ?? (route.query.error as string) ?? "")
+const hasError = computed(() => Boolean(errorDescription.value))
 
 // Email passed from register page — means user just signed up and needs to confirm
 const pendingEmail = route.query.email as string | undefined
 
-// Detected on mount — what kind of link the user clicked
-const hashType = ref<"signup" | "recovery" | null>(null)
+const isProcessingCode = computed(() => Boolean(route.query.code))
 
 const resendCooldown = ref(0)
 const resendSuccess = ref(false)
 const resendError = ref("")
-let cooldownTimer: ReturnType<typeof setInterval> | null = null
+
+const { pause: pauseCooldown, resume: resumeCooldown } = useIntervalFn(
+  () => {
+    resendCooldown.value--
+    if (resendCooldown.value <= 0) pauseCooldown()
+  },
+  1000,
+  { immediate: false }
+)
 
 const resendEmail = async () => {
   if (!pendingEmail || resendCooldown.value > 0) return
@@ -36,51 +44,12 @@ const resendEmail = async () => {
   })
   if (error) {
     resendError.value = error.message
-  } else {
-    resendSuccess.value = true
-    resendCooldown.value = 60
-    cooldownTimer = setInterval(() => {
-      resendCooldown.value--
-      if (resendCooldown.value <= 0 && cooldownTimer) {
-        clearInterval(cooldownTimer)
-        cooldownTimer = null
-      }
-    }, 1000)
+    return
   }
+  resendSuccess.value = true
+  resendCooldown.value = 60
+  resumeCooldown()
 }
-
-onUnmounted(() => {
-  if (cooldownTimer) clearInterval(cooldownTimer)
-})
-
-onMounted(async () => {
-  // PKCE flow: Supabase sends ?code= for email confirmation / OAuth callback
-  const code = route.query.code as string | undefined
-  if (code) {
-    hashType.value = "signup"
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (error) errorDescription.value = error.message
-    return
-  }
-
-  // Legacy implicit flow: hash-based token from older Supabase projects
-  const hash = globalThis.location.hash
-  if (!hash) return
-  const p = new URLSearchParams(hash.slice(1))
-
-  const hashError = p.get("error_description") || p.get("error") || ""
-  if (hashError) {
-    errorDescription.value = hashError
-    return
-  }
-
-  if (p.get("access_token") || p.get("type") === "signup") {
-    hashType.value = "signup"
-    // supabase-js processes the token; watch(user) below redirects to dashboard
-  }
-})
-
-const hasError = computed(() => Boolean(errorDescription.value))
 
 // Redirect to dashboard once session is established (signup confirmation or OAuth)
 watch(
@@ -116,7 +85,7 @@ watch(
         </template>
 
         <!-- Check inbox — user just registered, hasn't clicked the link yet -->
-        <template v-else-if="pendingEmail && !hashType">
+        <template v-else-if="pendingEmail && !isProcessingCode">
           <div class="mb-5 flex justify-center">
             <span class="bg-primary/10 text-primary flex size-14 items-center justify-center rounded-full">
               <UIcon name="i-lucide-mail" class="size-7" />
@@ -130,18 +99,8 @@ watch(
           </p>
 
           <div class="mt-5 flex flex-col gap-2">
-            <UAlert
-              v-if="resendSuccess"
-              color="success"
-              variant="soft"
-              :description="$t('confirmPage.resendSent')"
-            />
-            <UAlert
-              v-if="resendError"
-              color="error"
-              variant="soft"
-              :description="resendError"
-            />
+            <UAlert v-if="resendSuccess" color="success" variant="soft" :description="$t('confirmPage.resendSent')" />
+            <UAlert v-if="resendError" color="error" variant="soft" :description="resendError" />
             <UButton
               color="neutral"
               variant="outline"
@@ -150,7 +109,11 @@ watch(
               :disabled="resendCooldown > 0"
               @click="resendEmail"
             >
-              {{ resendCooldown > 0 ? $t("confirmPage.resendCooldown", { seconds: resendCooldown }) : $t("confirmPage.resendBtn") }}
+              {{
+                resendCooldown > 0
+                  ? $t("confirmPage.resendCooldown", { seconds: resendCooldown })
+                  : $t("confirmPage.resendBtn")
+              }}
             </UButton>
           </div>
 
@@ -160,8 +123,8 @@ watch(
           </p>
         </template>
 
-        <!-- Verifying email link (hash token being processed by supabase-js) -->
-        <template v-else-if="hashType === 'signup'">
+        <!-- Verifying email link / OAuth code being exchanged by @nuxtjs/supabase -->
+        <template v-else-if="isProcessingCode">
           <div class="mb-4 flex justify-center">
             <span
               class="text-primary inline-block size-8 animate-spin rounded-full border-2 border-current border-t-transparent"

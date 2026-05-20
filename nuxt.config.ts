@@ -85,6 +85,11 @@ export default defineNuxtConfig({
       include: ["/dashboard(/*)?", "/editor(/*)?", "/login"],
       login: "/login",
       callback: "/confirm"
+    },
+    cookieOptions: {
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+      sameSite: "lax",
+      secure: true
     }
   },
   routeRules: {

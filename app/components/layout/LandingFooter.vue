@@ -9,13 +9,13 @@ const footerCols = computed(() => [
     h: t("footer.colProduct"),
     items: [{ label: t("footer.linkFeatures"), to: "/#features" }]
   },
-  {
+  /* {
     h: t("footer.colResources"),
     items: [
       { label: t("footer.linkHelpFaq"), to: "/faq" },
       { label: t("footer.linkChangelog"), to: "/changelog" }
     ]
-  },
+  }, */
   {
     h: t("footer.colCompany"),
     items: [{ label: t("footer.linkContact"), href: `mailto:${CONTACT_EMAIL}` }]
