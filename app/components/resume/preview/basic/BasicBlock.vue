@@ -43,16 +43,20 @@ const processedContents = computed(() => {
   <div v-if="isSummary" ref="elementRef">
     <DescriptionContent :html="processedContents[0]?.description ?? ''" :is-profile-section="true" />
   </div>
-  <div v-else-if="contents.length > 0" ref="elementRef" :style="{ whiteSpace: 'pre-wrap' }">
-    <GridItems v-if="sectionConfigs.variant === 'grid'" :contents="contents" :section-configs="sectionConfigs" />
+  <div v-else-if="processedContents.length > 0" ref="elementRef" :style="{ whiteSpace: 'pre-wrap' }">
+    <GridItems
+      v-if="sectionConfigs.variant === 'grid'"
+      :contents="processedContents"
+      :section-configs="sectionConfigs"
+    />
     <InlineItems
       v-else-if="sectionConfigs.variant === 'inline'"
-      :contents="contents"
+      :contents="processedContents"
       :section-configs="sectionConfigs"
     />
     <StackedItems
       v-else-if="sectionConfigs.variant === 'stacked'"
-      :contents="contents"
+      :contents="processedContents"
       :section-configs="sectionConfigs"
     />
   </div>

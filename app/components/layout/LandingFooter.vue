@@ -98,12 +98,11 @@ const socials = [
       >
         <div class="flex flex-wrap items-center gap-4">
           <span>{{ $t("footer.copyright", { year: currentYear }) }}</span>
-          <NuxtLink
-            to="/changelog"
+          <span
             class="footer-link border-default bg-elevated text-muted hover:border-accented hover:text-highlighted inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[11px] transition-colors duration-200"
           >
             v{{ APP_VERSION }}
-          </NuxtLink>
+          </span>
         </div>
         <i18n-t keypath="footer.madeWith" tag="div" class="flex items-center gap-1">
           <template #heart>

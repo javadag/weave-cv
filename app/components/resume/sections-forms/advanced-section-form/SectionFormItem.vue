@@ -45,14 +45,14 @@ const isSummary = computed(() => props.sectionType === "summary")
     <UIcon name="i-lucide-grip-vertical" class="text-muted-foreground handle cursor-move" />
     <button
       type="button"
-      class="hover:bg-accented/50 bg-accented/30 divide-accented flex flex-1 items-center divide-x rounded-lg p-1 duration-150 *:px-2 *:text-sm"
+      class="hover:bg-accented/50 bg-accented/30 divide-accented flex flex-1 items-center divide-x rounded-lg p-1 whitespace-pre duration-150 *:px-2 *:text-sm"
       @click="isEditing = !isEditing"
     >
       <span class="line-clamp-1 text-start font-semibold">{{
         content.title ||
         ("subtitle" in content && content.subtitle) ||
         ("location" in content ? content.location : "") ||
-        ""
+        " "
       }}</span>
     </button>
     <Visibility
