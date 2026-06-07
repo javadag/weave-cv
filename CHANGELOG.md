@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.3](https://github.com/JavadAg/weave-cv/compare/v2.4.2...v2.4.3) (2026-06-07)
+
+
+### 🐛 Bug Fixes
+
+* hide section items ([f8cf98f](https://github.com/JavadAg/weave-cv/commit/f8cf98f86ed4aac765a8ab1c5dbd87213e6bbdb8))
+
 ### [2.4.2](https://github.com/JavadAg/weave-cv/compare/v2.4.1...v2.4.2) (2026-05-20)
 
 
