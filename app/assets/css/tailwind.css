@@ -2,7 +2,8 @@
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: "Inter", "Rubik", sans-serif;
+  --font-sans: "Inter" sans-serif;
+  --font-sans-2: "Rubik", sans-serif;
   --animate-landing-pulse: landing-pulse 2.4s ease-in-out infinite;
   --animate-landing-float: landing-float 6s ease-in-out infinite;
   --animate-cta-float-left: cta-float-left 6s ease-in-out infinite;
@@ -91,6 +92,9 @@
 }
 
 @layer base {
+  *:lang(fa) {
+    @apply font-sans-2;
+  }
   button {
     @apply cursor-pointer;
   }
