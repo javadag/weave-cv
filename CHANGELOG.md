@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.5](https://github.com/javadag/weave-cv/compare/v2.4.4...v2.4.5) (2026-06-20)
+
+
+### 🐛 Bug Fixes
+
+* fonts ([1fe91e0](https://github.com/javadag/weave-cv/commit/1fe91e0e36910dceea512d7e93d6a4b314a25655))
+
 ### [2.4.4](https://github.com/javadag/weave-cv/compare/v2.4.3...v2.4.4) (2026-06-20)
 
 
