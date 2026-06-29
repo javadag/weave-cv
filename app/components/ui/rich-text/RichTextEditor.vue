@@ -4,8 +4,11 @@ import Toolbar from "./Toolbar.vue"
 
 interface Props {
   content: string
+  rtl?: boolean
 }
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  rtl: false
+})
 const emit = defineEmits<{
   (e: "update:content", content: string): void
 }>()
@@ -37,7 +40,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2" :dir="props.rtl ? 'rtl' : 'ltr'">
     <Toolbar :editor="editor || null" />
     <TiptapEditorContent :editor="editor" class="bg-muted rounded-lg p-3" />
   </div>

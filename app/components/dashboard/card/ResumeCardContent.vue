@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TResume } from "~/types/resume.types"
-import MiniResumePreview from "./MiniResumePreview.vue"
+import type { TResume } from "~/types/resume.types";
+import MiniResumePreview from "./MiniResumePreview.vue";
 
 interface Props {
   resume: TResume
@@ -22,7 +22,7 @@ const formatDate = (dateString: string | null) => {
 <template>
   <div class="flex h-full min-h-65 flex-col gap-3">
     <ULink
-      to="`/editor/${id}`"
+      :to="`/editor/${props.resume.id}`"
       class="hover:border-primary border-muted/20 flex flex-1 cursor-pointer flex-col overflow-hidden rounded-lg border shadow-sm duration-300"
     >
       <MiniResumePreview

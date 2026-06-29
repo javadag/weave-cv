@@ -18,6 +18,7 @@ const emit = defineEmits(["closeEdit"])
 const { updateContent } = useResumeStore()
 const { configs } = storeToRefs(useConfigsStore())
 const language = computed(() => configs.value.general.layout.language)
+const rtl = computed(() => configs.value.general.layout.rtl)
 
 const advancedContent = computed(() =>
   props.isAdvancedSection ? (props.content as TAdvancedContent) : null
@@ -220,6 +221,7 @@ const isSummary = computed(() => props.sectionType === "summary")
       <RichTextEditor
         v-if="hasField('description')"
         :content="getStringFieldValue('description')"
+        :rtl="rtl"
         :label="$t(getFieldConfig('description').label)"
         :placeholder="$t(getFieldConfig('description').placeholder || '')"
         @update:content="(htmlContent) => handleFieldUpdate('description', htmlContent)"
