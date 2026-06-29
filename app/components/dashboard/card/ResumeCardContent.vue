@@ -18,16 +18,12 @@ const formatDate = (dateString: string | null) => {
     day: "numeric"
   })
 }
-
-const handleEdit = (id: string) => {
-  navigateTo(`/editor/${id}`)
-}
 </script>
 <template>
   <div class="flex h-full min-h-65 flex-col gap-3">
-    <div
+    <ULink
+      to="`/editor/${id}`"
       class="hover:border-primary border-muted/20 flex flex-1 cursor-pointer flex-col overflow-hidden rounded-lg border shadow-sm duration-300"
-      @click="handleEdit(props.resume.id)"
     >
       <MiniResumePreview
         :resume-id="props.resume.id"
@@ -36,7 +32,7 @@ const handleEdit = (id: string) => {
         :configs="props.resume.configs"
         :resume-title="props.resume.title"
       />
-    </div>
+    </ULink>
     <div class="text-muted mt-auto mb-0 flex flex-wrap items-center justify-between gap-1.5 text-xs">
       <span>{{ $t("resumeCard.createdAt", { date: formatDate(props.resume.created_at) }) }}</span>
       <span v-if="props.resume.updated_at !== props.resume.created_at">

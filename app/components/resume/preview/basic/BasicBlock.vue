@@ -14,7 +14,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { updateHeight } = usePreviewStore()
-const { elementRef } = useSelfResizeObserver((height) => {
+useSelfResizeObserver((height) => {
   updateHeight(props.sid, height)
 })
 
