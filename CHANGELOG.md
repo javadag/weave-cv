@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/javadag/weave-cv/compare/v2.4.5...v2.5.0) (2026-07-01)
+
+
+### 🐛 Bug Fixes
+
+* content editor text dir ([8da8b3a](https://github.com/javadag/weave-cv/commit/8da8b3a1ba2fe92aa3d101a5b633f98ffa0dbb7f))
+* personal space calculation ([4a0beea](https://github.com/javadag/weave-cv/commit/4a0beea7d0a47cebf53f4e9b9711a15ea27c56ca))
+
+
+### ✨ Features
+
+* add ai resume matching ([f9b920c](https://github.com/javadag/weave-cv/commit/f9b920c0b332ffbeb12bc884cec02c3091845bfa))
+
 ### [2.4.5](https://github.com/javadag/weave-cv/compare/v2.4.4...v2.4.5) (2026-06-20)
 
 
