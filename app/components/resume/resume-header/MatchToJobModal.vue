@@ -95,15 +95,15 @@ const dir = computed(() => (configs.value.general.layout.rtl ? "rtl" : "ltr"))
 
         <template v-if="matchResult">
           <USeparator />
-            <MatchToJobResults
-              :result="matchResult"
-              :refinements="refinedSuggestions"
-              :tailoring="tailoringIndex"
-              :existing-summary="existingSummary"
-              :existing-experiences="existingExperiences"
-              :existing-projects="existingProjects"
-              :score-color="getScoreColor"
-              :score-bar-color="getScoreBarColor"
+          <MatchToJobResults
+            :result="matchResult"
+            :refinements="refinedSuggestions"
+            :tailoring="tailoringIndex"
+            :existing-summary="existingSummary"
+            :existing-experiences="existingExperiences"
+            :existing-projects="existingProjects"
+            :score-color="getScoreColor"
+            :score-bar-color="getScoreBarColor"
             @apply-summary="applySummarySuggestion"
             @apply-experience="applyExperienceSuggestion"
             @apply-project="applyProjectSuggestion"

@@ -464,10 +464,10 @@
       "strengths": "Strengths",
       "areasToImprove": "Areas to Improve",
       "skillSuggestions": "Skill Suggestions",
-        "current": "Current",
-        "suggested": "Suggested",
-        "freeTierNoticeTitle": "Free tier AI may be less accurate",
-      "freeTierNoticeDesc": "This uses the free Groq AI model which may miss keywords or return imperfect suggestions. For best results, add your own API key in Settings."
+      "current": "Current",
+      "suggested": "Suggested",
+      "freeTierNoticeTitle": "Free tier AI may be less accurate",
+      "freeTierNoticeDesc": "For best results, add your own API key in Dashboard -> Settings."
     },
     "form": {
       "content": "Content",

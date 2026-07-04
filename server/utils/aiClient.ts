@@ -28,9 +28,11 @@ export async function aiChatToJson(options: AiChatOptions): Promise<Record<strin
     case "openai":
     case "deepseek":
     case "mistral":
-    case "perplexity":
     case "xai": {
       return openaiJsonChat(options, providerInfo.model, providerInfo.baseURL)
+    }
+    case "perplexity": {
+      return perplexityJsonChat(options, providerInfo.model)
     }
     case "anthropic": {
       return anthropicJsonChat(options, providerInfo.model)
@@ -78,6 +80,22 @@ async function openaiJsonChat(
   const raw = completion.choices[0]?.message?.content
   if (!raw) throw new Error("Empty response from model")
   return JSON.parse(raw) as Record<string, unknown>
+}
+
+async function perplexityJsonChat(options: AiChatOptions, model: string): Promise<Record<string, unknown>> {
+  const openai = new OpenAI({ apiKey: options.apiKey, baseURL: "https://api.perplexity.ai" })
+  const completion = await openai.chat.completions.create({
+    model,
+    temperature: options.temperature ?? 0,
+    messages: [
+      { role: "system", content: options.systemPrompt + "\n\nYou MUST respond with ONLY valid JSON. No markdown, no code fences, no extra text." },
+      { role: "user", content: options.userPrompt }
+    ]
+  })
+  const raw = completion.choices[0]?.message?.content
+  if (!raw) throw new Error("Empty response from Perplexity")
+  const cleaned = raw.trim().replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "")
+  return JSON.parse(cleaned) as Record<string, unknown>
 }
 
 async function anthropicJsonChat(options: AiChatOptions, model: string): Promise<Record<string, unknown>> {

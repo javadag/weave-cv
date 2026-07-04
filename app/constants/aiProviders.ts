@@ -36,8 +36,8 @@ export const AI_PROVIDERS: Record<AiProvider, AiProviderInfo> = {
   },
   gemini: {
     id: "gemini",
-    label: "Gemini 2.0 Flash",
-    model: "gemini-2.0-flash",
+    label: "Gemini 2.5 Flash",
+    model: "gemini-2.5-flash",
     keyHintUrl: "https://aistudio.google.com/app/apikey"
   },
   mistral: {

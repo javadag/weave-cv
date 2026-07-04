@@ -1,78 +1,8 @@
-import Groq from "groq-sdk"
 import { TEMPLATES } from "~/constants/templates"
+import { PARSE_RESUME_PROMPT } from "../../utils/ai/prompts/parseResume"
+import { aiChatToJson } from "../../utils/aiClient"
 import { requireAuth } from "../../utils/auth"
 import { checkRateLimit } from "../../utils/rateLimit"
-
-const PROMPT = `You are a resume parser. Extract structured data from the resume text below and return ONLY valid JSON matching this exact schema (use empty strings/arrays for missing fields, never null for strings):
-
-{
-  "name": "full name",
-  "jobTitle": "professional title",
-  "email": "email address",
-  "phone": "phone number",
-  "location": "city, country or region",
-  "linkedin": "linkedin profile URL or username",
-  "github": "github profile URL or username",
-  "website": "personal website URL",
-  "summary": "professional summary as plain text",
-  "experiences": [
-    {
-      "title": "job title",
-      "company": "company name",
-      "location": "city or remote",
-      "startDate": "YYYY-MM-DD or empty string",
-      "endDate": "YYYY-MM-DD or empty string",
-      "present": true or false,
-      "description": "responsibilities and achievements as plain text, one sentence or bullet per line"
-    }
-  ],
-  "educations": [
-    {
-      "degree": "degree name",
-      "institution": "school name",
-      "location": "city",
-      "startDate": "YYYY-MM-DD or empty string",
-      "endDate": "YYYY-MM-DD or empty string",
-      "present": false,
-      "description": "relevant details as plain text"
-    }
-  ],
-  "projects": [
-    {
-      "title": "project name",
-      "subtitle": "tech stack or role",
-      "url": "project URL or empty string",
-      "startDate": "YYYY-MM-DD or empty string",
-      "endDate": "YYYY-MM-DD or empty string",
-      "present": false,
-      "description": "what the project does as plain text"
-    }
-  ],
-  "skills": [
-    { "category": "category name", "items": "comma-separated list of skills" }
-  ],
-  "languages": [
-    { "name": "language name", "proficiency": "proficiency level" }
-  ],
-  "certificates": [
-    { "title": "certificate name", "issuer": "issuing organization" }
-  ],
-  "courses": [
-    {
-      "title": "course name",
-      "provider": "platform or school",
-      "date": "YYYY-MM-DD or empty string"
-    }
-  ],
-  "awards": [
-    {
-      "title": "award name",
-      "issuer": "organization",
-      "date": "YYYY-MM-DD or empty string",
-      "description": "brief description"
-    }
-  ]
-}`
 
 function uid() {
   return crypto.randomUUID()
@@ -342,43 +272,43 @@ function buildContent(parsed: ParsedResume) {
 
 export default defineEventHandler(async (event) => {
   const user = await requireAuth(event)
-  // 5 AI parses per hour per user — each call hits a paid external API
-  checkRateLimit(`ai:${user.id}`, 5, 60 * 60 * 1000)
 
-  const { text } = await readBody<{ text: string }>(event)
+  const { text } = await readBody<{
+    text: string
+  }>(event)
 
   if (!text?.trim()) {
     throw createError({ statusCode: 400, statusMessage: "text is required" })
   }
 
-  const apiKey = process.env.GROQ_API_KEY
-  if (!apiKey) {
+  checkRateLimit(`ai:${user.id}`, 5, 60 * 60 * 1000)
+
+  const effectiveProvider = "deepseek"
+  const effectiveApiKey = process.env.DEEPSEEK_API_KEY
+
+  if (!effectiveApiKey) {
     throw createError({
       statusCode: 500,
-      statusMessage: "AI parsing not configured — add GROQ_API_KEY to your environment"
+      statusMessage: "AI parsing not configured — add DEEPSEEK_API_KEY to your environment"
     })
   }
 
-  const groq = new Groq({ apiKey })
-
-  // Truncate to avoid exceeding context (30k chars covers any real CV)
   const truncated = text.length > 30_000 ? text.slice(0, 30_000) : text
 
   let parsed: ParsedResume
   try {
-    const completion = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      response_format: { type: "json_object" },
-      temperature: 0,
-      messages: [
-        { role: "system", content: PROMPT },
-        { role: "user", content: `Resume text:\n${truncated}` }
-      ]
+    const raw = await aiChatToJson({
+      provider: effectiveProvider,
+      apiKey: effectiveApiKey,
+      systemPrompt: PARSE_RESUME_PROMPT,
+      userPrompt: `Resume text:\n${truncated}`,
+      temperature: 0
     })
-    const raw = completion.choices[0]?.message?.content
-    if (!raw) throw new Error("Empty response from model")
-    parsed = JSON.parse(raw) as ParsedResume
+    parsed = raw as unknown as ParsedResume
   } catch (error) {
+    if ((error as { status?: number }).status === 401 || (error as { code?: string }).code === "invalid_api_key") {
+      throw createError({ statusCode: 401, statusMessage: "Invalid API key" })
+    }
     console.error(error)
     throw createError({ statusCode: 422, statusMessage: "Could not parse resume — try a text-based PDF" })
   }

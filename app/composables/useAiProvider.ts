@@ -36,7 +36,7 @@ export function useAiProvider() {
 
   function getFirstStoredProvider(): AiProvider {
     const keys = Object.keys(storedKeys.value)
-    return keys.length > 0 ? (keys[0] as AiProvider) : "gemini"
+    return keys.length > 0 ? (keys[0] as AiProvider) : "deepseek"
   }
 
   function getProviderLabel(provider: AiProvider): string {
@@ -91,7 +91,7 @@ export function useAiProvider() {
 
   function clearConfig() {
     storedKeys.value = {}
-    activeProvider.value = "gemini"
+    activeProvider.value = "deepseek"
     if (import.meta.client) {
       localStorage.removeItem(STORAGE_KEY)
     }

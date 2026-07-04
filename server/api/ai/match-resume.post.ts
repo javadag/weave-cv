@@ -1,10 +1,8 @@
+import { MATCH_PROMPT } from "../../utils/ai/prompts/matchResume"
 import type { AiProvider } from "../../utils/aiClient"
 import { aiChatToJson } from "../../utils/aiClient"
 import { requireAuth } from "../../utils/auth"
 import { checkRateLimit } from "../../utils/rateLimit"
-import { MATCH_PROMPT } from "../../utils/ai/prompts/matchResume"
-import type { MatchResult } from "~/types/ai.types"
-
 
 export default defineEventHandler(async (event) => {
   const user = await requireAuth(event)
@@ -27,13 +25,13 @@ export default defineEventHandler(async (event) => {
     checkRateLimit(`ai:${user.id}`, 5, 60 * 60 * 1000)
   }
 
-  const effectiveProvider = isUserKey ? provider! : "groq"
-  const effectiveApiKey = isUserKey ? apiKey! : process.env.GROQ_API_KEY
+  const effectiveProvider = isUserKey ? provider! : "deepseek"
+  const effectiveApiKey = isUserKey ? apiKey! : process.env.DEEPSEEK_API_KEY
 
   if (!effectiveApiKey) {
     throw createError({
       statusCode: 500,
-      statusMessage: "AI matching not configured"
+      statusMessage: "AI matching not configured — add DEEPSEEK_API_KEY to your environment or provide an API key"
     })
   }
 
