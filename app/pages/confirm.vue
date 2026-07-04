@@ -12,7 +12,15 @@ const route = useRoute()
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 
-const errorDescription = ref<string>((route.query.error_description as string) ?? (route.query.error as string) ?? "")
+const hashParams = computed(() => {
+  const hash = route.hash
+  if (!hash) return {}
+  return Object.fromEntries(new URLSearchParams(route.hash))
+})
+
+const errorDescription = computed(() =>
+  (hashParams.value.error_description as string) || (hashParams.value.error as string) || ""
+)
 const hasError = computed(() => Boolean(errorDescription.value))
 
 // Email passed from register page — means user just signed up and needs to confirm
