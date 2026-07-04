@@ -11,5 +11,9 @@ export async function requireAuth(event: H3Event<EventHandlerRequest>) {
     })
   }
 
+  if (!user.id && user.sub) {
+    user.id = user.sub
+  }
+
   return user
 }

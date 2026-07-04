@@ -58,7 +58,11 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
         variant="ghost"
         icon="i-lucide-x"
         :aria-label="$t('common.toggleSidebar')"
-        @click="open = !open"
+        @click="
+          () => {
+            open = !open
+          }
+        "
       />
     </template>
     <UNavigationMenu orientation="vertical" :items="navItems" class="w-full" />

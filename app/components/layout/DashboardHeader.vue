@@ -17,7 +17,11 @@ const { isRtl } = useLocaleInfo()
         class="lg:invisible"
         variant="ghost"
         :aria-label="$t('common.toggleSidebar')"
-        @click="open = !open"
+        @click="
+          () => {
+            open = !open
+          }
+        "
       />
       <div class="flex items-center gap-3">
         <UserDropdown v-if="user" />
