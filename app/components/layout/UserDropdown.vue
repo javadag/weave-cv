@@ -55,6 +55,11 @@ const menuItems = computed(() => [
     onSelect: () => router.push("/dashboard")
   },
   {
+    label: t("userDropdown.settings"),
+    icon: "i-lucide-settings",
+    onSelect: () => router.push("/dashboard/settings")
+  },
+  {
     label: t("userDropdown.logout"),
     icon: isLoggingOut.value ? "i-lucide-loader-circle" : "i-lucide-log-out",
     disabled: isLoggingOut.value,

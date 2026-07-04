@@ -2,7 +2,7 @@
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: "Inter", "Rubik", sans-serif;
+  --font-sans: "Inter", "Vazirmatn", serif;
   --animate-landing-pulse: landing-pulse 2.4s ease-in-out infinite;
   --animate-landing-float: landing-float 6s ease-in-out infinite;
   --animate-cta-float-left: cta-float-left 6s ease-in-out infinite;
@@ -16,6 +16,12 @@
 :root {
   /* app.config primary:'orange' handles --ui-color-primary-* for light mode */
   --ui-primary: var(--color-orange-600);
+}
+
+/* On Persian pages, Vazirmatn comes first so FA text isn't caught by
+   @nuxt/fonts' auto-inserted "Inter Fallback: Arial"  */
+:root:lang(fa) {
+  --font-sans: "Vazirmatn", "Inter", serif;
 }
 
 .dark {

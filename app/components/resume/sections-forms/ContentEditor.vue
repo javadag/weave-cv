@@ -9,6 +9,9 @@ const emit = defineEmits<{
   (e: "update:content", content: string): void
 }>()
 
+const { configs } = storeToRefs(useConfigsStore())
+const rtl = computed(() => configs.value.general.layout.rtl)
+
 const content = ref(props.content)
 const isEditing = ref(false)
 
@@ -36,6 +39,6 @@ const stopEditing = () => {
       <h3 class="text-default text-sm font-medium">{{ $t("editor.form.editContent") }}</h3>
       <UButton variant="ghost" size="sm" color="neutral" @click="stopEditing">{{ $t("editor.form.close") }}</UButton>
     </div>
-    <RichTextEditor :content="content" @update:content="handleUpdate" />
+    <RichTextEditor :content="content" :rtl="rtl" @update:content="handleUpdate" />
   </div>
 </template>

@@ -20,7 +20,7 @@
   "features": {
     "badge": "Features",
     "title": "Built for the way you actually job hunt.",
-    "subtitle": "No bloated AI gimmicks. Just the tools you need to ship a great résumé in an afternoon.",
+    "subtitle": "Just the tools you need to ship a great résumé in an afternoon.",
     "refinedTemplatesTitle": "Refined templates",
     "refinedTemplatesBody": "Modern, classic, creative, minimal, bold, academic. All ATS-tested, all printable.",
     "dragDropTitle": "Drag & drop sections",
@@ -135,7 +135,21 @@
       "darkModeDesc": "Easier on the eyes for late-night editing.",
       "languageTitle": "Language",
       "languageSubtitle": "Interface language for Weave CV.",
-      "languageLabel": "Language"
+      "languageLabel": "Language",
+      "aiProvider": {
+        "title": "AI Provider",
+        "subtitle": "Enter your own API key for unlimited AI requests. The free tier uses Groq at 5 calls/hour.",
+        "providerLabel": "Provider",
+        "keyLabel": "API Key",
+        "providerHint": "Enter your API key for the selected provider",
+        "getKeyForProvider": "Get a key from the {provider} console",
+        "keySaved": "API key saved. Unlimited AI calls now use your account.",
+        "keyCleared": "API key removed. Reverted to free tier (5/hour).",
+        "savedKeys": "Saved keys",
+        "active": "Active",
+        "removeAll": "Remove all keys",
+        "storedLocally": "Your keys are stored only on your device, never on our servers."
+      }
     },
     "account": {
       "title": "Account",
@@ -155,6 +169,7 @@
   },
   "userDropdown": {
     "dashboard": "Dashboard",
+    "settings": "Settings",
     "logout": "Logout",
     "loggedOut": "Logged out",
     "loggedOutDesc": "You have been successfully logged out",
@@ -297,7 +312,8 @@
       "saveErrorDesc": "Failed to save. Please try again.",
       "offlineDesc": "Changes will sync when you're back online",
       "undo": "Undo (Ctrl+Z)",
-      "redo": "Redo (Ctrl+Y)"
+      "redo": "Redo (Ctrl+Y)",
+      "matchToJob": "Match to Job"
     },
     "template": {
       "title": "Change Template",
@@ -416,6 +432,42 @@
       "awards": "Awards",
       "courses": "Courses",
       "custom": "Custom Section"
+    },
+    "matchToJob": {
+      "title": "Match to Job",
+      "subtitle": "Paste a job description and we'll analyze how well your resume matches it",
+      "placeholder": "Paste the full job description here...",
+      "match": "Match Resume",
+      "matching": "Analyzing...",
+      "matchScore": "Match Score",
+      "missingKeywords": "Missing Keywords",
+      "summarySuggestion": "Tailored Summary",
+      "applySummary": "Apply Summary",
+      "experienceSuggestions": "Section Suggestions",
+      "projectSuggestions": "Project Suggestions",
+      "tailor": "Tailor",
+      "apply": "Apply",
+      "close": "Close",
+      "skillsToAdd": "Skills to Add",
+      "addSkills": "Add Skills",
+      "noSummaryTitle": "No Summary Section",
+      "noSummaryDesc": "Add a summary section first to use this suggestion",
+      "summaryApplied": "Summary applied",
+      "suggestionApplied": "Suggestion applied",
+      "skillsAdded": "Skills added",
+      "rateLimitError": "Free tier limit reached (5/hour). Add your own API key in Settings for unlimited use.",
+      "invalidKeyError": "Invalid API key. Check your key in the provider console.",
+      "invalidJDError": "That doesn't look like a job description. Paste the full posting with responsibilities, requirements, and qualifications — at least a paragraph with proper punctuation.",
+      "unexpectedError": "Something went wrong. Please try again.",
+      "sectionNotFound": "Section not found in resume",
+      "entryNotFound": "Entry not found in resume",
+      "strengths": "Strengths",
+      "areasToImprove": "Areas to Improve",
+      "skillSuggestions": "Skill Suggestions",
+        "current": "Current",
+        "suggested": "Suggested",
+        "freeTierNoticeTitle": "Free tier AI may be less accurate",
+      "freeTierNoticeDesc": "This uses the free Groq AI model which may miss keywords or return imperfect suggestions. For best results, add your own API key in Settings."
     },
     "form": {
       "content": "Content",

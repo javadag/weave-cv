@@ -24,6 +24,17 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxtjs/sitemap"
   ],
+  fonts: {
+    defaults: {
+      weights: [300, 400, 500, 700],
+      styles: ["normal", "italic"],
+      subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"]
+    },
+    families: [
+      { name: "Inter", provider: "google" },
+      { name: "Vazirmatn", provider: "local" }
+    ]
+  },
   i18n: {
     baseUrl: "https://weavecv.app",
     strategy: "no_prefix",

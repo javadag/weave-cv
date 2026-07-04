@@ -85,7 +85,7 @@ const innerContentStyles = computed<CSSProperties>(() => ({
   minWidth: 0
 }))
 
-const { elementRef } = useSelfResizeObserver((height) => {
+useSelfResizeObserver((height) => {
   updateHeight("personal", height)
 })
 </script>

@@ -47,7 +47,6 @@ const handleManualSave = async () => {
     :disabled="isSaving"
     color="neutral"
     variant="ghost"
-    size="md"
     icon="i-lucide-save"
     :ui="{
       leadingIcon: 'size-4'

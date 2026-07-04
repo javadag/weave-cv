@@ -68,7 +68,6 @@ const handleDownload = async () => {
     color="primary"
     variant="solid"
     :loading="downloading"
-    size="md"
     :icon="downloading ? 'i-lucide-loader-2' : 'i-lucide-download'"
     :ui="{
       leadingIcon: 'group-data-[state=loading]:animate-spin size-4'

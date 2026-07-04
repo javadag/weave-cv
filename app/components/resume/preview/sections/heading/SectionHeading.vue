@@ -16,7 +16,7 @@ const props = defineProps<{
 
 const { updateHeight } = usePreviewStore()
 
-const { elementRef } = useSelfResizeObserver((height) => {
+useSelfResizeObserver((height) => {
   updateHeight(props.elementId, height)
 })
 

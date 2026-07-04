@@ -107,7 +107,7 @@ const isXlScreen = breakpoints.greaterOrEqual("xl")
             <ResumeSectionsForms :loading="pending" />
           </SplitterPanel>
           <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
-            <UIcon name="i-lucide-grip-vertical" class="text-primary" />
+            <UIcon name="i-lucide-grip-vertical" class="text-primary shrink-0" />
           </SplitterResizeHandle>
           <SplitterPanel :min-size="20" class="relative">
             <span class="text-toned mb-2 flex w-full items-center justify-center text-center text-xs tracking-wider">

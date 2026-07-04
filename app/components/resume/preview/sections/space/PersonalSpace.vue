@@ -1,18 +1,16 @@
 <script setup lang="ts">
 const { updateHeight } = usePreviewStore()
-
-const configsStore = useConfigsStore()
-const { configs } = storeToRefs(configsStore)
+const { configs } = storeToRefs(useConfigsStore())
 
 const height = computed(() => {
-  const verticalMargin = configs.value.general.layout.verticalMargin
-  const spacingHeight = 0.2 * verticalMargin
+  const { sectionGap } = configs.value.general.layout
+  const { lineHeight } = configs.value.general.typography
 
-  return `${spacingHeight}mm`
+  return `${1.5 * lineHeight * sectionGap}px`
 })
 
-const { elementRef } = useSelfResizeObserver((height) => {
-  updateHeight("personalSpace", height)
+useSelfResizeObserver((observedHeight) => {
+  updateHeight("personalSpace", observedHeight)
 })
 </script>
 <template>

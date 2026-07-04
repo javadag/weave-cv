@@ -37,6 +37,7 @@ const contentStyles = computed<CSSProperties>(() => {
     color: textColor
   }
 })
+
 provide(
   ColumnColorsKey,
   computed(() => configs.value.general.colors.secondary)
