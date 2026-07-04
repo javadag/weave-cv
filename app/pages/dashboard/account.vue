@@ -28,9 +28,16 @@ const isModalOpen = ref(false)
             {{ $t("dashboard.account.deleteDesc") }}
           </div>
         </div>
-        <UButton color="error" icon="i-lucide-user-x" @click="isModalOpen = true">{{
-          $t("dashboard.account.deleteBtn")
-        }}</UButton>
+        <UButton
+          color="error"
+          icon="i-lucide-user-x"
+          @click="
+            () => {
+              isModalOpen = true
+            }
+          "
+          >{{ $t("dashboard.account.deleteBtn") }}</UButton
+        >
       </div>
     </div>
 

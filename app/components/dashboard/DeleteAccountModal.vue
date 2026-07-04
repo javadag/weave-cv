@@ -10,8 +10,9 @@ const toast = useToast()
 const handleDelete = async () => {
   isDeleting.value = true
   try {
-    await $fetch("/api/account", { method: "DELETE" })
+    await $fetch("/api/user", { method: "DELETE" })
     await supabase.auth.signOut()
+    await router.push("/")
     toast.add({
       title: t("deleteAccountModal.successTitle"),
       description: t("deleteAccountModal.successDesc"),
