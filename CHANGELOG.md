@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.1](https://github.com/JavadAg/weave-cv/compare/v2.5.0...v2.5.1) (2026-07-04)
+
+
+### 🐛 Bug Fixes
+
+* sidebar toggle, user id missing ([c96b269](https://github.com/JavadAg/weave-cv/commit/c96b269f9363acd3c68b313abf9d49bf85ad3bab))
+* signup confirm error handling ([a782cb9](https://github.com/JavadAg/weave-cv/commit/a782cb97db540bd1e19cb440bec353c0a61238b1))
+
 ## [2.5.0](https://github.com/javadag/weave-cv/compare/v2.4.5...v2.5.0) (2026-07-01)
 
 
