@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.3](https://github.com/JavadAg/weave-cv/compare/v2.5.2...v2.5.3) (2026-07-04)
+
+
+### 🐛 Bug Fixes
+
+* deepseek as default provider, improve parsing ([a5b997a](https://github.com/JavadAg/weave-cv/commit/a5b997a554a5cc0f48c2e0077b09e8bbb43b4a6b))
+
 ### [2.5.2](https://github.com/JavadAg/weave-cv/compare/v2.5.1...v2.5.2) (2026-07-04)
 
 
