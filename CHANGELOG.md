@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.7](https://github.com/JavadAg/weave-cv/compare/v2.5.6...v2.5.7) (2026-07-05)
+
+
+### 🐛 Bug Fixes
+
+* item overflow, reverse resizing in RTL langs ([bc630e6](https://github.com/JavadAg/weave-cv/commit/bc630e6cc3e56e6880895a494a342e7f6cf88acb))
+* switch dir ([274937d](https://github.com/JavadAg/weave-cv/commit/274937d391b764d2628aac57d4a6d6aef5e7a744))
+
 ### [2.5.6](https://github.com/JavadAg/weave-cv/compare/v2.5.5...v2.5.6) (2026-07-05)
 
 
