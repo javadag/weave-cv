@@ -554,8 +554,20 @@
       "skillSuggestions": "Skill Suggestions",
       "current": "Current",
       "suggested": "Suggested",
-      "freeTierNoticeTitle": "Free tier AI may be less accurate",
-      "freeTierNoticeDesc": "For best results, add your own API key in Dashboard -> Settings."
+      "freeTierNoticeTitle": "Free tier: 5 matches/hour",
+      "freeTierNoticeDesc": "For unlimited use and best results, add your own API key in Dashboard -> Settings.",
+      "rewriteWithAi": "Rewrite with AI",
+      "aiRewritten": "AI Rewritten",
+      "scoreBreakdown": "Score Breakdown",
+      "criticalGaps": "Critical Gaps",
+      "quickWins": "Quick Wins",
+      "matches": "Matches",
+      "gaps": "Gaps",
+      "aiSuggestions": "AI Suggestions",
+      "noNewSkills": "All required skills already present",
+      "summaryAnalysis": "Summary Analysis",
+      "alignmentScore": "Alignment",
+      "rewriteSummary": "Rewrite Summary"
     },
     "form": {
       "content": "Content",

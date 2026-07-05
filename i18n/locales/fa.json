@@ -348,8 +348,20 @@
       "skillSuggestions": "مهارت‌های پیشنهادی",
       "current": "فعلی",
       "suggested": "پیشنهادی",
-      "freeTierNoticeTitle": "مدل رایگان ممکنه دقیق نباشه",
-      "freeTierNoticeDesc": "این ویژگی از مدل رایگان Groq استفاده می‌کنه و ممکنه بعضی کلمات کلیدی رو جا بندازه یا پیشنهادهای کم‌دقت بده. برای نتیجه بهتر، کلید API خودت رو در تنظیمات وارد کن."
+      "freeTierNoticeTitle": "سقف رایگان: ۵ بار در ساعت",
+      "freeTierNoticeDesc": "برای استفاده نامحدود و نتیجه بهتر، کلید API خودت رو در تنظیمات وارد کن.",
+      "rewriteWithAi": "بازنویسی با هوش مصنوعی",
+      "aiRewritten": "بازنویسی شده با هوش مصنوعی",
+      "scoreBreakdown": "جزئیات امتیاز",
+      "criticalGaps": "شکاف‌های بحرانی",
+      "quickWins": "بهبودهای سریع",
+      "matches": "تطابق‌ها",
+      "gaps": "شکاف‌ها",
+      "aiSuggestions": "پیشنهادهای هوش مصنوعی",
+      "noNewSkills": "همه مهارت‌های مورد نیاز وجود دارن",
+      "summaryAnalysis": "تحلیل خلاصه",
+      "alignmentScore": "میزان تطابق",
+      "rewriteSummary": "بازنویسی خلاصه"
     },
     "template": {
       "title": "تغییر قالب",

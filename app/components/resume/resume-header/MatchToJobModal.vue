@@ -8,16 +8,16 @@ const {
   isMatching,
   matchResult,
   matchError,
-  tailoringIndex,
-  refinedSuggestions,
+  isRewriting,
+  rewriteResults,
   existingSummary,
   existingExperiences,
-  existingProjects,
   hasApiKey,
   handleMatch,
-  applySummarySuggestion,
-  applyExperienceSuggestion,
-  applyProjectSuggestion,
+  handleRewrite,
+  handleRewriteSummary,
+  applySummaryRewrite,
+  applyExperienceRewrite,
   applySkillSuggestion,
   reset,
   getScoreColor,
@@ -97,17 +97,17 @@ const dir = computed(() => (configs.value.general.layout.rtl ? "rtl" : "ltr"))
           <USeparator />
           <MatchToJobResults
             :result="matchResult"
-            :refinements="refinedSuggestions"
-            :tailoring="tailoringIndex"
             :existing-summary="existingSummary"
             :existing-experiences="existingExperiences"
-            :existing-projects="existingProjects"
             :score-color="getScoreColor"
             :score-bar-color="getScoreBarColor"
-            @apply-summary="applySummarySuggestion"
-            @apply-experience="applyExperienceSuggestion"
-            @apply-project="applyProjectSuggestion"
+            :is-rewriting="isRewriting"
+            :rewrite-results="rewriteResults"
+            @apply-summary="applySummaryRewrite"
+            @apply-experience="applyExperienceRewrite"
             @apply-skill="applySkillSuggestion"
+            @rewrite="handleRewrite"
+            @rewrite-summary="handleRewriteSummary"
           />
         </template>
 

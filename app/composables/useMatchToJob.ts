@@ -1,4 +1,4 @@
-import type { MatchResult, SkillSuggestion } from "~/types/ai.types"
+import type { MatchResult, MatchRewriteResult, SkillSuggestion } from "~/types/ai.types"
 import { resumeToText } from "~/utils/ai/resumeToText"
 
 function getScoreColor(score: number): string {
@@ -42,8 +42,8 @@ export function useMatchToJob() {
   const isMatching = ref(false)
   const matchResult = ref<MatchResult | null>(null)
   const matchError = ref("")
-  const tailoringIndex = ref<number | null>(null)
-  const refinedSuggestions = ref<Record<number, string>>({})
+  const isRewriting = ref<Record<string, boolean>>({})
+  const rewriteResults = ref<Record<string, MatchRewriteResult>>({})
 
   function getResumeText(): string {
     return resumeToText(resumeStore.personal, resumeStore.core)
@@ -62,7 +62,8 @@ export function useMatchToJob() {
     isMatching.value = true
     matchError.value = ""
     matchResult.value = null
-    refinedSuggestions.value = {}
+    rewriteResults.value = {}
+    isRewriting.value = {}
     currentJD.value = jobDescription.value
 
     try {
@@ -91,6 +92,98 @@ export function useMatchToJob() {
     }
   }
 
+  async function handleRewrite(index: number) {
+    const result = matchResult.value
+    if (!result) return
+
+    const entry = result.experienceAnalysis[index]
+    if (!entry) return
+
+    const key = `experience-${index}`
+    isRewriting.value[key] = true
+
+    try {
+      const gapsText = entry.gaps.join("; ")
+      const suggestionsText = entry.suggestions.map((s) => `${s.action}: ${s.content}`).join("; ")
+      const instruction = `${gapsText} | ${suggestionsText}`
+
+      const rewriteResult = await $fetch<MatchRewriteResult>("/api/ai/match-rewrite", {
+        method: "POST",
+        body: {
+          resumeText: getResumeText(),
+          auditItem: {
+            entryId: entry.entryId,
+            section: "experience",
+            instruction,
+            targetKeywords: result.missingKeywords ?? [],
+            reason: instruction
+          },
+          language: getResumeLanguage(),
+          provider: userProvider.value || undefined,
+          apiKey: userApiKey.value || undefined
+        }
+      })
+
+      rewriteResults.value[key] = rewriteResult
+    } catch (error: unknown) {
+      const err = error as { statusCode?: number; statusMessage?: string }
+      if (err.statusCode === 429) {
+        matchError.value = t("editor.matchToJob.rateLimitError")
+      } else if (err.statusCode === 401) {
+        matchError.value = t("editor.matchToJob.invalidKeyError")
+      } else {
+        matchError.value = t("editor.matchToJob.unexpectedError")
+      }
+    } finally {
+      isRewriting.value[key] = false
+    }
+  }
+
+  async function handleRewriteSummary() {
+    const result = matchResult.value
+    if (!result?.summaryAnalysis) return
+
+    const key = "summary"
+    isRewriting.value[key] = true
+
+    try {
+      const recommendationsText = result.summaryAnalysis.recommendations
+        .map((r) => `${r.action}: ${r.suggestion}`)
+        .join("; ")
+      const instruction = `Weaknesses: ${result.summaryAnalysis.weaknesses.join("; ")} | Recommendations: ${recommendationsText}`
+
+      const rewriteResult = await $fetch<MatchRewriteResult>("/api/ai/match-rewrite", {
+        method: "POST",
+        body: {
+          resumeText: getResumeText(),
+          auditItem: {
+            entryId: null,
+            section: "summary",
+            instruction,
+            targetKeywords: result.summaryAnalysis.missingKeywords ?? [],
+            reason: instruction
+          },
+          language: getResumeLanguage(),
+          provider: userProvider.value || undefined,
+          apiKey: userApiKey.value || undefined
+        }
+      })
+
+      rewriteResults.value[key] = rewriteResult
+    } catch (error: unknown) {
+      const err = error as { statusCode?: number; statusMessage?: string }
+      if (err.statusCode === 429) {
+        matchError.value = t("editor.matchToJob.rateLimitError")
+      } else if (err.statusCode === 401) {
+        matchError.value = t("editor.matchToJob.invalidKeyError")
+      } else {
+        matchError.value = t("editor.matchToJob.unexpectedError")
+      }
+    } finally {
+      isRewriting.value[key] = false
+    }
+  }
+
   function findSectionOfType(
     type: string
   ): { sectionKey: string; section: NonNullable<typeof resumeStore.core>[string] } | null {
@@ -116,67 +209,47 @@ export function useMatchToJob() {
     return null
   }
 
-  function applySummarySuggestion() {
-    if (!matchResult.value?.summarySuggestion) return
-    const found = findSectionOfType("summary")
-    if (!found) {
-      resumeStore.addSection("summary")
-      toast.add({
-        title: t("editor.matchToJob.noSummaryTitle"),
-        description: t("editor.matchToJob.noSummaryDesc"),
-        color: "warning"
-      })
-      return
-    }
-    const contents = found.section.contents
-    if (contents.length === 0) return
-    resumeStore.updateContent(
-      `${found.sectionKey}.contents.${contents[0]!.id}.description`,
-      matchResult.value.summarySuggestion
-    )
-    toast.add({ title: t("editor.matchToJob.summaryApplied"), color: "success" })
-  }
-
-  function applyExperienceSuggestion(index: number) {
+  function applyExperienceRewrite(index: number) {
     const result = matchResult.value
     if (!result) return
-    const suggestion = result.experienceSuggestions[index]
-    if (!suggestion) return
+    const entry = result.experienceAnalysis[index]
+    if (!entry) return
+
+    const rewriteKey = `experience-${index}`
+    const rewrite = rewriteResults.value[rewriteKey]
+    if (!rewrite?.rewrittenContent) return
 
     const found = findSectionOfType("experiences")
     if (!found) {
       toast.add({ title: t("editor.matchToJob.sectionNotFound"), color: "warning" })
       return
     }
-    const match = findEntryById(found.section, suggestion.entryId)
+    const match = findEntryById(found.section, entry.entryId)
     if (!match) {
       toast.add({ title: t("editor.matchToJob.entryNotFound"), color: "warning" })
       return
     }
-    const html = refinedSuggestions.value[index] || suggestion.suggestion
-    resumeStore.updateContent(`${found.sectionKey}.contents.${match.id}.description`, html)
+    resumeStore.updateContent(`${found.sectionKey}.contents.${match.id}.description`, rewrite.rewrittenContent)
     toast.add({ title: t("editor.matchToJob.suggestionApplied"), color: "success" })
   }
 
-  function applyProjectSuggestion(index: number) {
-    const result = matchResult.value
-    if (!result) return
-    const suggestion = result.projectSuggestions[index]
-    if (!suggestion) return
+  function applySummaryRewrite() {
+    const rewrite = rewriteResults.value["summary"]
+    if (!rewrite?.rewrittenContent) return
 
-    const found = findSectionOfType("projects")
+    const found = findSectionOfType("summary")
     if (!found) {
-      toast.add({ title: t("editor.matchToJob.sectionNotFound"), color: "warning" })
+      resumeStore.addSection("summary")
+      toast.add({
+        title: t("editor.matchToJob.summaryApplied"),
+        color: "success"
+      })
       return
     }
-    const match = findEntryById(found.section, suggestion.entryId)
-    if (!match) {
-      toast.add({ title: t("editor.matchToJob.entryNotFound"), color: "warning" })
-      return
-    }
-    const html = refinedSuggestions.value[index] || suggestion.suggestion
-    resumeStore.updateContent(`${found.sectionKey}.contents.${match.id}.description`, html)
-    toast.add({ title: t("editor.matchToJob.suggestionApplied"), color: "success" })
+    const contents = found.section.contents
+    if (contents.length === 0) return
+    resumeStore.updateContent(`${found.sectionKey}.contents.${contents[0]!.id}.description`, rewrite.rewrittenContent)
+    toast.add({ title: t("editor.matchToJob.summaryApplied"), color: "success" })
   }
 
   function applySkillSuggestion(suggestion: SkillSuggestion) {
@@ -237,29 +310,12 @@ export function useMatchToJob() {
     if (!found) return {} as Record<number, string>
 
     const result: Record<number, string> = {}
-    for (const [index, suggestion] of matchResult.value.experienceSuggestions.entries()) {
-      const match = findEntryById(found.section, suggestion.entryId)
+    for (const [index, entry] of matchResult.value.experienceAnalysis.entries()) {
+      const match = findEntryById(found.section, entry.entryId)
       if (!match) continue
-      const entry = found.section.contents[match.index]
-      if (entry && "description" in entry) {
-        result[index] = (entry as { description?: string }).description || ""
-      }
-    }
-    return result
-  })
-
-  const existingProjects = computed(() => {
-    if (!matchResult.value) return {} as Record<number, string>
-    const found = findSectionOfType("projects")
-    if (!found) return {} as Record<number, string>
-
-    const result: Record<number, string> = {}
-    for (const [index, suggestion] of matchResult.value.projectSuggestions.entries()) {
-      const match = findEntryById(found.section, suggestion.entryId)
-      if (!match) continue
-      const entry = found.section.contents[match.index]
-      if (entry && "description" in entry) {
-        result[index] = (entry as { description?: string }).description || ""
+      const content = found.section.contents[match.index]
+      if (content && "description" in content) {
+        result[index] = (content as { description?: string }).description || ""
       }
     }
     return result
@@ -269,7 +325,8 @@ export function useMatchToJob() {
     jobDescription.value = ""
     matchResult.value = null
     matchError.value = ""
-    refinedSuggestions.value = {}
+    rewriteResults.value = {}
+    isRewriting.value = {}
   }
 
   return {
@@ -277,15 +334,15 @@ export function useMatchToJob() {
     isMatching,
     matchResult,
     matchError,
-    tailoringIndex,
-    refinedSuggestions,
+    isRewriting,
+    rewriteResults,
     existingSummary,
     existingExperiences,
-    existingProjects,
     handleMatch,
-    applySummarySuggestion,
-    applyExperienceSuggestion,
-    applyProjectSuggestion,
+    handleRewrite,
+    handleRewriteSummary,
+    applySummaryRewrite,
+    applyExperienceRewrite,
     applySkillSuggestion,
     reset,
     getScoreColor,
