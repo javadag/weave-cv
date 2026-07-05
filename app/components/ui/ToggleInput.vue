@@ -22,6 +22,7 @@ const model = computed({
   <USwitch
     v-model="model"
     :label="props.label"
+    dir="rtl"
     size="xs"
     :ui="{
       label: 'text-2sm font-medium text-muted',
