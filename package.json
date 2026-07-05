@@ -48,7 +48,7 @@
     "openai": "^6.45.0",
     "pdfjs-dist": "^6.1.200",
     "pinia": "^3.0.3",
-    "puppeteer-core": "^25.3.0",
+    "puppeteer-core": "24.29.0",
     "reka-ui": "^2.9.6",
     "resend": "^6.12.3",
     "sortablejs": "^1.15.6",
@@ -72,7 +72,7 @@
     "jsdom": "^29.1.1",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "puppeteer": "^25.3.0",
+    "puppeteer": "24.29.0",
     "sharp": "^0.35.3",
     "standard-version": "^9.5.0",
     "vue-tsc": "^3.3.6"

@@ -153,10 +153,16 @@ const handleHexBlur = () => {
 }
 
 const chip = computed(() => ({ backgroundColor: localColor.value }))
+
+const blurActiveElement = () => {
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur()
+  }
+}
 </script>
 
 <template>
-  <UPopover>
+  <UPopover @update:open="(open: boolean) => { if (open) { nextTick(blurActiveElement) } }">
     <UButton
       :disabled="props.disabled"
       :label="label"

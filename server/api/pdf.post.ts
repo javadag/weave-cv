@@ -137,11 +137,9 @@ export default defineEventHandler(async (event) => {
       </html>`
 
     await page.setContent(wrappedHtml, {
-      waitUntil: "load",
+      waitUntil: "networkidle0",
       timeout: 30_000
     })
-
-    await page.waitForNetworkIdle({ idleTime: 500, timeout: 30_000 }) // Wait for network to be idle for 500ms
 
     await page.evaluate(async () => {
       if (document.fonts?.ready) await document.fonts.ready

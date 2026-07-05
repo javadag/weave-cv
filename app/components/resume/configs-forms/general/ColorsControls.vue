@@ -41,6 +41,7 @@ const applyModel = computed({
     <ConfigWrapper :title="$t('editor.configs.applyAccent')" variant="stacked">
       <USelectMenu
         v-model="applyModel"
+        :search-input="false"
         multiple
         :items="applyableColorItemsOptions"
         option-attribute="label"
