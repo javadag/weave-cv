@@ -49,13 +49,13 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    const insertData: TablesInsert<"resumes"> = {
+    const insertData = {
       owner_id: user.id,
       title: originalResume.title,
       content: originalResume.content,
       configs: originalResume.configs,
       schemaVersion: originalResume.schemaVersion
-    }
+    } as TablesInsert<"resumes">
 
     const { data: duplicatedResume, error: insertError } = await client
       .from("resumes")

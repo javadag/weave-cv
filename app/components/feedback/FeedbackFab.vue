@@ -14,7 +14,11 @@ const isOpen = ref(false)
       class="pointer-events-auto rounded-full shadow-lg"
       :title="$t('feedback.button')"
       :aria-label="$t('feedback.button')"
-      @click="isOpen = true"
+      @click="
+        () => {
+          isOpen = true
+        }
+      "
     />
     <FeedbackModal v-model="isOpen" />
   </div>

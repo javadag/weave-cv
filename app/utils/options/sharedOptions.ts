@@ -1,58 +1,77 @@
 import type { TAlign, TIconStyle, TSeparator, TSide, TVariant, TVariantSimple } from "../schemas/shared.schema"
 
-export const alignOptions: { label: string; value: TAlign }[] = [
-  { label: "Left", value: "left" },
-  { label: "Center", value: "center" },
-  { label: "Right", value: "right" }
-]
-export const variantSimpleOptions: { label: string; value: TVariantSimple }[] = [
-  { label: "Same Line", value: "inline" },
-  { label: "Stacked", value: "stacked" }
-]
+export function getAlignOptions(t: (key: string) => string): { label: string; value: TAlign }[] {
+  return [
+    { label: t("editor.configs.alignOptions.left"), value: "left" },
+    { label: t("editor.configs.alignOptions.center"), value: "center" },
+    { label: t("editor.configs.alignOptions.right"), value: "right" }
+  ]
+}
 
-export const variantOptions: { label: string; value: TVariant }[] = [
-  { label: "Grid", value: "grid" },
-  { label: "Stacked", value: "stacked" },
-  { label: "Same Line", value: "inline" }
-]
+export function getVariantSimpleOptions(t: (key: string) => string): { label: string; value: TVariantSimple }[] {
+  return [
+    { label: t("editor.configs.variantSimpleOptions.inline"), value: "inline" },
+    { label: t("editor.configs.variantSimpleOptions.stacked"), value: "stacked" }
+  ]
+}
 
-export const separatorOptions: { label: string; value: TSeparator }[] = [
-  { label: "Pipe", value: "pipe" },
-  { label: "Dot", value: "dot" },
-  { label: "Dash", value: "dash" },
-  { label: "Comma", value: "comma" },
-  { label: "Slash", value: "slash" },
-  { label: "None", value: "none" }
-]
+export function getVariantOptions(t: (key: string) => string): { label: string; value: TVariant }[] {
+  return [
+    { label: t("editor.configs.variantOptions.grid"), value: "grid" },
+    { label: t("editor.configs.variantOptions.stacked"), value: "stacked" },
+    { label: t("editor.configs.variantOptions.inline"), value: "inline" }
+  ]
+}
 
-export const iconAlignOptions: { label: string; value: TSide }[] = [
-  { label: "Left", value: "left" },
-  { label: "Right", value: "right" }
-]
+export function getSeparatorOptions(t: (key: string) => string): { label: string; value: TSeparator }[] {
+  return [
+    { label: t("editor.configs.separatorOptions.pipe"), value: "pipe" },
+    { label: t("editor.configs.separatorOptions.dot"), value: "dot" },
+    { label: t("editor.configs.separatorOptions.dash"), value: "dash" },
+    { label: t("editor.configs.separatorOptions.comma"), value: "comma" },
+    { label: t("editor.configs.separatorOptions.slash"), value: "slash" },
+    { label: t("editor.configs.separatorOptions.none"), value: "none" }
+  ]
+}
 
-export const iconStyleOptions: { label: string; value: TIconStyle }[] = [
-  { label: "Simple", value: "simple" },
-  { label: "Filled Rounded", value: "filledRounded" },
-  { label: "Filled Square", value: "filledSquare" },
-  { label: "Outline Rounded", value: "outlineRounded" },
-  { label: "Outline Square", value: "outlineSquare" }
-]
+export function getIconAlignOptions(t: (key: string) => string): { label: string; value: TSide }[] {
+  return [
+    { label: t("editor.configs.iconAlignOptions.left"), value: "left" },
+    { label: t("editor.configs.iconAlignOptions.right"), value: "right" }
+  ]
+}
 
-export const photoPositionOptions: { label: string; value: "left" | "right" | "top" }[] = [
-  { label: "Left", value: "left" },
-  { label: "Right", value: "right" },
-  { label: "Top", value: "top" }
-]
+export function getIconStyleOptions(t: (key: string) => string): { label: string; value: TIconStyle }[] {
+  return [
+    { label: t("editor.configs.iconStyleOptions.simple"), value: "simple" },
+    { label: t("editor.configs.iconStyleOptions.filledRounded"), value: "filledRounded" },
+    { label: t("editor.configs.iconStyleOptions.filledSquare"), value: "filledSquare" },
+    { label: t("editor.configs.iconStyleOptions.outlineRounded"), value: "outlineRounded" },
+    { label: t("editor.configs.iconStyleOptions.outlineSquare"), value: "outlineSquare" }
+  ]
+}
 
-export const titleStyleOptions: { label: string; value: "colon" | "bracket" | "dash" | "none" }[] = [
-  { label: "Colon", value: "colon" },
-  { label: "Bracket", value: "bracket" },
-  { label: "Dash", value: "dash" },
-  { label: "None", value: "none" }
-]
+export function getPhotoPositionOptions(t: (key: string) => string): { label: string; value: "left" | "right" | "top" }[] {
+  return [
+    { label: t("editor.configs.photoPositionOptions.left"), value: "left" },
+    { label: t("editor.configs.photoPositionOptions.right"), value: "right" },
+    { label: t("editor.configs.photoPositionOptions.top"), value: "top" }
+  ]
+}
 
-export const photoShapeOptions: { label: string; value: "circle" | "rounded" | "square" }[] = [
-  { label: "Circle", value: "circle" },
-  { label: "Rounded", value: "rounded" },
-  { label: "Square", value: "square" }
-]
+export function getTitleStyleOptions(t: (key: string) => string): { label: string; value: "colon" | "bracket" | "dash" | "none" }[] {
+  return [
+    { label: t("editor.configs.titleStyleOptions.colon"), value: "colon" },
+    { label: t("editor.configs.titleStyleOptions.bracket"), value: "bracket" },
+    { label: t("editor.configs.titleStyleOptions.dash"), value: "dash" },
+    { label: t("editor.configs.titleStyleOptions.none"), value: "none" }
+  ]
+}
+
+export function getPhotoShapeOptions(t: (key: string) => string): { label: string; value: "circle" | "rounded" | "square" }[] {
+  return [
+    { label: t("editor.configs.photoShapeOptions.circle"), value: "circle" },
+    { label: t("editor.configs.photoShapeOptions.rounded"), value: "rounded" },
+    { label: t("editor.configs.photoShapeOptions.square"), value: "square" }
+  ]
+}

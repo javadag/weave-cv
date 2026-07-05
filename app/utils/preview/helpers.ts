@@ -12,6 +12,14 @@ export const createOptionsFromEnum = (enumValues: readonly string[], labelFormat
   }))
 }
 
+export function createTranslatedOptions<T extends string>(
+  t: (key: string) => string,
+  prefix: string,
+  values: readonly T[]
+): { label: string; value: T }[] {
+  return values.map((v) => ({ label: t(`${prefix}.${v}`), value: v }))
+}
+
 export const pxToMM = (px: number) => (px * 25.4) / 96
 export const sizeToPx = (size: TPaperSize, v: "h" | "w") => Math.trunc(PAPER_SIZES[size][v] * MM_TO_PX)
 

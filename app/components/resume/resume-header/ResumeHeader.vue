@@ -26,6 +26,8 @@ const undoRedo = inject<{
 
 const canUndo = computed(() => undoRedo?.canUndo.value ?? false)
 const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
+
+const startTour = inject<() => void>("startTour", () => {})
 </script>
 
 <template>
@@ -79,13 +81,27 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
       </div>
       <UButton
         color="neutral"
+        variant="ghost"
+        icon="i-lucide-circle-help"
+        :title="$t('editor.tour.restart')"
+        :ui="{
+          leadingIcon: 'size-4'
+        }"
+        @click="startTour()"
+      />
+      <UButton
+        color="neutral"
         variant="outline"
         icon="i-lucide-layout-template"
         :ui="{
           leadingIcon: 'size-4'
         }"
         :title="$t('editor.header.changeTemplate')"
-        @click="isTemplateModalOpen = true"
+        @click="
+          () => {
+            isTemplateModalOpen = true
+          }
+        "
       >
         <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
       </UButton>
@@ -97,11 +113,18 @@ const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
           leadingIcon: 'size-4'
         }"
         :title="$t('editor.header.matchToJob')"
-        @click="isMatchToJobModalOpen = true"
+        @click="
+          () => {
+            isMatchToJobModalOpen = true
+          }
+        "
       >
         <span class="hidden sm:inline">{{ $t("editor.header.matchToJob") }}</span>
       </UButton>
-      <div class="bg-elevated/50 border-muted flex items-center overflow-hidden rounded-lg border p-0 backdrop-blur-sm">
+      <div
+        id="editor-save-group"
+        class="bg-elevated/50 border-muted flex items-center overflow-hidden rounded-lg border p-0 backdrop-blur-sm"
+      >
         <SaveChanges @saving="saving = $event" />
         <Download :disabled="saving" />
         <Export :disabled="saving" />

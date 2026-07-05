@@ -81,7 +81,17 @@ const resetForm = () => {
 <template>
   <div class="flex items-center justify-between">
     <span class="text-default text-sm font-medium">{{ $t("editor.form.contactDetails") }}</span>
-    <UButton variant="ghost" :disabled="isAddingDetail" size="sm" icon="i-lucide-plus" @click="isAddingDetail = true">
+    <UButton
+      variant="ghost"
+      :disabled="isAddingDetail"
+      size="sm"
+      icon="i-lucide-plus"
+      @click="
+        () => {
+          isAddingDetail = true
+        }
+      "
+    >
       {{ $t("editor.form.addDetail") }}
     </UButton>
   </div>

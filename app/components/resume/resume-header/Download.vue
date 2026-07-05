@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { FetchError } from "ofetch"
+
 interface Props {
   disabled?: boolean
 }
@@ -8,6 +10,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const downloading = ref(false)
+const toast = useToast()
 const resumeStore = useResumeStore()
 const { title } = storeToRefs(resumeStore)
 const configsStore = useConfigsStore()
@@ -56,6 +59,16 @@ const handleDownload = async () => {
     globalThis.URL.revokeObjectURL(url)
   } catch (error) {
     console.error("Error generating PDF:", error)
+    toast.add({
+      title: "PDF export failed",
+      description:
+        error instanceof FetchError
+          ? error.statusMessage
+          : error instanceof Error
+            ? error.message
+            : "Could not generate PDF. Please try again.",
+      color: "error"
+    })
   } finally {
     downloading.value = false
   }

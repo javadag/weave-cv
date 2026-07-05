@@ -137,13 +137,16 @@ export default defineEventHandler(async (event) => {
       </html>`
 
     await page.setContent(wrappedHtml, {
-      waitUntil: "networkidle0",
+      waitUntil: "load",
       timeout: 30_000
     })
+
+    await page.waitForNetworkIdle({ idleTime: 500, timeout: 30_000 }) // Wait for network to be idle for 500ms
 
     await page.evaluate(async () => {
       if (document.fonts?.ready) await document.fonts.ready
     })
+
     await new Promise((resolve) => setTimeout(resolve, 500))
 
     const pdf = await page.pdf({

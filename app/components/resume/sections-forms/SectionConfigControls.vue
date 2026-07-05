@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { capitalize } from "vue"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import { SECTION_CONFIGS_CONFIG } from "~/constants/sectionConfigs"
-import { separatorOptions, titleStyleOptions, variantOptions, variantSimpleOptions } from "~/utils/options/sharedOptions"
+import { getSeparatorOptions, getTitleStyleOptions, getVariantOptions, getVariantSimpleOptions } from "~/utils/options/sharedOptions"
+import { createTranslatedOptions } from "~/utils/preview/helpers"
 import type { TCoreSectionType } from "~/utils/schemas/content.schema"
 import { AdvancedSectionVariant } from "~/utils/schemas/shared.schema"
 import type { TSeparator, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
@@ -15,16 +15,19 @@ const props = defineProps<{ sectionType: TCoreSectionType }>()
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
+const { t } = useI18n()
 
 const configOptions = computed(() => SECTION_CONFIGS_CONFIG[props.sectionType] ?? [])
 
-const advancedVariantOptions = AdvancedSectionVariant.options.map((option) => ({
-  label: capitalize(option),
-  value: option
-}))
+const advancedVariantOptions = computed(() => createTranslatedOptions(t, "editor.configs.advancedSectionVariantOptions", AdvancedSectionVariant.options))
+
+const separatorOptions = computed(() => getSeparatorOptions(t))
+const titleStyleOptions = computed(() => getTitleStyleOptions(t))
+const variantOptions = computed(() => getVariantOptions(t))
+const variantSimpleOptions = computed(() => getVariantSimpleOptions(t))
 
 const isAdvancedSection = computed(() => configOptions.value.includes("titleSubtitleVariant"))
-const currentVariantOptions = computed(() => (isAdvancedSection.value ? advancedVariantOptions : variantOptions))
+const currentVariantOptions = computed(() => (isAdvancedSection.value ? advancedVariantOptions.value : variantOptions.value))
 
 const getConfigValue = (key: string) => {
   const sectionConfig = configs.value[props.sectionType as keyof TConfigs]

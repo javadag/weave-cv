@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { capitalize } from "vue"
 import ColorPicker from "~/components/ui/ColorPicker.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
-import { createOptionsFromEnum } from "~/utils/preview/helpers"
+import { createTranslatedOptions } from "~/utils/preview/helpers"
 import { LinkIconType } from "~/utils/schemas/shared.schema"
 import ConfigWrapper from "../wrapper/ConfigWrapper.vue"
 import ConfigsContainer from "../wrapper/ConfigsContainer.vue"
@@ -11,8 +10,9 @@ import ConfigsContainer from "../wrapper/ConfigsContainer.vue"
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
+const { t } = useI18n()
 
-const iconTypeOptions = createOptionsFromEnum(LinkIconType.options, (value) => capitalize(value))
+const iconTypeOptions = computed(() => createTranslatedOptions(t, "editor.configs.iconTypeOptions", LinkIconType.options))
 
 const handleUpdate = (key: string, value: unknown) => {
   updateConfig(`general.links.${key}`, value)

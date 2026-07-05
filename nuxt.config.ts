@@ -5,7 +5,14 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   nitro: {
-    preset: "vercel"
+    preset: "vercel",
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          lib: ["ESNext", "DOM"]
+        }
+      }
+    }
   },
   image: {
     provider: process.env.GITHUB_ACTIONS ? "vercel" : "ipx"

@@ -419,7 +419,95 @@
       "titleVariant": "Title Variant",
       "titleStyle": "Title Style",
       "subtitleFirst": "Subtitle First",
-      "linkInTitle": "Link in Title"
+      "linkInTitle": "Link in Title",
+      "columnsOptions": {
+        "1": "1 Column",
+        "2": "2 Columns"
+      },
+      "personalPositionOptions": {
+        "top": "Top",
+        "left": "Left",
+        "right": "Right"
+      },
+      "listTypeOptions": {
+        "disc": "Disc",
+        "circle": "Circle",
+        "square": "Square",
+        "none": "None"
+      },
+      "fontWeightOptions": {
+        "normal": "Normal",
+        "bold": "Bold"
+      },
+      "fontCaseOptions": {
+        "inherit": "Inherit",
+        "uppercase": "Uppercase",
+        "lowercase": "Lowercase",
+        "capitalize": "Capitalize"
+      },
+      "fontStyleOptions": {
+        "normal": "Normal",
+        "italic": "Italic"
+      },
+      "iconTypeOptions": {
+        "arrow": "Arrow",
+        "chain": "Chain",
+        "pill": "Pill"
+      },
+      "variantSimpleOptions": {
+        "inline": "Same Line",
+        "stacked": "Stacked"
+      },
+      "variantOptions": {
+        "inline": "Same Line",
+        "stacked": "Stacked",
+        "grid": "Grid"
+      },
+      "separatorOptions": {
+        "pipe": "Pipe",
+        "dot": "Dot",
+        "dash": "Dash",
+        "comma": "Comma",
+        "slash": "Slash",
+        "none": "None"
+      },
+      "iconAlignOptions": {
+        "left": "Left",
+        "right": "Right"
+      },
+      "iconStyleOptions": {
+        "simple": "Simple",
+        "filledRounded": "Filled Rounded",
+        "filledSquare": "Filled Square",
+        "outlineRounded": "Outline Rounded",
+        "outlineSquare": "Outline Square"
+      },
+      "photoPositionOptions": {
+        "left": "Left",
+        "right": "Right",
+        "top": "Top"
+      },
+      "titleStyleOptions": {
+        "colon": "Colon",
+        "bracket": "Bracket",
+        "dash": "Dash",
+        "none": "None"
+      },
+      "photoShapeOptions": {
+        "circle": "Circle",
+        "rounded": "Rounded",
+        "square": "Square"
+      },
+      "alignOptions": {
+        "left": "Left",
+        "center": "Center",
+        "right": "Right"
+      },
+      "advancedSectionVariantOptions": {
+        "contentFirst": "Content First",
+        "dateFirst": "Date First",
+        "stacked": "Stacked"
+      }
     },
     "sectionTypes": {
       "summary": "Summary",
@@ -615,6 +703,24 @@
           "placeholder": "e.g. Publication title"
         }
       }
+    },
+    "tour": {
+      "help": "Help",
+      "restart": "Restart tour",
+      "step1Title": "Welcome to the Editor",
+      "step1Desc": "Give your resume a title here. Use the toolbar to navigate back, undo/redo changes, change templates, or use AI to match your resume to a job description.",
+      "step2Title": "Sections Panel",
+      "step2Desc": "This is where you build your resume content. Add your personal info, then fill in sections like experience, education, and skills. Expand a section to edit, use the eye icon to toggle visibility, or the trash icon to delete.",
+      "step3Title": "Add New Sections",
+      "step3Desc": "Click here to add more sections like languages, projects, certifications, or custom sections.",
+      "step4Title": "Live Preview",
+      "step4Desc": "Your resume preview updates in real-time as you edit. Zoom to fit and see exactly how your resume will look when printed or downloaded as a PDF.",
+      "step5Title": "Appearance Settings",
+      "step5Desc": "Customize layout, headings, fonts, colors, and spacing here. Every change reflects instantly in the preview.",
+      "step6Title": "Save & Export",
+      "step6Desc": "Autosave runs every 2 minutes, but you can save manually anytime. When you're ready, download your resume as a PDF or export it as JSON.",
+      "step7Title": "You're All Set!",
+      "step7Desc": "You can restart this tour anytime by clicking the help button (?) in the toolbar. Happy resume building!"
     }
   },
   "resetPassword": {

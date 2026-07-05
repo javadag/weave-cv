@@ -89,7 +89,11 @@ const vFontVisible = {
               :key="subset"
               size="xs"
               :variant="selectedSubset === subset ? 'solid' : 'ghost'"
-              @click="selectedSubset = subset"
+              @click="
+                () => {
+                  selectedSubset = subset
+                }
+              "
             >
               {{ subsetLabel(subset) }}
             </UButton>

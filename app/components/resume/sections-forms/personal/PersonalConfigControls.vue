@@ -5,20 +5,30 @@ import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import {
-  alignOptions,
-  iconAlignOptions,
-  iconStyleOptions,
-  photoPositionOptions,
-  photoShapeOptions,
-  separatorOptions,
-  variantOptions,
-  variantSimpleOptions
+  getAlignOptions,
+  getIconAlignOptions,
+  getIconStyleOptions,
+  getPhotoPositionOptions,
+  getPhotoShapeOptions,
+  getSeparatorOptions,
+  getVariantOptions,
+  getVariantSimpleOptions
 } from "~/utils/options/sharedOptions"
 import type { TAlign, TIconStyle, TSeparator, TSide, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
 
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
+const { t } = useI18n()
+
+const alignOptions = computed(() => getAlignOptions(t))
+const iconAlignOptions = computed(() => getIconAlignOptions(t))
+const iconStyleOptions = computed(() => getIconStyleOptions(t))
+const photoPositionOptions = computed(() => getPhotoPositionOptions(t))
+const photoShapeOptions = computed(() => getPhotoShapeOptions(t))
+const separatorOptions = computed(() => getSeparatorOptions(t))
+const variantOptions = computed(() => getVariantOptions(t))
+const variantSimpleOptions = computed(() => getVariantSimpleOptions(t))
 
 const handleUpdate = (key: string, value: unknown) => {
   updateConfig(`personal.${key}`, value)

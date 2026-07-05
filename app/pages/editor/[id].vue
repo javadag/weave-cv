@@ -95,21 +95,34 @@ const breakpoints = useBreakpoints({
 })
 
 const isXlScreen = breakpoints.greaterOrEqual("xl")
+
+const { startTour, checkFirstVisit } = useEditorTour()
+provide('startTour', startTour)
+
+watch([pending, isXlScreen], ([p, isXl]) => {
+  if (!p && isXl) {
+    setTimeout(() => {
+      if (checkFirstVisit()) {
+        startTour()
+      }
+    }, 800)
+  }
+})
 </script>
 
 <template>
   <ClientOnly>
     <div class="flex max-h-[calc(100dvh-88px)] w-full flex-col gap-4 overflow-hidden">
-      <ResumeHeader />
+      <ResumeHeader id="editor-toolbar" />
       <div v-if="isXlScreen" class="overflow-hidden">
         <SplitterGroup direction="horizontal" class="flex h-full gap-1">
-          <SplitterPanel :min-size="20" :default-size="25" :max-size="35">
+          <SplitterPanel :min-size="20" :default-size="25" :max-size="35" id="editor-sections">
             <ResumeSectionsForms :loading="pending" />
           </SplitterPanel>
           <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
             <UIcon name="i-lucide-grip-vertical" class="text-primary shrink-0" />
           </SplitterResizeHandle>
-          <SplitterPanel :min-size="20" class="relative">
+          <SplitterPanel id="editor-preview" :min-size="20" class="relative">
             <span class="text-toned mb-2 flex w-full items-center justify-center text-center text-xs tracking-wider">
               {{ $t("editor.header.preview") }}
               <span class="text-muted ms-2 flex items-center justify-center"
@@ -124,7 +137,7 @@ const isXlScreen = breakpoints.greaterOrEqual("xl")
           <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
             <UIcon name="i-lucide-grip-vertical" class="text-primary size-5" />
           </SplitterResizeHandle>
-          <SplitterPanel :min-size="20" :default-size="20" :max-size="30">
+          <SplitterPanel :min-size="20" :default-size="20" :max-size="30" id="editor-configs">
             <ResumeConfigs />
           </SplitterPanel>
         </SplitterGroup>

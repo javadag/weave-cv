@@ -10,6 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "analyze": "nuxt analyze",
+    "typecheck": "nuxt typecheck",
     "update-types": "bash scripts/update-types.sh",
     "build:pdf-css": "tailwindcss -i app/assets/css/tailwind.css -o public/tailwind-pdf.css --minify",
     "prepare": "husky",
@@ -38,6 +39,7 @@
     "@vueuse/motion": "^3.0.3",
     "@vueuse/nuxt": "14.3.0",
     "dompurify": "^3.4.11",
+    "driver.js": "^1.6.0",
     "eslint": "^9.35.0",
     "groq-sdk": "^1.1.2",
     "marked": "^18.0.5",
@@ -68,10 +70,11 @@
     "eslint-plugin-unicorn": "^70.0.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
-    "prettier": "^3.6.2",
+    "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "puppeteer": "^25.3.0",
     "sharp": "^0.35.3",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "vue-tsc": "^3.3.6"
   }
 }

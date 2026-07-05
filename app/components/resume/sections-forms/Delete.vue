@@ -31,7 +31,11 @@ const handleCancel = () => {
         :size="props.size ?? 'sm'"
         icon="i-lucide-trash-2"
         :aria-label="props.tooltip ?? t('editor.form.deleteSection')"
-        @click="isOpen = true"
+        @click="
+          () => {
+            isOpen = true
+          }
+        "
       />
     </UTooltip>
     <template #content>

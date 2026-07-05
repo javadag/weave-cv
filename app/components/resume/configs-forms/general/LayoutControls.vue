@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { capitalize } from "vue"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import type { TPaperSize } from "~/constants/papers"
 import { PAPER_SIZES } from "~/constants/papers"
-import { createOptionsFromEnum } from "~/utils/preview/helpers"
+import { createOptionsFromEnum, createTranslatedOptions } from "~/utils/preview/helpers"
 import { ContentLayoutSchema, LayoutSchema } from "~/utils/schemas/configs/generalConfigs.schema"
 import { extractNumberConstraintsFromPath } from "~/utils/schemas/schemaExtractors"
 import { DateFormat, ListType, PersonalPosition } from "~/utils/schemas/shared.schema"
@@ -16,6 +15,7 @@ import SectionsOrderControl from "./SectionsOrderControl.vue"
 const configsStore = useConfigsStore()
 const { updateConfig } = configsStore
 const { configs } = storeToRefs(configsStore)
+const { t } = useI18n()
 
 const handleUpdate = (key: string, value: unknown) => {
   updateConfig(`general.layout.${key}`, value)
@@ -45,12 +45,9 @@ const RESUME_LANGUAGE_OPTIONS = [
 
 const dateFormatOptions = createOptionsFromEnum(DateFormat.options)
 const pageSizeOptions = createOptionsFromEnum(Object.keys(PAPER_SIZES) as TPaperSize[], (value) => value)
-const columnsOptions = createOptionsFromEnum(
-  LayoutSchema.shape.columns.options,
-  (value) => `${value} Column${value === "1" ? "" : "s"}`
-)
-const personalPositionOptions = createOptionsFromEnum(PersonalPosition.options, capitalize)
-const listTypeOptions = createOptionsFromEnum(ListType.options, capitalize)
+const columnsOptions = computed(() => createTranslatedOptions(t, "editor.configs.columnsOptions", LayoutSchema.shape.columns.options))
+const personalPositionOptions = computed(() => createTranslatedOptions(t, "editor.configs.personalPositionOptions", PersonalPosition.options))
+const listTypeOptions = computed(() => createTranslatedOptions(t, "editor.configs.listTypeOptions", ListType.options))
 
 const handleColumnWidthUpdate = (side: "left" | "right", value: number) => {
   const newValue = Math.max(0, Math.min(100, value))

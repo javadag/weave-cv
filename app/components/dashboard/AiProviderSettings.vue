@@ -75,14 +75,16 @@ function getKeyHintUrl(providerId: string): string {
             color="neutral"
             size="md"
             :icon="showKey ? 'i-lucide-eye-off' : 'i-lucide-eye'"
-            @click="showKey = !showKey"
+            @click="
+              () => {
+                showKey = !showKey
+              }
+            "
           />
         </div>
       </div>
       <div class="flex items-center gap-3">
-        <UButton color="primary" size="sm" :disabled="!provider || !inputKey" @click="handleSaveConfig">
-          Save
-        </UButton>
+        <UButton color="primary" size="sm" :disabled="!provider || !inputKey" @click="handleSaveConfig"> Save </UButton>
         <UButton v-if="hasApiKey" variant="ghost" color="neutral" size="sm" @click="handleClearAll">
           {{ $t("dashboard.settings.aiProvider.removeAll") }}
         </UButton>

@@ -18,8 +18,8 @@ const hashParams = computed(() => {
   return Object.fromEntries(new URLSearchParams(route.hash))
 })
 
-const errorDescription = computed(() =>
-  (hashParams.value.error_description as string) || (hashParams.value.error as string) || ""
+const errorDescription = computed(
+  () => (hashParams.value.error_description as string) || (hashParams.value.error as string) || ""
 )
 const hasError = computed(() => Boolean(errorDescription.value))
 

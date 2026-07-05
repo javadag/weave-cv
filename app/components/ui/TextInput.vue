@@ -10,8 +10,8 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<{ (e: "update:modelValue", value: string): void }>()
 
-const model = computed({
-  get: () => props.modelValue,
+const model = computed<string>({
+  get: () => (props.modelValue ?? "") as string,
   set: (v: string) => emit("update:modelValue", v)
 })
 </script>

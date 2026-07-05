@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { capitalize } from "vue"
 import type z from "zod"
 import type { $ZodTypeInternals } from "zod/v4/core"
 import NumberInput from "~/components/ui/NumberInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
+import { createTranslatedOptions } from "~/utils/preview/helpers"
 import { extractNumberConstraintsFromPath } from "~/utils/schemas/schemaExtractors"
 import { FontCase, FontStyle, FontWeight } from "~/utils/schemas/shared.schema"
 import ConfigWrapper from "../wrapper/ConfigWrapper.vue"
@@ -20,14 +20,15 @@ const props = defineProps<Props>()
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
+const { t } = useI18n()
 
 const fontSizeFieldName = props.schema && "fontSizeMultiplier" in props.schema.shape ? "fontSizeMultiplier" : "fontSize"
 
 const fontSizeConstraints = props.schema ? extractNumberConstraintsFromPath(props.schema, fontSizeFieldName) : undefined
 
-const fontStyleOptions = FontStyle.options.map((option) => ({ label: capitalize(option), value: option }))
-const fontWeightOptions = FontWeight.options.map((option) => ({ label: capitalize(option), value: option }))
-const fontCaseOptions = FontCase.options.map((option) => ({ label: capitalize(option), value: option }))
+const fontStyleOptions = computed(() => createTranslatedOptions(t, "editor.configs.fontStyleOptions", FontStyle.options))
+const fontWeightOptions = computed(() => createTranslatedOptions(t, "editor.configs.fontWeightOptions", FontWeight.options))
+const fontCaseOptions = computed(() => createTranslatedOptions(t, "editor.configs.fontCaseOptions", FontCase.options))
 
 function onUpdate(suffix: string, value: unknown) {
   updateConfig(`${props.baseKey}.${suffix}`, value)

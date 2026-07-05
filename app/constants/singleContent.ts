@@ -12,12 +12,14 @@ export const EDUCATION_ITEM = SECTIONS_REGISTRY.educations.singleItem as Omit<TA
 export const PROJECT_ITEM = SECTIONS_REGISTRY.projects.singleItem as Omit<TAdvancedContent, "id">
 export const AWARD_ITEM = SECTIONS_REGISTRY.awards.singleItem as Omit<TAdvancedContent, "id">
 export const COURSE_ITEM = SECTIONS_REGISTRY.courses.singleItem as Omit<TAdvancedContent, "id">
+export const CUSTOM_ITEM = SECTIONS_REGISTRY.custom.singleItem as Omit<TBasicContent, "id">
 
 export const BASIC_SECTION_ITEM = {
   skills: SKILL_ITEM,
   summary: SUMMARY_ITEM,
   languages: LANGUAGE_ITEM,
-  certificates: CERTIFICATE_ITEM
+  certificates: CERTIFICATE_ITEM,
+  custom: CUSTOM_ITEM
 }
 
 export const ADVANCED_SECTION_ITEM = {

@@ -13,6 +13,8 @@ const store = new Map<string, WindowEntry>()
  * Records the current call on every successful pass.
  */
 export function checkRateLimit(key: string, limit: number, windowMs: number): void {
+  if (process.env.DISABLE_RATE_LIMIT === "true") return
+
   const now = Date.now()
   const cutoff = now - windowMs
 

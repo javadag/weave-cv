@@ -17,6 +17,14 @@ const availableSectionTypes = computed(() => {
 
 const showAddSectionModal = ref(false)
 
+const openModal = () => {
+  showAddSectionModal.value = true
+}
+
+const closeModal = () => {
+  showAddSectionModal.value = false
+}
+
 const handleAddSection = (sectionType: TCoreSectionType) => {
   resumeStore.addSection(sectionType)
   showAddSectionModal.value = false
@@ -24,13 +32,13 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
 </script>
 
 <template>
-  <div>
+  <div id="editor-add-section">
     <UButton
       v-if="availableSectionTypes.length > 0"
       variant="subtle"
       color="primary"
       class="mt-2 flex items-center justify-center gap-2"
-      @click="showAddSectionModal = true"
+      @click="openModal"
     >
       <UIcon name="i-lucide-plus" class="h-4 w-4" />
       {{ $t("editor.addSection.button") }}
@@ -46,7 +54,7 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
               >
                 <UIcon name="i-lucide-layers" class="text-primary h-5 w-5" />
               </div>
-              <div>
+  <div>
                 <h3 class="text-default text-lg font-semibold">{{ $t("editor.addSection.modalTitle") }}</h3>
                 <p class="text-muted mt-1 text-sm">{{ $t("editor.addSection.modalSubtitle") }}</p>
               </div>
@@ -84,7 +92,7 @@ const handleAddSection = (sectionType: TCoreSectionType) => {
 
           <template #footer>
             <div class="flex justify-end">
-              <UButton color="neutral" variant="ghost" @click="showAddSectionModal = false">{{
+              <UButton color="neutral" variant="ghost" @click="closeModal">{{
                 $t("common.cancel")
               }}</UButton>
             </div>

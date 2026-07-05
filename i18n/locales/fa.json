@@ -467,7 +467,95 @@
       "titleVariant": "حالت عنوان",
       "titleStyle": "سبک عنوان",
       "subtitleFirst": "زیرعنوان اول",
-      "linkInTitle": "لینک داخل عنوان"
+      "linkInTitle": "لینک داخل عنوان",
+      "columnsOptions": {
+        "1": "۱ ستون",
+        "2": "۲ ستون"
+      },
+      "personalPositionOptions": {
+        "top": "بالا",
+        "left": "چپ",
+        "right": "راست"
+      },
+      "listTypeOptions": {
+        "disc": "دایره توپر",
+        "circle": "دایره توخالی",
+        "square": "مربع توپر",
+        "none": "بدون"
+      },
+      "fontWeightOptions": {
+        "normal": "معمولی",
+        "bold": "بولد"
+      },
+      "fontCaseOptions": {
+        "inherit": "پیش‌فرض",
+        "uppercase": "بزرگ",
+        "lowercase": "کوچیک",
+        "capitalize": "بزرگ اول کلمه"
+      },
+      "fontStyleOptions": {
+        "normal": "معمولی",
+        "italic": "ایتالیک"
+      },
+      "iconTypeOptions": {
+        "arrow": "فلش",
+        "chain": "زنجیر",
+        "pill": "کپسول"
+      },
+      "variantSimpleOptions": {
+        "inline": "همان خط",
+        "stacked": "انباشته"
+      },
+      "variantOptions": {
+        "inline": "همان خط",
+        "stacked": "انباشته",
+        "grid": "شبکه‌ای"
+      },
+      "separatorOptions": {
+        "pipe": "خط عمودی",
+        "dot": "نقطه",
+        "dash": "خط تیره",
+        "comma": "ویرگول",
+        "slash": "اسلش",
+        "none": "بدون"
+      },
+      "iconAlignOptions": {
+        "left": "چپ",
+        "right": "راست"
+      },
+      "iconStyleOptions": {
+        "simple": "ساده",
+        "filledRounded": "گرد توپر",
+        "filledSquare": "مربع توپر",
+        "outlineRounded": "گرد توخالی",
+        "outlineSquare": "مربع توخالی"
+      },
+      "photoPositionOptions": {
+        "left": "چپ",
+        "right": "راست",
+        "top": "بالا"
+      },
+      "titleStyleOptions": {
+        "colon": "دونقطه",
+        "bracket": "پرانتز",
+        "dash": "خط تیره",
+        "none": "بدون"
+      },
+      "photoShapeOptions": {
+        "circle": "دایره",
+        "rounded": "گرد",
+        "square": "مربع"
+      },
+      "alignOptions": {
+        "left": "چپ",
+        "center": "وسط",
+        "right": "راست"
+      },
+      "advancedSectionVariantOptions": {
+        "contentFirst": "محتوا اول",
+        "dateFirst": "تاریخ اول",
+        "stacked": "انباشته"
+      }
     },
     "form": {
       "content": "محتوا",
@@ -615,6 +703,24 @@
           "placeholder": "مثلاً عنوان مقاله"
         }
       }
+    },
+    "tour": {
+      "help": "راهنما",
+      "restart": "شروع مجدد تور",
+      "step1Title": "به ویرایشگر خوش آمدید",
+      "step1Desc": "اینجا به رزومه‌ات عنوان بده. از نوار ابزار برای بازگشت، لغو/بازگردانی تغییرات، تغییر قالب یا استفاده از هوش مصنوعی برای تطبیق با شغل استفاده کن.",
+      "step2Title": "پنل بخش‌ها",
+      "step2Desc": "اینجا محتوای رزومه‌ات رو می‌سازی. اطلاعات شخصی رو اضافه کن، بعد بخش‌هایی مثل تجربه، تحصیلات و مهارت‌ها رو پر کن. روی هر بخش کلیک کن تا باز بشه، با آیکون چشم نمایشش رو کنترل کن، یا با آیکون سطل زباله حذفش کن.",
+      "step3Title": "افزودن بخش جدید",
+      "step3Desc": "برای افزودن بخش‌های بیشتر مثل زبان‌ها، پروژه‌ها، مدارک یا بخش سفارشی اینجا کلیک کن.",
+      "step4Title": "پیش‌نمایش زنده",
+      "step4Desc": "پیش‌نمایش رزومه‌ات همزمان با ویرایش به‌روز می‌شه. بزرگ‌نمایی کن و دقیقاً ببین رزومه‌ات موقع چاپ یا دانلود PDF چطور به نظر می‌رسه.",
+      "step5Title": "تنظیمات ظاهری",
+      "step5Desc": "اینجا چیدمان، عنوان‌ها، فونت‌ها، رنگ‌ها و فاصله‌ها رو شخصی‌سازی کن. هر تغییر فوراً توی پیش‌نمایش دیده می‌شه.",
+      "step6Title": "ذخیره و خروجی",
+      "step6Desc": "ذخیره خودکار هر ۲ دقیقه انجام می‌شه، ولی هر وقت خواستی می‌تونی دستی ذخیره کنی. وقتی آماده بودی، رزومه‌ات رو به صورت PDF دانلود کن یا JSON خروجی بگیر.",
+      "step7Title": "حالا دیگه راه افتادی!",
+      "step7Desc": "هر وقت خواستی می‌تونی این تور رو دوباره با کلیک روی دکمه راهنما (؟) توی نوار ابزار ببینی. موفق باشی!"
     }
   },
   "resetPassword": {
