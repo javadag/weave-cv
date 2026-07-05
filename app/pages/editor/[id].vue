@@ -114,7 +114,7 @@ watch([pending, isXlScreen], ([p, isXl]) => {
   <ClientOnly>
     <div class="flex max-h-[calc(100dvh-88px)] w-full flex-col gap-4 overflow-hidden">
       <ResumeHeader id="editor-toolbar" />
-      <div v-if="isXlScreen" class="overflow-hidden">
+      <div v-if="isXlScreen" class="overflow-hidden" dir="ltr">
         <SplitterGroup direction="horizontal" class="flex h-full gap-1">
           <SplitterPanel :min-size="20" :default-size="25" :max-size="35" id="editor-sections">
             <ResumeSectionsForms :loading="pending" />
