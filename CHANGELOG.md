@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.10](https://github.com/JavadAg/weave-cv/compare/v2.5.9...v2.5.10) (2026-07-06)
+
+
+### 🐛 Bug Fixes
+
+* improve landing animation, initial load ([9b017e7](https://github.com/JavadAg/weave-cv/commit/9b017e7ab44f3993d6b351c43fbceab81b709ff6))
+
 ### [2.5.9](https://github.com/JavadAg/weave-cv/compare/v2.5.8...v2.5.9) (2026-07-05)
 
 
