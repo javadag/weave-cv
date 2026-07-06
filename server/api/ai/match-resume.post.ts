@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const isUserKey = !!(provider && apiKey)
 
   if (!isUserKey) {
-    checkRateLimit(`ai:${user.id}`, 5, 60 * 60 * 1000)
+    checkRateLimit(`ai:${user.id}`, 3, 60 * 60 * 1000)
   }
 
   const effectiveProvider = isUserKey ? provider! : "deepseek"

@@ -46,32 +46,31 @@ const features = computed(() => [
 <template>
   <section id="features" class="border-default bg-muted border-y py-20 sm:py-28">
     <div class="max-w-compact mx-auto px-6 lg:px-12">
-      <Motion
-        is="div"
-        :initial="{ opacity: 0, y: 20 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-        class="mb-16 text-center"
-      >
+      <div class="mb-16 text-center">
         <span
+          v-animate
           class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
         >
           {{ $t("features.badge") }}
         </span>
-        <h2 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
+        <h2
+          v-animate
+          style="--anim-delay: 100ms"
+          class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
+        >
           {{ $t("features.title") }}
         </h2>
-        <p class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
+        <p v-animate style="--anim-delay: 200ms" class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
           {{ $t("features.subtitle") }}
         </p>
-      </Motion>
+      </div>
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <Motion
-          is="div"
-          v-for="(f, index) in features"
+        <div
+          v-for="(f, i) in features"
           :key="f.title"
-          :initial="{ opacity: 0, y: 20 }"
-          :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut', delay: index * 80 } }"
+          v-animate
+          :style="{ '--anim-delay': `${i * 75}ms` }"
           class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
         >
           <div
@@ -86,7 +85,7 @@ const features = computed(() => [
           </div>
           <h3 class="text-highlighted mb-2 text-lg font-bold tracking-[-0.01em]">{{ f.title }}</h3>
           <p class="text-muted text-sm leading-relaxed">{{ f.body }}</p>
-        </Motion>
+        </div>
       </div>
     </div>
   </section>

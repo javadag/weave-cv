@@ -84,15 +84,12 @@ function catCount(id: string) {
         <span class="text-primary">◆</span>
         <span>{{ $t("faqPage.badge") }}</span>
       </div>
-      <Motion
-        is="h1"
-        :initial="{ opacity: 0, y: 14 }"
-        :enter="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+      <h1
         class="text-highlighted mb-6 max-w-230 text-[clamp(48px,6vw,72px)] leading-none font-bold tracking-[-0.04em] rtl:leading-snug"
       >
         {{ $t("faqPage.title") }}<br />
         <span class="text-dimmed font-semibold">{{ $t("faqPage.subtitle") }}</span>
-      </Motion>
+      </h1>
       <p class="text-muted max-w-2xl text-xl leading-relaxed">
         {{ $t("faqPage.description") }}
       </p>

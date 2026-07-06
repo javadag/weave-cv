@@ -6,7 +6,6 @@ import TemplatesSection from "~/components/landing/home/TemplatesSection.vue"
 
 const { t } = useI18n()
 
-
 definePageMeta({
   layout: "landing"
 })
@@ -25,6 +24,8 @@ useSeoMeta({
 <template>
   <HeroSection />
   <FeaturesSection />
-  <TemplatesSection />
+  <ClientOnly>
+    <TemplatesSection />
+  </ClientOnly>
   <CTASection />
 </template>

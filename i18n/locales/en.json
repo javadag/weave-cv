@@ -554,7 +554,7 @@
       "skillSuggestions": "Skill Suggestions",
       "current": "Current",
       "suggested": "Suggested",
-      "freeTierNoticeTitle": "Free tier: 5 matches/hour",
+      "freeTierNoticeTitle": "Free tier: 3 matches/hour",
       "freeTierNoticeDesc": "For unlimited use and best results, add your own API key in Dashboard -> Settings.",
       "rewriteWithAi": "Rewrite with AI",
       "aiRewritten": "AI Rewritten",

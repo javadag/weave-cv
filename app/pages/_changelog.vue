@@ -24,12 +24,7 @@ const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: 
 <template>
   <main class="bg-default py-20 sm:py-28">
     <div class="mx-auto max-w-3xl px-6 lg:px-8">
-      <Motion
-        is="header"
-        :initial="{ opacity: 0, y: 20 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600, ease: 'easeOut' } }"
-        class="mb-12"
-      >
+      <header v-intersect class="mb-12">
         <span
           class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
         >
@@ -42,15 +37,9 @@ const html = computed(() => marked.parse(changelogContent, { gfm: true, breaks: 
           Every feature, fix, and refinement we've shipped. Generated from our git history — see something missing? Let
           us know.
         </p>
-      </Motion>
+      </header>
 
-      <Motion
-        is="article"
-        :initial="{ opacity: 0, y: 20 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut', delay: 100 } }"
-        class="changelog-prose"
-        v-html="html"
-      />
+      <article v-intersect class="changelog-prose" v-html="html" />
     </div>
   </main>
 </template>

@@ -26,7 +26,6 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-tiptap-editor",
     "@nuxt/image",
-    "@vueuse/motion/nuxt",
     "@nuxtjs/i18n",
     "@nuxt/fonts",
     "@nuxtjs/sitemap"
@@ -63,25 +62,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     resendApiKey: "",
     feedbackToEmail: "",
-    feedbackFromEmail: "",
-    public: {
-      motion: {
-        directives: {
-          "pop-bottom": {
-            initial: {
-              scale: 0,
-              opacity: 0,
-              y: 100
-            },
-            visible: {
-              scale: 1,
-              opacity: 1,
-              y: 0
-            }
-          }
-        }
-      }
-    }
+    feedbackFromEmail: ""
   },
   icon: {
     clientBundle: {

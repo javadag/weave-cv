@@ -42,26 +42,22 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
 
 <template>
   <section ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center pt-24">
-    <Motion
-      is="div"
-      :initial="{ opacity: 0, y: 20 }"
-      :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-      class="max-w-compact mx-auto mb-10 flex w-full items-end justify-between px-6 lg:px-12"
-    >
+    <div class="max-w-compact mx-auto mb-10 flex w-full items-end justify-between px-6 lg:px-12">
       <div>
         <span
+          v-animate
           class="border-primary-200 bg-primary-50 text-primary dark:border-primary/25 dark:bg-primary/10 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
         >
           {{ $t("templates.badge") }}
         </span>
-        <h2 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
+        <h2 v-animate style="--anim-delay: 100ms" class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
           {{ $t("templates.titleLine1") }}<br />{{ $t("templates.titleLine2") }}
         </h2>
-        <p class="text-dimmed mt-4 max-w-md text-base leading-relaxed">
+        <p v-animate style="--anim-delay: 200ms" class="text-dimmed mt-4 max-w-md text-base leading-relaxed">
           {{ $t("templates.subtitle") }}
         </p>
       </div>
-    </Motion>
+    </div>
     <div
       class="relative flex w-full flex-col items-center justify-center overflow-hidden pb-24"
       style="transform: translateZ(0)"

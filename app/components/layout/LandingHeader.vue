@@ -11,13 +11,15 @@ const user = useSupabaseUser()
     <div class="max-w-compact mx-auto flex h-full items-center justify-between px-6 lg:px-12">
       <Logo />
       <div class="flex items-center gap-1.5 md:gap-4">
-        <NuxtLink
-          v-if="user"
-          to="/dashboard"
-          class="lh-btn-dashboard inline-flex items-center rounded-[10px] bg-zinc-900 px-3 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-zinc-700 md:px-4.5 md:py-2.5 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
-        >
-          {{ $t("nav.dashboard") }}
-        </NuxtLink>
+        <ClientOnly>
+          <NuxtLink
+            v-if="user"
+            to="/dashboard"
+            class="lh-btn-dashboard inline-flex items-center rounded-[10px] bg-zinc-900 px-3 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-zinc-700 md:px-4.5 md:py-2.5 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+          >
+            {{ $t("nav.dashboard") }}
+          </NuxtLink>
+        </ClientOnly>
         <LanguageSwitcher />
         <Theme />
       </div>
