@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.12](https://github.com/JavadAg/weave-cv/compare/v2.5.11...v2.5.12) (2026-07-08)
+
+
+### ♻️ Code Refactoring
+
+* improve landing load, lazy load editor page ([795aedf](https://github.com/JavadAg/weave-cv/commit/795aedfb83e65407e9e9133ce18edf261d26a65c))
+
 ### [2.5.11](https://github.com/JavadAg/weave-cv/compare/v2.5.10...v2.5.11) (2026-07-06)
 
 
