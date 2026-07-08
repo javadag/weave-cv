@@ -48,29 +48,22 @@ const features = computed(() => [
     <div class="max-w-compact mx-auto px-6 lg:px-12">
       <div class="mb-16 text-center">
         <span
-          v-animate
           class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
         >
           {{ $t("features.badge") }}
         </span>
-        <h2
-          v-animate
-          style="--anim-delay: 100ms"
-          class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
-        >
+        <h2 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
           {{ $t("features.title") }}
         </h2>
-        <p v-animate style="--anim-delay: 200ms" class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
+        <p class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
           {{ $t("features.subtitle") }}
         </p>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <div
-          v-for="(f, i) in features"
+          v-for="f in features"
           :key="f.title"
-          v-animate
-          :style="{ '--anim-delay': `${i * 75}ms` }"
           class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
         >
           <div

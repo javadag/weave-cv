@@ -32,15 +32,12 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
       <div class="grid items-center gap-14 lg:grid-cols-2">
         <div class="flex flex-col">
           <span
-            v-animate
             class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex w-max items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
           >
-            <span class="bg-primary inline-block size-1.5 rounded-full" />
+            <span class="hero-pulse bg-primary inline-block size-1.5 rounded-full" />
             {{ APP_VERSION }}
           </span>
           <h1
-            v-animate
-            style="--anim-delay: 100ms"
             class="text-highlighted mt-6 text-[3.5rem] leading-[1.05] font-bold tracking-[-0.04em] text-balance lg:text-[4.5rem] rtl:leading-tight"
           >
             {{ $t("hero.titleStart") }}
@@ -48,10 +45,10 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
               {{ $t("hero.titleHighlight") }}
             </span>
           </h1>
-          <p v-animate style="--anim-delay: 200ms" class="text-muted mt-6 max-w-135 text-lg leading-relaxed">
+          <p class="text-muted mt-6 max-w-135 text-lg leading-relaxed">
             {{ $t("hero.subtitle") }}
           </p>
-          <div v-animate style="--anim-delay: 300ms" class="mt-9 flex flex-wrap gap-3">
+          <div class="mt-9 flex flex-wrap gap-3">
             <NuxtLink
               to="/dashboard"
               class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
@@ -59,7 +56,7 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
               <span>✦</span> {{ $t("hero.buildBtn") }}
             </NuxtLink>
           </div>
-          <div v-animate style="--anim-delay: 400ms" class="text-muted mt-9 flex flex-wrap gap-6 text-sm">
+          <div class="text-muted mt-9 flex flex-wrap gap-6 text-sm">
             <div v-for="b in trustBadges" :key="b" class="flex items-center gap-1.5">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" fill="#EA580C" fill-opacity="0.15" />
@@ -76,9 +73,7 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
           </div>
         </div>
         <div
-          v-animate:fade-left
           dir="ltr"
-          style="--anim-delay: 150ms"
           class="hero-preview border-default relative overflow-hidden rounded-2xl border shadow-[0_50px_100px_-30px_rgba(28,25,23,0.22)] dark:shadow-[0_50px_100px_-30px_rgba(0,0,0,0.7)]"
         >
           <div class="border-default bg-muted flex items-center gap-2 border-b px-4 py-3">
@@ -163,14 +158,14 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
             </div>
           </div>
           <div
-            class="border-muted bg-default dark:bg-elevated absolute right-5 bottom-5 flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs shadow-lg"
+            class="hero-float border-muted bg-default dark:bg-elevated absolute right-5 bottom-5 flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs shadow-lg"
           >
-            <span class="inline-block size-2 rounded-full bg-emerald-500" />
+            <span class="hero-pulse inline-block size-2 rounded-full bg-emerald-500" />
             <span dir="auto" class="text-highlighted font-semibold">{{ $t("hero.savedAgo") }}</span>
           </div>
           <div
             dir="auto"
-            class="border-muted bg-default dark:bg-elevated text-highlighted absolute top-14 right-5 flex items-center gap-1.5 rounded-xl border px-3 py-2 text-[11px] font-semibold shadow-lg"
+            class="hero-float-slow border-muted bg-default dark:bg-elevated text-highlighted absolute top-14 right-5 flex items-center gap-1.5 rounded-xl border px-3 py-2 text-[11px] font-semibold shadow-lg"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" fill="#10B981" fill-opacity="0.2" />
@@ -206,5 +201,22 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
 }
 .hero-preview:hover {
   box-shadow: 0 60px 120px -30px color-mix(in srgb, var(--ui-primary) 20%, transparent);
+}
+.hero-pulse {
+  animation: landing-pulse 2.4s ease-in-out infinite;
+}
+.hero-float {
+  animation: landing-float 4s ease-in-out infinite;
+}
+.hero-float-slow {
+  animation: landing-float 5.5s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-pulse,
+  .hero-float,
+  .hero-float-slow {
+    animation: none;
+  }
 }
 </style>

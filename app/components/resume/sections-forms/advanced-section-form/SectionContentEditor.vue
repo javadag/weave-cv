@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from "vue"
 import DatePicker from "~/components/ui/DatePicker.vue"
-import RichTextEditor from "~/components/ui/rich-text/RichTextEditor.vue"
 import TextInput from "~/components/ui/TextInput.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import { SECTION_FIELDS_CONFIG, type EditorField } from "~/constants/sectionFields"
 import type { TAdvancedContent, TBasicContent, TCoreSectionType, TSubRole } from "~/utils/schemas/content.schema"
+
+const RichTextEditor = defineAsyncComponent(() => import("~/components/ui/rich-text/RichTextEditor.vue"))
 
 interface Props {
   sectionId: string
@@ -224,7 +226,7 @@ const isSummary = computed(() => props.sectionType === "summary")
         :rtl="rtl"
         :label="$t(getFieldConfig('description').label)"
         :placeholder="$t(getFieldConfig('description').placeholder || '')"
-        @update:content="(htmlContent) => handleFieldUpdate('description', htmlContent)"
+        @update:content="(htmlContent: string) => handleFieldUpdate('description', htmlContent)"
       />
 
       <div v-if="hasField('subRoles')" class="flex flex-col gap-2">

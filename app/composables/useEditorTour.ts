@@ -1,5 +1,4 @@
-import { driver } from "driver.js"
-import "driver.js/dist/driver.css"
+import type { Driver } from "driver.js"
 
 const STORAGE_KEY = "weave-cv-editor-tour-v1"
 
@@ -12,7 +11,7 @@ const checkFirstVisit = () => {
 
 export function useEditorTour() {
   const { t } = useI18n()
-  const driverInstance = ref<ReturnType<typeof driver> | null>(null)
+  const driverInstance = ref<Driver | null>(null)
   const isTourActive = ref(false)
 
   const destroyDriver = () => {
@@ -23,8 +22,11 @@ export function useEditorTour() {
     isTourActive.value = false
   }
 
-  const startTour = () => {
+  const startTour = async () => {
     destroyDriver()
+
+    const { driver } = await import("driver.js")
+    await import("driver.js/dist/driver.css")
 
     driverInstance.value = driver({
       showProgress: true,

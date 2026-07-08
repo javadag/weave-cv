@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import ChangeTemplateModal from "./ChangeTemplateModal.vue"
+import { defineAsyncComponent } from "vue"
 import Download from "./Download.vue"
 import Export from "./Export.vue"
-import MatchToJobModal from "./MatchToJobModal.vue"
 import SaveChanges from "./SaveChanges.vue"
+
+const ChangeTemplateModal = defineAsyncComponent(() => import("./ChangeTemplateModal.vue"))
+const MatchToJobModal = defineAsyncComponent(() => import("./MatchToJobModal.vue"))
 
 const saving = ref(false)
 const isTemplateModalOpen = ref(false)
@@ -27,7 +29,7 @@ const undoRedo = inject<{
 const canUndo = computed(() => undoRedo?.canUndo.value ?? false)
 const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
 
-const startTour = inject<() => void>("startTour", () => {})
+const startTour = inject<() => Promise<void>>("startTour", async () => {})
 </script>
 
 <template>

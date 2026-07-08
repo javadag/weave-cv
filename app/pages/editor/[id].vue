@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from "vue"
 import { useRoute } from "vue-router"
 import ResumeConfigs from "~/components/resume/configs-forms/ResumeConfigsForms.vue"
-import ConfigsSlideover from "~/components/resume/editor/ConfigsSlideover.vue"
 import MobileEditorControls from "~/components/resume/editor/MobileEditorControls.vue"
-import SectionsSlideover from "~/components/resume/editor/SectionsSlideover.vue"
 import ResumePreview from "~/components/resume/preview/ResumePreview.vue"
 import ResumePreviewSkeleton from "~/components/resume/preview/ResumePreviewSkeleton.vue"
 import ResumeHeader from "~/components/resume/resume-header/ResumeHeader.vue"
@@ -12,6 +11,9 @@ import type { Tables } from "~/types/database.types"
 import { loadFont } from "~/utils/preview/core/fontUtils"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
+
+const SectionsSlideover = defineAsyncComponent(() => import("~/components/resume/editor/SectionsSlideover.vue"))
+const ConfigsSlideover = defineAsyncComponent(() => import("~/components/resume/editor/ConfigsSlideover.vue"))
 
 const { t } = useI18n()
 const route = useRoute()

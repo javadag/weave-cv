@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   nitro: {
-    preset: "vercel",
+    preset: process.env.GITHUB_ACTIONS ? "vercel" : "node-server",
     typescript: {
       tsConfig: {
         compilerOptions: {
@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     defaults: {
       weights: [300, 400, 500, 700],
       styles: ["normal", "italic"],
-      subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"]
+      subsets: ["latin", "latin-ext"]
     },
     families: [
       { name: "Inter", provider: "google" },
@@ -50,13 +50,11 @@ export default defineNuxtConfig({
       { code: "fa", language: "fa-IR", name: "Persian (فارسی)", file: "fa.json", dir: "rtl" }
     ],
     experimental: {
-      typedOptionsAndMessages: "all"
+      typedOptionsAndMessages: "all",
+      stripMessagesPayload: true
     },
     detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: "weave-cv:language",
-      redirectOn: "root",
-      alwaysRedirect: false
+      cookieKey: "weave-cv:language"
     }
   },
   runtimeConfig: {
@@ -74,7 +72,22 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     build: {
-      sourcemap: false
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks(id: string) {
+            if (id.includes("node_modules/@tiptap") || id.includes("node_modules/nuxt-tiptap-editor") || id.includes("node_modules/prosemirror")) {
+              return "tiptap"
+            }
+            if (id.includes("node_modules/driver.js")) {
+              return "driver"
+            }
+            if (id.includes("node_modules/@internationalized/date")) {
+              return "intl-date"
+            }
+          }
+        }
+      }
     }
   },
   supabase: {
