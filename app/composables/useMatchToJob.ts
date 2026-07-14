@@ -282,7 +282,10 @@ export function useMatchToJob() {
     for (const entry of contents) {
       if (!entry || !("title" in entry)) continue
       if (normalize(entry.title) === normalize(suggestion.category)) {
-        resumeStore.updateContent(`${found.sectionKey}.contents.${entry.id}.description`, `<p>${items}</p>`)
+        const existing = (entry.description as string) || ""
+        const added = suggestion.addedItems.join(", ")
+        const merged = existing.replace(/<\/p>$/, `, ${added}</p>`)
+        resumeStore.updateContent(`${found.sectionKey}.contents.${entry.id}.description`, merged)
         toast.add({ title: t("editor.matchToJob.skillsAdded"), color: "success" })
         return
       }
