@@ -12,7 +12,6 @@ export default defineEventHandler(async (event) => {
     const { data: resumes, error } = await client
       .from("resumes")
       .select("*")
-      .eq("owner_id", user.id)
       .order("updated_at", { ascending: false })
 
     if (error) {
@@ -40,7 +39,6 @@ export default defineEventHandler(async (event) => {
               updated_at: new Date().toISOString()
             })
             .eq("id", resume.id)
-            .eq("owner_id", user.id)
 
           if (updateError) {
             console.error(`Failed to update migrated resume ${resume.id}:`, updateError)

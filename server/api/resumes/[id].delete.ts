@@ -20,7 +20,6 @@ export default defineEventHandler(async (event) => {
     .from("resumes")
     .select("id")
     .eq("id", id)
-    .eq("owner_id", user.id)
     .single()
 
   if (fetchError) {
@@ -44,7 +43,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // Delete the resume
-  const { error: deleteError } = await client.from("resumes").delete().eq("id", id).eq("owner_id", user.id)
+  const { error: deleteError } = await client.from("resumes").delete().eq("id", id)
 
   if (deleteError) {
     throw createError({

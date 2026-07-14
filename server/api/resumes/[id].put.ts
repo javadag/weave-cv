@@ -58,7 +58,6 @@ export default defineEventHandler(async (event) => {
     .from("resumes")
     .update(updateData)
     .eq("id", id)
-    .eq("owner_id", user.id)
     .select()
     .single()
 

@@ -25,7 +25,6 @@ export default defineEventHandler(async (event) => {
       .from("resumes")
       .select("*")
       .eq("id", id)
-      .eq("owner_id", user.id)
       .single()
       .overrideTypes<TResume>()
 

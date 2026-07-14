@@ -7,10 +7,9 @@ export async function checkResumeLimit(
   userId: string,
   action: "creating" | "duplicating" = "creating"
 ) {
-  const { count, error: countError } = await client
-    .from("resumes")
-    .select("*", { count: "exact", head: true })
-    .eq("owner_id", userId)
+    const { count, error: countError } = await client
+      .from("resumes")
+      .select("*", { count: "exact", head: true })
 
   if (countError) {
     throw createError({
