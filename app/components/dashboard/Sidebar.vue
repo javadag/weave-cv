@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui"
-import { MAX_RESUMES } from "~/constants/config"
 import Logo from "../layout/Logo.vue"
 
 const open = defineModel<boolean>("open", { default: false })
@@ -31,7 +30,7 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
       icon: "i-lucide-file-text",
       to: "/dashboard",
       exact: true,
-      badge: `${count.value}/${MAX_RESUMES}`
+      badge: `${count.value}`
     },
     { label: t("sidebar.profile"), icon: "i-lucide-user", to: "/dashboard/profile" },
     { label: t("sidebar.settings"), icon: "i-lucide-settings", to: "/dashboard/settings" }

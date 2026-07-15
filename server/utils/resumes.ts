@@ -1,5 +1,4 @@
 import type { serverSupabaseClient } from "#supabase/server"
-import { MAX_RESUMES } from "~/constants/config"
 import type { Database } from "~/types/database.types"
 
 export async function checkResumeLimit(
@@ -7,22 +6,6 @@ export async function checkResumeLimit(
   userId: string,
   action: "creating" | "duplicating" = "creating"
 ) {
-    const { count, error: countError } = await client
-      .from("resumes")
-      .select("*", { count: "exact", head: true })
-
-  if (countError) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: countError.message || "Failed to check resume count"
-    })
-  }
-
-  if (count !== null && count >= MAX_RESUMES) {
-    const actionText = action === "creating" ? "creating a new one" : "duplicating"
-    throw createError({
-      statusCode: 403,
-      statusMessage: `You have reached the maximum limit of ${MAX_RESUMES} resumes. Please delete an existing resume before ${actionText}.`
-    })
-  }
+  // Resume limit has been removed — this function is kept as a no-op
+  // in case it is re-enabled in the future.
 }

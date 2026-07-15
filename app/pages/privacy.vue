@@ -6,7 +6,12 @@ definePageMeta({ layout: "landing" })
 const { tm, rt, t } = useI18n()
 useSeoMeta({
   title: () => t("seo.privacy.title"),
-  description: () => t("seo.privacy.description")
+  description: () => t("seo.privacy.description"),
+  ogTitle: () => t("seo.privacy.title"),
+  ogDescription: () => t("seo.privacy.description"),
+  ogUrl: "/privacy",
+  twitterTitle: () => t("seo.privacy.title"),
+  twitterDescription: () => t("seo.privacy.description")
 })
 
 interface Section {

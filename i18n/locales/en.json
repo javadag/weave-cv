@@ -8,9 +8,10 @@
     "titleHighlight": "actually gets you hired.",
     "subtitle": "Pick a template, drop in your story, export a perfect PDF, full design control, ATS-friendly by default and free.",
     "buildBtn": "Build my résumé",
+    "tryBtn": "Try demo",
     "browseBtn": "Browse templates",
     "trustNoCreditCard": "No credit card",
-    "trustFreeResumes": "Up to {max} résumés free",
+    "trustUnlimitedResumes": "Unlimited resumes, free",
     "trustCloudSync": "Cloud sync",
     "savedAgo": "Saved 2s ago",
     "atsCheck": "ATS check passed",
@@ -30,7 +31,7 @@
     "colorTypeTitle": "Color & type control",
     "colorTypeBody": "Tune palettes, fonts, spacing — bounded by sensible defaults you can't break.",
     "cloudSyncTitle": "Cloud sync",
-    "cloudSyncBody": "Up to {max} résumés, autosaved, versioned. Switch devices without losing a draft.",
+    "cloudSyncBody": "Unlimited resumes, autosaved, versioned. Switch devices without losing a draft.",
     "freeTitle": "Free",
     "freeBody": "No paywall, no upsell, no upsold features. We just want you to land the role."
   },
@@ -860,7 +861,7 @@
         "id": 6,
         "cat": "account",
         "q": "How many résumés can I have on the free plan?",
-        "content": "Up to {max} active résumés per account, each with unlimited revisions. There's no premium plan that unlocks more — if you need a fourth, delete one you're not using."
+        "content": "There is no limit on the number of resumes you can create. Each resume has unlimited revisions. All features are free — no premium upsells."
       },
       {
         "id": 7,
@@ -1094,6 +1095,21 @@
     },
     "dashboardAccount": {
       "title": "Account - Weave CV"
+    },
+    "try": {
+      "title": "Try Demo - Weave CV",
+      "description": "Try Weave CV's resume builder for free. No sign-up required."
     }
+  },
+  "try": {
+    "seo": {
+      "title": "Try Weave CV — Free Resume Builder Demo",
+      "description": "Try Weave CV's professional resume builder for free. Edit, preview, and customize your resume — no account required."
+    },
+    "ctaBanner": "Sign up to save your resume and download as PDF.",
+    "saveSignUp": "Save & Sign Up",
+    "signIn": "Sign In",
+    "guestImported": "Your demo resume has been saved to your account!",
+    "importFailed": "Could not import your resume. Please try again."
   }
 }

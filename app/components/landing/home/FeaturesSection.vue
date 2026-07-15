@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { MAX_RESUMES } from "~/constants/config"
-
 const { t } = useI18n()
 
 const features = computed(() => [
@@ -31,7 +29,7 @@ const features = computed(() => [
   {
     icon: "i-lucide-cloud",
     title: t("features.cloudSyncTitle"),
-    body: t("features.cloudSyncBody", { max: MAX_RESUMES }),
+    body: t("features.cloudSyncBody"),
     tone: "primary"
   },
   {

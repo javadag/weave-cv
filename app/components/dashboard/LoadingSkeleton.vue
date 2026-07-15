@@ -1,11 +1,7 @@
-<script setup lang="ts">
-import { MAX_RESUMES } from "~/constants/config"
-</script>
-
 <template>
   <div class="grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
     <div
-      v-for="i in MAX_RESUMES"
+      v-for="i in 6"
       :key="i"
       class="bg-default border-default animate-pulse overflow-hidden rounded-xl border shadow-sm"
     >

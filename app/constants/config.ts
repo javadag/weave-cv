@@ -19,4 +19,4 @@ export const CURRENT_SCHEMA_VERSION = 2
 export const APP_VERSION = pkg.version
 export const CONTACT_EMAIL = "hello@weavecv.app"
 
-export const MAX_RESUMES = 6
+export const MAX_RESUMES = Number.MAX_SAFE_INTEGER

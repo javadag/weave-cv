@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { MAX_RESUMES } from "~/constants/config"
 import type { TResume } from "~/types/resume.types"
 import ResumeCard from "./card/ResumeCard.vue"
 
-interface Props {
+defineProps<{
   resumes: TResume[]
   resumeCount: number
-}
-
-const props = defineProps<Props>()
+}>()
 
 const emits = defineEmits<{
   refresh: []
 }>()
-
-const hasReachedLimit = computed(() => props.resumeCount >= MAX_RESUMES)
 </script>
 
 <template>
@@ -23,7 +18,6 @@ const hasReachedLimit = computed(() => props.resumeCount >= MAX_RESUMES)
       v-for="resume in resumes"
       :key="resume.id"
       :resume="resume"
-      :disable-duplicate="hasReachedLimit"
       @refresh="emits('refresh')"
     />
   </div>

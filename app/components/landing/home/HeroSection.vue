@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { APP_VERSION, MAX_RESUMES } from "~/constants/config"
+import { APP_VERSION } from "~/constants/config"
 
 const { t } = useI18n()
 
 const trustBadges = computed(() => [
   t("hero.trustNoCreditCard"),
-  t("hero.trustFreeResumes", { max: MAX_RESUMES }),
+  t("hero.trustUnlimitedResumes"),
   t("hero.trustCloudSync")
 ])
 const sidebarSections = [
@@ -48,12 +48,18 @@ const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
           <p class="text-muted mt-6 max-w-135 text-lg leading-relaxed">
             {{ $t("hero.subtitle") }}
           </p>
-          <div class="mt-9 flex flex-wrap gap-3">
+           <div class="mt-9 flex flex-wrap gap-3">
             <NuxtLink
-              to="/dashboard"
+              to="/try"
               class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
             >
-              <span>✦</span> {{ $t("hero.buildBtn") }}
+              <span>✦</span> {{ $t("hero.tryBtn") }}
+            </NuxtLink>
+            <NuxtLink
+              to="/dashboard"
+              class="hero-btn-outline border-primary/20 text-primary hover:bg-primary/5 inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 text-[15px] font-semibold no-underline transition-colors"
+            >
+              {{ $t("hero.buildBtn") }}
             </NuxtLink>
           </div>
           <div class="text-muted mt-9 flex flex-wrap gap-6 text-sm">

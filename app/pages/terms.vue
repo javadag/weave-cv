@@ -6,7 +6,12 @@ definePageMeta({ layout: "landing" })
 const { tm, rt, t } = useI18n()
 useSeoMeta({
   title: () => t("seo.terms.title"),
-  description: () => t("seo.terms.description")
+  description: () => t("seo.terms.description"),
+  ogTitle: () => t("seo.terms.title"),
+  ogDescription: () => t("seo.terms.description"),
+  ogUrl: "/terms",
+  twitterTitle: () => t("seo.terms.title"),
+  twitterDescription: () => t("seo.terms.description")
 })
 
 interface Section {

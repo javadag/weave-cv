@@ -6,7 +6,12 @@ definePageMeta({ layout: "landing" })
 const { rt, tm, t } = useI18n()
 useSeoMeta({
   title: () => t("seo.faq.title"),
-  description: () => t("seo.faq.description")
+  description: () => t("seo.faq.description"),
+  ogTitle: () => t("seo.faq.title"),
+  ogDescription: () => t("seo.faq.description"),
+  ogUrl: "/faq",
+  twitterTitle: () => t("seo.faq.title"),
+  twitterDescription: () => t("seo.faq.description")
 })
 
 const activeCat = ref("all")

@@ -19,7 +19,9 @@ const editor = useEditor({
     emit("update:content", editor.getHTML())
   },
   extensions: [
-    TiptapStarterKit,
+    TiptapStarterKit.configure({
+      link: false
+    }),
     TiptapLink.configure({
       autolink: true,
       openOnClick: false,

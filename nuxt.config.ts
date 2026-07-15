@@ -93,7 +93,7 @@ export default defineNuxtConfig({
   supabase: {
     types: "~/types/database.types.ts",
     redirectOptions: {
-      exclude: ["/", "/register", "/forgot-password", "/reset-password"],
+      exclude: ["/", "/try", "/register", "/forgot-password", "/reset-password"],
       include: ["/dashboard(/*)?", "/editor(/*)?", "/login"],
       login: "/login",
       callback: "/confirm"
@@ -106,6 +106,9 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/": { prerender: true },
+    "/try/**": {
+      ssr: false
+    },
     "/editor/**": {
       ssr: false
     }
@@ -129,9 +132,31 @@ export default defineNuxtConfig({
           content: "Weave CV"
         },
         {
+          property: "og:image",
+          content: "https://weavecv.app/og-image.png"
+        },
+        {
+          property: "og:image:width",
+          content: "1200"
+        },
+        {
+          property: "og:image:height",
+          content: "630"
+        },
+        {
           name: "twitter:card",
           content: "summary_large_image"
+        },
+        {
+          name: "twitter:image",
+          content: "https://weavecv.app/og-image.png"
         }
+      ],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+        { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+        { rel: "apple-touch-icon", href: "/apple-touch-icon.png" }
       ]
     }
   },
@@ -141,6 +166,6 @@ export default defineNuxtConfig({
   },
   sitemap: {
     zeroRuntime: true,
-    exclude: ["/dashboard/**", "/editor/**", "/confirm", "/reset-password"]
+    exclude: ["/dashboard/**", "/editor/**", "/try", "/confirm", "/reset-password"]
   }
 })

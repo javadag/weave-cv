@@ -5,7 +5,6 @@ import ImportResumeButton from "~/components/dashboard/ImportResumeButton.vue"
 import LoadingSkeleton from "~/components/dashboard/LoadingSkeleton.vue"
 import ResumeGrid from "~/components/dashboard/ResumeGrid.vue"
 import { useResumeCount } from "~/composables/useResumeCount"
-import { MAX_RESUMES } from "~/constants/config"
 
 const { t } = useI18n()
 
@@ -26,7 +25,14 @@ useHead({
 })
 
 const { resumes, count, pending, error, refresh } = useResumeCount()
-const hasReachedLimit = computed(() => count.value >= MAX_RESUMES)
+const { importGuestResume, hasPending } = useGuestResume()
+
+onMounted(async () => {
+  if (hasPending.value) {
+    const imported = await importGuestResume()
+    if (imported) await refresh()
+  }
+})
 </script>
 
 <template>
@@ -36,18 +42,9 @@ const hasReachedLimit = computed(() => count.value >= MAX_RESUMES)
         <h1 class="text-default text-2xl font-bold tracking-tight">{{ $t("dashboard.myResumes.title") }}</h1>
         <p class="text-muted mt-1 text-sm">{{ $t("dashboard.myResumes.subtitle") }}</p>
       </div>
-      <ImportResumeButton :disabled="hasReachedLimit" @created="() => refresh()" />
-      <CreateResumeButton :disabled="hasReachedLimit" @created="() => refresh()" />
+      <ImportResumeButton @created="() => refresh()" />
+      <CreateResumeButton @created="() => refresh()" />
     </div>
-    <UAlert
-      v-if="hasReachedLimit"
-      color="warning"
-      variant="subtle"
-      icon="i-lucide-alert-triangle"
-      :title="$t('dashboard.myResumes.limitTitle')"
-      :description="$t('dashboard.myResumes.limitDesc', { max: MAX_RESUMES })"
-      class="text-primary mb-6"
-    />
     <UAlert
       v-if="error"
       color="error"
