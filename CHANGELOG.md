@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/JavadAg/weave-cv/compare/v2.5.13...v2.6.0) (2026-07-15)
+
+
+### ✨ Features
+
+* remove resume limit, add SEO improvements, and try-before-sign-up demo ([5017b28](https://github.com/JavadAg/weave-cv/commit/5017b2852713435317ea9d386d9d1b6519dcfdb6))
+
 ### [2.5.13](https://github.com/JavadAg/weave-cv/compare/v2.5.12...v2.5.13) (2026-07-14)
 
 
