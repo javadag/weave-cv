@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { motion } from "motion-v"
+import { useScrollReveal } from "~/composables/useScrollReveal"
+
 const { t } = useI18n()
 
 const features = computed(() => [
@@ -39,30 +42,58 @@ const features = computed(() => [
     tone: "secondary"
   }
 ])
+
+const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
+const headingReveal = useScrollReveal(0.1, { y: 24 })
+const subtitleReveal = useScrollReveal(0.2, { y: 24 })
+
+function cardReveal(i: number) {
+  return useScrollReveal(0.15 + i * 0.08, { y: 36, duration: 0.5 })
+}
 </script>
 
 <template>
   <section id="features" class="border-default bg-muted border-y py-20 sm:py-28">
     <div class="max-w-compact mx-auto px-6 lg:px-12">
       <div class="mb-16 text-center">
-        <span
+        <motion.span
           class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
+          :initial="badgeReveal.initial.value"
+          :whileInView="badgeReveal.whileInView.value"
+          :transition="badgeReveal.transition.value"
+          :inViewOptions="badgeReveal.inViewOptions"
         >
           {{ $t("features.badge") }}
-        </span>
-        <h2 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
+        </motion.span>
+        <motion.h2
+          class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
+          :initial="headingReveal.initial.value"
+          :whileInView="headingReveal.whileInView.value"
+          :transition="headingReveal.transition.value"
+          :inViewOptions="headingReveal.inViewOptions"
+        >
           {{ $t("features.title") }}
-        </h2>
-        <p class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed">
+        </motion.h2>
+        <motion.p
+          class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed"
+          :initial="subtitleReveal.initial.value"
+          :whileInView="subtitleReveal.whileInView.value"
+          :transition="subtitleReveal.transition.value"
+          :inViewOptions="subtitleReveal.inViewOptions"
+        >
           {{ $t("features.subtitle") }}
-        </p>
+        </motion.p>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <div
-          v-for="f in features"
+        <motion.div
+          v-for="(f, i) in features"
           :key="f.title"
           class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
+          :initial="cardReveal(i).initial.value"
+          :whileInView="cardReveal(i).whileInView.value"
+          :transition="cardReveal(i).transition.value"
+          :inViewOptions="cardReveal(i).inViewOptions"
         >
           <div
             class="feat-icon mb-4.5 flex size-12 items-center justify-center rounded-xl text-xl font-bold text-white will-change-transform"
@@ -76,7 +107,7 @@ const features = computed(() => [
           </div>
           <h3 class="text-highlighted mb-2 text-lg font-bold tracking-[-0.01em]">{{ f.title }}</h3>
           <p class="text-muted text-sm leading-relaxed">{{ f.body }}</p>
-        </div>
+        </motion.div>
       </div>
     </div>
   </section>

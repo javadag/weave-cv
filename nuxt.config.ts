@@ -28,7 +28,8 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/i18n",
     "@nuxt/fonts",
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    "motion-v/nuxt"
   ],
   fonts: {
     defaults: {
@@ -70,25 +71,7 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/css/tailwind.css"],
   vite: {
-    plugins: [tailwindcss()],
-    build: {
-      sourcemap: false,
-      rollupOptions: {
-        output: {
-          manualChunks(id: string) {
-            if (id.includes("node_modules/@tiptap") || id.includes("node_modules/nuxt-tiptap-editor") || id.includes("node_modules/prosemirror")) {
-              return "tiptap"
-            }
-            if (id.includes("node_modules/driver.js")) {
-              return "driver"
-            }
-            if (id.includes("node_modules/@internationalized/date")) {
-              return "intl-date"
-            }
-          }
-        }
-      }
-    }
+    plugins: [tailwindcss()]
   },
   supabase: {
     types: "~/types/database.types.ts",

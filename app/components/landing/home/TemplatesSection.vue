@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { motion } from "motion-v"
+import { useScrollReveal } from "~/composables/useScrollReveal"
 import TemplateCarouselCard from "./TemplateCarouselCard.vue"
 
 const SHIFT = 450
@@ -14,51 +16,58 @@ onMounted(async () => {
   }))
 })
 
-// scrollProgress: 0 = section entering viewport from bottom
-//                 0.5 = section centred in viewport
-//                 1 = section exiting at top
-const scrollProgress = ref(0.5)
 const sectionRef = ref<HTMLElement>()
+const { scrollY } = useScroll()
 
-function updateProgress() {
+const sectionProgress = useTransform(scrollY, () => {
   const el = sectionRef.value
-  if (!el) return
+  if (!el) return 0
   const rect = el.getBoundingClientRect()
   const viewH = window.innerHeight
-  const total = viewH + rect.height
-  const scrolled = viewH - rect.top
-  scrollProgress.value = Math.max(0, Math.min(1, scrolled / total))
-}
-
-onMounted(() => {
-  window.addEventListener("scroll", updateProgress, { passive: true })
-  updateProgress()
-})
-onBeforeUnmount(() => {
-  window.removeEventListener("scroll", updateProgress)
+  return Math.max(0, Math.min(1, (viewH - rect.top) / (viewH + rect.height)))
 })
 
-// Row A: starts shifted right (+SHIFT), ends shifted left (-SHIFT) → right-to-left on scroll down
-const offsetA = computed(() => SHIFT * (1 - 2 * scrollProgress.value))
-// Row B: starts shifted left (-SHIFT), ends shifted right (+SHIFT) → left-to-right on scroll down
-const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
+const smoothProgress = useSpring(sectionProgress, { stiffness: 70, damping: 20 })
+
+const offsetA = useTransform(smoothProgress, [0, 0.5, 1], [SHIFT, 0, -SHIFT])
+const offsetB = useTransform(smoothProgress, [0, 0.5, 1], [-SHIFT, 0, SHIFT])
+
+const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
+const headingReveal = useScrollReveal(0.1, { y: 24 })
+const subtitleReveal = useScrollReveal(0.2, { y: 24 })
 </script>
 
 <template>
   <section ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center pt-24">
     <div class="max-w-compact mx-auto mb-10 flex w-full items-end justify-between px-6 lg:px-12">
       <div>
-        <span
+        <motion.span
           class="border-primary-200 bg-primary-50 text-primary dark:border-primary/25 dark:bg-primary/10 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
+          :initial="badgeReveal.initial.value"
+          :whileInView="badgeReveal.whileInView.value"
+          :transition="badgeReveal.transition.value"
+          :inViewOptions="badgeReveal.inViewOptions"
         >
           {{ $t("templates.badge") }}
-        </span>
-        <h2 class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl">
+        </motion.span>
+        <motion.h2
+          class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
+          :initial="headingReveal.initial.value"
+          :whileInView="headingReveal.whileInView.value"
+          :transition="headingReveal.transition.value"
+          :inViewOptions="headingReveal.inViewOptions"
+        >
           {{ $t("templates.titleLine1") }}<br />{{ $t("templates.titleLine2") }}
-        </h2>
-        <p class="text-dimmed mt-4 max-w-md text-base leading-relaxed">
+        </motion.h2>
+        <motion.p
+          class="text-dimmed mt-4 max-w-md text-base leading-relaxed"
+          :initial="subtitleReveal.initial.value"
+          :whileInView="subtitleReveal.whileInView.value"
+          :transition="subtitleReveal.transition.value"
+          :inViewOptions="subtitleReveal.inViewOptions"
+        >
           {{ $t("templates.subtitle") }}
-        </p>
+        </motion.p>
       </div>
     </div>
     <div
@@ -73,10 +82,9 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
         class="absolute top-0 right-0 bottom-0 z-10 w-10 sm:w-20 lg:w-30"
         style="background: linear-gradient(270deg, var(--ui-bg), transparent)"
       />
-      <!-- Row A -->
-      <div
-        class="flex gap-4 transition-transform duration-80 ease-out will-change-transform sm:gap-5"
-        :style="{ transform: `translate3d(${offsetA}px, 0, 0)` }"
+      <motion.div
+        class="flex gap-4 will-change-transform sm:gap-5"
+        :style="{ x: offsetA }"
       >
         <TemplateCarouselCard
           v-for="(t, i) in base.slice(0, 12)"
@@ -84,11 +92,10 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
           :name="t.name"
           :screenshot="t.screenshot"
         />
-      </div>
-      <!-- Row B -->
-      <div
-        class="mt-4 flex gap-4 transition-transform duration-80 ease-out will-change-transform sm:mt-5 sm:gap-5"
-        :style="{ transform: `translate3d(${offsetB}px, 0, 0)` }"
+      </motion.div>
+      <motion.div
+        class="mt-4 flex gap-4 will-change-transform sm:mt-5 sm:gap-5"
+        :style="{ x: offsetB }"
       >
         <TemplateCarouselCard
           v-for="(t, i) in base.slice(12)"
@@ -96,7 +103,7 @@ const offsetB = computed(() => SHIFT * (2 * scrollProgress.value - 1))
           :name="t.name"
           :screenshot="t.screenshot"
         />
-      </div>
+      </motion.div>
     </div>
   </section>
 </template>

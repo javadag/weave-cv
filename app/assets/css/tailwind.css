@@ -53,44 +53,6 @@
   background-size: 40px 40px;
 }
 
-@keyframes landing-pulse {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.65;
-    transform: scale(1.25);
-  }
-}
-@keyframes landing-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-@keyframes cta-float-left {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-4deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(-4deg);
-  }
-}
-@keyframes cta-float-right {
-  0%,
-  100% {
-    transform: translateY(0) rotate(3deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(3deg);
-  }
-}
 
 @layer base {
   button {

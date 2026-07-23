@@ -57,6 +57,7 @@ const tabItems = computed(() => [
         <div
           v-if="props.isSectionHideable"
           class="flex shrink-0 items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100"
+          @click.stop
         >
           <Visibility
             size="xs"
