@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.1](https://github.com/JavadAg/weave-cv/compare/v2.6.0...v2.6.1) (2026-07-23)
+
+
+### ♻️ Code Refactoring
+
+* disable ai matcher for now ([d6753a3](https://github.com/JavadAg/weave-cv/commit/d6753a37da41fb47fdbf9e7bdba29b27ccbb47bc))
+* use motion for animation ([5281372](https://github.com/JavadAg/weave-cv/commit/5281372f4155222a106a3d565a2c11ee79a3fc38))
+
 ## [2.6.0](https://github.com/JavadAg/weave-cv/compare/v2.5.13...v2.6.0) (2026-07-15)
 
 
