@@ -1,3 +1,9 @@
+// Match-to-job disabled — remove throw and uncomment below to re-enable
+export default defineEventHandler(() => {
+  throw createError({ statusCode: 503, statusMessage: "Match to Job feature is temporarily disabled" })
+})
+
+/*
 import { MATCH_PROMPT } from "../../utils/ai/prompts/matchResume"
 import type { AiProvider } from "../../utils/aiClient"
 import { aiChatToJson } from "../../utils/aiClient"
@@ -55,3 +61,4 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 422, statusMessage: "Could not analyze resume — try again" })
   }
 })
+*/
