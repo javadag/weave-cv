@@ -16,6 +16,7 @@ const SectionsSlideover = defineAsyncComponent(() => import("~/components/resume
 const ConfigsSlideover = defineAsyncComponent(() => import("~/components/resume/editor/ConfigsSlideover.vue"))
 
 const { t } = useI18n()
+const { isRtl } = useLocaleInfo()
 const route = useRoute()
 
 const id = computed(() => route.params.id as string)
@@ -119,7 +120,7 @@ watch([pending, isXlScreen], ([p, isXl]) => {
       <div v-if="isXlScreen" class="overflow-hidden" dir="ltr">
         <SplitterGroup direction="horizontal" class="flex h-full gap-1">
           <SplitterPanel :min-size="20" :default-size="25" :max-size="35" id="editor-sections">
-            <ResumeSectionsForms :loading="pending" />
+            <ResumeSectionsForms :dir="isRtl ? 'rtl' : 'ltr'" :loading="pending" />
           </SplitterPanel>
           <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
             <UIcon name="i-lucide-grip-vertical" class="text-primary shrink-0" />
@@ -131,8 +132,8 @@ watch([pending, isXlScreen], ([p, isXl]) => {
                 >{{ configs.general.layout.size }}
                 <UIcon name="i-lucide-dot" class="size-4" />
                 {{ Math.round(scale * 100) }}%</span
-              ></span
-            >
+              >
+            </span>
             <ResumePreviewSkeleton v-if="pending" />
             <ResumePreview v-else :scale="scale" @update:scale="scale = $event" />
           </SplitterPanel>
@@ -140,7 +141,7 @@ watch([pending, isXlScreen], ([p, isXl]) => {
             <UIcon name="i-lucide-grip-vertical" class="text-primary size-5" />
           </SplitterResizeHandle>
           <SplitterPanel :min-size="20" :default-size="20" :max-size="30" id="editor-configs">
-            <ResumeConfigs />
+            <ResumeConfigs :dir="isRtl ? 'rtl' : 'ltr'" />
           </SplitterPanel>
         </SplitterGroup>
       </div>
