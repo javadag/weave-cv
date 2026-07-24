@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import NumberInput from "~/components/ui/NumberInput.vue"
-import FontPicker from "./FontPicker.vue"
 import { loadFont, preloadFont } from "~/utils/preview/core/fontUtils"
 import { ContentLayoutSchema, TypographySchema } from "~/utils/schemas/configs/generalConfigs.schema"
 import { PersonalConfigsSchema } from "~/utils/schemas/configs/sectionsConfigs.schema"
@@ -8,6 +7,7 @@ import { extractNumberConstraintsFromPath } from "~/utils/schemas/schemaExtracto
 import SectionTypography from "../sections/SectionTypography.vue"
 import ConfigsContainer from "../wrapper/ConfigsContainer.vue"
 import ConfigWrapper from "../wrapper/ConfigWrapper.vue"
+import FontPicker from "./FontPicker.vue"
 
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
@@ -31,12 +31,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ConfigsContainer
-    :title="$t('editor.configs.typography')"
-    icon="i-lucide-type"
-    :collapsible="true"
-    :default-expanded="true"
-  >
+  <ConfigsContainer :title="$t('editor.configs.typography')" icon="i-lucide-type">
     <ConfigWrapper variant="grid">
       <FontPicker
         v-model="configs.general.typography.fontFamily"

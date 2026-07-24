@@ -38,6 +38,7 @@ const tabItems = computed(() => [
 
 <template>
   <UCollapsible
+    :default-open="true"
     class="group bg-default border-muted flex flex-col rounded-lg border"
     :ui="{
       content: 'p-2'

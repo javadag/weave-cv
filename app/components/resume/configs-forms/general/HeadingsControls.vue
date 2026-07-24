@@ -31,12 +31,7 @@ const iconSizeConstraints = extractNumberConstraintsFromPath(HeadingsSchema.shap
 </script>
 
 <template>
-  <ConfigsContainer
-    :title="$t('editor.configs.headings')"
-    icon="i-lucide-type"
-    :collapsible="true"
-    :default-expanded="true"
-  >
+  <ConfigsContainer :title="$t('editor.configs.headings')" icon="i-lucide-type">
     <SelectItem
       :model-value="configs.general.headings.variant"
       :label="$t('editor.configs.style')"

@@ -3,6 +3,9 @@ import { generateSectionsOrder } from "~/utils/preview/core/layoutGenerator"
 import { sizeToPx } from "~/utils/preview/helpers"
 import RenderPages from "./pages/RenderPages.vue"
 
+const SCALE_DEBOUNCE_MS = 150
+const SCALE_THRESHOLD = 0.005
+
 interface Props {
   scale: number
   isResponsive?: boolean
@@ -30,13 +33,17 @@ useProcessContent(core, title)
 
 const pages = useGeneratePages(sectionsOrder)
 
-const fitWidth = () => {
+const scale = computed(() => props.scale)
+
+const debouncedFitWidth = useDebounceFn(() => {
+  if (width.value <= 0) return
   const newScale = width.value / sizeToPx(configs.value.general.layout.size, "w")
+  if (Math.abs(newScale - scale.value) > SCALE_THRESHOLD) {
+    emit("update:scale", newScale)
+  }
+}, SCALE_DEBOUNCE_MS)
 
-  emit("update:scale", newScale)
-}
-
-watch(width, fitWidth)
+watch(width, debouncedFitWidth)
 
 const transformStyle = computed(() => ({
   width: "fit-content",

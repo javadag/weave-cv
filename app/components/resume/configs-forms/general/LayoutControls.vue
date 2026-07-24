@@ -45,8 +45,12 @@ const RESUME_LANGUAGE_OPTIONS = [
 
 const dateFormatOptions = createOptionsFromEnum(DateFormat.options)
 const pageSizeOptions = createOptionsFromEnum(Object.keys(PAPER_SIZES) as TPaperSize[], (value) => value)
-const columnsOptions = computed(() => createTranslatedOptions(t, "editor.configs.columnsOptions", LayoutSchema.shape.columns.options))
-const personalPositionOptions = computed(() => createTranslatedOptions(t, "editor.configs.personalPositionOptions", PersonalPosition.options))
+const columnsOptions = computed(() =>
+  createTranslatedOptions(t, "editor.configs.columnsOptions", LayoutSchema.shape.columns.options)
+)
+const personalPositionOptions = computed(() =>
+  createTranslatedOptions(t, "editor.configs.personalPositionOptions", PersonalPosition.options)
+)
 const listTypeOptions = computed(() => createTranslatedOptions(t, "editor.configs.listTypeOptions", ListType.options))
 
 const handleColumnWidthUpdate = (side: "left" | "right", value: number) => {
@@ -74,12 +78,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
 </script>
 
 <template>
-  <ConfigsContainer
-    :title="$t('editor.configs.layout')"
-    icon="i-lucide-grid"
-    :collapsible="true"
-    :default-expanded="true"
-  >
+  <ConfigsContainer :title="$t('editor.configs.layout')" icon="i-lucide-grid">
     <ToggleInput
       v-model="configs.general.layout.rtl"
       :label="$t('editor.configs.rtl')"

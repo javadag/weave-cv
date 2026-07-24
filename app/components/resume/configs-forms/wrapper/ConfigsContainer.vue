@@ -7,13 +7,11 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
-const isOpen = ref(false)
 </script>
 
 <template>
   <UCollapsible
-    v-model:is-open="isOpen"
+    :default-open="true"
     class="bg-default border-muted flex flex-col rounded-lg border duration-500"
     :ui="{
       content: 'p-2'

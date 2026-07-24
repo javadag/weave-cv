@@ -12,7 +12,9 @@ const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
 const { t } = useI18n()
 
-const iconTypeOptions = computed(() => createTranslatedOptions(t, "editor.configs.iconTypeOptions", LinkIconType.options))
+const iconTypeOptions = computed(() =>
+  createTranslatedOptions(t, "editor.configs.iconTypeOptions", LinkIconType.options)
+)
 
 const handleUpdate = (key: string, value: unknown) => {
   updateConfig(`general.links.${key}`, value)
@@ -20,12 +22,7 @@ const handleUpdate = (key: string, value: unknown) => {
 </script>
 
 <template>
-  <ConfigsContainer
-    :title="$t('editor.configs.links')"
-    icon="i-lucide-link"
-    :collapsible="true"
-    :default-expanded="true"
-  >
+  <ConfigsContainer :title="$t('editor.configs.links')" icon="i-lucide-link">
     <ConfigWrapper variant="stacked">
       <ToggleInput
         v-model="configs.general.links.underline"
