@@ -99,7 +99,7 @@ const breakpoints = useBreakpoints({
 const isXlScreen = breakpoints.greaterOrEqual("xl")
 
 const { startTour, checkFirstVisit } = useEditorTour()
-provide('startTour', startTour)
+provide("startTour", startTour)
 
 watch([pending, isXlScreen], ([p, isXl]) => {
   if (!p && isXl) {

@@ -33,14 +33,10 @@ export default defineNuxtConfig({
   ],
   fonts: {
     defaults: {
-      weights: [300, 400, 500, 700],
+      weights: [200, 300, 400, 500, 700],
       styles: ["normal", "italic"],
-      subsets: ["latin", "latin-ext"]
-    },
-    families: [
-      { name: "Inter", provider: "google" },
-      { name: "Vazirmatn", provider: "local" }
-    ]
+      subsets: ["latin", "latin-ext", "arabic", "cyrillic"]
+    }
   },
   i18n: {
     baseUrl: "https://weavecv.app",
@@ -88,7 +84,6 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    "/": { prerender: true },
     "/try/**": {
       ssr: false
     },

@@ -14,8 +14,6 @@
   --ui-primary: var(--color-orange-600);
 }
 
-/* On Persian pages, Vazirmatn comes first so FA text isn't caught by
-   @nuxt/fonts' auto-inserted "Inter Fallback: Arial"  */
 :root:lang(fa) {
   --font-sans: "Vazirmatn", "Inter", serif;
 }
@@ -52,7 +50,6 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
   background-size: 40px 40px;
 }
-
 
 @layer base {
   button {

@@ -331,8 +331,15 @@
       "empty": "All available sections have been added."
     },
     "export": {
-      "button": "Export JSON",
+      "button": "Export",
       "buttonShort": "Export",
+      "title": "Export Resume",
+      "subtitle": "Choose an export format for your resume",
+      "pdfOption": "PDF",
+      "pdfDesc": "Download a print-ready PDF file",
+      "jsonOption": "JSON",
+      "jsonDesc": "Export all resume data as a JSON file",
+      "generating": "Generating...",
       "exporting": "Exporting..."
     },
     "slideover": {

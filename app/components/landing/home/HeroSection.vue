@@ -43,9 +43,7 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.55, delay, ease: [0.25, 0.4, 0.25, 1] }
 })
 
-const pulseAnimate = computed(() =>
-  prefersReducedMotion.value ? {} : { opacity: [1, 0.65, 1], scale: [1, 1.25, 1] }
-)
+const pulseAnimate = computed(() => (prefersReducedMotion.value ? {} : { opacity: [1, 0.65, 1], scale: [1, 1.25, 1] }))
 const pulseTransition = { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
 
 const floatAnimate4s = computed(() => (prefersReducedMotion.value ? {} : { y: [0, -6, 0] }))
@@ -94,16 +92,10 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
               {{ $t("hero.titleHighlight") }}
             </span>
           </motion.h1>
-          <motion.p
-            class="text-muted mt-6 max-w-135 text-lg leading-relaxed"
-            v-bind="fadeUp(0.35)"
-          >
+          <motion.p class="text-muted mt-6 max-w-135 text-lg leading-relaxed" v-bind="fadeUp(0.35)">
             {{ $t("hero.subtitle") }}
           </motion.p>
-          <motion.div
-            class="mt-9 flex flex-wrap gap-3"
-            v-bind="fadeUp(0.5)"
-          >
+          <motion.div class="mt-9 flex flex-wrap gap-3" v-bind="fadeUp(0.5)">
             <NuxtLink
               to="/try"
               class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
@@ -278,17 +270,17 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
               :animate="floatAnimate5_5s"
               :transition="floatTransition5_5s"
             >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" fill="#10B981" fill-opacity="0.2" />
-              <path
-                d="M8 12.5L11 15.5L16 9.5"
-                stroke="#10B981"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            {{ $t("hero.atsCheck") }}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" fill="#10B981" fill-opacity="0.2" />
+                <path
+                  d="M8 12.5L11 15.5L16 9.5"
+                  stroke="#10B981"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              {{ $t("hero.atsCheck") }}
             </motion.div>
           </motion.div>
         </motion.div>

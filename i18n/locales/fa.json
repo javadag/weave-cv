@@ -391,8 +391,15 @@
       "empty": "تمام بخش‌های موجود اضافه شدن."
     },
     "export": {
-      "button": "خروجی JSON",
+      "button": "خروجی",
       "buttonShort": "خروجی",
+      "title": "خروجی رزومه",
+      "subtitle": "یک قالب خروجی برای رزومه انتخاب کن",
+      "pdfOption": "PDF",
+      "pdfDesc": "دانلود فایل PDF آماده چاپ",
+      "jsonOption": "JSON",
+      "jsonDesc": "خروجی تمام داده‌های رزومه به صورت JSON",
+      "generating": "در حال تولید...",
       "exporting": "در حال خروجی..."
     },
     "slideover": {
