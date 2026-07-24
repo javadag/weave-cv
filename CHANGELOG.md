@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.2](https://github.com/JavadAg/weave-cv/compare/v2.6.1...v2.6.2) (2026-07-24)
+
+
+### ♻️ Code Refactoring
+
+* merged exports ([d0ca609](https://github.com/JavadAg/weave-cv/commit/d0ca609e65f584c64879041bee3ef1dcf96921c9))
+
+
+### 🐛 Bug Fixes
+
+* configs dir ([e74a723](https://github.com/JavadAg/weave-cv/commit/e74a7237d6ea5b98833c90cfef6e007046ed9c73))
+* page rerendering ([76b9836](https://github.com/JavadAg/weave-cv/commit/76b9836dab2ce6706416d5372eeb143ea0f7a2e8))
+
 ### [2.6.1](https://github.com/JavadAg/weave-cv/compare/v2.6.0...v2.6.1) (2026-07-23)
 
 
