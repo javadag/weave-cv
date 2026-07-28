@@ -4,6 +4,7 @@ import type { ConfigOptions } from '@nuxt/test-utils/playwright'
 import { isCI, isWindows } from 'std-env'
 
 export default defineConfig<ConfigOptions>({
+  globalSetup: fileURLToPath(new URL('./tests/e2e/globalSetup.ts', import.meta.url)),
   testDir: './tests/e2e',
   fullyParallel: true,
   forbidOnly: !!isCI,
