@@ -22,6 +22,7 @@ const iconSizeConstraints = extractNumberConstraintsFromPath(HeadingsSchema.shap
 <template>
   <ConfigsContainer :title="$t('editor.configs.headings')" icon="i-lucide-type">
     <HeadingStylePicker
+      label-variant="stacked"
       :model-value="configs.general.headings.variant"
       :label="$t('editor.configs.style')"
       @update:model-value="(value) => handleUpdate('variant', value)"

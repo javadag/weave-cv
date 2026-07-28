@@ -4,6 +4,7 @@ import SelectItem from "~/components/ui/SelectItem.vue"
 import SliderInput from "~/components/ui/SliderInput.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import { PAPER_SIZES, type TPaperSize } from "~/constants/papers.js"
+import { CUSTOM_ICON_NAMES } from "~/utils/preview/icons"
 import { createOptionsFromEnum, createTranslatedOptions } from "~/utils/options"
 import { ContentLayoutSchema, LayoutSchema } from "~/utils/schemas/configs/generalConfigs.schema"
 import { extractNumberConstraintsFromPath } from "~/utils/schemas/schemaExtractors"
@@ -63,7 +64,18 @@ const personalPositionOptions = computed(() =>
     icon: POSITION_ICONS[o.value]
   }))
 )
-const listTypeOptions = computed(() => createTranslatedOptions(t, "editor.configs.listTypeOptions", ListType.options))
+const LIST_TYPE_ICONS: Record<string, string> = {
+  disc: CUSTOM_ICON_NAMES.disc,
+  circle: CUSTOM_ICON_NAMES.circle,
+  square: CUSTOM_ICON_NAMES.square,
+  none: "i-lucide-ban"
+}
+const listTypeOptions = computed(() =>
+  createTranslatedOptions(t, "editor.configs.listTypeOptions", ListType.options).map((o) => ({
+    ...o,
+    icon: LIST_TYPE_ICONS[o.value] ?? "i-lucide-circle"
+  }))
+)
 
 const handleColumnWidthUpdate = (side: "left" | "right", value: number) => {
   const newValue = Math.max(0, Math.min(100, value))
@@ -241,7 +253,8 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       :max="indentConstraints.max"
       @update:model-value="(value) => handleUpdate('contentLayout.indent', value)"
     />
-    <SelectItem
+    <ButtonGroupInput
+      icon-only
       :model-value="configs.general.layout.contentLayout.listType"
       :label="$t('editor.configs.listType')"
       :options="listTypeOptions"

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import CustomIcon from "~/components/ui/CustomIcon.vue"
+
 type Option = { label: string; value: string; icon?: string }
 
 const props = withDefaults(
@@ -23,6 +25,10 @@ function select(value: string) {
     emit("update:modelValue", value)
   }
 }
+
+function isCustomIcon(icon?: string) {
+  return icon?.startsWith("i-custom-") ?? false
+}
 </script>
 
 <template>
@@ -31,10 +37,10 @@ function select(value: string) {
     :class="props.labelVariant === 'inline' ? 'flex items-center justify-between gap-2' : ''"
     :ui="{ label: 'text-2sm text-muted', container: `basis-1/2 ${props.labelVariant === 'inline' ? 'mt-0' : ''}` }"
   >
-    <div class="flex gap-1">
+    <div class="flex w-full flex-wrap gap-1" :class="props.labelVariant === 'inline' ? 'justify-end' : ''">
       <UTooltip v-for="option in props.options" :key="option.value" :text="option.label">
         <UButton
-          :icon="option.icon"
+          :icon="isCustomIcon(option.icon) ? undefined : option.icon"
           :label="props.iconOnly ? undefined : option.label"
           :disabled="props.disabled"
           :variant="option.value === modelValue ? 'solid' : 'outline'"
@@ -42,7 +48,11 @@ function select(value: string) {
           size="xs"
           :class="props.iconOnly ? '' : 'flex-1 justify-center'"
           @click="select(option.value)"
-        />
+        >
+          <template v-if="isCustomIcon(option.icon)" #leading>
+            <CustomIcon :name="option.icon!" class="h-4 w-4" />
+          </template>
+        </UButton>
       </UTooltip>
     </div>
   </UFormField>

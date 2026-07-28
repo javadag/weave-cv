@@ -10,6 +10,7 @@ import {
   getVariantOptions,
   getVariantSimpleOptions
 } from "~/utils/options/sharedOptions"
+import { CUSTOM_ICON_NAMES } from "~/utils/preview/icons"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSectionType } from "~/utils/schemas/content.schema"
 import type { TSeparator, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
@@ -27,19 +28,19 @@ const configOptions = computed(() => SECTION_CONFIGS_CONFIG[props.sectionType] ?
 const VARIANT_ICONS: Record<string, string> = {
   grid: "i-lucide-grid-2x2",
   stacked: "i-lucide-rows-3",
-  inline: "i-lucide-square"
+  inline: "i-custom-same-line"
 }
 const SEPARATOR_ICONS: Record<string, string> = {
-  pipe: "i-lucide-minus",
-  dot: "i-lucide-circle",
+  pipe: CUSTOM_ICON_NAMES.pipe,
+  dot: CUSTOM_ICON_NAMES.dot,
   dash: "i-lucide-minus",
-  comma: "i-lucide-minus",
+  comma: CUSTOM_ICON_NAMES.comma,
   slash: "i-lucide-slash",
   none: "i-lucide-ban"
 }
 const TITLE_STYLE_ICONS: Record<string, string> = {
-  colon: "i-lucide-pilcrow",
-  bracket: "i-lucide-brackets",
+  colon: CUSTOM_ICON_NAMES.colon,
+  bracket: CUSTOM_ICON_NAMES.parentheses,
   dash: "i-lucide-minus",
   none: "i-lucide-ban"
 }
@@ -108,6 +109,7 @@ const handleUpdate = (key: string, value: unknown) => {
       @update:model-value="(value) => handleUpdate('grids', value)"
     />
     <ButtonGroupInput
+      icon-only
       v-if="configOptions.includes('separator') && getConfigValue('variant') === 'inline'"
       :model-value="getConfigValue('separator') as string"
       :label="$t('editor.configs.separator')"
@@ -116,6 +118,7 @@ const handleUpdate = (key: string, value: unknown) => {
       @update:model-value="(value) => handleUpdate('separator', value as TSeparator)"
     />
     <ButtonGroupInput
+      icon-only
       v-if="configOptions.includes('titleStyle')"
       :model-value="getConfigValue('titleStyle') as string"
       :label="$t('editor.configs.titleStyle')"

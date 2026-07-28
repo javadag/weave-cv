@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import ButtonGroupInput from "~/components/ui/ButtonGroupInput.vue"
 import ColorPicker from "~/components/ui/ColorPicker.vue"
-import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
+import { CUSTOM_ICON_NAMES } from "~/utils/preview/icons"
 import { createTranslatedOptions } from "~/utils/options"
 import { LinkIconType } from "~/utils/schemas/shared.schema"
 import ConfigWrapper from "../wrapper/ConfigWrapper.vue"
@@ -12,8 +13,16 @@ const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
 const { t } = useI18n()
 
+const ICON_TYPE_ICONS: Record<string, string> = {
+  arrow: CUSTOM_ICON_NAMES.arrow,
+  chain: CUSTOM_ICON_NAMES.chain,
+  pill: CUSTOM_ICON_NAMES.pill
+}
 const iconTypeOptions = computed(() =>
-  createTranslatedOptions(t, "editor.configs.iconTypeOptions", LinkIconType.options)
+  createTranslatedOptions(t, "editor.configs.iconTypeOptions", LinkIconType.options).map((o) => ({
+    ...o,
+    icon: ICON_TYPE_ICONS[o.value] ?? "i-lucide-link"
+  }))
 )
 
 const handleUpdate = (key: string, value: unknown) => {
@@ -42,7 +51,8 @@ const handleUpdate = (key: string, value: unknown) => {
         :label="$t('editor.configs.show')"
         @update:model-value="(value) => handleUpdate('icon.visible', value)"
       />
-      <SelectItem
+      <ButtonGroupInput
+        icon-only
         :model-value="configs.general.links.icon.type"
         :label="$t('editor.configs.type')"
         :disabled="!configs.general.links.icon.visible"
