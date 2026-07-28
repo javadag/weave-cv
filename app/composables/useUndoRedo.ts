@@ -23,10 +23,10 @@ export function useUndoRedo() {
   let timer: ReturnType<typeof setTimeout> | null = null
   let snapshotInitialized = false
 
-  const takeSnapshot = (): Snapshot => ({
-    personal: structuredClone(personal.value!),
-    core: structuredClone(core.value!),
-    configs: structuredClone(configs.value)
+  const takeSnapshot = (): Snapshot => structuredClone({
+    personal: toRaw(personal.value!),
+    core: toRaw(core.value!),
+    configs: toRaw(configs.value)
   })
 
   const commit = () => {

@@ -26,10 +26,32 @@ export function extractNumberConstraintsFromPath(
   path: string
 ) {
   const shape = parentSchema instanceof z.ZodPrefault ? parentSchema.unwrap().shape : parentSchema.shape
-  const fieldSchema = shape[path]
+  let fieldSchema = shape[path]
 
-  if (fieldSchema && fieldSchema instanceof z.ZodNumber) {
+  if (!fieldSchema) return {}
+
+  // Unwrap ZodDefault / ZodPrefault to get the underlying schema
+  while (typeof (fieldSchema as any).unwrap === "function") {
+    fieldSchema = (fieldSchema as any).unwrap()
+  }
+
+  if (fieldSchema instanceof z.ZodNumber) {
     return extractNumberConstraints(fieldSchema)
+  }
+
+  // Nested z.object with number fields (e.g. { left: z.number(), right: z.number() })
+  if (fieldSchema instanceof z.ZodObject) {
+    const firstNumberField = Object.values(fieldSchema.shape).find((field) => {
+      let f = field
+      while (typeof (f as any).unwrap === "function") f = (f as any).unwrap()
+      return f instanceof z.ZodNumber
+    })
+
+    if (firstNumberField) {
+      let unwrapped: any = firstNumberField
+      while (typeof unwrapped.unwrap === "function") unwrapped = unwrapped.unwrap()
+      return extractNumberConstraints(unwrapped)
+    }
   }
 
   return {}

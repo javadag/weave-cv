@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import NumberInput from "~/components/ui/NumberInput.vue"
+import ButtonGroupInput from "~/components/ui/ButtonGroupInput.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
+import SliderInput from "~/components/ui/SliderInput.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
-import type { TPaperSize } from "~/constants/papers"
-import { PAPER_SIZES } from "~/constants/papers"
+import { PAPER_SIZES, type TPaperSize } from "~/constants/papers.js"
 import { createOptionsFromEnum, createTranslatedOptions } from "~/utils/options"
 import { ContentLayoutSchema, LayoutSchema } from "~/utils/schemas/configs/generalConfigs.schema"
 import { extractNumberConstraintsFromPath } from "~/utils/schemas/schemaExtractors"
@@ -45,11 +45,23 @@ const RESUME_LANGUAGE_OPTIONS = [
 
 const dateFormatOptions = createOptionsFromEnum(DateFormat.options)
 const pageSizeOptions = createOptionsFromEnum(Object.keys(PAPER_SIZES) as TPaperSize[], (value) => value)
+const COLUMNS_ICONS: Record<string, string> = { "1": "i-lucide-square", "2": "i-lucide-columns-2" }
 const columnsOptions = computed(() =>
-  createTranslatedOptions(t, "editor.configs.columnsOptions", LayoutSchema.shape.columns.options)
+  createTranslatedOptions(t, "editor.configs.columnsOptions", LayoutSchema.shape.columns.options).map((o) => ({
+    ...o,
+    icon: COLUMNS_ICONS[o.value]
+  }))
 )
+const POSITION_ICONS: Record<string, string> = {
+  left: "i-lucide-panel-left",
+  right: "i-lucide-panel-right",
+  top: "i-lucide-panel-top"
+}
 const personalPositionOptions = computed(() =>
-  createTranslatedOptions(t, "editor.configs.personalPositionOptions", PersonalPosition.options)
+  createTranslatedOptions(t, "editor.configs.personalPositionOptions", PersonalPosition.options).map((o) => ({
+    ...o,
+    icon: POSITION_ICONS[o.value]
+  }))
 )
 const listTypeOptions = computed(() => createTranslatedOptions(t, "editor.configs.listTypeOptions", ListType.options))
 
@@ -102,7 +114,8 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       :options="pageSizeOptions"
       @update:model-value="(value) => handleUpdate('size', value)"
     />
-    <SelectItem
+    <ButtonGroupInput
+      icon-only
       :model-value="configs.general.layout.columns"
       :label="$t('editor.configs.columns')"
       :options="columnsOptions"
@@ -115,7 +128,8 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         }
       "
     />
-    <SelectItem
+    <ButtonGroupInput
+      icon-only
       :disabled="configs.general.layout.columns === '1'"
       :model-value="
         configs.general.layout.rtl
@@ -139,7 +153,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
             : handleUpdate('personalPosition', value)
       "
     />
-    <NumberInput
+    <SliderInput
       v-model="configs.general.layout.sectionGap"
       :label="$t('editor.configs.sectionGap')"
       :min="sectionGapConstraints.min"
@@ -147,7 +161,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       @update:model-value="(value) => handleUpdate('sectionGap', value)"
     />
     <ConfigWrapper :title="$t('editor.configs.margins')" variant="grid">
-      <NumberInput
+      <SliderInput
         label-variant="stacked"
         :model-value="configs.general.layout.verticalMargin"
         :label="$t('editor.configs.vertical')"
@@ -155,7 +169,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         :max="verticalMarginConstraints.max"
         @update:model-value="(value) => handleUpdate('verticalMargin', value)"
       />
-      <NumberInput
+      <SliderInput
         label-variant="stacked"
         :model-value="configs.general.layout.horizontalMargin"
         :label="$t('editor.configs.horizontal')"
@@ -165,7 +179,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       />
     </ConfigWrapper>
     <ConfigWrapper :title="$t('editor.configs.columnsWidth')" variant="grid">
-      <NumberInput
+      <SliderInput
         :disabled="configs.general.layout.columns === '1'"
         label-variant="stacked"
         :model-value="configs.general.layout.columnsWidth.left"
@@ -174,7 +188,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         :max="columnsWidthConstraints.max"
         @update:model-value="(value) => handleColumnWidthUpdate('left', value)"
       />
-      <NumberInput
+      <SliderInput
         :disabled="configs.general.layout.columns === '1'"
         label-variant="stacked"
         :model-value="configs.general.layout.columnsWidth.right"
@@ -185,7 +199,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       />
     </ConfigWrapper>
     <ConfigWrapper :title="$t('editor.configs.contentLayoutContentFirst')" variant="grid">
-      <NumberInput
+      <SliderInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.contentFirstWidth.left"
         :label="$t('editor.configs.leftColumn')"
@@ -193,7 +207,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         :max="contentFirstWidthConstraints.max"
         @update:model-value="(value) => handleContentLayoutWidthUpdate('contentFirst', 'left', value)"
       />
-      <NumberInput
+      <SliderInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.contentFirstWidth.right"
         :label="$t('editor.configs.rightColumn')"
@@ -203,7 +217,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
       />
     </ConfigWrapper>
     <ConfigWrapper :title="$t('editor.configs.contentLayoutDateFirst')" variant="grid">
-      <NumberInput
+      <SliderInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.dateFirstWidth.left"
         :label="$t('editor.configs.leftColumn')"
@@ -211,7 +225,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         :max="dateFirstWidthConstraints.max"
         @update:model-value="(value) => handleContentLayoutWidthUpdate('dateFirst', 'left', value)"
       />
-      <NumberInput
+      <SliderInput
         label-variant="stacked"
         :model-value="configs.general.layout.contentLayout.dateFirstWidth.right"
         :label="$t('editor.configs.rightColumn')"
@@ -220,7 +234,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
         @update:model-value="(value) => handleContentLayoutWidthUpdate('dateFirst', 'right', value)"
       />
     </ConfigWrapper>
-    <NumberInput
+    <SliderInput
       v-model="configs.general.layout.contentLayout.indent"
       :label="$t('editor.configs.contentIndent')"
       :min="indentConstraints.min"

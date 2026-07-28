@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NumberInput from "~/components/ui/NumberInput.vue"
+import SliderInput from "~/components/ui/SliderInput.vue"
 import { loadFont, preloadFont } from "~/utils/preview/core/fontUtils"
 import { ContentLayoutSchema, TypographySchema } from "~/utils/schemas/configs/generalConfigs.schema"
 import { PersonalConfigsSchema } from "~/utils/schemas/configs/sectionsConfigs.schema"
@@ -38,7 +38,7 @@ onMounted(async () => {
         :label="$t('editor.configs.fontFamily')"
         @update:model-value="(v) => handleUpdate('fontFamily', v)"
       />
-      <NumberInput
+      <SliderInput
         v-model="configs.general.typography.fontSize"
         label-variant="stacked"
         :label="$t('editor.configs.fontSize')"
@@ -47,7 +47,7 @@ onMounted(async () => {
         :step="1"
         @update:model-value="(v) => handleUpdate('fontSize', v)"
       />
-      <NumberInput
+      <SliderInput
         v-model="configs.general.typography.lineHeight"
         label-variant="stacked"
         :label="$t('editor.configs.lineHeight')"

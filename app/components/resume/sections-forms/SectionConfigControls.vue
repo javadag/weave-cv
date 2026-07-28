@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import NumberInput from "~/components/ui/NumberInput.vue"
-import SelectItem from "~/components/ui/SelectItem.vue"
+import ButtonGroupInput from "~/components/ui/ButtonGroupInput.vue"
+import SliderInput from "~/components/ui/SliderInput.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
 import { SECTION_CONFIGS_CONFIG } from "~/constants/sectionConfigs"
-import { getSeparatorOptions, getTitleStyleOptions, getVariantOptions, getVariantSimpleOptions } from "~/utils/options/sharedOptions"
 import { createTranslatedOptions } from "~/utils/options"
-import type { TCoreSectionType } from "~/utils/schemas/content.schema"
-import { AdvancedSectionVariant } from "~/utils/schemas/shared.schema"
-import type { TSeparator, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
+import {
+  getSeparatorOptions,
+  getTitleStyleOptions,
+  getVariantOptions,
+  getVariantSimpleOptions
+} from "~/utils/options/sharedOptions"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
+import type { TCoreSectionType } from "~/utils/schemas/content.schema"
+import type { TSeparator, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
+import { AdvancedSectionVariant } from "~/utils/schemas/shared.schema"
 
 const props = defineProps<{ sectionType: TCoreSectionType }>()
 
@@ -19,15 +24,57 @@ const { t } = useI18n()
 
 const configOptions = computed(() => SECTION_CONFIGS_CONFIG[props.sectionType] ?? [])
 
-const advancedVariantOptions = computed(() => createTranslatedOptions(t, "editor.configs.advancedSectionVariantOptions", AdvancedSectionVariant.options))
+const VARIANT_ICONS: Record<string, string> = {
+  grid: "i-lucide-grid-2x2",
+  stacked: "i-lucide-rows-3",
+  inline: "i-lucide-square"
+}
+const SEPARATOR_ICONS: Record<string, string> = {
+  pipe: "i-lucide-minus",
+  dot: "i-lucide-circle",
+  dash: "i-lucide-minus",
+  comma: "i-lucide-minus",
+  slash: "i-lucide-slash",
+  none: "i-lucide-ban"
+}
+const TITLE_STYLE_ICONS: Record<string, string> = {
+  colon: "i-lucide-pilcrow",
+  bracket: "i-lucide-brackets",
+  dash: "i-lucide-minus",
+  none: "i-lucide-ban"
+}
+const ADVANCED_VARIANT_ICONS: Record<string, string> = {
+  contentFirst: "i-lucide-file-text",
+  dateFirst: "i-lucide-calendar",
+  stacked: "i-lucide-rows-3"
+}
 
-const separatorOptions = computed(() => getSeparatorOptions(t))
-const titleStyleOptions = computed(() => getTitleStyleOptions(t))
-const variantOptions = computed(() => getVariantOptions(t))
-const variantSimpleOptions = computed(() => getVariantSimpleOptions(t))
+const advancedVariantOptions = computed(() =>
+  createTranslatedOptions(t, "editor.configs.advancedSectionVariantOptions", AdvancedSectionVariant.options).map(
+    (o) => ({
+      ...o,
+      icon: ADVANCED_VARIANT_ICONS[o.value] ?? "i-lucide-square"
+    })
+  )
+)
+
+const separatorOptions = computed(() =>
+  getSeparatorOptions(t).map((o) => ({ ...o, icon: SEPARATOR_ICONS[o.value] ?? "i-lucide-minus" }))
+)
+const titleStyleOptions = computed(() =>
+  getTitleStyleOptions(t).map((o) => ({ ...o, icon: TITLE_STYLE_ICONS[o.value] ?? "i-lucide-minus" }))
+)
+const variantOptions = computed(() =>
+  getVariantOptions(t).map((o) => ({ ...o, icon: VARIANT_ICONS[o.value] ?? "i-lucide-square" }))
+)
+const variantSimpleOptions = computed(() =>
+  getVariantSimpleOptions(t).map((o) => ({ ...o, icon: VARIANT_ICONS[o.value] ?? "i-lucide-square" }))
+)
 
 const isAdvancedSection = computed(() => configOptions.value.includes("titleSubtitleVariant"))
-const currentVariantOptions = computed(() => (isAdvancedSection.value ? advancedVariantOptions.value : variantOptions.value))
+const currentVariantOptions = computed(() =>
+  isAdvancedSection.value ? advancedVariantOptions.value : variantOptions.value
+)
 
 const getConfigValue = (key: string) => {
   const sectionConfig = configs.value[props.sectionType as keyof TConfigs]
@@ -44,7 +91,7 @@ const handleUpdate = (key: string, value: unknown) => {
 
 <template>
   <div class="space-y-2 p-1">
-    <SelectItem
+    <ButtonGroupInput
       v-if="configOptions.includes('variant')"
       :model-value="getConfigValue('variant') as string"
       :label="$t('editor.configs.variant')"
@@ -52,7 +99,7 @@ const handleUpdate = (key: string, value: unknown) => {
       :options="currentVariantOptions"
       @update:model-value="(value) => handleUpdate('variant', value as TVariant)"
     />
-    <NumberInput
+    <SliderInput
       v-if="configOptions.includes('grids') && getConfigValue('variant') === 'grid'"
       :model-value="getConfigValue('grids') as number"
       :label="$t('editor.configs.grids')"
@@ -60,7 +107,7 @@ const handleUpdate = (key: string, value: unknown) => {
       :max="4"
       @update:model-value="(value) => handleUpdate('grids', value)"
     />
-    <SelectItem
+    <ButtonGroupInput
       v-if="configOptions.includes('separator') && getConfigValue('variant') === 'inline'"
       :model-value="getConfigValue('separator') as string"
       :label="$t('editor.configs.separator')"
@@ -68,7 +115,7 @@ const handleUpdate = (key: string, value: unknown) => {
       :options="separatorOptions"
       @update:model-value="(value) => handleUpdate('separator', value as TSeparator)"
     />
-    <SelectItem
+    <ButtonGroupInput
       v-if="configOptions.includes('titleStyle')"
       :model-value="getConfigValue('titleStyle') as string"
       :label="$t('editor.configs.titleStyle')"
@@ -76,7 +123,7 @@ const handleUpdate = (key: string, value: unknown) => {
       :options="titleStyleOptions"
       @update:model-value="(value) => handleUpdate('titleStyle', value)"
     />
-    <SelectItem
+    <ButtonGroupInput
       v-if="configOptions.includes('titleSubtitleVariant')"
       :model-value="getConfigValue('titleSubtitleVariant') as string"
       :label="$t('editor.configs.titleVariant')"

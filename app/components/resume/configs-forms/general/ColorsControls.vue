@@ -38,13 +38,13 @@ const applyModel = computed({
         v-model="applyModel"
         :search-input="false"
         multiple
+        class="w-full"
         :items="applyableColorItemsOptions"
         option-attribute="label"
         size="sm"
         value-attribute="value"
       />
     </ConfigWrapper>
-
     <ConfigWrapper :title="$t('editor.configs.primary')" variant="grid">
       <ColorPicker
         :model-value="configs.general.colors.primary.textColor"
