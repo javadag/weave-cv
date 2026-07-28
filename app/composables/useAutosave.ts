@@ -7,14 +7,13 @@ export function useAutosave(resumeId: Ref<string>) {
   const { title, personal, core } = storeToRefs(resumeStore)
   const { configs } = storeToRefs(configsStore)
   const toast = useToast()
+  const { initialized } = useStoreReady()
 
   const isOnline = useOnline()
   const isDirty = ref(false)
   const isSaving = ref(false)
   const lastSavedAt = ref<Date | null>(null)
   const hasPendingOfflineChanges = ref(false)
-
-  let initialized = false
 
   const getPayload = () => ({
     title: title.value,
@@ -75,19 +74,11 @@ export function useAutosave(resumeId: Ref<string>) {
   watch(
     [title, personal, core, configs],
     () => {
-      if (!initialized) return
+      if (!initialized.value) return
       isDirty.value = true
     },
     { deep: true }
   )
-
-  // Mark initialized once the first real data load completes
-  watch([personal, core], ([p, c]) => {
-    if (p && c && !initialized)
-      nextTick(() => {
-        initialized = true
-      })
-  })
 
   onMounted(() => {
     if (localStorage.getItem(storageKey(resumeId.value))) {

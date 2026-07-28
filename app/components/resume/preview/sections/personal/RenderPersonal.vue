@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue"
-import { alignToFlex } from "~/utils/preview/helpers"
+import { alignToFlex } from "~/utils/preview/layout"
 import DetailsContainer from "./details/DetailsContainer.vue"
 import NameAndRole from "./NameAndRole.vue"
 import PersonalPhoto from "./PersonalPhoto.vue"

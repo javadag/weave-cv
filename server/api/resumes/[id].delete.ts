@@ -1,9 +1,7 @@
 import { serverSupabaseClient } from "#supabase/server"
-import { requireAuth } from "../../utils/auth"
+import { defineProtectedEventHandler } from "../../utils/api"
 
-export default defineEventHandler(async (event) => {
-  const user = await requireAuth(event)
-
+export default defineProtectedEventHandler(async (event) => {
   const id = getRouterParam(event, "id")
 
   if (!id) {
@@ -15,37 +13,15 @@ export default defineEventHandler(async (event) => {
 
   const client = await serverSupabaseClient(event)
 
-  // Verify the resume exists and belongs to the user
-  const { data: resume, error: fetchError } = await client
-    .from("resumes")
-    .select("id")
-    .eq("id", id)
-    .single()
+  const { error: deleteError } = await client.from("resumes").delete().eq("id", id)
 
-  if (fetchError) {
-    if (fetchError.code === "PGRST116") {
+  if (deleteError) {
+    if (deleteError.code === "PGRST116") {
       throw createError({
         statusCode: 404,
         statusMessage: "Resume not found"
       })
     }
-    throw createError({
-      statusCode: 500,
-      statusMessage: fetchError.message || "Failed to fetch resume"
-    })
-  }
-
-  if (!resume) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: "Resume not found"
-    })
-  }
-
-  // Delete the resume
-  const { error: deleteError } = await client.from("resumes").delete().eq("id", id)
-
-  if (deleteError) {
     throw createError({
       statusCode: 500,
       statusMessage: deleteError.message || "Failed to delete resume"

@@ -2,7 +2,7 @@
 import ColorPicker from "~/components/ui/ColorPicker.vue"
 import SelectItem from "~/components/ui/SelectItem.vue"
 import ToggleInput from "~/components/ui/ToggleInput.vue"
-import { createTranslatedOptions } from "~/utils/preview/helpers"
+import { createTranslatedOptions } from "~/utils/options"
 import { LinkIconType } from "~/utils/schemas/shared.schema"
 import ConfigWrapper from "../wrapper/ConfigWrapper.vue"
 import ConfigsContainer from "../wrapper/ConfigsContainer.vue"

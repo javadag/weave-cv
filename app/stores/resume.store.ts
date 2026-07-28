@@ -1,5 +1,5 @@
-import { DUMMY_CORE_SECTIONS, DUMMY_TITLE } from "~/constants/dummyData"
-import type { TCoreSection, TCoreSections, TCoreSectionType, TPersonalContent } from "~/utils/schemas/content.schema"
+import { DUMMY_TITLE } from "~/constants/dummyData"
+import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
 
 export type TResumeState = {
   title: string
@@ -65,69 +65,6 @@ export const useResumeStore = defineStore("resume", {
         const finalKey = pathParts.at(-1)!
         target[finalKey] = value
       })
-    },
-
-    addSection(type: TCoreSectionType) {
-      const sectionKey = `${type}-${crypto.randomUUID()}`
-
-      const section = DUMMY_CORE_SECTIONS[type]
-
-      if (!section) return
-
-      const newSection = {
-        title: section.title,
-        isTitleVisible: true,
-        isSectionVisible: true,
-        type,
-        contents: section.contents
-      } as TCoreSection
-
-      this.$patch((state) => {
-        state.core = {
-          ...state.core,
-          [sectionKey]: newSection
-        }
-      })
-
-      // Update order config with the section ID
-      const configsStore = useConfigsStore()
-
-      const currentLeft = [...(configsStore.configs.general.layout.order.twoCol.left || [])]
-      const currentRight = [...(configsStore.configs.general.layout.order.twoCol.right || [])]
-
-      if (!currentLeft.includes(sectionKey) && !currentRight.includes(sectionKey)) {
-        currentLeft.push(sectionKey)
-        configsStore.updateOrder("twoCol", { left: currentLeft, right: currentRight })
-      }
-      const currentOrder = [...(configsStore.configs.general.layout.order.oneCol || [])]
-      if (!currentOrder.includes(sectionKey)) {
-        currentOrder.push(sectionKey)
-        configsStore.updateOrder("oneCol", currentOrder)
-      }
-
-      return { sectionKey }
-    },
-
-    removeSection(sectionKey: string) {
-      this.$patch((state) => {
-        if (state.core) {
-          const { [sectionKey]: _, ...rest } = state.core
-          state.core = Object.keys(rest).length > 0 ? rest : null
-        }
-      })
-
-      // Update order config by removing the section ID
-      const configsStore = useConfigsStore()
-
-      const currentLeft = (configsStore.configs.general.layout.order.twoCol.left || []).filter(
-        (id) => id !== sectionKey
-      )
-      const currentRight = (configsStore.configs.general.layout.order.twoCol.right || []).filter(
-        (id) => id !== sectionKey
-      )
-      configsStore.updateOrder("twoCol", { left: currentLeft, right: currentRight })
-      const currentOrder = (configsStore.configs.general.layout.order.oneCol || []).filter((id) => id !== sectionKey)
-      configsStore.updateOrder("oneCol", currentOrder)
     }
   }
 })

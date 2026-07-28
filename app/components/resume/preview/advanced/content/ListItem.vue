@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, h, inject, type CSSProperties } from "vue"
-import { calculateLineHeight } from "~/utils/preview/helpers"
+import { calculateLineHeight } from "~/utils/preview/units"
 import BulletIcon from "../../basic/basic/BulletIcon.vue"
 import { ColumnColorsKey } from "../../pages/columnColorsContext"
 

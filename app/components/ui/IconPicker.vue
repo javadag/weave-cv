@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { POPULAR_ICONS } from "~/constants/icons"
-import { getIcon } from "~/utils/preview/helpers"
+import { getIcon } from "~/utils/preview/icons"
 
 const props = withDefaults(
   defineProps<{

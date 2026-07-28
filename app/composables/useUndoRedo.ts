@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-structured-clone */
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
 
@@ -16,17 +15,18 @@ export function useUndoRedo() {
   const configsStore = useConfigsStore()
   const { personal, core } = storeToRefs(resumeStore)
   const { configs } = storeToRefs(configsStore)
+  const { initialized } = useStoreReady()
 
   const stack: Snapshot[] = []
   const pointer = ref(-1)
   let isRestoring = false
-  let initialized = false
   let timer: ReturnType<typeof setTimeout> | null = null
+  let snapshotInitialized = false
 
   const takeSnapshot = (): Snapshot => ({
-    personal: JSON.parse(JSON.stringify(personal.value)),
-    core: JSON.parse(JSON.stringify(core.value)),
-    configs: JSON.parse(JSON.stringify(configs.value))
+    personal: structuredClone(personal.value!),
+    core: structuredClone(core.value!),
+    configs: structuredClone(configs.value)
   })
 
   const commit = () => {
@@ -39,7 +39,7 @@ export function useUndoRedo() {
   }
 
   const scheduleCommit = () => {
-    if (isRestoring || !initialized) return
+    if (isRestoring || !snapshotInitialized) return
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       timer = null
@@ -56,14 +56,13 @@ export function useUndoRedo() {
 
   watch([personal, core, configs], scheduleCommit, { deep: true })
 
-  watch([personal, core], ([p, c]) => {
-    if (p && c && !initialized) {
-      nextTick(() => {
-        initialized = true
-        stack.length = 0
-        stack.push(takeSnapshot())
-        pointer.value = 0
-      })
+  // Seed the snapshot stack once the store is ready
+  watch(initialized, (ready) => {
+    if (ready && !snapshotInitialized) {
+      snapshotInitialized = true
+      stack.length = 0
+      stack.push(takeSnapshot())
+      pointer.value = 0
     }
   })
 

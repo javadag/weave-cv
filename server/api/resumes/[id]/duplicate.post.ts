@@ -1,12 +1,9 @@
 import { serverSupabaseClient } from "#supabase/server"
 import type { TablesInsert } from "~/types/database.types"
 import type { TResume } from "~/types/resume.types"
-import { requireAuth } from "../../../utils/auth"
-import { checkResumeLimit } from "../../../utils/resumes"
+import { defineProtectedEventHandler, handleApiError } from "../../../utils/api"
 
-export default defineEventHandler(async (event) => {
-  const user = await requireAuth(event)
-
+export default defineProtectedEventHandler(async (event, user) => {
   const id = getRouterParam(event, "id")
 
   if (!id) {
@@ -19,8 +16,6 @@ export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event)
 
   try {
-    await checkResumeLimit(client, user.id, "duplicating")
-
     const { data: originalResume, error: fetchError } = await client
       .from("resumes")
       .select("*")
@@ -70,14 +65,7 @@ export default defineEventHandler(async (event) => {
     }
 
     return duplicatedResume
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "statusCode" in error) {
-      throw error
-    }
-    const err = error as { statusCode?: number; statusMessage?: string }
-    throw createError({
-      statusCode: err.statusCode || 500,
-      statusMessage: err.statusMessage || "Internal server error"
-    })
+  } catch (error) {
+    handleApiError(error)
   }
 })

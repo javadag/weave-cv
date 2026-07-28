@@ -3,7 +3,7 @@ import { CURRENT_SCHEMA_VERSION } from "~/constants/config"
 import type { Json, TablesUpdate } from "~/types/database.types"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
-import { requireAuth } from "../../utils/auth"
+import { defineProtectedEventHandler } from "../../utils/api"
 
 type UpdateResumeBody = {
   title: string
@@ -14,9 +14,7 @@ type UpdateResumeBody = {
   configs: TConfigs
 }
 
-export default defineEventHandler(async (event) => {
-  const user = await requireAuth(event)
-
+export default defineProtectedEventHandler(async (event) => {
   const id = getRouterParam(event, "id")
 
   if (!id) {

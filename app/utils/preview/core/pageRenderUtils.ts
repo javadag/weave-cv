@@ -4,7 +4,7 @@ export function findPersonalElement(page: TBlocks[]): TBlock | null {
   return (page.find((item) => "id" in item && item.id === "personal") as TBlock) || null
 }
 
-export function isPersonalElement(section: TBlocks): boolean {
+function isPersonalElement(section: TBlocks): boolean {
   return "id" in section && section.id === "personal"
 }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { generateSectionsOrder } from "~/utils/preview/core/layoutGenerator"
-import { sizeToPx } from "~/utils/preview/helpers"
+import { sizeToPx } from "~/utils/preview/units"
 import RenderPages from "./pages/RenderPages.vue"
 
 const SCALE_DEBOUNCE_MS = 150

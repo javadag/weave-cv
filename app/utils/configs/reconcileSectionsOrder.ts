@@ -11,18 +11,6 @@ export function getSectionType(id: string): string {
   return id.replace(UUID_SUFFIX, "")
 }
 
-const dedupe = <T>(arr: T[]): T[] => {
-  const seen = new Set<T>()
-  const out: T[] = []
-  for (const item of arr) {
-    if (!seen.has(item)) {
-      seen.add(item)
-      out.push(item)
-    }
-  }
-  return out
-}
-
 export function reconcileSectionsOrder(templateOrder: Order, currentOrder: Order, coreKeys: string[]): Order {
   const coreSet = new Set(coreKeys)
   const orderedUserIds: string[] = []
@@ -72,7 +60,7 @@ export function reconcileSectionsOrder(templateOrder: Order, currentOrder: Order
   }
 
   return {
-    oneCol: dedupe(oneCol),
-    twoCol: { left: dedupe(left), right: dedupe(right) }
+    oneCol: [...new Set(oneCol)],
+    twoCol: { left: [...new Set(left)], right: [...new Set(right)] }
   }
 }

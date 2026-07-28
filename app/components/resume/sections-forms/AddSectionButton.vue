@@ -5,6 +5,7 @@ import { ADVANCED_SECTION_TYPES, BASIC_SECTION_TYPES } from "~/constants/section
 import type { TCoreSectionType } from "~/utils/schemas/content.schema"
 
 const resumeStore = useResumeStore()
+const { addSection } = useEditorState()
 const { core } = storeToRefs(resumeStore)
 
 const availableSectionTypes = computed(() => {
@@ -26,7 +27,7 @@ const closeModal = () => {
 }
 
 const handleAddSection = (sectionType: TCoreSectionType) => {
-  resumeStore.addSection(sectionType)
+  addSection(sectionType)
   showAddSectionModal.value = false
 }
 </script>

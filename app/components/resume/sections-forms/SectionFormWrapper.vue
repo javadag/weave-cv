@@ -25,7 +25,8 @@ const props = withDefaults(
 )
 
 const { t } = useI18n()
-const { updateContent, removeSection } = useResumeStore()
+const { updateContent } = useResumeStore()
+const { removeSection } = useEditorState()
 const handleDelete = () => {
   removeSection(props.sectionId)
 }

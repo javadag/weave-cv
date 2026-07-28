@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue"
-import { calculateHeaderMargin } from "~/utils/preview/helpers"
+import { calculateHeaderMargin } from "~/utils/preview/units"
 import { ColumnColorsKey } from "./columnColorsContext"
 
 interface Props {

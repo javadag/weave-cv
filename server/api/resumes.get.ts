@@ -2,11 +2,10 @@ import { serverSupabaseClient } from "#supabase/server"
 import { CURRENT_SCHEMA_VERSION } from "~/constants/config"
 import type { Json } from "~/types/database.types"
 import { migrateResumeData } from "~/utils/migrations/migrations"
-import { requireAuth } from "../utils/auth"
+import { defineProtectedEventHandler, handleApiError } from "../utils/api"
 
-export default defineEventHandler(async (event) => {
+export default defineProtectedEventHandler(async (event) => {
   const client = await serverSupabaseClient(event)
-  const user = await requireAuth(event)
 
   try {
     const { data: resumes, error } = await client
@@ -55,14 +54,7 @@ export default defineEventHandler(async (event) => {
     )
 
     return migratedResumes
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "statusCode" in error) {
-      throw error
-    }
-    const err = error as { statusCode?: number; statusMessage?: string }
-    throw createError({
-      statusCode: err.statusCode || 500,
-      statusMessage: err.statusMessage || "Internal server error"
-    })
+  } catch (error) {
+    handleApiError(error)
   }
 })

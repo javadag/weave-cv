@@ -29,3 +29,7 @@ export const isContentEmpty = (content: TAdvancedContent | TBasicContent) => {
     return !value
   })
 }
+
+export const hasValidDescription = (contents: TBasicContent[]) => {
+  return contents.some((content) => content.description && content.description.trim().length > 0)
+}

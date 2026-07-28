@@ -3,14 +3,12 @@ import type { TBlock } from "~/utils/preview/core/types"
 export type TPreviewStore = {
   contentLines: Map<string, string[]> | null
   blocks: Map<string, TBlock> | null
-  updateHeightCallback: (() => void) | null
 }
 
 export const usePreviewStore = defineStore("preview", {
   state: (): TPreviewStore => ({
     contentLines: null,
-    blocks: null,
-    updateHeightCallback: null
+    blocks: null
   }),
   actions: {
     setContentLines(lines: Map<string, string[]>) {
@@ -34,14 +32,9 @@ export const usePreviewStore = defineStore("preview", {
     getBlock(id: string) {
       return this.blocks?.get(id) ?? null
     },
-    setUpdateHeightCallback(callback: () => void) {
-      this.updateHeightCallback = callback
-    },
     updateHeight(id: string, height: number) {
       const block = this.blocks?.get(id)
-
       if (block) block.height = height
-      this.updateHeightCallback?.()
     }
   }
 })

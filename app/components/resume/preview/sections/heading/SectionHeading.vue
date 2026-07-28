@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue"
-import { getIcon, getSectionIconNameWithCustom } from "~/utils/preview/helpers"
+import { getIcon, getSectionIconNameWithCustom } from "~/utils/preview/icons"
 import { ColumnColorsKey } from "../../pages/columnColorsContext"
 import HeadingBorder from "./HeadingBorder.vue"
 import HeadingPill from "./HeadingPill.vue"

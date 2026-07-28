@@ -112,7 +112,7 @@ export function useAiProvider() {
   }
 }
 
-export function maskKey(key: string): string {
+function maskKey(key: string): string {
   if (key.length <= 8) return "*".repeat(key.length)
   return key.slice(0, 4) + "*".repeat(key.length - 8) + key.slice(-4)
 }

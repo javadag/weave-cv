@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type CSSProperties } from "vue"
 import DescriptionContent from "~/components/resume/preview/advanced/content/DescriptionContent.vue"
-import { hasValidDescription } from "~/utils/preview/helpers"
+import { hasValidDescription } from "~/utils/preview/core/entryUtils"
 import type { TBasicSectionConfigs } from "~/utils/schemas/configs/sectionsConfigs.schema"
 import type { TBasicContent } from "~/utils/schemas/content.schema"
 import BasicTitle from "./BasicTitle.vue"

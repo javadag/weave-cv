@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import IconPicker from "~/components/ui/IconPicker.vue"
-import { getSectionIconName } from "~/utils/preview/helpers"
+import { getSectionIconName } from "~/utils/preview/icons"
 
 const props = withDefaults(
   defineProps<{

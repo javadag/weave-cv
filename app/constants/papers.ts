@@ -9,6 +9,6 @@ export const PAPER_SIZES = {
   }
 }
 
-export const MM_TO_PX = 3.78
+export const MM_TO_PX = 96 / 25.4
 
 export type TPaperSize = keyof typeof PAPER_SIZES

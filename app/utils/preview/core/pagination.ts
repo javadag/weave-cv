@@ -1,5 +1,21 @@
-import { calculatePageHeight } from "~/utils/preview/core/pageHeight"
+import { MM_TO_PX } from "~/constants/papers"
+import { getPageDimensionsInPx } from "~/utils/preview/units"
 import type { TBlock, TBlocks } from "~/utils/preview/core/types"
+
+function calculatePageHeight({ pageFormat, verticalMargin, isTopPersonal, isFirstPage }: {
+  pageFormat: string
+  verticalMargin: number
+  isTopPersonal: boolean
+  isFirstPage: boolean
+}) {
+  const marginPx = verticalMargin * MM_TO_PX
+  const pageHeightPx = getPageDimensionsInPx(pageFormat).heightInPx
+  let availableHeight = pageHeightPx - marginPx
+  if (!isTopPersonal || !isFirstPage) {
+    availableHeight -= marginPx
+  }
+  return availableHeight
+}
 
 interface IProcessPagesProps {
   blocks: Map<string, TBlock>

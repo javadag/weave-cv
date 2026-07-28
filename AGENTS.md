@@ -6,6 +6,7 @@
 - Install dependencies: `pnpm install`
 - `.env` is required. See `.env.example` for Supabase, AI, and email keys.
 - `postinstall` auto-runs `nuxt prepare` to generate `.nuxt/` (required for typechecking, linting, and IDE support).
+- ESLint config imports from `.nuxt/eslint.config.mjs` — if linting fails with import errors, run `pnpm install` first.
 
 ## Commands
 
@@ -13,7 +14,7 @@
 |---|---|
 | `pnpm dev` | Start dev server |
 | `pnpm build` | Production build (`nuxt build`) |
-| `pnpm typecheck` | Type-check with `vue-tsc` |
+| `pnpm typecheck` | Type-check with `nuxt typecheck` |
 | `pnpm lint` | Lint via ESLint (Nuxt auto-config) |
 | `pnpm format` | Format with Prettier |
 | `pnpm build:pdf-css` | Build a standalone `public/tailwind-pdf.css` for PDF rendering |
@@ -52,8 +53,10 @@ scripts/      # update-types.sh, fetch-google-fonts.ts
 - **Vue components**: `<script setup lang="ts">` with explicit type imports from `~/utils/schemas/`.
 - **RTL-aware**: When touching CSS or UI, remember the app supports Persian RTL (use logical properties, test both directions).
 - Editor route rules disallow SSR — if adding editor features, they must work client-side only.
+- `/try/**` also has `ssr: false` in route rules.
 - Image provider switches automatically: `ipx` locally, `vercel` in CI (`GITHUB_ACTIONS` env check).
 - AI providers expect API keys from the **client** (passed from frontend), not server-side env vars.
+- If modifying PDF styles or `tailwind-pdf.css`, run `pnpm build:pdf-css` to regenerate the stylesheet.
 
 ## Deployment
 
@@ -61,3 +64,14 @@ scripts/      # update-types.sh, fetch-google-fonts.ts
 - **CI**: Tag pushes trigger prod deploy (`main.yml`). Pushes to `hotfix` branch trigger hotfix deploy (`hotfix.yml`).
 - Deploy uses `vercel build --prod` then `vercel deploy --prebuilt --prod`.
 - `NODE_OPTIONS: --max-old-space-size=4096` is set in CI due to build memory requirements.
+- `pnpm release` runs `standard-version` — auto-generates changelog from conventional commits, bumps version, creates a git tag. Customize sections in `.versionrc.json`.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context layout: `CONTEXT.md` + `docs/adr/` at repo root. See `docs/agents/domain.md`.

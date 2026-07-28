@@ -28,7 +28,10 @@ export function useGeneratePages(sectionsOrder: Ref<TSectionsOrder>) {
     })
   }
 
-  previewStore.setUpdateHeightCallback(useDebounceFn(updatePages, DEBOUNCE_DELAY))
+  const debouncedUpdatePages = useDebounceFn(updatePages, DEBOUNCE_DELAY)
+
+  // Re-paginate when any block's height changes
+  watch(blocks, debouncedUpdatePages, { deep: true })
 
   watch(
     [

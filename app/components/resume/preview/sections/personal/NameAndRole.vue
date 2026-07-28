@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { alignToFlex } from "~/utils/preview/helpers"
+import { alignToFlex } from "~/utils/preview/layout"
 
 interface Props {
   isSameLine: boolean

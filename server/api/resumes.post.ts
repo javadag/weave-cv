@@ -3,8 +3,7 @@ import { CURRENT_SCHEMA_VERSION } from "~/constants/config"
 import type { TablesInsert } from "~/types/database.types"
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
-import { requireAuth } from "../utils/auth"
-import { checkResumeLimit } from "../utils/resumes"
+import { defineProtectedEventHandler, handleApiError } from "../utils/api"
 
 type CreateResumeBody = {
   title: string
@@ -15,13 +14,10 @@ type CreateResumeBody = {
   configs: TConfigs
 }
 
-export default defineEventHandler(async (event) => {
+export default defineProtectedEventHandler(async (event, user) => {
   const client = await serverSupabaseClient(event)
-  const user = await requireAuth(event)
 
   try {
-    await checkResumeLimit(client, user.id, "creating")
-
     const body = await readBody<CreateResumeBody>(event)
 
     const insertData: TablesInsert<"resumes"> = {
@@ -42,14 +38,7 @@ export default defineEventHandler(async (event) => {
     }
 
     return data
-  } catch (error: unknown) {
-    if (error && typeof error === "object" && "statusCode" in error) {
-      throw error
-    }
-    const err = error as { statusCode?: number; statusMessage?: string }
-    throw createError({
-      statusCode: err.statusCode || 500,
-      statusMessage: err.statusMessage || "Internal server error"
-    })
+  } catch (error) {
+    handleApiError(error)
   }
 })

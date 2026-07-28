@@ -32,6 +32,7 @@ function isValidJobDescription(text: string): boolean {
 export function useMatchToJob() {
   const resumeStore = useResumeStore()
   const configsStore = useConfigsStore()
+  const { addSection } = useEditorState()
   const toast = useToast()
   const { t } = useI18n()
   const { provider: userProvider, apiKey: userApiKey, hasApiKey } = useAiProvider()
@@ -239,7 +240,7 @@ export function useMatchToJob() {
 
     const found = findSectionOfType("summary")
     if (!found) {
-      resumeStore.addSection("summary")
+      addSection("summary")
       toast.add({
         title: t("editor.matchToJob.summaryApplied"),
         color: "success"

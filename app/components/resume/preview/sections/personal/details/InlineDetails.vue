@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import { SOLID_ICONS } from "~/constants/solidIcons"
-import { alignToFlex } from "~/utils/preview/helpers"
+import { alignToFlex } from "~/utils/preview/layout"
 import DetailWrapper from "./DetailWrapper.vue"
 import StyledIcon from "./StyledIcon.vue"
 
