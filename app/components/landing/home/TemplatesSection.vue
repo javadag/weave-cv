@@ -3,7 +3,7 @@ import { motion } from "motion-v"
 import { useScrollReveal } from "~/composables/useScrollReveal"
 import TemplateCarouselCard from "./TemplateCarouselCard.vue"
 
-const SHIFT = 450
+const SHIFT = 550
 
 const base = ref<{ id: string; name: string; screenshot: string }[]>([])
 
