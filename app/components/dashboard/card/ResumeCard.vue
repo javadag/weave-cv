@@ -60,6 +60,7 @@ const handleDuplicateClick = async () => {
 
 <template>
   <UCard
+    data-testid="resume-card"
     class="relative flex flex-col transition-shadow duration-200 hover:shadow-lg"
     :ui="{
       header: 'sm:px-4 py-3',
