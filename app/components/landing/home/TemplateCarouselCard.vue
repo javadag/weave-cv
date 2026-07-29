@@ -1,24 +1,13 @@
 <script setup lang="ts">
-import { motion } from "motion-v"
-
 defineProps<{
   name: string
   screenshot: string
 }>()
-
-const tilt = useTiltCard(3)
-
-const prefersReducedMotion = useReducedMotion()
 </script>
 
 <template>
-  <motion.div
-    ref="tilt.ref"
-    class="group border-default hover:border-primary/30 bg-default w-44 shrink-0 overflow-hidden rounded-2xl border shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-colors duration-300 sm:w-48 lg:w-56 dark:shadow-none"
-    :style="tilt.style.value"
-    :while-hover="prefersReducedMotion ? {} : { y: -4, transition: { type: 'spring', bounce: 0.3 } }"
-    @mousemove="tilt.onMove"
-    @mouseleave="tilt.onLeave"
+  <div
+    class="group border-default hover:border-primary/30 bg-default w-44 shrink-0 overflow-hidden rounded-2xl border shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-20px_rgba(28,25,23,0.18)] sm:w-48 lg:w-56 dark:shadow-none dark:hover:shadow-[0_24px_48px_-20px_rgba(0,0,0,0.7)]"
   >
     <div class="relative aspect-77/100 overflow-hidden bg-(--ui-bg-canvas,#f5f5f4)">
       <div
@@ -36,5 +25,5 @@ const prefersReducedMotion = useReducedMotion()
     <div class="flex items-center justify-between px-4 py-3.5">
       <span class="text-highlighted text-[15px] font-semibold">{{ name }}</span>
     </div>
-  </motion.div>
+  </div>
 </template>

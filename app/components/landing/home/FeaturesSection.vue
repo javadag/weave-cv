@@ -43,36 +43,13 @@ const features = computed(() => [
   }
 ])
 
-// --- Directional reveals per card (alternating left/right/scale) ---
-const directions = ["left", "right", "scale", "left", "right", "scale"] as const
-const reveals = directions.map((dir, i) =>
-  useScrollReveal(0.15 + i * 0.08, { direction: dir })
-)
-function getReveal(i: number) { return reveals[i]! }
-
-// --- Card tilt ---
-const tilts = Array.from({ length: 6 }, () => useTiltCard(3))
-function getTilt(i: number) { return tilts[i]! }
-function setTiltRef(index: number, el: HTMLElement | null) {
-  tilts[index]!.ref.value = el
-}
-
-// --- Icon bounce on hover ---
-const prefersReducedMotion = useReducedMotion()
-const iconScale = computed(() => (prefersReducedMotion.value ? {} : { scale: [1, 1.2, 1] }))
-const iconTransition = { type: "spring" as const, bounce: 0.5 }
-
-// --- Section heading word-by-word ---
-const headingText = computed(() => t("features.title"))
-const headingWords = computed(() =>
-  headingText.value.split(/\s+/).map((word, i) => ({
-    word,
-    transition: { type: "spring" as const, bounce: 0.4, delay: 0.1 + i * 0.06 }
-  }))
-)
-
-// --- Badge reveal ---
 const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
+const headingReveal = useScrollReveal(0.1, { y: 24 })
+const subtitleReveal = useScrollReveal(0.2, { y: 24 })
+
+function cardReveal(i: number) {
+  return useScrollReveal(0.15 + i * 0.08, { y: 36, duration: 0.5 })
+}
 </script>
 
 <template>
@@ -90,23 +67,19 @@ const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
         </motion.span>
         <motion.h2
           class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
+          :initial="headingReveal.initial.value"
+          :whileInView="headingReveal.whileInView.value"
+          :transition="headingReveal.transition.value"
+          :inViewOptions="headingReveal.inViewOptions"
         >
-          <motion.span
-            v-for="(w, i) in headingWords"
-            :key="i"
-            class="inline-block"
-            :initial="{ opacity: 0, y: 24 }"
-            :whileInView="{ opacity: 1, y: 0 }"
-            :transition="w.transition"
-            :inViewOptions="{ once: true, margin: '-80px' }"
-          >{{ w.word }}&nbsp;</motion.span>
+          {{ $t("features.title") }}
         </motion.h2>
         <motion.p
           class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed"
-          :initial="{ opacity: 0, y: 24 }"
-          :whileInView="{ opacity: 1, y: 0 }"
-          :transition="{ type: 'spring', bounce: 0.3, delay: 0.2 }"
-          :inViewOptions="{ once: true, margin: '-80px' }"
+          :initial="subtitleReveal.initial.value"
+          :whileInView="subtitleReveal.whileInView.value"
+          :transition="subtitleReveal.transition.value"
+          :inViewOptions="subtitleReveal.inViewOptions"
         >
           {{ $t("features.subtitle") }}
         </motion.p>
@@ -116,28 +89,22 @@ const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
         <motion.div
           v-for="(f, i) in features"
           :key="f.title"
-          :ref="(el: any) => setTiltRef(i, el as HTMLElement)"
           class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
-          :initial="getReveal(i).initial.value"
-          :whileInView="getReveal(i).whileInView.value"
-          :transition="getReveal(i).transition.value"
-          :inViewOptions="getReveal(i).inViewOptions"
-          :style="getTilt(i).style.value"
-          @mousemove="getTilt(i).onMove"
-          @mouseleave="getTilt(i).onLeave"
+          :initial="cardReveal(i).initial.value"
+          :whileInView="cardReveal(i).whileInView.value"
+          :transition="cardReveal(i).transition.value"
+          :inViewOptions="cardReveal(i).inViewOptions"
         >
-          <motion.div
+          <div
             class="feat-icon mb-4.5 flex size-12 items-center justify-center rounded-xl text-xl font-bold text-white will-change-transform"
             :class="
               f.tone === 'primary'
                 ? 'from-primary-500 to-primary-700 bg-linear-to-br'
                 : 'from-primary-300 to-primary-400 bg-linear-to-br'
             "
-            :while-hover="iconScale"
-            :transition="iconTransition"
           >
             <UIcon :name="f.icon" />
-          </motion.div>
+          </div>
           <h3 class="text-highlighted mb-2 text-lg font-bold tracking-[-0.01em]">{{ f.title }}</h3>
           <p class="text-muted text-sm leading-relaxed">{{ f.body }}</p>
         </motion.div>
@@ -150,15 +117,23 @@ const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
 .feat-card {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.25s ease,
     box-shadow 0.25s ease;
   will-change: transform;
 }
 .feat-card:hover {
+  transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--ui-primary) 30%, transparent);
   box-shadow: 0 20px 44px -16px rgba(28, 25, 23, 0.14);
 }
 :global(.dark) .feat-card:hover {
   box-shadow: 0 20px 44px -16px rgba(32, 32, 32, 0.65);
+}
+.feat-icon {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.feat-card:hover .feat-icon {
+  transform: rotate(-6deg) scale(1.1);
 }
 </style>

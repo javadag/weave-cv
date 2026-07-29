@@ -21,23 +21,11 @@ const smoothProgress = useSpring(heroProgress, { stiffness: 60, damping: 18 })
 const blobTopY = useTransform(smoothProgress, [0, 0.5, 1], [40, 0, -40])
 const blobBottomY = useTransform(smoothProgress, [0, 0.5, 1], [-30, 0, 30])
 
-// --- Word-by-word headline animation ---
-const titleStart = computed(() => t("hero.titleStart"))
-const titleHighlight = computed(() => t("hero.titleHighlight"))
-
-const titleStartWords = computed(() =>
-  titleStart.value.split(/\s+/).map((word, i) => ({
-    word,
-    transition: { type: "spring" as const, bounce: 0.4, delay: 0.2 + i * 0.06 }
-  }))
-)
-const highlightTransition = computed(() => ({
-  type: "spring" as const,
-  bounce: 0.4,
-  delay: 0.2 + titleStartWords.value.length * 0.06
-}))
-
-// --- Sidebar sections ---
+const trustBadges = computed(() => [
+  t("hero.trustNoCreditCard"),
+  t("hero.trustUnlimitedResumes"),
+  t("hero.trustCloudSync")
+])
 const sidebarSections = [
   "✶ Personal",
   "☰ Summary",
@@ -49,64 +37,20 @@ const sidebarSections = [
 ]
 const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
 
-// --- Version badge pulse (spring) ---
-const pulseAnimate = computed(() => (prefersReducedMotion.value ? {} : { opacity: [1, 0.65, 1], scale: [1, 1.3, 1] }))
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.55, delay, ease: [0.25, 0.4, 0.25, 1] }
+})
+
+const pulseAnimate = computed(() => (prefersReducedMotion.value ? {} : { opacity: [1, 0.65, 1], scale: [1, 1.25, 1] }))
 const pulseTransition = { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
 
-// --- Magnetic CTAs ---
-const primaryCta = useMagneticCursor(10)
-const secondaryCta = useMagneticCursor(10)
+const floatAnimate4s = computed(() => (prefersReducedMotion.value ? {} : { y: [0, -6, 0] }))
+const floatTransition4s = { duration: 4, repeat: Infinity, ease: "easeInOut" }
 
-// --- Preview card tilt ---
-const previewTilt = useTiltCard(5)
-
-// --- Trust badge alternating reveals ---
-const trustBadges = computed(() => [
-  t("hero.trustNoCreditCard"),
-  t("hero.trustUnlimitedResumes"),
-  t("hero.trustCloudSync")
-])
-
-const badge0 = useScrollReveal(0.65, { direction: "left" })
-const badge1 = useScrollReveal(0.75, { direction: "right" })
-const badge2 = useScrollReveal(0.85, { direction: "left" })
-const badgeReveals = [badge0, badge1, badge2]
-function getBadgeReveal(i: number) {
-  return badgeReveals[i]!
-}
-
-// --- Floating notifications (spring bounce) ---
-const { value: floatLeftVal, to: floatLeftTo } = useSpringValue(0, { stiffness: 120, damping: 14 })
-const { value: floatRightVal, to: floatRightTo } = useSpringValue(0, { stiffness: 120, damping: 14 })
-
-function animateFloat(setter: (v: number) => void, amplitude: number, phaseOffset: number) {
-  let startTime: number | null = null
-  let running = true
-  function step(time: number) {
-    if (!running) return
-    if (startTime == null) startTime = time - phaseOffset * 1000
-    const elapsed = (time - startTime) / 1000
-    setter(Math.sin(elapsed * Math.PI * 0.5) * amplitude)
-    requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
-  return () => {
-    running = false
-  }
-}
-
-const stopFloats: Array<() => void> = []
-
-onMounted(() => {
-  if (!prefersReducedMotion.value) {
-    stopFloats.push(animateFloat(floatLeftTo, 8, 0))
-    stopFloats.push(animateFloat(floatRightTo, 8, 1))
-  }
-})
-
-onUnmounted(() => {
-  for (const stop of stopFloats) stop()
-})
+const floatAnimate5_5s = computed(() => (prefersReducedMotion.value ? {} : { y: [0, -6, 0] }))
+const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
 </script>
 
 <template>
@@ -130,9 +74,7 @@ onUnmounted(() => {
         <div class="flex flex-col">
           <motion.span
             class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex w-max items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
-            :initial="{ opacity: 0, y: 24 }"
-            :animate="{ opacity: 1, y: 0 }"
-            :transition="{ type: 'spring', bounce: 0.4, delay: 0.1 }"
+            v-bind="fadeUp(0.1)"
           >
             <motion.span
               class="bg-primary inline-block size-1.5 rounded-full"
@@ -143,77 +85,38 @@ onUnmounted(() => {
           </motion.span>
           <motion.h1
             class="text-highlighted mt-6 text-[3.5rem] leading-[1.05] font-bold tracking-[-0.04em] text-balance lg:text-[4.5rem] rtl:leading-tight"
+            v-bind="fadeUp(0.2)"
           >
-            <motion.span
-              v-for="(w, i) in titleStartWords"
-              :key="i"
-              class="inline-block"
-              :initial="{ opacity: 0, y: 24 }"
-              :animate="{ opacity: 1, y: 0 }"
-              :transition="w.transition"
-            >
-              {{ w.word }}&nbsp;
-            </motion.span>
-            <motion.span
-              class="from-brand-gradient-from to-brand-gradient-to inline-block bg-linear-to-br bg-clip-text text-transparent"
-              :initial="{ opacity: 0, y: 24 }"
-              :animate="{ opacity: 1, y: 0 }"
-              :transition="highlightTransition"
-              >{{ titleHighlight }}</motion.span
-            >
+            {{ $t("hero.titleStart") }}
+            <span class="from-brand-gradient-from to-brand-gradient-to bg-linear-to-br bg-clip-text text-transparent">
+              {{ $t("hero.titleHighlight") }}
+            </span>
           </motion.h1>
-          <motion.p
-            class="text-muted mt-6 max-w-135 text-lg leading-relaxed"
-            :initial="{ opacity: 0, y: 24 }"
-            :animate="{ opacity: 1, y: 0 }"
-            :transition="{ type: 'spring', bounce: 0.4, delay: 0.35 }"
-          >
+          <motion.p class="text-muted mt-6 max-w-135 text-lg leading-relaxed" v-bind="fadeUp(0.35)">
             {{ $t("hero.subtitle") }}
           </motion.p>
-          <motion.div
-            class="mt-9 flex flex-wrap gap-3"
-            :initial="{ opacity: 0, y: 24 }"
-            :animate="{ opacity: 1, y: 0 }"
-            :transition="{ type: 'spring', bounce: 0.4, delay: 0.5 }"
-          >
-            <div
-              ref="primaryCta.ref"
-              :style="primaryCta.style.value"
-              @mouseenter="primaryCta.onEnter"
-              @mouseleave="primaryCta.onLeave"
-              @mousemove="primaryCta.onMove"
+          <motion.div class="mt-9 flex flex-wrap gap-3" v-bind="fadeUp(0.5)">
+            <NuxtLink
+              to="/try"
+              class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
             >
-              <NuxtLink
-                to="/try"
-                class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
-              >
-                <span>✦</span> {{ $t("hero.tryBtn") }}
-              </NuxtLink>
-            </div>
-            <div
-              ref="secondaryCta.ref"
-              :style="secondaryCta.style.value"
-              @mouseenter="secondaryCta.onEnter"
-              @mouseleave="secondaryCta.onLeave"
-              @mousemove="secondaryCta.onMove"
+              <span>✦</span> {{ $t("hero.tryBtn") }}
+            </NuxtLink>
+            <NuxtLink
+              to="/dashboard"
+              class="hero-btn-outline border-primary/20 text-primary hover:bg-primary/5 inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 text-[15px] font-semibold no-underline transition-colors"
             >
-              <NuxtLink
-                to="/dashboard"
-                class="hero-btn-outline border-primary/20 text-primary hover:bg-primary/5 inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 text-[15px] font-semibold no-underline transition-colors"
-              >
-                {{ $t("hero.buildBtn") }}
-              </NuxtLink>
-            </div>
+              {{ $t("hero.buildBtn") }}
+            </NuxtLink>
           </motion.div>
           <div class="text-muted mt-9 flex flex-wrap gap-6 text-sm">
             <motion.div
               v-for="(b, i) in trustBadges"
               :key="b"
               class="flex items-center gap-1.5"
-              :initial="getBadgeReveal(i).initial.value"
-              :whileInView="getBadgeReveal(i).whileInView.value"
-              :transition="getBadgeReveal(i).transition.value"
-              :inViewOptions="getBadgeReveal(i).inViewOptions"
+              :initial="{ opacity: 0, y: 16 }"
+              :animate="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.45, delay: 0.65 + i * 0.1, ease: [0.25, 0.4, 0.25, 1] }"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" fill="#EA580C" fill-opacity="0.15" />
@@ -231,15 +134,11 @@ onUnmounted(() => {
         </div>
         <motion.div
           dir="ltr"
-          ref="previewTilt.ref"
           class="hero-preview border-default relative overflow-hidden rounded-2xl border shadow-[0_50px_100px_-30px_rgba(28,25,23,0.22)] dark:shadow-[0_50px_100px_-30px_rgba(0,0,0,0.7)]"
           :initial="{ opacity: 0, x: 48, scale: 0.94 }"
           :whileInView="{ opacity: 1, x: 0, scale: 1 }"
           :inViewOptions="inViewOptionsPreview"
           :transition="{ duration: 0.7, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }"
-          :style="previewTilt.style.value"
-          @mousemove="previewTilt.onMove"
-          @mouseleave="previewTilt.onLeave"
         >
           <div class="border-default bg-muted flex items-center gap-2 border-b px-4 py-3">
             <div class="flex gap-1.5">
@@ -344,11 +243,12 @@ onUnmounted(() => {
             class="absolute right-5 bottom-5"
             :initial="{ opacity: 0, y: 12, scale: 0.85 }"
             :animate="{ opacity: 1, y: 0, scale: 1 }"
-            :transition="{ type: 'spring', bounce: 0.5, delay: 1.2 }"
+            :transition="{ duration: 0.45, delay: 1.2, ease: 'easeOut' }"
           >
             <motion.div
               class="border-muted bg-default dark:bg-elevated flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs shadow-lg"
-              :style="{ y: floatLeftVal + 'px' }"
+              :animate="floatAnimate4s"
+              :transition="floatTransition4s"
             >
               <motion.span
                 class="inline-block size-2 rounded-full bg-emerald-500"
@@ -362,12 +262,13 @@ onUnmounted(() => {
             class="absolute top-14 right-5"
             :initial="{ opacity: 0, y: 12, scale: 0.85 }"
             :animate="{ opacity: 1, y: 0, scale: 1 }"
-            :transition="{ type: 'spring', bounce: 0.5, delay: 1.35 }"
+            :transition="{ duration: 0.45, delay: 1.35, ease: 'easeOut' }"
           >
             <motion.div
               dir="auto"
               class="border-muted bg-default dark:bg-elevated text-highlighted flex items-center gap-1.5 rounded-xl border px-3 py-2 text-[11px] font-semibold shadow-lg"
-              :style="{ y: floatRightVal + 'px' }"
+              :animate="floatAnimate5_5s"
+              :transition="floatTransition5_5s"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" fill="#10B981" fill-opacity="0.2" />

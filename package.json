@@ -17,9 +17,7 @@
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major",
-    "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "release:major": "standard-version --release-as major"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
@@ -64,9 +62,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
-    "@nuxt/test-utils": "^4.1.0",
     "@nuxtjs/sitemap": "^8.0.15",
-    "@playwright/test": "^1.62.0",
     "@tailwindcss/cli": "^4.3.2",
     "@types/jsdom": "^28.0.3",
     "changelogen": "^0.6.1",
@@ -79,7 +75,6 @@
     "puppeteer": "24.29.0",
     "sharp": "^0.35.3",
     "standard-version": "^9.5.0",
-    "std-env": "^4.2.0",
     "vue-tsc": "^3.3.6"
   }
 }

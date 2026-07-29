@@ -12,75 +12,37 @@ const pulseAnimate = computed(() =>
 )
 const pulseTransition = { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
 
-// --- Floating notifications (spring bounce) ---
-const { value: floatLeftVal, to: floatLeftTo } = useSpringValue(0, { stiffness: 120, damping: 14 })
-const { value: floatRightVal, to: floatRightTo } = useSpringValue(0, { stiffness: 120, damping: 14 })
+const floatLeftAnimate = computed(() =>
+  prefersReducedMotion.value ? {} : { y: [0, -8, 0], rotate: [-4, -4, -4] }
+)
+const floatLeftTransition = { duration: 5, repeat: Infinity, ease: "easeInOut" }
 
-function animateFloat(setter: (v: number) => void, amplitude: number, phaseOffset: number) {
-  let startTime: number | null = null
-  let running = true
-  function step(time: number) {
-    if (!running) return
-    if (startTime == null) startTime = time - phaseOffset * 1000
-    const elapsed = (time - startTime) / 1000
-    setter(Math.sin(elapsed * Math.PI * 0.5) * amplitude)
-    requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
-  return () => { running = false }
-}
+const floatRightAnimate = computed(() =>
+  prefersReducedMotion.value ? {} : { y: [0, -8, 0], rotate: [3, 3, 3] }
+)
+const floatRightTransition = { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }
 
-const stopFloats: Array<() => void> = []
-
-onMounted(() => {
-  if (!prefersReducedMotion.value) {
-    stopFloats.push(animateFloat(floatLeftTo, 10, 0))
-    stopFloats.push(animateFloat(floatRightTo, 10, 1))
-  }
-})
-
-onUnmounted(() => {
-  for (const stop of stopFloats) stop()
-})
-
-// --- Magnetic CTA button ---
-const ctaButton = useMagneticCursor(12)
-
-// --- Reveal animations ---
-const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
-const headingReveal = useScrollReveal(0.1, { direction: "scale" })
-const subtitleReveal = useScrollReveal(0.25, { y: 24 })
-const btnReveal = useScrollReveal(0.4, { y: 24, duration: 0.5 })
-const cardReveal = useScrollReveal(0, { direction: "scale" })
-
-// --- Stats alternating reveals ---
-const stat0 = useScrollReveal(0.55, { direction: "left" })
-const stat1 = useScrollReveal(0.65, { direction: "right" })
-const stat2 = useScrollReveal(0.75, { direction: "left" })
-const statReveals = [stat0, stat1, stat2]
-function getStatReveal(i: number) { return statReveals[i]! }
-
-// --- Button glow (shadow + scale pulse) ---
 const btnGlowAnimate = {
   boxShadow: [
     "0 12px 32px -8px rgba(0,0,0,0.2)",
     "0 12px 40px -4px rgba(0,0,0,0.35)",
     "0 12px 32px -8px rgba(0,0,0,0.2)"
-  ],
-  scale: [1, 1.02, 1]
+  ]
 }
 const btnGlowTransition = { duration: 3, repeat: Infinity, ease: "easeInOut" }
+
+const badgeReveal = useScrollReveal(0, { y: 12, duration: 0.5 })
+const headingReveal = useScrollReveal(0.1, { y: 24 })
+const subtitleReveal = useScrollReveal(0.25, { y: 24 })
+const btnReveal = useScrollReveal(0.4, { y: 24, duration: 0.5 })
+const statsReveal = useScrollReveal(0.55, { y: 16, duration: 0.45 })
 </script>
 
 <template>
   <section class="bg-default px-6 pb-20 sm:pb-28 lg:px-12">
     <div class="max-w-compact mx-auto">
-      <motion.div
-        class="from-primary-700 to-primary-500 dark:from-primary-600 dark:to-primary-400 relative overflow-hidden rounded-3xl bg-linear-to-br px-8 py-20 text-center shadow-[0_40px_80px_-30px_rgba(234,88,12,0.45)] sm:px-14 sm:py-24 dark:shadow-[0_40px_80px_-30px_rgba(245,158,11,0.3)]"
-        :initial="cardReveal.initial.value"
-        :whileInView="cardReveal.whileInView.value"
-        :transition="cardReveal.transition.value"
-        :inViewOptions="cardReveal.inViewOptions"
+      <div
+        class="from-primary-700 to-primary-500 dark:from-primary-600 dark:to-primary-400 relative overflow-hidden rounded-3xl bg-linear-to-br px-8 py-20 text-center shadow-[0_40px_80px_-30px_rgba(234,88,12,0.45)] transition-transform duration-500 hover:scale-[100.4%] sm:px-14 sm:py-24 dark:shadow-[0_40px_80px_-30px_rgba(245,158,11,0.3)]"
       >
         <div
           class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(255,255,255,0.22),transparent_45%),radial-gradient(circle_at_82%_75%,rgba(255,255,255,0.14),transparent_45%)]"
@@ -91,11 +53,12 @@ const btnGlowTransition = { duration: 3, repeat: Infinity, ease: "easeInOut" }
           :initial="{ opacity: 0, x: -30 }"
           :whileInView="{ opacity: 1, x: 0 }"
           :inViewOptions="{ once: true, margin: '-80px' }"
-          :transition="{ type: 'spring', bounce: 0.4, delay: 0.5 }"
+          :transition="{ duration: 0.5, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }"
         >
           <motion.div
             class="flex items-center gap-2.5 rounded-xl bg-white/95 px-4 py-3 shadow-[0_16px_40px_rgba(0,0,0,0.15)]"
-            :style="{ y: floatLeftVal + 'px' }"
+            :animate="floatLeftAnimate"
+            :transition="floatLeftTransition"
           >
             <div class="flex size-7 items-center justify-center rounded-md bg-emerald-500 text-sm font-bold text-white">
               ✓
@@ -111,11 +74,12 @@ const btnGlowTransition = { duration: 3, repeat: Infinity, ease: "easeInOut" }
           :initial="{ opacity: 0, x: 30 }"
           :whileInView="{ opacity: 1, x: 0 }"
           :inViewOptions="{ once: true, margin: '-80px' }"
-          :transition="{ type: 'spring', bounce: 0.4, delay: 0.7 }"
+          :transition="{ duration: 0.5, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }"
         >
           <motion.div
             class="flex items-center gap-2.5 rounded-xl bg-white/95 px-4 py-3 shadow-[0_16px_40px_rgba(0,0,0,0.15)]"
-            :style="{ y: floatRightVal + 'px' }"
+            :animate="floatRightAnimate"
+            :transition="floatRightTransition"
           >
             <div class="bg-primary-700 flex size-7 items-center justify-center rounded-md text-sm font-bold text-white">
               ★
@@ -171,36 +135,25 @@ const btnGlowTransition = { duration: 3, repeat: Infinity, ease: "easeInOut" }
               :transition="btnGlowTransition"
               class="inline-flex"
             >
-              <div
-                ref="ctaButton.ref"
-                :style="ctaButton.style.value"
-                @mouseenter="ctaButton.onEnter"
-                @mouseleave="ctaButton.onLeave"
-                @mousemove="ctaButton.onMove"
+              <NuxtLink
+                to="/dashboard"
+                class="text-primary-700 inline-flex items-center gap-2 rounded-xl bg-white px-9 py-4.5 text-base font-bold no-underline shadow-[0_12px_32px_-8px_rgba(0,0,0,0.25)] transition-transform duration-200 hover:translate-y-[-1px] hover:brightness-105"
               >
-                <NuxtLink
-                  to="/dashboard"
-                  class="text-primary-700 inline-flex items-center gap-2 rounded-xl bg-white px-9 py-4.5 text-base font-bold no-underline shadow-[0_12px_32px_-8px_rgba(0,0,0,0.25)] transition-transform duration-200 hover:translate-y-[-1px] hover:brightness-105"
-                >
-                  <span>✦</span> {{ $t("cta.buildBtn") }}
-                </NuxtLink>
-              </div>
+                <span>✦</span> {{ $t("cta.buildBtn") }}
+              </NuxtLink>
             </motion.div>
           </motion.div>
           <motion.div
             class="mt-7 flex flex-wrap justify-center gap-6 text-sm font-medium text-white/90"
+            :initial="statsReveal.initial.value"
+            :whileInView="statsReveal.whileInView.value"
+            :transition="statsReveal.transition.value"
+            :inViewOptions="statsReveal.inViewOptions"
           >
-            <motion.span
-              v-for="(s, i) in quickStats"
-              :key="s"
-              :initial="getStatReveal(i).initial.value"
-              :whileInView="getStatReveal(i).whileInView.value"
-              :transition="getStatReveal(i).transition.value"
-              :inViewOptions="getStatReveal(i).inViewOptions"
-            >{{ s }}</motion.span>
+            <span v-for="s in quickStats" :key="s">{{ s }}</span>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </div>
   </section>
 </template>

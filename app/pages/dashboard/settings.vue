@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// Match-to-job disabled
-// import AiProviderSettings from "~/components/dashboard/AiProviderSettings.vue"
+import AiProviderSettings from "~/components/dashboard/AiProviderSettings.vue"
 
 definePageMeta({ layout: "dashboard" })
 
@@ -58,9 +57,7 @@ const languageOptions = computed(() =>
         </template>
       </ClientOnly>
     </UCard>
-    <!-- Match-to-job disabled
     <AiProviderSettings />
-    -->
     <UCard>
       <template #header>
         <div>
