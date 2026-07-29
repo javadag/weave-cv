@@ -27,3 +27,12 @@ logs
 .mcp.json
 .vercel
 .env*.local
+
+# SDD workspace
+.superpowers/
+
+# Playwright
+playwright-report/
+test-results/
+
+.impeccable

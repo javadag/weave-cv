@@ -34,7 +34,7 @@ useHead(() => ({
 </script>
 
 <template>
-  <UApp :dir="(head.htmlAttrs?.dir as 'ltr' | 'rtl') || 'ltr'">
+  <UApp>
     <NuxtLoadingIndicator color="var(--ui-primary)" />
     <NuxtLayout>
       <NuxtPage />

@@ -4,14 +4,10 @@ import SaveChanges from "./SaveChanges.vue"
 
 const ChangeTemplateModal = defineAsyncComponent(() => import("./ChangeTemplateModal.vue"))
 const ExportModal = defineAsyncComponent(() => import("./ExportModal.vue"))
-// Match-to-job disabled
-// const MatchToJobModal = defineAsyncComponent(() => import("./MatchToJobModal.vue"))
 
 const saving = ref(false)
 const isTemplateModalOpen = ref(false)
 const isExportModalOpen = ref(false)
-// Match-to-job disabled
-// const isMatchToJobModalOpen = ref(false)
 
 const resumeStore = useResumeStore()
 const { title } = storeToRefs(resumeStore)
@@ -108,24 +104,6 @@ const startTour = inject<() => Promise<void>>("startTour", async () => {})
       >
         <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
       </UButton>
-      <!-- Match-to-job disabled
-      <UButton
-        color="primary"
-        variant="outline"
-        icon="i-lucide-sparkles"
-        :ui="{
-          leadingIcon: 'size-4'
-        }"
-        :title="$t('editor.header.matchToJob')"
-        @click="
-          () => {
-            isMatchToJobModalOpen = true
-          }
-        "
-      >
-        <span class="hidden sm:inline">{{ $t("editor.header.matchToJob") }}</span>
-      </UButton>
-      -->
       <div
         id="editor-save-group"
         class="bg-elevated/50 border-muted flex items-center overflow-hidden rounded-lg border p-0 backdrop-blur-sm"
@@ -152,8 +130,5 @@ const startTour = inject<() => Promise<void>>("startTour", async () => {})
     </div>
     <ChangeTemplateModal v-model="isTemplateModalOpen" />
     <ExportModal v-model="isExportModalOpen" :disabled="saving" />
-    <!-- Match-to-job disabled
-    <MatchToJobModal v-model="isMatchToJobModalOpen" />
-    -->
   </div>
 </template>

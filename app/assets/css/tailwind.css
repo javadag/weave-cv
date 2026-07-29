@@ -2,7 +2,7 @@
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: "Inter", "Vazirmatn", serif;
+  --font-sans: "Noto Sans Arabic", serif;
   --color-brand-gradient-from: var(--color-orange-500);
   --color-brand-gradient-to: var(--color-amber-500);
   --container-compact: 1600px;
@@ -12,10 +12,6 @@
 :root {
   /* app.config primary:'orange' handles --ui-color-primary-* for light mode */
   --ui-primary: var(--color-orange-600);
-}
-
-:root:lang(fa) {
-  --font-sans: "Vazirmatn", "Inter", serif;
 }
 
 .dark {

@@ -67,6 +67,9 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/css/tailwind.css"],
   vite: {
+    optimizeDeps: {
+      include: ["zod"]
+    },
     plugins: [tailwindcss()]
   },
   supabase: {

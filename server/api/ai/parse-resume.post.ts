@@ -1,6 +1,6 @@
+import OpenAI from "openai"
 import { TEMPLATES } from "~/constants/templates"
 import { PARSE_RESUME_PROMPT } from "../../utils/ai/prompts/parseResume"
-import { aiChatToJson } from "../../utils/aiClient"
 import { requireAuth } from "../../utils/auth"
 import { checkRateLimit } from "../../utils/rateLimit"
 
@@ -283,10 +283,9 @@ export default defineEventHandler(async (event) => {
 
   checkRateLimit(`ai:${user.id}`, 5, 60 * 60 * 1000)
 
-  const effectiveProvider = "deepseek"
-  const effectiveApiKey = process.env.DEEPSEEK_API_KEY
+  const apiKey = process.env.DEEPSEEK_API_KEY
 
-  if (!effectiveApiKey) {
+  if (!apiKey) {
     throw createError({
       statusCode: 500,
       statusMessage: "AI parsing not configured — add DEEPSEEK_API_KEY to your environment"
@@ -297,14 +296,23 @@ export default defineEventHandler(async (event) => {
 
   let parsed: ParsedResume
   try {
-    const raw = await aiChatToJson({
-      provider: effectiveProvider,
-      apiKey: effectiveApiKey,
-      systemPrompt: PARSE_RESUME_PROMPT,
-      userPrompt: `Resume text:\n${truncated}`,
-      temperature: 0
+    const openai = new OpenAI({ apiKey, baseURL: "https://api.deepseek.com/v1" })
+
+    const completion = await openai.chat.completions.create({
+      model: "deepseek-chat",
+      response_format: { type: "json_object" },
+      temperature: 0,
+      messages: [
+        { role: "system", content: PARSE_RESUME_PROMPT },
+        { role: "user", content: `Resume text:\n${truncated}` }
+      ]
     })
-    parsed = raw as unknown as ParsedResume
+
+    const raw = completion.choices[0]?.message?.content
+
+    if (!raw) throw new Error("Empty response from model")
+
+    parsed = JSON.parse(raw) as unknown as ParsedResume
   } catch (error) {
     if ((error as { status?: number }).status === 401 || (error as { code?: string }).code === "invalid_api_key") {
       throw createError({ statusCode: 401, statusMessage: "Invalid API key" })

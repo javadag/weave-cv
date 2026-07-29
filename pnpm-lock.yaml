@@ -70,7 +70,7 @@ importers:
         version: 9.35.0(jiti@2.6.1)
       groq-sdk:
         specifier: ^1.1.2
-        version: 1.1.2
+        version: 1.4.0
       marked:
         specifier: ^18.0.5
         version: 18.0.5
@@ -5578,8 +5578,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  groq-sdk@1.1.2:
-    resolution: {integrity: sha512-CZO0XUQQDhn43ri1+lZHxZKpb+bGutgTvFmCJtooexiitGmPqhm1hntOT3nCoaq07e+OpeokVnfUs0i/oQuUaQ==}
+  groq-sdk@1.4.0:
+    resolution: {integrity: sha512-4EAmBWlt5SNVyhKWqVPns9marmWYbtYO4kkE0u34NW3+GlVQ5d/JJ0sJRg/rOsqmVispCD3bK/EykH3zC1AeUQ==}
     hasBin: true
 
   gzip-size@7.0.0:
@@ -7424,6 +7424,9 @@ packages:
 
   std-env@4.1.0:
     resolution: {integrity: sha512-Rq7ybcX2RuC55r9oaPVEW7/xu3tj8u4GeBYHBWCychFtzMIr86A7e3PPEBPT37sHStKX3+TiX/Fr/ACmJLVlLQ==}
+
+  std-env@4.2.0:
+    resolution: {integrity: sha512-oCUKSupKTHX53EyjDtuZQ64pjLJ6yYCtpmEw0goYxtjG9KpbRe8KAsl2tBUGU9DyMcJ0RwJ8GqJAFzMXcXW1Rw==}
 
   streamx@2.22.1:
     resolution: {integrity: sha512-znKXEBxfatz2GBNK02kRnCXjV+AA4kjZIUxeWSr3UGirZMJfTE9uiwKHobnbgxWyL/JWro8tTq+vOqAK1/qbSA==}
@@ -10107,7 +10110,7 @@ snapshots:
       defu: 6.1.7
       pathe: 2.0.3
       pkg-types: 2.3.1
-      std-env: 4.1.0
+      std-env: 4.2.0
 
   '@nuxt/telemetry@2.8.0(@nuxt/kit@4.4.8(magicast@0.5.2))':
     dependencies:
@@ -13749,7 +13752,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  groq-sdk@1.1.2: {}
+  groq-sdk@1.4.0: {}
 
   gzip-size@7.0.0:
     dependencies:
@@ -16022,6 +16025,8 @@ snapshots:
   std-env@3.10.0: {}
 
   std-env@4.1.0: {}
+
+  std-env@4.2.0: {}
 
   streamx@2.22.1:
     dependencies:
