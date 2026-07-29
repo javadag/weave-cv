@@ -51,8 +51,8 @@ const statsReveal = useScrollReveal(0.55, { y: 16, duration: 0.45 })
         <motion.div
           class="pointer-events-none absolute top-10 left-10 hidden sm:flex"
           :initial="{ opacity: 0, x: -30 }"
-          :whileInView="{ opacity: 1, x: 0 }"
-          :inViewOptions="{ once: true, margin: '-80px' }"
+          :while-in-view="{ opacity: 1, x: 0 }"
+          :in-view-options="{ once: true, margin: '-80px' }"
           :transition="{ duration: 0.5, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }"
         >
           <motion.div
@@ -72,8 +72,8 @@ const statsReveal = useScrollReveal(0.55, { y: 16, duration: 0.45 })
         <motion.div
           class="pointer-events-none absolute right-12 bottom-6 hidden sm:flex"
           :initial="{ opacity: 0, x: 30 }"
-          :whileInView="{ opacity: 1, x: 0 }"
-          :inViewOptions="{ once: true, margin: '-80px' }"
+          :while-in-view="{ opacity: 1, x: 0 }"
+          :in-view-options="{ once: true, margin: '-80px' }"
           :transition="{ duration: 0.5, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }"
         >
           <motion.div
@@ -94,9 +94,9 @@ const statsReveal = useScrollReveal(0.55, { y: 16, duration: 0.45 })
           <motion.span
             class="mb-6 inline-flex items-center gap-1.5 rounded-full bg-white/18 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-white backdrop-blur-sm"
             :initial="badgeReveal.initial.value"
-            :whileInView="badgeReveal.whileInView.value"
+            :while-in-view="badgeReveal.whileInView.value"
             :transition="badgeReveal.transition.value"
-            :inViewOptions="badgeReveal.inViewOptions"
+            :in-view-options="badgeReveal.inViewOptions"
           >
             <motion.span
               class="inline-block size-1.5 rounded-full bg-white"
@@ -108,27 +108,27 @@ const statsReveal = useScrollReveal(0.55, { y: 16, duration: 0.45 })
           <motion.h2
             class="mt-0 text-4xl leading-none font-extrabold tracking-[-0.035em] text-balance text-white sm:text-5xl lg:text-[4rem]"
             :initial="headingReveal.initial.value"
-            :whileInView="headingReveal.whileInView.value"
+            :while-in-view="headingReveal.whileInView.value"
             :transition="headingReveal.transition.value"
-            :inViewOptions="headingReveal.inViewOptions"
+            :in-view-options="headingReveal.inViewOptions"
           >
             {{ $t("cta.titleLine1") }}<br />{{ $t("cta.titleLine2") }}
           </motion.h2>
           <motion.p
             class="mx-auto mt-5 max-w-130 text-lg leading-relaxed text-white/90"
             :initial="subtitleReveal.initial.value"
-            :whileInView="subtitleReveal.whileInView.value"
+            :while-in-view="subtitleReveal.whileInView.value"
             :transition="subtitleReveal.transition.value"
-            :inViewOptions="subtitleReveal.inViewOptions"
+            :in-view-options="subtitleReveal.inViewOptions"
           >
             {{ $t("cta.subtitle") }}
           </motion.p>
           <motion.div
             class="mt-10 flex flex-wrap justify-center gap-3"
             :initial="btnReveal.initial.value"
-            :whileInView="btnReveal.whileInView.value"
+            :while-in-view="btnReveal.whileInView.value"
             :transition="btnReveal.transition.value"
-            :inViewOptions="btnReveal.inViewOptions"
+            :in-view-options="btnReveal.inViewOptions"
           >
             <motion.div
               :animate="btnGlowAnimate"
@@ -146,9 +146,9 @@ const statsReveal = useScrollReveal(0.55, { y: 16, duration: 0.45 })
           <motion.div
             class="mt-7 flex flex-wrap justify-center gap-6 text-sm font-medium text-white/90"
             :initial="statsReveal.initial.value"
-            :whileInView="statsReveal.whileInView.value"
+            :while-in-view="statsReveal.whileInView.value"
             :transition="statsReveal.transition.value"
-            :inViewOptions="statsReveal.inViewOptions"
+            :in-view-options="statsReveal.inViewOptions"
           >
             <span v-for="s in quickStats" :key="s">{{ s }}</span>
           </motion.div>

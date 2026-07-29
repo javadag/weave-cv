@@ -1,25 +1,16 @@
-import { MM_TO_PX } from "~/constants/papers"
-import { getPageDimensionsInPx } from "~/utils/preview/units"
-import type { TBlock, TBlocks } from "~/utils/preview/core/types"
+import {
+  createPageHeightCalculator,
+  shouldHandleHeading,
+  shouldSkipSpace,
+  totalHeight,
+  willOverflow
+} from "./paginationHelpers"
+import type { TBlock, TPage, TPageBlock, TPages } from "./types"
+import { isSingleBlock } from "./types"
 
-function calculatePageHeight({ pageFormat, verticalMargin, isTopPersonal, isFirstPage }: {
-  pageFormat: string
-  verticalMargin: number
-  isTopPersonal: boolean
-  isFirstPage: boolean
-}) {
-  const marginPx = verticalMargin * MM_TO_PX
-  const pageHeightPx = getPageDimensionsInPx(pageFormat).heightInPx
-  let availableHeight = pageHeightPx - marginPx
-  if (!isTopPersonal || !isFirstPage) {
-    availableHeight -= marginPx
-  }
-  return availableHeight
-}
-
-interface IProcessPagesProps {
+interface PaginateInput {
   blocks: Map<string, TBlock>
-  page: TBlocks[]
+  page: TPageBlock[]
 }
 
 interface ColumnState {
@@ -29,34 +20,36 @@ interface ColumnState {
   ids: string[]
 }
 
-const isHeading = (id: string): boolean => id.endsWith("Heading")
-const isSpace = (id: string): boolean => id.endsWith("Space") || id === "personalSpace"
-
-function processColumn(element: TBlock | undefined, state: ColumnState, pageHeightLimit: number, column: TBlock[]) {
+function canProcessColumnItem(
+  element: TBlock | undefined,
+  state: ColumnState,
+  pageHeightLimit: number,
+  output: TBlock[]
+): boolean {
   if (!element || state.done) return false
 
-  if (isHeading(element.id)) {
-    state.heading = element
+  if (shouldHandleHeading(element, state)) {
     state.ids.shift()
     return true
   }
 
-  const totalHeight = element.height + (state.heading?.height ?? 0)
-  const shouldSkipSpace = state.height === 0 && isSpace(element.id) && element.height !== 0
-  const fitsOnPage = state.height === 0 || state.height + totalHeight < pageHeightLimit
+  const height = totalHeight(element, state.heading)
 
-  if (shouldSkipSpace) {
+  if (shouldSkipSpace(element, state.height)) {
     state.ids.shift()
     return true
   }
 
-  if (fitsOnPage) {
+  const isFitsOnPage =
+    state.height === 0 || !willOverflow(state.height, element.height, state.heading?.height ?? 0, pageHeightLimit)
+
+  if (isFitsOnPage) {
     if (state.heading) {
-      column.push(state.heading)
+      output.push(state.heading)
       state.heading = undefined
     }
-    column.push(element)
-    state.height += totalHeight
+    output.push(element)
+    state.height += height
     state.ids.shift()
     return true
   }
@@ -68,7 +61,7 @@ function processColumn(element: TBlock | undefined, state: ColumnState, pageHeig
 function processTwoColumn(
   element: { left: TBlock[]; right: TBlock[] },
   blocks: Map<string, TBlock>,
-  pages: Array<Array<TBlocks>>,
+  pages: TPages,
   config: {
     size: string
     verticalMargin: number
@@ -76,10 +69,10 @@ function processTwoColumn(
     isFirstPage: boolean
     currentHeight: number
   }
-) {
-  const lastPage = pages.at(-1) as Array<{ left: TBlock[]; right: TBlock[] }>
-  if (!lastPage?.at(-1)?.left) {
-    lastPage?.push({ left: [], right: [] })
+): { isFirstPage: boolean; currentHeight: number } {
+  const lastPage = pages.at(-1) as TPage
+  if (!lastPage?.at(-1) || !("left" in lastPage.at(-1)!)) {
+    lastPage?.push({ type: "two-column", left: [], right: [] })
   }
 
   const leftState: ColumnState = {
@@ -97,14 +90,14 @@ function processTwoColumn(
   }
 
   let isFirstPage = config.isFirstPage
+  const getPageHeightLimit = createPageHeightCalculator({
+    pageFormat: config.size,
+    verticalMargin: config.verticalMargin,
+    isTopPersonal: config.isTopPersonal
+  })
 
   while (leftState.ids.length > 0 || rightState.ids.length > 0) {
-    const pageHeightLimit = calculatePageHeight({
-      pageFormat: config.size,
-      verticalMargin: config.verticalMargin,
-      isTopPersonal: config.isTopPersonal,
-      isFirstPage
-    })
+    const pageHeightLimit = getPageHeightLimit(isFirstPage)
 
     const currentPage = pages.at(-1)
     const currentCol = currentPage?.at(-1) as { left: TBlock[]; right: TBlock[] }
@@ -112,8 +105,8 @@ function processTwoColumn(
     const leftElement = blocks.get(leftState.ids[0] ?? "")
     const rightElement = blocks.get(rightState.ids[0] ?? "")
 
-    processColumn(leftElement, leftState, pageHeightLimit, currentCol.left)
-    processColumn(rightElement, rightState, pageHeightLimit, currentCol.right)
+    canProcessColumnItem(leftElement, leftState, pageHeightLimit, currentCol.left)
+    canProcessColumnItem(rightElement, rightState, pageHeightLimit, currentCol.right)
 
     const needsNewPage =
       (leftState.done && rightState.done) ||
@@ -121,7 +114,7 @@ function processTwoColumn(
       (rightState.ids.length === 0 && leftState.done)
 
     if (needsNewPage) {
-      pages.push([{ left: [], right: [] }])
+      pages.push([{ type: "two-column", left: [], right: [] }])
       leftState.height = 0
       rightState.height = 0
       leftState.done = false
@@ -135,8 +128,8 @@ function processTwoColumn(
 
 function processSingleColumn(
   element: TBlock,
-  pages: Array<Array<TBlocks>>,
-  heading: { current: TBlock | undefined },
+  pages: TPages,
+  heading: { heading: TBlock | undefined },
   config: {
     size: string
     verticalMargin: number
@@ -144,48 +137,45 @@ function processSingleColumn(
     isFirstPage: boolean
     currentHeight: number
   }
-) {
-  const pageHeightLimit = calculatePageHeight({
+): { isFirstPage: boolean; currentHeight: number } {
+  const getPageHeightLimit = createPageHeightCalculator({
     pageFormat: config.size,
     verticalMargin: config.verticalMargin,
-    isTopPersonal: config.isTopPersonal,
-    isFirstPage: config.isFirstPage
+    isTopPersonal: config.isTopPersonal
   })
 
+  const pageHeightLimit = getPageHeightLimit(config.isFirstPage)
   let { currentHeight, isFirstPage } = config
 
-  if (isHeading(element.id)) {
-    heading.current = element
+  if (shouldHandleHeading(element, heading)) {
     return { isFirstPage, currentHeight }
   }
 
-  const totalHeight = element.height + (heading.current?.height ?? 0)
-  const isSpaceBlock = isSpace(element.id) && element.height !== 0
-  const willOverflow = currentHeight > 0 && currentHeight + totalHeight > pageHeightLimit
+  const height = totalHeight(element, heading.heading)
+  const isSpaceBlock = shouldSkipSpace(element, currentHeight)
+  const overflows = willOverflow(currentHeight, element.height, heading.heading?.height ?? 0, pageHeightLimit)
 
-  if (willOverflow && isSpaceBlock) {
+  if (overflows && isSpaceBlock) {
     return { isFirstPage, currentHeight }
   }
 
-  if (willOverflow) {
+  if (overflows) {
     pages.push([])
     currentHeight = 0
     isFirstPage = false
   }
 
-  const shouldSkipSpace = currentHeight === 0 && isSpaceBlock
-
-  if (shouldSkipSpace) {
+  if (currentHeight === 0 && isSpaceBlock) {
     return { isFirstPage, currentHeight }
   }
 
-  if (heading.current) {
-    pages.at(-1)?.push(heading.current)
-    heading.current = undefined
+  if (heading.heading) {
+    pages.at(-1)?.push({ type: "single", block: heading.heading })
+    heading.heading = undefined
   }
 
-  pages.at(-1)?.push(element)
-  currentHeight += totalHeight
+  pages.at(-1)?.push({ type: "single", block: element })
+  currentHeight += height
 
   return { isFirstPage, currentHeight }
 }
@@ -193,39 +183,35 @@ function processSingleColumn(
 /**
  * Process the generated page into multiple pages
  */
-export function paginate({ blocks, page }: IProcessPagesProps) {
-  const pages = [[]] as Array<Array<TBlocks>>
+export function paginate({ blocks, page }: PaginateInput): TPages {
+  const pages: TPages = [[]]
 
   const configsStore = useConfigsStore()
   const { configs } = storeToRefs(configsStore)
 
-  const {
-    general: {
-      layout: { verticalMargin, size, personalPosition }
-    }
-  } = configs.value
+  const { general } = configs.value
+  const { verticalMargin, size, personalPosition } = general.layout
 
   const isTopPersonal = personalPosition === "top"
   const config = { size, verticalMargin, isTopPersonal }
 
-  const heading = { current: undefined as TBlock | undefined }
+  const heading = { heading: undefined as TBlock | undefined }
   let currentHeight = 0
   let isFirstPage = true
 
   for (const element of page) {
     if (!element) continue
 
-    if ("left" in element && "right" in element && (element.left.length > 0 || element.right.length > 0)) {
-      const result = processTwoColumn(element, blocks, pages, {
+    if (isSingleBlock(element)) {
+      const result = processSingleColumn(element.block, pages, heading, {
         ...config,
         isFirstPage,
         currentHeight
       })
-
       isFirstPage = result.isFirstPage
       currentHeight = result.currentHeight
-    } else if ("id" in element) {
-      const result = processSingleColumn(element, pages, heading, {
+    } else if (element.type === "two-column") {
+      const result = processTwoColumn(element, blocks, pages, {
         ...config,
         isFirstPage,
         currentHeight
@@ -236,11 +222,11 @@ export function paginate({ blocks, page }: IProcessPagesProps) {
   }
 
   const filteredPages = pages.filter((page) =>
-    page.some((el) => {
-      if ("id" in el) return true
-      if ("left" in el && "right" in el) return (el as { left: unknown[]; right: unknown[] }).left.length > 0 || (el as { left: unknown[]; right: unknown[] }).right.length > 0
-      return false
-    })
+    page.some(
+      (element) =>
+        isSingleBlock(element) ||
+        (element.type === "two-column" && (element.left.length > 0 || element.right.length > 0))
+    )
   )
   return filteredPages.length > 0 ? filteredPages : [[]]
 }

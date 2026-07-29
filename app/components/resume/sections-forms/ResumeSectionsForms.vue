@@ -51,7 +51,9 @@ const orderedSections = computed(() => {
     }
 
     return ordered
-  } else {
+  }
+
+  {
     const sectionOrder = configs.value.general.layout.order.oneCol || []
 
     if (sectionOrder.length === 0) {

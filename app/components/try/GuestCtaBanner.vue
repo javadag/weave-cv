@@ -2,7 +2,6 @@
 import { useResumeStore } from "~/stores/resume.store"
 import { useConfigsStore } from "~/stores/configs.store"
 
-const { t } = useI18n()
 const resumeStore = useResumeStore()
 const configsStore = useConfigsStore()
 const { saveGuestResume } = useGuestResume()

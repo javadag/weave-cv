@@ -29,8 +29,8 @@ const splitIntoColumns = (numColumns: number) => {
   const columns: TBasicContent[][] = Array.from({ length: numColumns }, () => [])
   for (const [index, content] of props.contents.entries()) {
     const columnIndex = index % numColumns
-    if (columns[columnIndex]) {
-      columns[columnIndex].push(content)
+    if (Object.hasOwn(columns, columnIndex)) {
+      columns[columnIndex]?.push(content)
     }
   }
   return columns

@@ -17,7 +17,7 @@ const { personal, updatePersonal } = useResumeStore()
 const getDetailConfig = (): DetailConfig | null => {
   const type = props.detail.type
   for (const category of Object.values(DETAILS_CATALOG)) {
-    if (type in category) {
+    if (Object.hasOwn(category, type)) {
       return (category as Partial<Record<DetailKey, DetailConfig>>)[type] ?? null
     }
   }
@@ -47,9 +47,9 @@ const handleUrlUpdate = (url: string) => {
       let finalUrl = url || undefined
 
       if (finalUrl && config?.urlTemplate) {
-        const prefix = config.urlTemplate.split("{value}")[0]
+        const prefix = config.urlTemplate.split("{value}", 1)[0]
         if (prefix && !finalUrl.startsWith(prefix) && !finalUrl.includes("://")) {
-          finalUrl = config.urlTemplate.replace("{value}", finalUrl)
+          finalUrl = config.urlTemplate.replaceAll("{value}", finalUrl)
         }
       }
 

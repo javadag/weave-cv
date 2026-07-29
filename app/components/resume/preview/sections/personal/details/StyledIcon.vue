@@ -47,8 +47,8 @@ const createSimpleIcon = () =>
   h(
     "svg",
     {
-      width: `${props.size}`,
-      height: `${props.size}`,
+      width: props.size,
+      height: props.size,
       viewBox: `0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`,
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg",
@@ -70,8 +70,8 @@ const createSquareFramedIcon = () => {
   return h(
     "svg",
     {
-      width: `${props.size}`,
-      height: `${props.size}`,
+      width: props.size,
+      height: props.size,
       viewBox: `0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`,
       xmlns: "http://www.w3.org/2000/svg",
       role: "img",
@@ -85,8 +85,8 @@ const createSquareFramedIcon = () => {
       h("rect", {
         x: "0.5",
         y: "0.5",
-        width: `${VIEW_BOX_SIZE - 1}`,
-        height: `${VIEW_BOX_SIZE - 1}`,
+        width: VIEW_BOX_SIZE - 1,
+        height: VIEW_BOX_SIZE - 1,
         rx: "0",
         fill: isOutline ? "none" : props.color,
         stroke: isOutline ? props.color : "none",
@@ -109,8 +109,8 @@ const createCircularFramedIcon = () => {
   return h(
     "svg",
     {
-      width: `${props.size}`,
-      height: `${props.size}`,
+      width: props.size,
+      height: props.size,
       viewBox: `0 0 ${VIEW_BOX_SIZE} ${VIEW_BOX_SIZE}`,
       xmlns: "http://www.w3.org/2000/svg",
       role: "img",

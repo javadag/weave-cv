@@ -23,7 +23,7 @@ const submit = async () => {
   error.value = ""
 
   const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.value, {
-    redirectTo: `${globalThis.location.origin}/reset-password`
+    redirectTo: `${location.origin}/reset-password`
   })
 
   loading.value = false

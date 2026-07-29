@@ -40,10 +40,12 @@ const previewSections = computed(() => {
   const sectionsById = new Map<string, TCoreSection>()
   const sectionsByType = new Map<string, TCoreSection>()
   for (const [id, section] of Object.entries(core) as [string, TCoreSection][]) {
-    if (section.isSectionVisible && section.contents.some((c) => !c.isHidden)) {
-      sectionsById.set(id, section)
-      if (!sectionsByType.has(section.type)) sectionsByType.set(section.type, section)
+    if (!(section.isSectionVisible && section.contents.some((c) => !c.isHidden))) {
+    	continue;
     }
+
+    sectionsById.set(id, section)
+    if (!sectionsByType.has(section.type)) sectionsByType.set(section.type, section)
   }
 
   const result: TCoreSection[] = []
@@ -76,7 +78,7 @@ function getSectionItems(section: TCoreSection): (TextItem | TitleItem)[] {
     return []
   }
 
-  if (section.type === "skills" || section.type === "languages" || section.type === "certificates") {
+  if (["skills", "languages", "certificates"].includes(section.type)) {
     const titles = visible
       .slice(0, 5)
       .map((c) => c.title)

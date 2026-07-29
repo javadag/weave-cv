@@ -21,7 +21,7 @@ export function useUndoRedo() {
   const pointer = ref(-1)
   let isRestoring = false
   let timer: ReturnType<typeof setTimeout> | null = null
-  let snapshotInitialized = false
+  let isSnapshotInitialized = false
 
   const takeSnapshot = (): Snapshot => structuredClone({
     personal: toRaw(personal.value!),
@@ -39,7 +39,7 @@ export function useUndoRedo() {
   }
 
   const scheduleCommit = () => {
-    if (isRestoring || !snapshotInitialized) return
+    if (isRestoring || !isSnapshotInitialized) return
     if (timer) clearTimeout(timer)
     timer = setTimeout(() => {
       timer = null
@@ -58,12 +58,14 @@ export function useUndoRedo() {
 
   // Seed the snapshot stack once the store is ready
   watch(initialized, (ready) => {
-    if (ready && !snapshotInitialized) {
-      snapshotInitialized = true
-      stack.length = 0
-      stack.push(takeSnapshot())
-      pointer.value = 0
+    if (!ready || isSnapshotInitialized) {
+    	return;
     }
+
+    isSnapshotInitialized = true
+    stack.length = 0
+    stack.push(takeSnapshot())
+    pointer.value = 0
   })
 
   const canUndo = computed(() => pointer.value > 0)

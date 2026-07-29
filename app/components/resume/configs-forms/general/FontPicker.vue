@@ -38,7 +38,7 @@ function selectFont(entry: FontEntry) {
 const loadedInPicker: Record<string, boolean> = {}
 
 function onFontVisible(family: string) {
-  if (loadedInPicker[family]) return
+  if (Object.hasOwn(loadedInPicker, family)) return
   loadedInPicker[family] = true
   loadFont(family)
 }
@@ -49,10 +49,10 @@ const vFontVisible = {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            onFontVisible(binding.value)
-            observer.unobserve(el)
-          }
+          if (!entry.isIntersecting) continue
+
+          onFontVisible(binding.value)
+          observer.unobserve(el)
         }
       },
       { threshold: 0.1 }

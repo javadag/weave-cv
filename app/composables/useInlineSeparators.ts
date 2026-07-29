@@ -9,10 +9,12 @@ export function useInlineSeparators(containerRef: Ref<HTMLElement | undefined>, 
     if (children.length === 0) return
 
     for (const child of children) {
-      if (child.classList?.contains("separator")) {
-        child.style.visibility = "visible"
-        child.style.opacity = "1"
+      if (!child.classList?.contains("separator")) {
+      	continue;
       }
+
+      child.style.visibility = "visible"
+      child.style.opacity = "1"
     }
 
     let previousTop = children[0]!.offsetTop

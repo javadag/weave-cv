@@ -166,6 +166,13 @@ export const OtherSectionTypeSchema = z.enum(OTHER_SECTION_TYPES)
 export const CoreSectionTypeSchema = z.union([AdvancedSectionTypeSchema, BasicSectionTypeSchema])
 export const SectionTypeSchema = z.union([CoreSectionTypeSchema, OtherSectionTypeSchema])
 
+const DetailSchema = z.object({
+  value: z.string(),
+  isHidden: z.boolean(),
+  type: z.enum(DETAIL_KEYS),
+  url: z.url().optional()
+})
+
 export const PersonalContentSchema = z.object({
   title: z.string(),
   subtitle: z.string(),
@@ -174,14 +181,7 @@ export const PersonalContentSchema = z.object({
       url: z.string().default("")
     })
     .default({ url: "" }),
-  details: z.array(
-    z.object({
-      value: z.string(),
-      isHidden: z.boolean(),
-      type: z.enum(DETAIL_KEYS),
-      url: z.url().optional()
-    })
-  )
+  details: z.array(DetailSchema)
 })
 
 const BasicContentSchema = z.object({

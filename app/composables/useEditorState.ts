@@ -45,23 +45,21 @@ export function useEditorState() {
 
   function removeSection(sectionKey: string) {
     resumeStore.$patch((state) => {
-      if (state.core) {
-        const { [sectionKey]: _, ...rest } = state.core
-        state.core = Object.keys(rest).length > 0 ? rest : null
+      if (!state.core) {
+        return
       }
+
+      const { [sectionKey]: _, ...rest } = state.core
+      state.core = Object.keys(rest).length > 0 ? rest : null
     })
 
-    const currentLeft = (configsStore.configs.general.layout.order.twoCol.left || []).filter(
-      (id) => id !== sectionKey
-    )
+    const currentLeft = (configsStore.configs.general.layout.order.twoCol.left || []).filter((id) => id !== sectionKey)
     const currentRight = (configsStore.configs.general.layout.order.twoCol.right || []).filter(
       (id) => id !== sectionKey
     )
     configsStore.updateOrder("twoCol", { left: currentLeft, right: currentRight })
 
-    const currentOrder = (configsStore.configs.general.layout.order.oneCol || []).filter(
-      (id) => id !== sectionKey
-    )
+    const currentOrder = (configsStore.configs.general.layout.order.oneCol || []).filter((id) => id !== sectionKey)
     configsStore.updateOrder("oneCol", currentOrder)
   }
 

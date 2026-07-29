@@ -2,6 +2,24 @@ import { z } from "zod"
 import { PAPER_SIZES, type TPaperSize } from "~/constants/papers"
 import { DateFormat, FontCase, FontStyle, FontWeight, LinkIconType, ListType, PersonalPosition } from "../shared.schema"
 
+const StringSchema = z.string()
+const StringArraySchema = z.array(StringSchema)
+const OptionalStringRecordSchema = z.record(StringSchema, StringSchema.optional())
+
+const defaultTwoColLeft = ["summary", "experiences", "languages", "certificates", "courses"]
+const defaultTwoColRight = ["educations", "projects", "skills", "awards"]
+const defaultOneCol = ["summary", "experiences", "educations", "projects", "skills", "languages", "certificates", "courses", "awards"]
+
+const TwoColOrderSchema = z.object({
+  left: StringArraySchema.default(() => defaultTwoColLeft),
+  right: StringArraySchema.default(() => defaultTwoColRight)
+})
+
+const OrderSchema = z.object({
+  twoCol: TwoColOrderSchema,
+  oneCol: StringArraySchema.default(() => defaultOneCol)
+})
+
 export type TLayout = z.infer<typeof LayoutSchema>
 export type TColors = z.infer<typeof ColorsSchema>
 
@@ -45,25 +63,7 @@ export const LayoutSchema = z.object({
     left: z.number().min(25).max(75).default(50),
     right: z.number().min(25).max(75).default(50)
   }),
-  order: z.object({
-    twoCol: z.object({
-      left: z.array(z.string()).default(() => ["summary", "experiences", "languages", "certificates", "courses"]),
-      right: z.array(z.string()).default(() => ["educations", "projects", "skills", "awards"])
-    }),
-    oneCol: z
-      .array(z.string())
-      .default(() => [
-        "summary",
-        "experiences",
-        "educations",
-        "projects",
-        "skills",
-        "languages",
-        "certificates",
-        "courses",
-        "awards"
-      ])
-  })
+  order: OrderSchema
 })
 
 export const HeadingsSchema = z.object({
@@ -76,10 +76,7 @@ export const HeadingsSchema = z.object({
   icon: z.object({
     visible: z.boolean().default(true),
     size: z.number().min(8).max(32).default(16),
-    custom: z
-      .record(z.string(), z.string().optional())
-      .optional()
-      .default(() => ({}))
+    custom: OptionalStringRecordSchema.optional().default(() => ({}))
   })
 })
 

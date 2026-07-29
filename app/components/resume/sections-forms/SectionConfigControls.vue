@@ -73,13 +73,14 @@ const variantSimpleOptions = computed(() =>
 )
 
 const isAdvancedSection = computed(() => configOptions.value.includes("titleSubtitleVariant"))
-const currentVariantOptions = computed(() =>
-  isAdvancedSection.value ? advancedVariantOptions.value : variantOptions.value
-)
+const currentVariantOptions = computed(() => {
+  const options = isAdvancedSection.value ? advancedVariantOptions : variantOptions
+  return options.value
+})
 
 const getConfigValue = (key: string) => {
   const sectionConfig = configs.value[props.sectionType as keyof TConfigs]
-  if (sectionConfig && typeof sectionConfig === "object" && key in sectionConfig) {
+  if (sectionConfig && typeof sectionConfig === "object" && Object.hasOwn(sectionConfig as Record<string, unknown>, key)) {
     return (sectionConfig as Record<string, unknown>)[key]
   }
   return null
@@ -109,8 +110,8 @@ const handleUpdate = (key: string, value: unknown) => {
       @update:model-value="(value) => handleUpdate('grids', value)"
     />
     <ButtonGroupInput
-      icon-only
       v-if="configOptions.includes('separator') && getConfigValue('variant') === 'inline'"
+      icon-only
       :model-value="getConfigValue('separator') as string"
       :label="$t('editor.configs.separator')"
       label-variant="stacked"
@@ -118,8 +119,8 @@ const handleUpdate = (key: string, value: unknown) => {
       @update:model-value="(value) => handleUpdate('separator', value as TSeparator)"
     />
     <ButtonGroupInput
-      icon-only
       v-if="configOptions.includes('titleStyle')"
+      icon-only
       :model-value="getConfigValue('titleStyle') as string"
       :label="$t('editor.configs.titleStyle')"
       label-variant="stacked"

@@ -30,7 +30,7 @@ const navItems = computed<NavigationMenuItem[][]>(() => [
       icon: "i-lucide-file-text",
       to: "/dashboard",
       exact: true,
-      badge: `${count.value}`
+      badge: String(count.value)
     },
     { label: t("sidebar.profile"), icon: "i-lucide-user", to: "/dashboard/profile" },
     { label: t("sidebar.settings"), icon: "i-lucide-settings", to: "/dashboard/settings" }

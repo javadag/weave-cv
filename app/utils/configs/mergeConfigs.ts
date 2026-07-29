@@ -9,8 +9,7 @@ export function mergeConfigs<T>(base: T, override: DeepPartial<T> | undefined): 
   const overrideRec = override as unknown
   if (!isPlainObject(baseRec) || !isPlainObject(overrideRec)) return base
   const out: Record<string, unknown> = { ...baseRec }
-  for (const key of Object.keys(overrideRec)) {
-    const overrideVal = overrideRec[key]
+  for (const [key, overrideVal] of Object.entries(overrideRec)) {
     if (overrideVal === undefined) continue
     const baseVal = out[key]
     out[key] = isPlainObject(baseVal) && isPlainObject(overrideVal) ? mergeConfigs(baseVal, overrideVal) : overrideVal

@@ -53,10 +53,10 @@ const checkWrapAndHandleSpacer = () => {
     const dateTop = dateElement.getBoundingClientRect().top
     const locationTop = locationElement.getBoundingClientRect().top
 
-    const wrapped = locationTop - 5 > dateTop
+    const isNowWrapped = locationTop - 5 > dateTop
 
-    if (wrapped === isWrapped.value) return
-    isWrapped.value = wrapped
+    if (isNowWrapped === isWrapped.value) return
+    isWrapped.value = isNowWrapped
   })
 }
 
@@ -78,8 +78,8 @@ const containerStyles = computed<CSSProperties>(() => ({
   alignItems: "center",
   flexWrap: "wrap",
   rowGap: `${0.15 * titleFontSize.value}px`,
-  ...(props.position === "contentFirst" ? { justifyContent: "flex-end" } : {}),
-  ...(props.position === "stacked" ? { alignItems: "flex-end" } : {})
+  ...((props.position === "contentFirst") && { justifyContent: "flex-end" }),
+  ...((props.position === "stacked") && { alignItems: "flex-end" })
 }))
 
 const spacerStyles = computed<CSSProperties>(() => ({

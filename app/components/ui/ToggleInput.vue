@@ -10,11 +10,11 @@ const props = withDefaults(
   }
 )
 
-const emit = defineEmits<{ (e: "update:modelValue", value: boolean): void }>()
+const emit = defineEmits<{ (e: "update:modelValue", isOn: boolean): void }>()
 
 const model = computed({
   get: () => props.modelValue,
-  set: (v: boolean) => emit("update:modelValue", v)
+  set: (isOn: boolean) => emit("update:modelValue", isOn)
 })
 </script>
 

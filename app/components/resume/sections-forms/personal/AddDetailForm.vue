@@ -51,7 +51,7 @@ const addDetail = () => {
   if (!form.value.trim() || !form.key || !currentConfig.value) return
 
   const { label, icon, urlTemplate } = currentConfig.value
-  const url = urlTemplate ? urlTemplate.replace("{value}", form.value) : undefined
+  const url = urlTemplate ? urlTemplate.replaceAll("{value}", form.value) : undefined
 
   const newDetail = {
     value: form.value,

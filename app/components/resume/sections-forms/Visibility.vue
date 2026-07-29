@@ -13,7 +13,7 @@ const props = defineProps<{
 const { t } = useI18n()
 const tooltipText = computed(() => {
   if (props.tooltip) return props.tooltip
-  return props.isHidden ? t("editor.form.showTooltip") : t("editor.form.hideTooltip")
+  return t(props.isHidden ? "editor.form.showTooltip" : "editor.form.hideTooltip")
 })
 </script>
 

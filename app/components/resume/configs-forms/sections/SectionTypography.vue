@@ -22,7 +22,7 @@ const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
 const { t } = useI18n()
 
-const fontSizeFieldName = props.schema && "fontSizeMultiplier" in props.schema.shape ? "fontSizeMultiplier" : "fontSize"
+const fontSizeFieldName = props.schema && Object.hasOwn(props.schema.shape, "fontSizeMultiplier") ? "fontSizeMultiplier" : "fontSize"
 
 const fontSizeConstraints = props.schema ? extractNumberConstraintsFromPath(props.schema, fontSizeFieldName) : undefined
 
@@ -61,7 +61,7 @@ function getNested(path: string): unknown {
   let node: unknown = configs.value
   const parts = path.split(".")
   for (const key of parts) {
-    if (node && typeof node === "object" && key in (node as Record<string, unknown>)) {
+    if (node && typeof node === "object" && Object.hasOwn(node as Record<string, unknown>, key)) {
       node = (node as Record<string, unknown>)[key]
     } else {
       return undefined
@@ -72,7 +72,7 @@ function getNested(path: string): unknown {
 
 function getValue(field: string): unknown {
   const target = getNested(props.baseKey)
-  if (target && typeof target === "object" && field in (target as Record<string, unknown>)) {
+  if (target && typeof target === "object" && Object.hasOwn(target as Record<string, unknown>, field)) {
     return (target as Record<string, unknown>)[field]
   }
   return undefined

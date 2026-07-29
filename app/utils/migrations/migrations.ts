@@ -26,12 +26,12 @@ function migrateFromV1ToV2(configs: unknown, content: unknown): MigrationResult 
   return {
     configs: c as TConfigs,
     content: content as { personal: TPersonalContent; core: TCoreSections },
-    migrated: true,
+    migrated: true
   }
 }
 
 const MIGRATIONS = new Map<string, (configs: unknown, content: unknown) => MigrationResult>([
-  ["1->2", migrateFromV1ToV2],
+  ["1->2", migrateFromV1ToV2]
 ])
 
 export function migrateResumeData(schemaVersion: number, configs: unknown | null, content: unknown | null) {
@@ -56,7 +56,7 @@ export function migrateResumeData(schemaVersion: number, configs: unknown | null
 
   let currentConfigs = configs
   let currentContent = content
-  let migrated = false
+  let isMigrated = false
   let currentVersion = schemaVersion
 
   while (currentVersion < CURRENT_SCHEMA_VERSION) {
@@ -69,20 +69,20 @@ export function migrateResumeData(schemaVersion: number, configs: unknown | null
 
       currentConfigs = result.configs
       currentContent = result.content
-      migrated = migrated || result.migrated
+      isMigrated = isMigrated || result.migrated
       currentVersion = nextVersion
     } else {
       // No migration function found - preserve existing data but mark as migrated
       // This handles cases where version increment doesn't require data changes
       console.warn(`No migration function found for ${migrationKey}. Preserving existing data.`)
       currentVersion = nextVersion
-      migrated = true
+      isMigrated = true
     }
   }
 
   return {
     configs: currentConfigs,
     content: currentContent,
-    migrated
+    migrated: isMigrated
   }
 }

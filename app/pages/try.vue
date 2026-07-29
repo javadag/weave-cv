@@ -104,7 +104,7 @@ onMounted(() => {
       <ResumeHeader id="editor-toolbar" />
       <div v-if="isXlScreen" class="overflow-hidden" dir="ltr">
         <SplitterGroup direction="horizontal" class="flex h-full gap-1">
-          <SplitterPanel :min-size="20" :default-size="25" :max-size="35" id="editor-sections">
+          <SplitterPanel id="editor-sections" :min-size="20" :default-size="25" :max-size="35">
             <ResumeSectionsForms :loading="pending" />
           </SplitterPanel>
           <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
@@ -125,7 +125,7 @@ onMounted(() => {
           <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
             <UIcon name="i-lucide-grip-vertical" class="text-primary size-5" />
           </SplitterResizeHandle>
-          <SplitterPanel :min-size="20" :default-size="20" :max-size="30" id="editor-configs">
+          <SplitterPanel id="editor-configs" :min-size="20" :default-size="20" :max-size="30">
             <ResumeConfigs />
           </SplitterPanel>
         </SplitterGroup>

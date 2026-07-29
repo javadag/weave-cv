@@ -11,7 +11,7 @@ useHead({
 
 const userEmail = computed(() => user.value?.email || "")
 const fullName = computed(
-  () => user.value?.user_metadata?.full_name || user.value?.user_metadata?.name || userEmail.value.split("@")[0] || ""
+  () => user.value?.user_metadata?.full_name || user.value?.user_metadata?.name || userEmail.value.split("@", 1)[0] || ""
 )
 
 const userInitials = computed(() => {

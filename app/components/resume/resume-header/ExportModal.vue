@@ -48,14 +48,14 @@ const handlePdfExport = async () => {
     })
 
     const blob = new Blob([response], { type: "application/pdf" })
-    const url = globalThis.URL.createObjectURL(blob)
+    const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
     link.href = url
     link.download = `${title.value || "resume"}.pdf`
     document.body.append(link)
     link.click()
     link.remove()
-    globalThis.URL.revokeObjectURL(url)
+    URL.revokeObjectURL(url)
 
     modelValue.value = false
   } catch (error) {
@@ -90,14 +90,14 @@ const handleJsonExport = () => {
 
     const jsonString = JSON.stringify(exportData, null, 2)
     const blob = new Blob([jsonString], { type: "application/json" })
-    const url = globalThis.URL.createObjectURL(blob)
+    const url = URL.createObjectURL(blob)
     const link = document.createElement("a")
     link.href = url
     link.download = `${title.value || "resume"}-export.json`
     document.body.append(link)
     link.click()
     link.remove()
-    globalThis.URL.revokeObjectURL(url)
+    URL.revokeObjectURL(url)
 
     modelValue.value = false
   } catch (error) {

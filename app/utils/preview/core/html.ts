@@ -111,9 +111,7 @@ function parseInlineStyles(styleString: string): Record<string, string> {
 }
 
 function computeTextStyles({ tagName, inlineStyles = {} }: TextStyleOptions) {
-  const styles: Record<string, string> = {}
-
-  Object.assign(styles, inlineStyles)
+  const styles: Record<string, string> = { ...inlineStyles }
 
   if (tagName) {
     const normalizedTag = tagName.toLowerCase()

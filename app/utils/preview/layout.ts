@@ -1,8 +1,8 @@
 export function alignToFlex(
   align: "left" | "center" | "right",
-  rtl: boolean
+  isRtl: boolean
 ): "flex-start" | "center" | "flex-end" {
   if (align === "center") return "center"
-  const isStart = (align === "left") !== rtl
+  const isStart = (align === "left") !== isRtl
   return isStart ? "flex-start" : "flex-end"
 }

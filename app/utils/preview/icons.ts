@@ -32,7 +32,7 @@ export function getSectionIconName(sectionType: string) {
 }
 
 export function getSectionIconNameWithCustom(sectionType: string, customIcons?: Record<string, string | undefined>) {
-  if (customIcons && customIcons[sectionType]) {
+  if (customIcons && Object.hasOwn(customIcons, sectionType)) {
     const customIcon = customIcons[sectionType]
 
     return customIcon || null

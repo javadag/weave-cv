@@ -8,7 +8,7 @@ const toast = useToast()
 const userEmail = computed(() => user.value?.email || "")
 const userInitials = computed(() => {
   if (!userEmail.value) return "U"
-  const emailPart = userEmail.value.split("@")[0]
+  const emailPart = userEmail.value.split("@", 1)[0]
   if (!emailPart) return "U"
   return emailPart
     .split(/[.\-_]/)

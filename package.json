@@ -10,6 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "analyze": "nuxt analyze",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-pattern .gitignore .",
     "typecheck": "nuxt typecheck",
     "update-types": "bash scripts/update-types.sh",
     "build:pdf-css": "tailwindcss -i app/assets/css/tailwind.css -o public/tailwind-pdf.css --minify",

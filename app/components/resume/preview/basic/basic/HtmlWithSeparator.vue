@@ -81,11 +81,11 @@ function processNode(
 }
 
 const renderContent = computed(() => {
+  if (!props.html) return () => null
+
   const html = props.html
   const sep = SEPARATOR_CHARS[props.separator] ?? ", "
   const styles = linkStyles.value
-
-  if (!html) return () => null
 
   return () => {
     try {

@@ -41,7 +41,7 @@ const { isLink, linkAttributes, linkStyles } = useLinkConfigs(toRef(props, "url"
 
 const textStyles = computed(() => ({
   ...baseTextStyles.value,
-  ...(isLink.value ? linkStyles.value : {})
+  ...(isLink.value && linkStyles.value)
 }))
 </script>
 

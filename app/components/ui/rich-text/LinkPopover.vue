@@ -8,8 +8,8 @@ interface Props {
 defineProps<Props>()
 
 const emit = defineEmits<{
-  (e: "update:isOpen", value: boolean): void
-  (e: "update:linkUrl", value: string): void
+  (e: "update:isOpen", isOpen: boolean): void
+  (e: "update:linkUrl", linkUrl: string): void
   (e: "action", action: "apply" | "clear" | "open"): void
 }>()
 

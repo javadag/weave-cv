@@ -30,7 +30,7 @@ useSelfResizeObserver((height) => {
 
 const sectionConfigs = computed(() => configs.value[props.sectionType])
 
-const titleSubTitle = computed(() => {
+const titleSubtitle = computed(() => {
   if (sectionConfigs.value.subTitleFirst) {
     return [content.value.subtitle, content.value.title]
   }
@@ -65,8 +65,8 @@ const contentLayoutWidth = computed(() =>
       <div style="display: flex">
         <TitleSubtitle
           :width="contentLayoutWidth.left"
-          :title="titleSubTitle[0]"
-          :subtitle="titleSubTitle[1]"
+          :title="titleSubtitle[0]"
+          :subtitle="titleSubtitle[1]"
           :url="content.url"
           :is-in-column="false"
           :section-type="sectionType"
@@ -95,8 +95,8 @@ const contentLayoutWidth = computed(() =>
         />
         <TitleSubtitle
           :width="contentLayoutWidth.right"
-          :title="titleSubTitle[0]"
-          :subtitle="titleSubTitle[1]"
+          :title="titleSubtitle[0]"
+          :subtitle="titleSubtitle[1]"
           :url="content.url"
           :is-in-column="false"
           :section-type="sectionType"
@@ -106,8 +106,8 @@ const contentLayoutWidth = computed(() =>
     <template v-if="displayMode === 'stacked'">
       <div :style="{ display: 'flex', justifyContent: 'space-between' }">
         <TitleSubtitle
-          :title="titleSubTitle[0]"
-          :subtitle="titleSubTitle[1]"
+          :title="titleSubtitle[0]"
+          :subtitle="titleSubtitle[1]"
           :url="content.url"
           :is-in-column="false"
           :section-type="sectionType"
@@ -125,8 +125,8 @@ const contentLayoutWidth = computed(() =>
     </template>
     <template v-if="displayMode === 'columns'">
       <TitleSubtitle
-        :title="titleSubTitle[0]"
-        :subtitle="titleSubTitle[1]"
+        :title="titleSubtitle[0]"
+        :subtitle="titleSubtitle[1]"
         :url="content.url"
         :is-in-column="true"
         :section-type="sectionType"

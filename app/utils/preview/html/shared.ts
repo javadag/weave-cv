@@ -34,6 +34,9 @@ const sanitizeFormat = (format: string, options?: { hideDay?: boolean }) => {
   return result.replaceAll(/\s{2,}/g, " ").trim() || "YYYY-MM"
 }
 
+const partValue = (parts: Intl.DateTimeFormatPart[], type: Intl.DateTimeFormatPartTypes) =>
+  parts.find((p) => p.type === type)?.value ?? ""
+
 export const fmtDate = (
   iso: string | null | undefined,
   format: string,
@@ -48,14 +51,12 @@ export const fmtDate = (
   const effectiveFormat = sanitizeFormat(format, options)
 
   const fmt = (opts: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(calLocale, opts).formatToParts(date)
-  const part = (parts: Intl.DateTimeFormatPart[], type: Intl.DateTimeFormatPartTypes) =>
-    parts.find((p) => p.type === type)?.value ?? ""
 
-  const yearFull = part(fmt({ year: "numeric" }), "year")
-  const monthLong = part(fmt({ month: "long" }), "month")
-  const monthShrt = part(fmt({ month: "short" }), "month")
-  const monthNum = part(fmt({ month: "2-digit" }), "month")
-  const dayNum = part(fmt({ day: "2-digit" }), "day")
+  const yearFull = partValue(fmt({ year: "numeric" }), "year")
+  const monthLong = partValue(fmt({ month: "long" }), "month")
+  const monthShrt = partValue(fmt({ month: "short" }), "month")
+  const monthNum = partValue(fmt({ month: "2-digit" }), "month")
+  const dayNum = partValue(fmt({ day: "2-digit" }), "day")
 
   return effectiveFormat
     .replaceAll("YYYY", yearFull)

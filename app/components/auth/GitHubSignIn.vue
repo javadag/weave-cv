@@ -9,7 +9,7 @@ const signInWithGithub = async () => {
   const { error: githubError } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: `${globalThis.location.origin}/confirm`
+      redirectTo: `${location.origin}/confirm`
     }
   })
 

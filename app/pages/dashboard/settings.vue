@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AiProviderSettings from "~/components/dashboard/AiProviderSettings.vue"
-
 definePageMeta({ layout: "dashboard" })
 
 const { t, locale, locales, setLocale } = useI18n()
@@ -13,8 +11,8 @@ useHead({
 const colorMode = useColorMode()
 const isDark = computed({
   get: () => colorMode.value === "dark",
-  set: (v: boolean) => {
-    colorMode.preference = v ? "dark" : "light"
+  set: (isDark: boolean) => {
+    colorMode.preference = isDark ? "dark" : "light"
   }
 })
 
@@ -36,7 +34,6 @@ const languageOptions = computed(() =>
       <h1 class="text-default text-2xl font-bold tracking-tight">{{ $t("dashboard.settings.title") }}</h1>
       <p class="text-muted mt-1 text-sm">{{ $t("dashboard.settings.subtitle") }}</p>
     </div>
-
     <UCard class="mb-4">
       <template #header>
         <div>
@@ -57,7 +54,6 @@ const languageOptions = computed(() =>
         </template>
       </ClientOnly>
     </UCard>
-    <AiProviderSettings />
     <UCard>
       <template #header>
         <div>

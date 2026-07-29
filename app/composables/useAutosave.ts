@@ -58,11 +58,11 @@ export function useAutosave(resumeId: Ref<string>) {
   }
 
   // Called by the timer and on reconnect — only runs if there's something to save
-  const backgroundSave = async (showSyncToast = false) => {
+  const backgroundSave = async (shouldShowSyncToast = false) => {
     if (!isDirty.value && !hasPendingOfflineChanges.value) return
     if (isOnline.value) {
       const ok = await saveToServer()
-      if (ok && showSyncToast) {
+      if (ok && shouldShowSyncToast) {
         toast.add({ title: "Back online", description: "Offline changes have been synced", color: "success" })
       }
     } else {

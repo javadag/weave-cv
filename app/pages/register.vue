@@ -52,7 +52,7 @@ const signUpWithPassword = async () => {
       email: formState.email,
       password: formState.password,
       options: {
-        emailRedirectTo: `${globalThis.location.origin}/confirm`
+        emailRedirectTo: `${location.origin}/confirm`
       }
     })
 
@@ -72,7 +72,7 @@ const signUpWithGoogle = async () => {
   const { error: googleError } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${globalThis.location.origin}/dashboard`
+      redirectTo: `${location.origin}/dashboard`
     }
   })
 
@@ -86,7 +86,7 @@ const signUpWithGithub = async () => {
   const { error: githubError } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: `${globalThis.location.origin}/dashboard`
+      redirectTo: `${location.origin}/dashboard`
     }
   })
 

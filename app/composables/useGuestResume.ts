@@ -1,21 +1,21 @@
 const GUEST_PENDING_KEY = "guest_resume_pending"
 const GUEST_DATA_KEY = "guest_resume_data"
 
+function saveGuestResume(data: { title: string; content: unknown; configs: unknown }) {
+  localStorage.setItem(GUEST_DATA_KEY, JSON.stringify(data))
+  localStorage.setItem(GUEST_PENDING_KEY, "true")
+}
+
+function clearGuestResume() {
+  localStorage.removeItem(GUEST_DATA_KEY)
+  localStorage.removeItem(GUEST_PENDING_KEY)
+}
+
 export function useGuestResume() {
   const toast = useToast()
   const { t } = useI18n()
 
   const hasPending = computed(() => localStorage.getItem(GUEST_PENDING_KEY) === "true")
-
-  function saveGuestResume(data: { title: string; content: unknown; configs: unknown }) {
-    localStorage.setItem(GUEST_DATA_KEY, JSON.stringify(data))
-    localStorage.setItem(GUEST_PENDING_KEY, "true")
-  }
-
-  function clearGuestResume() {
-    localStorage.removeItem(GUEST_DATA_KEY)
-    localStorage.removeItem(GUEST_PENDING_KEY)
-  }
 
   async function importGuestResume() {
     if (!hasPending.value) return null

@@ -75,7 +75,8 @@ const visible = computed(() =>
 )
 
 function catCount(id: string) {
-  return id === "all" ? faqs.value.length : faqs.value.filter((f) => f.cat === id).length
+  const filtered = id === "all" ? faqs.value : faqs.value.filter((f) => f.cat === id)
+  return filtered.length
 }
 </script>
 

@@ -59,27 +59,27 @@ function cardReveal(i: number) {
         <motion.span
           class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
           :initial="badgeReveal.initial.value"
-          :whileInView="badgeReveal.whileInView.value"
+          :while-in-view="badgeReveal.whileInView.value"
           :transition="badgeReveal.transition.value"
-          :inViewOptions="badgeReveal.inViewOptions"
+          :in-view-options="badgeReveal.inViewOptions"
         >
           {{ $t("features.badge") }}
         </motion.span>
         <motion.h2
           class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
           :initial="headingReveal.initial.value"
-          :whileInView="headingReveal.whileInView.value"
+          :while-in-view="headingReveal.whileInView.value"
           :transition="headingReveal.transition.value"
-          :inViewOptions="headingReveal.inViewOptions"
+          :in-view-options="headingReveal.inViewOptions"
         >
           {{ $t("features.title") }}
         </motion.h2>
         <motion.p
           class="text-muted mx-auto mt-4 max-w-150 text-lg leading-relaxed"
           :initial="subtitleReveal.initial.value"
-          :whileInView="subtitleReveal.whileInView.value"
+          :while-in-view="subtitleReveal.whileInView.value"
           :transition="subtitleReveal.transition.value"
-          :inViewOptions="subtitleReveal.inViewOptions"
+          :in-view-options="subtitleReveal.inViewOptions"
         >
           {{ $t("features.subtitle") }}
         </motion.p>
@@ -91,9 +91,9 @@ function cardReveal(i: number) {
           :key="f.title"
           class="feat-card border-default bg-default dark:bg-elevated cursor-pointer rounded-2xl border p-7"
           :initial="cardReveal(i).initial.value"
-          :whileInView="cardReveal(i).whileInView.value"
+          :while-in-view="cardReveal(i).whileInView.value"
           :transition="cardReveal(i).transition.value"
-          :inViewOptions="cardReveal(i).inViewOptions"
+          :in-view-options="cardReveal(i).inViewOptions"
         >
           <div
             class="feat-icon mb-4.5 flex size-12 items-center justify-center rounded-xl text-xl font-bold text-white will-change-transform"

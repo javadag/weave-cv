@@ -20,10 +20,10 @@ const formError = ref("")
 let authListener: ReturnType<typeof supabase.auth.onAuthStateChange> | null = null
 
 onMounted(() => {
-  const arrivedWithCode = !!route.query.code
+  const isArrivedWithCode = !!route.query.code
 
   authListener = supabase.auth.onAuthStateChange((event, session) => {
-    if (event === "PASSWORD_RECOVERY" || (event === "INITIAL_SESSION" && session && arrivedWithCode)) {
+    if (event === "PASSWORD_RECOVERY" || (event === "INITIAL_SESSION" && session && isArrivedWithCode)) {
       status.value = "ready"
     }
   })
@@ -35,7 +35,7 @@ onMounted(() => {
     return
   }
 
-  if (arrivedWithCode) {
+  if (isArrivedWithCode) {
     return
   }
 

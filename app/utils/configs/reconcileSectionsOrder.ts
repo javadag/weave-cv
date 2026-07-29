@@ -17,10 +17,12 @@ export function reconcileSectionsOrder(templateOrder: Order, currentOrder: Order
   const seen = new Set<string>()
 
   const collect = (id: string) => {
-    if (coreSet.has(id) && !seen.has(id)) {
-      seen.add(id)
-      orderedUserIds.push(id)
+    if (!coreSet.has(id) || seen.has(id)) {
+      return
     }
+
+    seen.add(id)
+    orderedUserIds.push(id)
   }
   for (const id of currentOrder.twoCol.left) collect(id)
   for (const id of currentOrder.twoCol.right) collect(id)
@@ -47,14 +49,12 @@ export function reconcileSectionsOrder(templateOrder: Order, currentOrder: Order
   const left = templateOrder.twoCol.left.flatMap((entry) => expand(entry))
   const right = templateOrder.twoCol.right.flatMap((entry) => expand(entry))
 
-  const wasInLeft = new Set(currentOrder.twoCol.left)
-  const wasInRight = new Set(currentOrder.twoCol.right)
+  const leftSet = new Set(currentOrder.twoCol.left)
 
   for (const id of orderedUserIds) {
     if (used.has(id)) continue
     used.add(id)
-    if (wasInLeft.has(id)) left.push(id)
-    else if (wasInRight.has(id)) right.push(id)
+    if (leftSet.has(id)) left.push(id)
     else right.push(id)
     oneCol.push(id)
   }

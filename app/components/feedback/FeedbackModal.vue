@@ -18,12 +18,14 @@ const website = ref("")
 const isSending = ref(false)
 
 watch(modelValue, (open) => {
-  if (open) {
-    type.value = "bug"
-    email.value = user.value?.email ?? ""
-    message.value = ""
-    website.value = ""
+  if (!open) {
+  	return;
   }
+
+  type.value = "bug"
+  email.value = user.value?.email ?? ""
+  message.value = ""
+  website.value = ""
 })
 
 const canSubmit = computed(() => message.value.trim().length >= 5 && !isSending.value)
@@ -39,7 +41,7 @@ const handleSubmit = async () => {
         message: message.value.trim(),
         email: email.value.trim() || undefined,
         website: website.value,
-        url: globalThis.window === undefined ? undefined : globalThis.location.href,
+        url: globalThis.window === undefined ? undefined : location.href,
         userAgent: typeof navigator === "undefined" ? undefined : navigator.userAgent
       }
     })

@@ -9,7 +9,7 @@ const signInWithGoogle = async () => {
   const { error: googleError } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${globalThis.location.origin}/confirm`
+      redirectTo: `${location.origin}/confirm`
     }
   })
 

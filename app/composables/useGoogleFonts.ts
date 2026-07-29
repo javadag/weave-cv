@@ -24,14 +24,15 @@ export function useGoogleFonts() {
   const allFonts = ref<FontEntry[]>(cachedFonts ?? [])
 
   if (!cachedFonts) {
-    useFetch<GoogleFontRaw[]>("/google-fonts.json").then(({ data }) => {
+    ;(async () => {
+      const { data } = await useFetch<GoogleFontRaw[]>("/google-fonts.json")
       if (!data.value) return
 
       const googleEntries: FontEntry[] = data.value.map((f) => ({
         family: f.family,
         label: f.family,
         category: f.category,
-        subsets: f.subsets,
+        subsets: f.subsets
       }))
 
       const localEntries: FontEntry[] = LOCAL_ONLY_PICKER_ENTRIES.map((e) => ({
@@ -39,14 +40,14 @@ export function useGoogleFonts() {
         label: e.label,
         category: "local",
         subsets: e.subsets,
-        isLocal: true,
+        isLocal: true
       }))
 
-      const combined = [...googleEntries, ...localEntries].sort((a, b) => a.family.localeCompare(b.family))
+      const combined = [...googleEntries, ...localEntries].toSorted((a, b) => a.family.localeCompare(b.family))
 
       cachedFonts = combined
       allFonts.value = combined
-    })
+    })()
   }
 
   const subsets = computed(() => {
@@ -54,7 +55,7 @@ export function useGoogleFonts() {
     for (const font of allFonts.value) {
       for (const s of font.subsets) set.add(s)
     }
-    const sorted = [...set].sort()
+    const sorted = [...set].toSorted((a, b) => a.localeCompare(b))
     return ["all", ...sorted]
   })
 

@@ -15,7 +15,7 @@ const pageStyles = computed<CSSProperties>(() => {
     overflow: "hidden",
     display: "flex",
     flexDirection: "column",
-    lineHeight: `${typography.value.lineHeight}`,
+    lineHeight: String(typography.value.lineHeight),
     fontSize: `${typography.value.fontSize}pt`,
     fontFamily: `${typography.value.fontFamily}, sans-serif`,
     fontStretch: "normal",

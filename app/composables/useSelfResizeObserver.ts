@@ -5,28 +5,32 @@ export function useSelfResizeObserver(callback: (height: number) => void) {
   let resizeObserver: ResizeObserver | null = null
 
   const updateHeight = (entries?: ResizeObserverEntry[]) => {
-    if (elementRef.value && entries && entries.length > 0) {
-      const entry = entries[0]
-      if (entry) {
-        const borderBox = entry.borderBoxSize?.[0]
-        const contentBox = entry.contentBoxSize?.[0]
+    if (!(elementRef.value && entries && entries.length > 0)) {
+      return
+    }
 
-        const rawHeight = borderBox?.blockSize ?? contentBox?.blockSize ?? 0
-        const totalHeight = Math.round(rawHeight * 100) / 100
+    const entry = entries[0]
+    if (entry) {
+      const borderBox = entry.borderBoxSize?.[0]
+      const contentBox = entry.contentBoxSize?.[0]
 
-        height.value = totalHeight
-        callback(totalHeight)
-      }
+      const rawHeight = borderBox?.blockSize ?? contentBox?.blockSize ?? 0
+      const totalHeight = Math.round(rawHeight * 100) / 100
+
+      height.value = totalHeight
+      callback(totalHeight)
     }
   }
 
   onMounted(() => {
-    if (elementRef.value) {
-      resizeObserver = new ResizeObserver((entries) => {
-        updateHeight(entries)
-      })
-      resizeObserver.observe(elementRef.value, { box: "border-box" })
+    if (!elementRef.value) {
+      return
     }
+
+    resizeObserver = new ResizeObserver((entries) => {
+      updateHeight(entries)
+    })
+    resizeObserver.observe(elementRef.value, { box: "border-box" })
   })
 
   onUnmounted(() => {

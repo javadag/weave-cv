@@ -25,14 +25,16 @@ const validationError = ref<string | null>(null)
 watch(
   () => props.modelValue,
   (newValue) => {
-    if (newValue && newValue !== localColor.value) {
-      isUpdating.value = true
-      localColor.value = newValue
-      hexInputValue.value = newValue
-      nextTick(() => {
-        isUpdating.value = false
-      })
+    if (!newValue || newValue === localColor.value) {
+    	return;
     }
+
+    isUpdating.value = true
+    localColor.value = newValue
+    hexInputValue.value = newValue
+    nextTick(() => {
+      isUpdating.value = false
+    })
   },
   { immediate: true }
 )
@@ -134,11 +136,10 @@ const handleHexBlur = () => {
     if (/^#([A-Fa-f0-9]{3})$/.test(value)) {
       value = "#" + value[1] + value[1] + value[2] + value[2] + value[3] + value[3]
     }
-    validationError.value = null
   } else {
     value = localColor.value
-    validationError.value = null
   }
+  validationError.value = null
 
   if (value !== hexInputValue.value || value !== localColor.value) {
     isUpdating.value = true

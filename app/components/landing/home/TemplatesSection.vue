@@ -44,27 +44,27 @@ const subtitleReveal = useScrollReveal(0.2, { y: 24 })
         <motion.span
           class="border-primary-200 bg-primary-50 text-primary dark:border-primary/25 dark:bg-primary/10 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
           :initial="badgeReveal.initial.value"
-          :whileInView="badgeReveal.whileInView.value"
+          :while-in-view="badgeReveal.whileInView.value"
           :transition="badgeReveal.transition.value"
-          :inViewOptions="badgeReveal.inViewOptions"
+          :in-view-options="badgeReveal.inViewOptions"
         >
           {{ $t("templates.badge") }}
         </motion.span>
         <motion.h2
           class="text-highlighted mt-5 text-4xl font-bold tracking-[-0.03em] text-balance sm:text-5xl"
           :initial="headingReveal.initial.value"
-          :whileInView="headingReveal.whileInView.value"
+          :while-in-view="headingReveal.whileInView.value"
           :transition="headingReveal.transition.value"
-          :inViewOptions="headingReveal.inViewOptions"
+          :in-view-options="headingReveal.inViewOptions"
         >
           {{ $t("templates.titleLine1") }}<br />{{ $t("templates.titleLine2") }}
         </motion.h2>
         <motion.p
           class="text-dimmed mt-4 max-w-md text-base leading-relaxed"
           :initial="subtitleReveal.initial.value"
-          :whileInView="subtitleReveal.whileInView.value"
+          :while-in-view="subtitleReveal.whileInView.value"
           :transition="subtitleReveal.transition.value"
-          :inViewOptions="subtitleReveal.inViewOptions"
+          :in-view-options="subtitleReveal.inViewOptions"
         >
           {{ $t("templates.subtitle") }}
         </motion.p>

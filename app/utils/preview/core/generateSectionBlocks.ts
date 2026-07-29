@@ -18,10 +18,19 @@ const OTHER_SECTIONS: Record<(typeof OTHER_SECTION_TYPES)[number], TBlock> = {
   }
 }
 
-const generateOtherBlock = (block: TBlock): TBlock => {
+/**
+ * Create a block for a "special" section (personal, space)
+ * Returns the block from store if it exists, otherwise creates a new one
+ */
+function createSpecialBlock(block: TBlock): TBlock {
   const { blocks, setBlock } = usePreviewStore()
 
-  const newBlock = blocks?.get(block.id) ?? {
+  const existingBlock = blocks?.get(block.id)
+  if (existingBlock) {
+    return existingBlock
+  }
+
+  const newBlock: TBlock = {
     id: block.id,
     component: h(block.component),
     height: 0
@@ -31,21 +40,32 @@ const generateOtherBlock = (block: TBlock): TBlock => {
   return newBlock
 }
 
-export function generateSectionBlocks(sid: string) {
+/**
+ * Register blocks in the preview store
+ * Called after block generation to sync with the store
+ */
+export function registerBlocks(blocks: TBlock[]): void {
+  const { setBlock } = usePreviewStore()
+  for (const block of blocks) {
+    setBlock(block.id, block)
+  }
+}
+
+/**
+ * Generate blocks for a section by its ID
+ * Handles special sections (personal, space) and core sections
+ */
+export function generateSectionBlocks(sid: string): TBlock[] {
   const otherBlock = OTHER_SECTIONS[sid as (typeof OTHER_SECTION_TYPES)[number]]
 
-  const { setBlock } = usePreviewStore()
-
   if (otherBlock) {
-    return [generateOtherBlock(otherBlock)]
+    return [createSpecialBlock(otherBlock)]
   }
 
   const blocks = generateCoreBlocks(sid)
 
-  if (blocks) {
-    for (const block of blocks) {
-      setBlock(block.id, block)
-    }
+  if (blocks && blocks.length > 0) {
+    registerBlocks(blocks)
     return blocks
   }
 

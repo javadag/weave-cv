@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emit = defineEmits<{ (e: "saving", value: boolean): void }>()
+const emit = defineEmits<{ (e: "saving", isSaving: boolean): void }>()
 
 const toast = useToast()
 const { t } = useI18n()

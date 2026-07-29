@@ -43,24 +43,26 @@ export function buildFontCss(family: string, baseUrl?: string): string {
 }
 
 export async function preloadFont(family: string) {
-  if (LOCAL_FONT_FAMILIES.has(family)) {
-    const cuts = LOCAL_FONTS_CUTS[family]
-    if (!cuts) return
-
-    const faces = cuts.map((cut) => {
-      const [weight] = cut.split("-")
-      return `${weight} 16px "${family}"`
-    })
-
-    await Promise.all(faces.map((face) => document.fonts.load(face)))
-    await document.fonts.ready
+  if (!LOCAL_FONT_FAMILIES.has(family)) {
+    return
   }
+
+  const cuts = LOCAL_FONTS_CUTS[family]
+  if (!cuts) return
+
+  const faces = cuts.map((cut) => {
+    const [weight] = cut.split("-")
+    return `${weight} 16px "${family}"`
+  })
+
+  await Promise.all(faces.map((face) => document.fonts.load(face)))
+  await document.fonts.ready
 }
 
 const loadedFonts: Record<string, boolean> = {}
 
 export function loadFont(family: string) {
-  if (loadedFonts[family]) return
+  if (Object.hasOwn(loadedFonts, family)) return
 
   const css = buildFontCss(family)
   if (!css) return

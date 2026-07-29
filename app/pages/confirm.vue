@@ -48,7 +48,7 @@ const resendEmail = async () => {
   const { error } = await supabase.auth.resend({
     type: "signup",
     email: pendingEmail,
-    options: { emailRedirectTo: `${globalThis.location.origin}/confirm` }
+    options: { emailRedirectTo: `${location.origin}/confirm` }
   })
   if (error) {
     resendError.value = error.message

@@ -14,11 +14,11 @@ const { core } = storeToRefs(resumeStore)
 const isTwoColumnLayout = computed(() => configs.value.general.layout.columns === "2")
 
 const sections = computed(() => {
-  const sectionOrder = configs.value.general.layout.order.oneCol || []
-
   if (!core.value) {
     return []
   }
+
+  const sectionOrder = configs.value.general.layout.order.oneCol || []
 
   if (sectionOrder.length === 0) {
     return Object.entries(core.value).filter(([_, section]) => (section as TCoreSection).isSectionVisible) as [
@@ -40,8 +40,9 @@ const sections = computed(() => {
 })
 
 const leftColumnSections = computed(() => {
-  const leftSectionOrder = configs.value.general.layout.order.twoCol.left || []
   if (!isTwoColumnLayout.value || !core.value) return []
+
+  const leftSectionOrder = configs.value.general.layout.order.twoCol.left || []
 
   return leftSectionOrder
     .map((sectionId: string) => {
@@ -55,8 +56,9 @@ const leftColumnSections = computed(() => {
 })
 
 const rightColumnSections = computed(() => {
-  const rightSectionOrder = configs.value.general.layout.order.twoCol.right || []
   if (!isTwoColumnLayout.value || !core.value) return []
+
+  const rightSectionOrder = configs.value.general.layout.order.twoCol.right || []
 
   return rightSectionOrder
     .map((sectionId: string) => {

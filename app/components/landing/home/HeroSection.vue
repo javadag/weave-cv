@@ -136,8 +136,8 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
           dir="ltr"
           class="hero-preview border-default relative overflow-hidden rounded-2xl border shadow-[0_50px_100px_-30px_rgba(28,25,23,0.22)] dark:shadow-[0_50px_100px_-30px_rgba(0,0,0,0.7)]"
           :initial="{ opacity: 0, x: 48, scale: 0.94 }"
-          :whileInView="{ opacity: 1, x: 0, scale: 1 }"
-          :inViewOptions="inViewOptionsPreview"
+          :while-in-view="{ opacity: 1, x: 0, scale: 1 }"
+          :in-view-options="inViewOptionsPreview"
           :transition="{ duration: 0.7, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }"
         >
           <div class="border-default bg-muted flex items-center gap-2 border-b px-4 py-3">

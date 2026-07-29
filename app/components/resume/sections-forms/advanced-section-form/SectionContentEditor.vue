@@ -87,7 +87,7 @@ const getDateFieldValue = (field: "startDate" | "endDate"): string | null => {
   return content.endDate ?? null
 }
 
-const getBooleanFieldValue = (field: "present" | "showDateDay"): boolean => {
+const isFieldTrue = (field: "present" | "showDateDay"): boolean => {
   if (!props.isAdvancedSection) {
     return field === "showDateDay"
   }
@@ -170,7 +170,7 @@ const isSummary = computed(() => props.sectionType === "summary")
             v-if="hasField('endDate')"
             :model-value="getDateFieldValue('endDate')"
             :label="$t(getFieldConfig('endDate').label)"
-            :disabled="getBooleanFieldValue('present')"
+            :disabled="isFieldTrue('present')"
             :placeholder="$t(getFieldConfig('endDate').placeholder || '')"
             :locale="language"
             @update:model-value="(value) => handleDateUpdate('endDate', value)"
@@ -182,14 +182,14 @@ const isSummary = computed(() => props.sectionType === "summary")
               variant="ghost"
               color="neutral"
               class="self-start"
-              :disabled="getBooleanFieldValue('present')"
+              :disabled="isFieldTrue('present')"
               @click="clearDate('endDate')"
             >
               {{ $t("editor.form.clearDate") }}
             </UButton>
             <ToggleInput
               v-if="hasField('present')"
-              :model-value="getBooleanFieldValue('present')"
+              :model-value="isFieldTrue('present')"
               :label="$t(getFieldConfig('present').label)"
               :style="'start'"
               class="py-1"
@@ -200,7 +200,7 @@ const isSummary = computed(() => props.sectionType === "summary")
       </div>
       <ToggleInput
         v-if="props.isAdvancedSection && hasField('showDateDay')"
-        :model-value="getBooleanFieldValue('showDateDay')"
+        :model-value="isFieldTrue('showDateDay')"
         :label="$t(getFieldConfig('showDateDay').label)"
         :style="'start'"
         @update:model-value="(value) => handleFieldUpdate('showDateDay', value)"
