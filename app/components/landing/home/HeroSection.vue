@@ -37,6 +37,17 @@ const sidebarSections = [
 ]
 const skillChips = ["Figma", "Design systems", "Prototyping", "User research"]
 
+const configItems = [
+  { icon: "🎨", label: "Color", value: "Orange" },
+  { icon: "Aa", label: "Font", value: "Inter" },
+  { icon: "↔", label: "Spacing", value: "Compact" },
+  { icon: "📄", label: "Paper", value: "A4" },
+  { icon: "◧", label: "Layout", value: "Sidebar" },
+  { icon: "T", label: "Size", value: "11pt" },
+  { icon: "▬", label: "Margins", value: "Narrow" },
+  { icon: "⊕", label: "Icons", value: "On" }
+]
+
 const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
@@ -54,7 +65,8 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
 </script>
 
 <template>
-  <section ref="heroRef" class="bg-default relative overflow-hidden py-16 lg:py-20">
+  <section ref="heroRef" class="bg-default relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden">
+    <!-- Background decorative blobs -->
     <motion.div
       class="pointer-events-none absolute -top-60 -right-48 size-180 rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--color-primary-400)_18%,transparent),transparent_70%)] blur-2xl"
       :initial="{ opacity: 0, scale: 0.8 }"
@@ -69,8 +81,16 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
       :transition="{ duration: 1.2, delay: 0.25, ease: [0.25, 0.4, 0.25, 1] }"
       :style="{ y: blobBottomY }"
     />
-    <div class="max-w-compact relative mx-auto px-6 lg:px-12">
-      <div class="grid items-center gap-14 lg:grid-cols-2">
+
+    <!-- Dot grid pattern -->
+    <div
+      class="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.06]"
+      style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 24px 24px"
+    />
+
+    <div class="max-w-compact relative mx-auto w-full px-6 lg:px-12">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <!-- Left column -->
         <div class="flex flex-col">
           <motion.span
             class="border-primary-200 dark:border-primary/25 bg-primary-50 dark:bg-primary/10 text-primary inline-flex w-max items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold"
@@ -84,7 +104,7 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
             {{ APP_VERSION }}
           </motion.span>
           <motion.h1
-            class="text-highlighted mt-6 text-[3.5rem] leading-[1.05] font-bold tracking-[-0.04em] text-balance lg:text-[4.5rem] rtl:leading-tight"
+            class="text-highlighted mt-5 text-[3.5rem] leading-[1.05] font-bold tracking-[-0.04em] text-balance lg:text-[4.5rem] rtl:leading-tight"
             v-bind="fadeUp(0.2)"
           >
             {{ $t("hero.titleStart") }}
@@ -92,24 +112,24 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
               {{ $t("hero.titleHighlight") }}
             </span>
           </motion.h1>
-          <motion.p class="text-muted mt-6 max-w-135 text-lg leading-relaxed" v-bind="fadeUp(0.35)">
+          <motion.p class="text-muted mt-5 max-w-135 text-lg leading-relaxed" v-bind="fadeUp(0.35)">
             {{ $t("hero.subtitle") }}
           </motion.p>
-          <motion.div class="mt-9 flex flex-wrap gap-3" v-bind="fadeUp(0.5)">
-            <NuxtLink
-              to="/try"
-              class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
-            >
-              <span>✦</span> {{ $t("hero.tryBtn") }}
-            </NuxtLink>
+          <motion.div class="mt-8 flex flex-wrap gap-3" v-bind="fadeUp(0.5)">
             <NuxtLink
               to="/dashboard"
+              class="hero-btn-primary from-primary-500 to-primary-700 dark:from-primary-400 dark:to-primary-600 inline-flex items-center gap-2 rounded-xl bg-linear-to-br px-6 py-3.5 text-[15px] font-semibold text-white no-underline shadow-[0_8px_24px_-8px_rgba(234,88,12,0.5)] dark:shadow-none"
+            >
+              <span>✦</span> {{ $t("hero.buildBtn") }}
+            </NuxtLink>
+            <NuxtLink
+              to="/#templates"
               class="hero-btn-outline border-primary/20 text-primary hover:bg-primary/5 inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 text-[15px] font-semibold no-underline transition-colors"
             >
-              {{ $t("hero.buildBtn") }}
+              {{ $t("hero.browseBtn") }}
             </NuxtLink>
           </motion.div>
-          <div class="text-muted mt-9 flex flex-wrap gap-6 text-sm">
+          <div class="text-muted mt-7 flex flex-wrap gap-6 text-sm">
             <motion.div
               v-for="(b, i) in trustBadges"
               :key="b"
@@ -132,6 +152,8 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
             </motion.div>
           </div>
         </div>
+
+        <!-- Right column — Editor preview -->
         <motion.div
           dir="ltr"
           class="hero-preview border-default relative overflow-hidden rounded-2xl border shadow-[0_50px_100px_-30px_rgba(28,25,23,0.22)] dark:shadow-[0_50px_100px_-30px_rgba(0,0,0,0.7)]"
@@ -140,6 +162,7 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
           :in-view-options="inViewOptionsPreview"
           :transition="{ duration: 0.7, delay: 0.3, ease: [0.25, 0.4, 0.25, 1] }"
         >
+          <!-- Browser chrome bar -->
           <div class="border-default bg-muted flex items-center gap-2 border-b px-4 py-3">
             <div class="flex gap-1.5">
               <div class="size-2.75 rounded-full bg-[#FF5F57]" />
@@ -148,7 +171,10 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
             </div>
             <div class="text-dimmed flex-1 text-center text-[11px]">weave-cv.app/editor/sara-chen</div>
           </div>
-          <div class="grid h-120 grid-cols-[160px_1fr] lg:h-135">
+
+          <!-- Editor body: sidebar + resume + config -->
+          <div class="grid h-120 grid-cols-[140px_1fr_120px] lg:h-135">
+            <!-- Sections sidebar -->
             <div class="border-default bg-muted border-r p-3 text-xs">
               <motion.div
                 class="text-dimmed mb-2.5 text-[10px] font-semibold tracking-widest uppercase"
@@ -174,7 +200,7 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
                 {{ sec }}
               </motion.div>
               <motion.div
-                class="text-primary mt-4 cursor-pointer px-2.5 py-2 text-xs font-semibold"
+                class="text-primary mt-3 cursor-pointer px-2.5 py-2 text-xs font-semibold"
                 :initial="{ opacity: 0, x: -12 }"
                 :animate="{ opacity: 1, x: 0 }"
                 :transition="{ duration: 0.35, delay: 1.0 }"
@@ -182,6 +208,8 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
                 {{ $t("hero.addSection") }}
               </motion.div>
             </div>
+
+            <!-- Resume preview -->
             <motion.div
               class="bg-elevated dark:bg-default flex items-center justify-center p-5"
               :initial="{ opacity: 0, scale: 0.93 }"
@@ -238,7 +266,42 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
                 </div>
               </div>
             </motion.div>
+
+            <!-- Config sidebar -->
+            <motion.div
+              class="border-default bg-muted flex flex-col overflow-hidden border-l text-xs"
+              :initial="{ opacity: 0, x: 14 }"
+              :animate="{ opacity: 1, x: 0 }"
+              :transition="{ duration: 0.4, delay: 0.7, ease: 'easeOut' }"
+            >
+              <div class="text-dimmed shrink-0 px-3 pt-3 pb-2 text-[10px] font-semibold tracking-widest uppercase">
+                Config
+              </div>
+              <div class="overflow-y-auto px-3 pb-3">
+                <div v-for="(item, i) in configItems" :key="item.label" class="mb-1.5 last:mb-0">
+                  <motion.div
+                    class="text-dimmed mb-0.75 text-[9px] font-medium"
+                    :initial="{ opacity: 0, x: 8 }"
+                    :animate="{ opacity: 1, x: 0 }"
+                    :transition="{ duration: 0.3, delay: 0.8 + i * 0.06 }"
+                  >
+                    {{ item.label }}
+                  </motion.div>
+                  <motion.div
+                    class="bg-elevated dark:bg-default text-toned flex items-center gap-1.5 rounded-md px-2 py-1 text-[10px]"
+                    :initial="{ opacity: 0, x: 8 }"
+                    :animate="{ opacity: 1, x: 0 }"
+                    :transition="{ duration: 0.3, delay: 0.85 + i * 0.06 }"
+                  >
+                    <span class="text-[11px]">{{ item.icon }}</span>
+                    <span>{{ item.value }}</span>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
           </div>
+
+          <!-- Floating badges on preview -->
           <motion.div
             class="absolute right-5 bottom-5"
             :initial="{ opacity: 0, y: 12, scale: 0.85 }"

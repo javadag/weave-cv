@@ -7,8 +7,8 @@ const { t } = useI18n()
 const features = computed(() => [
   {
     icon: "i-lucide-file-text",
-    title: t("features.refinedTemplatesTitle"),
-    body: t("features.refinedTemplatesBody"),
+    title: t("features.templatesTitle"),
+    body: t("features.templatesBody"),
     tone: "primary"
   },
   {
@@ -19,20 +19,20 @@ const features = computed(() => [
   },
   {
     icon: "i-lucide-download",
-    title: t("features.pixelPdfTitle"),
-    body: t("features.pixelPdfBody"),
+    title: t("features.pdfTitle"),
+    body: t("features.pdfBody"),
     tone: "primary"
   },
   {
     icon: "i-lucide-palette",
-    title: t("features.colorTypeTitle"),
-    body: t("features.colorTypeBody"),
+    title: t("features.designTitle"),
+    body: t("features.designBody"),
     tone: "secondary"
   },
   {
     icon: "i-lucide-cloud",
-    title: t("features.cloudSyncTitle"),
-    body: t("features.cloudSyncBody"),
+    title: t("features.cloudTitle"),
+    body: t("features.cloudBody"),
     tone: "primary"
   },
   {

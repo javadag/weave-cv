@@ -4,11 +4,11 @@
     "dashboard": "Dashboard"
   },
   "hero": {
-    "titleStart": "The résumé builder that",
-    "titleHighlight": "actually gets you hired.",
-    "subtitle": "Pick a template, drop in your story, export a perfect PDF, full design control, ATS-friendly by default and free.",
-    "buildBtn": "Build my résumé",
+    "titleStart": "Build your resume.",
+    "titleHighlight": "Right here, right now.",
+    "subtitle": "A clean, free resume builder with professional templates. Export pixel-perfect PDFs. That's it.",
     "tryBtn": "Try demo",
+    "buildBtn": "Start building",
     "browseBtn": "Browse templates",
     "trustNoCreditCard": "No credit card",
     "trustUnlimitedResumes": "Unlimited resumes, free",
@@ -20,39 +20,134 @@
   },
   "features": {
     "badge": "Features",
-    "title": "Built for the way you actually job hunt.",
-    "subtitle": "Just the tools you need to ship a great résumé in an afternoon.",
-    "refinedTemplatesTitle": "Refined templates",
-    "refinedTemplatesBody": "Modern, classic, creative, minimal, bold, academic. All ATS-tested, all printable.",
-    "dragDropTitle": "Drag & drop sections",
-    "dragDropBody": "Reorder, swap to two columns, change density. Live preview, no page-break surprises.",
-    "pixelPdfTitle": "Pixel-perfect PDF",
-    "pixelPdfBody": "Embedded fonts, real kerning, A4 or Letter. The same file every recruiter sees.",
-    "colorTypeTitle": "Color & type control",
-    "colorTypeBody": "Tune palettes, fonts, spacing — bounded by sensible defaults you can't break.",
-    "cloudSyncTitle": "Cloud sync",
-    "cloudSyncBody": "Unlimited resumes, autosaved, versioned. Switch devices without losing a draft.",
-    "freeTitle": "Free",
-    "freeBody": "No paywall, no upsell, no upsold features. We just want you to land the role."
+    "title": "Everything you need. Nothing you don't.",
+    "subtitle": "Just the tools to build a great résumé. No bloat, no upsells.",
+    "templatesTitle": "Professional templates",
+    "templatesBody": "Clean, modern designs that work in any industry. Every template passes ATS screening.",
+    "dragDropTitle": "Drag & drop",
+    "dragDropBody": "Reorder sections, switch layouts, adjust spacing. Your preview updates instantly.",
+    "pdfTitle": "PDF export",
+    "pdfBody": "Embedded fonts, proper kerning, A4 or Letter. The file recruiters actually open.",
+    "designTitle": "Full design control",
+    "designBody": "Colors, fonts, spacing — tweak everything. Sensible defaults so you can't break it.",
+    "cloudTitle": "Cloud sync",
+    "cloudBody": "Your work saves automatically. Pick up where you left off on any device.",
+    "freeTitle": "Actually free",
+    "freeBody": "No premium tier. No feature gates. No 'upgrade to unlock.' Everything is free."
   },
   "templates": {
     "badge": "Templates",
-    "titleLine1": "Pick a starting point.",
-    "titleLine2": "Make it yours.",
-    "subtitle": "Scroll to browse — the rows drift in opposite directions as you move down the page. Every template is ATS-tested and printable."
+    "title": "Start with a template. Make it yours.",
+    "subtitle": "Every template is ATS-tested and designed for real hiring workflows."
   },
-  "cta": {
-    "badge": "Free forever · No credit card",
-    "titleLine1": "Start your résumé.",
-    "titleLine2": "Land the job.",
-    "subtitle": "Pick a template, add your story, export the PDF — in under ten minutes. No pay wall, no catch.",
-    "buildBtn": "Build my résumé — free",
-    "stat1": "7-min average build",
-    "stat2": "Polished templates",
-    "stat3": "Pixel-perfect PDF",
-    "resumeExported": "Resume exported",
-    "atsScore": "ATS score: 98/100",
-    "keywords": "11 keywords matched"
+  "howItWorks": {
+    "badge": "How it works",
+    "title": "Three steps. Ten minutes.",
+    "subtitle": "No forms to fill out before you start. Just pick a template and go.",
+    "step1Title": "Pick a template",
+    "step1Body": "Browse our collection and choose one that fits your style.",
+    "step2Title": "Add your story",
+    "step2Body": "Fill in your experience, skills, and education. Drag sections where you want them.",
+    "step3Title": "Export & apply",
+    "step3Body": "Download a polished PDF. Start sending it out."
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title": "People use it. It works.",
+    "subtitle": "A few words from people who built their resume here.",
+    "items": [
+      {
+        "quote": "I had a polished resume in 20 minutes. No paywall surprises.",
+        "name": "Sarah K.",
+        "role": "Software Engineer"
+      },
+      {
+        "quote": "The templates actually look professional. Not the generic stuff you see everywhere.",
+        "name": "Marcus T.",
+        "role": "Marketing Manager"
+      },
+      {
+        "quote": "Finally a resume builder that doesn't ask for my credit card halfway through.",
+        "name": "Priya S.",
+        "role": "UX Designer"
+      },
+      {
+        "quote": "Clean PDF, no weird formatting issues. Sent it out the same day.",
+        "name": "James L.",
+        "role": "Data Analyst"
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Your data stays yours.",
+    "subtitle": "We built this to be trustworthy. Here's what that means.",
+    "noSellingTitle": "No selling",
+    "noSellingBody": "We never sell or share your data. Period.",
+    "noAiTitle": "No AI training",
+    "noAiBody": "Your resume content is never used to train models.",
+    "deleteTitle": "Delete anytime",
+    "deleteBody": "Wipe your account and all data with one click. Instant and permanent.",
+    "hostingTitle": "EU hosting",
+    "hostingBody": "Data stored in Frankfurt. GDPR compliant."
+  },
+  "landingFaq": {
+    "title": "Questions?",
+    "items": [
+      {
+        "q": "Is it really free?",
+        "a": "Yes. All features, all templates, unlimited resumes. No catch."
+      },
+      {
+        "q": "Are templates ATS-friendly?",
+        "a": "Every template uses standard PDF text, proper headings, and a linear reading order."
+      },
+      {
+        "q": "Can I switch templates?",
+        "a": "Yes. Your content stays — just pick a new style."
+      },
+      {
+        "q": "How many resumes can I create?",
+        "a": "As many as you want. No limits."
+      },
+      {
+        "q": "Where is my data stored?",
+        "a": "EU servers in Frankfurt. You can delete everything anytime."
+      },
+      {
+        "q": "Can I use it offline?",
+        "a": "The editor caches your work so you can keep editing. PDF export needs a connection."
+      },
+      {
+        "q": "Do you sell my data?",
+        "a": "No. We never sell, share, or monetize your information."
+      }
+    ]
+  },
+  "resumeTips": {
+    "title": "While you're here — a few resume tips.",
+    "subtitle": "Small things that make a big difference.",
+    "tips": [
+      {
+        "icon": "i-lucide-target",
+        "title": "Tailor it to the job",
+        "body": "Read the job posting carefully and mirror the language they use. A generic resume gets generic results."
+      },
+      {
+        "icon": "i-lucide-ruler",
+        "title": "Keep it to one page",
+        "body": "Unless you have 10+ years of experience, one page is enough. Recruiters spend about 7 seconds on a first scan."
+      },
+      {
+        "icon": "i-lucide-bar-chart-3",
+        "title": "Use numbers, not adjectives",
+        "body": "\"Increased sales by 30%\" beats \"hard-working team player\" every time. Quantify what you did."
+      },
+      {
+        "icon": "i-lucide-spell-check",
+        "title": "Proofread, then proofread again",
+        "body": "Typos signal carelessness. Read it backwards, use a spell checker, or ask a friend to review it."
+      }
+    ]
   },
   "footer": {
     "tagline": "The honest, no-nonsense résumé builder. Free, forever.",
@@ -763,133 +858,6 @@
     "errorShort": "Password must be at least 8 characters",
     "errorMatch": "Passwords do not match"
   },
-  "faqPage": {
-    "badge": "Help center",
-    "title": "Stuck on something?",
-    "subtitle": "Start here.",
-    "description": "Ten questions cover almost everything. If you can't find what you need, email us — a real human reads every message.",
-    "browse": "Browse",
-    "allQuestions": "All questions",
-    "article": "article",
-    "articles": "articles",
-    "stillStuck": "Still stuck?",
-    "stillStuckDesc": "We answer every email within 48 hours.",
-    "emailUs": "Email us. A human will reply.",
-    "emailDesc": "~48h average response. Bug reports, feature ideas, or just a hello — all welcome.",
-    "topics": [
-      {
-        "icon": "i-lucide-download",
-        "title": "Exporting",
-        "body": "PDF, fonts, page breaks",
-        "count": "3 articles",
-        "cat": "export"
-      },
-      {
-        "icon": "i-lucide-edit",
-        "title": "Editing",
-        "body": "Sections, layout, content",
-        "count": "3 articles",
-        "cat": "editing"
-      },
-      {
-        "icon": "i-lucide-table-cells-merge",
-        "title": "Templates",
-        "body": "Switching, ATS, custom",
-        "count": "2 articles",
-        "cat": "templates"
-      },
-      {
-        "icon": "i-lucide-user",
-        "title": "Account & data",
-        "body": "Storage, deletion, plans",
-        "count": "2 articles",
-        "cat": "account"
-      }
-    ],
-    "categories": [
-      {
-        "id": "all",
-        "label": "All",
-        "icon": "i-lucide-rows-4"
-      },
-      {
-        "id": "export",
-        "label": "Exporting",
-        "icon": "i-lucide-download"
-      },
-      {
-        "id": "editing",
-        "label": "Editing",
-        "icon": "i-lucide-edit"
-      },
-      {
-        "id": "templates",
-        "label": "Templates",
-        "icon": "i-lucide-table-cells-merge"
-      },
-      {
-        "id": "account",
-        "label": "Account",
-        "icon": "i-lucide-user"
-      }
-    ],
-    "items": [
-      {
-        "id": 1,
-        "cat": "export",
-        "q": "How do I export my résumé as a PDF?",
-        "content": "Hit the Download button at the top right of the editor. The same file is what recruiters and ATS systems will see."
-      },
-      {
-        "id": 2,
-        "cat": "editing",
-        "q": "Can I add custom sections that aren't in the template?",
-        "content": "Not currently. However, you can modify existing sections and add additional ones as needed."
-      },
-      {
-        "id": 3,
-        "cat": "editing",
-        "q": "How do I switch between one-column and two-column layouts?",
-        "content": "Open the Layout panel. Toggle Two columns on and choose which sections live in the sidebar. The change is non-destructive — toggle back any time without losing content."
-      },
-      {
-        "id": 4,
-        "cat": "templates",
-        "q": "Can I switch templates without re-typing everything?",
-        "content": "Yes — your content lives separately from the template. Open Templates in the toolbar, hover any template, and click Try this."
-      },
-      {
-        "id": 5,
-        "cat": "templates",
-        "q": "Are all templates ATS-friendly?",
-        "content": "Yes. Every template uses standard PDF text (not images), proper section headings, and a single linear reading order under the hood — even the two-column ones."
-      },
-      {
-        "id": 6,
-        "cat": "account",
-        "q": "How many résumés can I have on the free plan?",
-        "content": "There is no limit on the number of resumes you can create. Each resume has unlimited revisions. All features are free — no premium upsells."
-      },
-      {
-        "id": 7,
-        "cat": "account",
-        "q": "Where is my data stored, and can I delete it?",
-        "content": "Your résumés are stored on our servers in the EU (Frankfurt). You can delete any individual résumé at any time, or wipe your whole account from Settings → Account → Delete account. Deletion is permanent and immediate — we don't hold soft copies."
-      },
-      {
-        "id": 8,
-        "cat": "editing",
-        "q": "Can I work on my résumé offline?",
-        "content": "Partially. The editor caches your current document so you can keep editing without a connection — changes sync the moment you're back online. Exports require a connection (we render PDFs server-side for consistent fonts)."
-      },
-      {
-        "id": 9,
-        "cat": "export",
-        "q": "Can I export to Word (.docx) or plain text?",
-        "content": "Not yet. We deliberately ship only PDF for now — it's the only format where what you see is exactly what the recruiter gets. Word export is on the roadmap for late 2026."
-      }
-    ]
-  },
   "termsPage": {
     "badge": "Legal",
     "lastUpdated": "Last updated April 12, 2026",
@@ -1049,8 +1017,8 @@
   },
   "seo": {
     "index": {
-      "title": "Weave CV - Create Professional Resumes",
-      "description": "Create professional resumes with ease. Build, edit, and download your resume in minutes with Weave CV."
+      "title": "Weave CV — Free Resume Builder",
+      "description": "Build a professional resume for free. Clean templates, drag-and-drop editing, pixel-perfect PDF export. No credit card, no catch."
     },
     "changelog": {
       "title": "Changelog — Weave CV",
@@ -1076,10 +1044,6 @@
       "title": "Privacy Policy — Weave CV",
       "description": "What we collect, what we don't, and what you can do about it."
     },
-    "faq": {
-      "title": "Help & FAQ — Weave CV",
-      "description": "Answers to the most common questions about exporting, editing, templates, and your account."
-    },
     "editor": {
       "titleEdit": "Edit {title} - Weave CV",
       "titleDefault": "Resume Editor - Weave CV",
@@ -1102,21 +1066,6 @@
     },
     "dashboardAccount": {
       "title": "Account - Weave CV"
-    },
-    "try": {
-      "title": "Try Demo - Weave CV",
-      "description": "Try Weave CV's resume builder for free. No sign-up required."
     }
-  },
-  "try": {
-    "seo": {
-      "title": "Try Weave CV — Free Resume Builder Demo",
-      "description": "Try Weave CV's professional resume builder for free. Edit, preview, and customize your resume — no account required."
-    },
-    "ctaBanner": "Sign up to save your resume and download as PDF.",
-    "saveSignUp": "Save & Sign Up",
-    "signIn": "Sign In",
-    "guestImported": "Your demo resume has been saved to your account!",
-    "importFailed": "Could not import your resume. Please try again."
   }
 }

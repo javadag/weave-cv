@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import CTASection from "~/components/landing/home/CTASection.vue"
+import FAQSection from "~/components/landing/home/FAQSection.vue"
 import FeaturesSection from "~/components/landing/home/FeaturesSection.vue"
 import HeroSection from "~/components/landing/home/HeroSection.vue"
+import HowItWorksSection from "~/components/landing/home/HowItWorksSection.vue"
 import TemplatesSection from "~/components/landing/home/TemplatesSection.vue"
 
 const { t } = useI18n()
@@ -24,8 +25,10 @@ useSeoMeta({
 <template>
   <HeroSection />
   <FeaturesSection />
+  <HowItWorksSection />
   <ClientOnly>
     <TemplatesSection />
   </ClientOnly>
-  <CTASection />
+  <!-- <TestimonialsSection /> -->
+  <FAQSection />
 </template>

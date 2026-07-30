@@ -25,16 +25,6 @@ useHead({
 })
 
 const { resumes, count, pending, error, refresh } = useResumeCount()
-const { importGuestResume, hasPending } = useGuestResume()
-
-onMounted(async () => {
-  if (!hasPending.value) {
-  	return;
-  }
-
-  const imported = await importGuestResume()
-  if (imported) await refresh()
-})
 </script>
 
 <template>

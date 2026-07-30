@@ -3,7 +3,7 @@ import LandingFooter from "~/components/layout/LandingFooter.vue"
 import LandingHeader from "~/components/layout/LandingHeader.vue"
 </script>
 <template>
-  <div class="relative mx-auto grid min-h-dvh w-full grid-rows-[auto_1fr]">
+  <div class="relative mx-auto grid min-h-dvh w-full grid-rows-[auto_1fr] overflow-x-hidden">
     <LandingHeader />
     <main>
       <slot />

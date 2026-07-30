@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   supabase: {
     types: "~/types/database.types.ts",
     redirectOptions: {
-      exclude: ["/", "/try", "/register", "/forgot-password", "/reset-password"],
+      exclude: ["/", "/register", "/forgot-password", "/reset-password"],
       include: ["/dashboard(/*)?", "/editor(/*)?", "/login"],
       login: "/login",
       callback: "/confirm"
@@ -87,9 +87,6 @@ export default defineNuxtConfig({
     }
   },
   routeRules: {
-    "/try/**": {
-      ssr: false
-    },
     "/editor/**": {
       ssr: false
     }
@@ -147,6 +144,6 @@ export default defineNuxtConfig({
   },
   sitemap: {
     zeroRuntime: true,
-    exclude: ["/dashboard/**", "/editor/**", "/try", "/confirm", "/reset-password"]
+    exclude: ["/dashboard/**", "/editor/**", "/confirm", "/reset-password"]
   }
 })

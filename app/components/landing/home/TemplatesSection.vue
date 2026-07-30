@@ -38,7 +38,7 @@ const subtitleReveal = useScrollReveal(0.2, { y: 24 })
 </script>
 
 <template>
-  <section ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center pt-24">
+  <section id="templates" ref="sectionRef" class="relative flex w-full max-w-screen flex-col items-center justify-center pt-24">
     <div class="max-w-compact mx-auto mb-10 flex w-full items-end justify-between px-6 lg:px-12">
       <div>
         <motion.span
@@ -57,7 +57,7 @@ const subtitleReveal = useScrollReveal(0.2, { y: 24 })
           :transition="headingReveal.transition.value"
           :in-view-options="headingReveal.inViewOptions"
         >
-          {{ $t("templates.titleLine1") }}<br />{{ $t("templates.titleLine2") }}
+          {{ $t("templates.title") }}
         </motion.h2>
         <motion.p
           class="text-dimmed mt-4 max-w-md text-base leading-relaxed"
