@@ -4,10 +4,13 @@ import SaveChanges from "./SaveChanges.vue"
 
 const ChangeTemplateModal = defineAsyncComponent(() => import("./ChangeTemplateModal.vue"))
 const ExportModal = defineAsyncComponent(() => import("./ExportModal.vue"))
+const ShareModal = defineAsyncComponent(() => import("./ShareModal.vue"))
 
 const saving = ref(false)
 const isTemplateModalOpen = ref(false)
 const isExportModalOpen = ref(false)
+const isShareModalOpen = ref(false)
+const isHelpModalOpen = ref(false)
 
 const resumeStore = useResumeStore()
 const { title } = storeToRefs(resumeStore)
@@ -28,6 +31,13 @@ const canUndo = computed(() => undoRedo?.canUndo.value ?? false)
 const canRedo = computed(() => undoRedo?.canRedo.value ?? false)
 
 const startTour = inject<() => Promise<void>>("startTour", async () => {})
+
+const shortcuts = [
+  { keys: ["Ctrl", "S"], label: "editor.shortcuts.save" },
+  { keys: ["Ctrl", "Z"], label: "editor.shortcuts.undo" },
+  { keys: ["Ctrl", "Shift", "Z"], label: "editor.shortcuts.redo" },
+  { keys: ["Ctrl", "Y"], label: "editor.shortcuts.redoAlt" }
+]
 </script>
 
 <template>
@@ -82,11 +92,15 @@ const startTour = inject<() => Promise<void>>("startTour", async () => {})
         color="neutral"
         variant="ghost"
         icon="i-lucide-circle-help"
-        :title="$t('editor.tour.restart')"
+        :title="$t('editor.tour.help')"
         :ui="{
           leadingIcon: 'size-4'
         }"
-        @click="startTour()"
+        @click="
+          () => {
+            isHelpModalOpen = true
+          }
+        "
       />
       <UButton
         color="neutral"
@@ -103,6 +117,22 @@ const startTour = inject<() => Promise<void>>("startTour", async () => {})
         "
       >
         <span class="hidden sm:inline">{{ $t("editor.header.changeTemplate") }}</span>
+      </UButton>
+      <UButton
+        color="neutral"
+        variant="outline"
+        icon="i-lucide-share-2"
+        :ui="{
+          leadingIcon: 'size-4'
+        }"
+        :title="$t('editor.share.button')"
+        @click="
+          () => {
+            isShareModalOpen = true
+          }
+        "
+      >
+        <span class="hidden sm:inline">{{ $t("editor.share.button") }}</span>
       </UButton>
       <div
         id="editor-save-group"
@@ -130,5 +160,40 @@ const startTour = inject<() => Promise<void>>("startTour", async () => {})
     </div>
     <ChangeTemplateModal v-model="isTemplateModalOpen" />
     <ExportModal v-model="isExportModalOpen" :disabled="saving" />
+    <ShareModal v-model="isShareModalOpen" :disabled="saving" />
+    <UModal v-model:open="isHelpModalOpen" :title="$t('editor.tour.help')">
+      <template #content>
+        <div class="p-6">
+          <div class="space-y-4">
+            <div v-for="shortcut in shortcuts" :key="shortcut.label" class="flex items-center justify-between">
+              <span class="text-sm">{{ $t(shortcut.label) }}</span>
+              <div class="flex items-center gap-1">
+                <kbd
+                  v-for="key in shortcut.keys"
+                  :key="key"
+                  class="bg-muted border-default inline-flex h-6 min-w-6 items-center justify-center rounded border px-1.5 text-xs font-medium"
+                >
+                  {{ key }}
+                </kbd>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end">
+            <UButton
+              variant="ghost"
+              color="primary"
+              @click="
+                () => {
+                  startTour()
+                  isHelpModalOpen = false
+                }
+              "
+            >
+              {{ $t("editor.tour.restart") }}
+            </UButton>
+          </div>
+        </div>
+      </template>
+    </UModal>
   </div>
 </template>
