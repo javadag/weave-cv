@@ -32,7 +32,7 @@ const applyModel = computed({
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.colors')" icon="i-lucide-palette">
+  <ConfigsContainer :title="$t('editor.configs.colors')" icon="i-lucide-palette" :default-open="false">
     <ConfigWrapper :title="$t('editor.configs.applyAccent')" variant="stacked">
       <USelectMenu
         v-model="applyModel"

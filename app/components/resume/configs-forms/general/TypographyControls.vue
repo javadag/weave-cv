@@ -31,7 +31,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.typography')" icon="i-lucide-type">
+  <ConfigsContainer :title="$t('editor.configs.typography')" icon="i-lucide-type" :default-open="false">
     <ConfigWrapper variant="grid">
       <FontPicker
         v-model="configs.general.typography.fontFamily"

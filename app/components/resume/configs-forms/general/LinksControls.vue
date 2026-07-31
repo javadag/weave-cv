@@ -31,7 +31,7 @@ const handleUpdate = (key: string, value: unknown) => {
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.links')" icon="i-lucide-link">
+  <ConfigsContainer :title="$t('editor.configs.links')" icon="i-lucide-link" :default-open="false">
     <ConfigWrapper variant="stacked">
       <ToggleInput
         v-model="configs.general.links.underline"

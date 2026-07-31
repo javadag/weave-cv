@@ -22,9 +22,10 @@ const modelValue = computed({
   <USlideover
     v-model:open="modelValue"
     :title="$t('editor.slideover.sections')"
-    side="right"
+    side="bottom"
     :ui="{
-      body: 'sm:p-0 p-0'
+      content: 'max-h-[75vh] sm:max-h-[85vh] rounded-t-2xl',
+      body: 'p-0'
     }"
   >
     <template #body>

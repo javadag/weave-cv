@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-structured-clone */
 import type { TConfigs } from "~/utils/schemas/configs/configs.schema"
 import type { TCoreSections, TPersonalContent } from "~/utils/schemas/content.schema"
 
@@ -23,11 +24,14 @@ export function useUndoRedo() {
   let timer: ReturnType<typeof setTimeout> | null = null
   let isSnapshotInitialized = false
 
-  const takeSnapshot = (): Snapshot => structuredClone({
-    personal: toRaw(personal.value!),
-    core: toRaw(core.value!),
-    configs: toRaw(configs.value)
-  })
+  const takeSnapshot = (): Snapshot =>
+    JSON.parse(
+      JSON.stringify({
+        personal: toRaw(personal.value!),
+        core: toRaw(core.value!),
+        configs: toRaw(configs.value)
+      })
+    )
 
   const commit = () => {
     if (pointer.value < stack.length - 1) {
@@ -59,7 +63,7 @@ export function useUndoRedo() {
   // Seed the snapshot stack once the store is ready
   watch(initialized, (ready) => {
     if (!ready || isSnapshotInitialized) {
-    	return;
+      return
     }
 
     isSnapshotInitialized = true

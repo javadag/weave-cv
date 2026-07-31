@@ -54,22 +54,39 @@ const advancedVariantOptions = computed(() =>
   createTranslatedOptions(t, "editor.configs.advancedSectionVariantOptions", AdvancedSectionVariant.options).map(
     (o) => ({
       ...o,
-      icon: ADVANCED_VARIANT_ICONS[o.value] ?? "i-lucide-square"
+      icon: ADVANCED_VARIANT_ICONS[o.value] ?? "i-lucide-square",
+      description: o.value === "contentFirst" ? "Skill | Company" : o.value === "dateFirst" ? "2020–2024 | Company" : "Title above details"
     })
   )
 )
 
 const separatorOptions = computed(() =>
-  getSeparatorOptions(t).map((o) => ({ ...o, icon: SEPARATOR_ICONS[o.value] ?? "i-lucide-minus" }))
+  getSeparatorOptions(t).map((o) => ({
+    ...o,
+    icon: SEPARATOR_ICONS[o.value] ?? "i-lucide-minus",
+    description: o.value === "pipe" ? "Skill | Skill" : o.value === "dot" ? "Skill • Skill" : o.value === "dash" ? "Skill — Skill" : o.value === "comma" ? "Skill, Skill" : o.value === "slash" ? "Skill / Skill" : "Skill Skill"
+  }))
 )
 const titleStyleOptions = computed(() =>
-  getTitleStyleOptions(t).map((o) => ({ ...o, icon: TITLE_STYLE_ICONS[o.value] ?? "i-lucide-minus" }))
+  getTitleStyleOptions(t).map((o) => ({
+    ...o,
+    icon: TITLE_STYLE_ICONS[o.value] ?? "i-lucide-minus",
+    description: o.value === "colon" ? "Experience:" : o.value === "bracket" ? "[Experience]" : o.value === "dash" ? "Experience —" : "Experience"
+  }))
 )
 const variantOptions = computed(() =>
-  getVariantOptions(t).map((o) => ({ ...o, icon: VARIANT_ICONS[o.value] ?? "i-lucide-square" }))
+  getVariantOptions(t).map((o) => ({
+    ...o,
+    icon: VARIANT_ICONS[o.value] ?? "i-lucide-square",
+    description: o.value === "grid" ? "Tiles side by side" : o.value === "stacked" ? "One per line" : "All on one line"
+  }))
 )
 const variantSimpleOptions = computed(() =>
-  getVariantSimpleOptions(t).map((o) => ({ ...o, icon: VARIANT_ICONS[o.value] ?? "i-lucide-square" }))
+  getVariantSimpleOptions(t).map((o) => ({
+    ...o,
+    icon: VARIANT_ICONS[o.value] ?? "i-lucide-square",
+    description: o.value === "inline" ? "Title and subtitle on one line" : "Title above subtitle"
+  }))
 )
 
 const isAdvancedSection = computed(() => configOptions.value.includes("titleSubtitleVariant"))

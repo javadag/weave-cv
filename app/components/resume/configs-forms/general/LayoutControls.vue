@@ -102,7 +102,7 @@ const indentConstraints = extractNumberConstraintsFromPath(ContentLayoutSchema, 
 </script>
 
 <template>
-  <ConfigsContainer :title="$t('editor.configs.layout')" icon="i-lucide-grid">
+  <ConfigsContainer :title="$t('editor.configs.layout')" icon="i-lucide-grid" :default-open="true">
     <ToggleInput
       v-model="configs.general.layout.rtl"
       :label="$t('editor.configs.rtl')"

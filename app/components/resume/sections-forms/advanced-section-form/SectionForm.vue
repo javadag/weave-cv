@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import { VueDraggable, type SortableEvent } from "vue-draggable-plus"
-import { ADVANCED_SECTION_ITEM, BASIC_SECTION_ITEM } from "~/constants/singleContent"
 import { SECTION_CONFIGS_CONFIG } from "~/constants/sectionConfigs"
+import { ADVANCED_SECTION_ITEM, BASIC_SECTION_ITEM } from "~/constants/singleContent"
 import type {
   BasicSectionTypeSchema,
   TAdvancedContent,
@@ -11,8 +11,8 @@ import type {
   TCoreSectionType
 } from "~/utils/schemas/content.schema"
 import { AdvancedSectionTypeSchema } from "~/utils/schemas/content.schema"
-import SectionFormWrapper from "../SectionFormWrapper.vue"
 import SectionConfigControls from "../SectionConfigControls.vue"
+import SectionFormWrapper from "../SectionFormWrapper.vue"
 import SectionFormItem from "./SectionFormItem.vue"
 
 interface Props {

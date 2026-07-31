@@ -1,6 +1,8 @@
 import type { Driver } from "driver.js"
 
-const STORAGE_KEY = "weave-cv-editor-tour-v1"
+// Bump this version when tour steps change — returning users will see the updated tour
+const TOUR_VERSION = 2
+const STORAGE_KEY = `weave-cv-editor-tour-v${TOUR_VERSION}`
 
 const checkFirstVisit = () => {
   if (globalThis.window !== undefined) {
@@ -54,13 +56,13 @@ export function useEditorTour() {
           }
         },
         {
-          element: '#editor-add-section',
+          element: "#editor-add-section",
           popover: {
-            title: t('editor.tour.step3Title'),
-            description: t('editor.tour.step3Desc'),
-            side: 'top' as const,
-            align: 'start' as const,
-          },
+            title: t("editor.tour.step3Title"),
+            description: t("editor.tour.step3Desc"),
+            side: "top" as const,
+            align: "start" as const
+          }
         },
         {
           element: "#editor-preview",

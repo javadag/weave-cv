@@ -4,14 +4,17 @@ import ConfigsHeader from "./ConfigsHeader.vue"
 interface Props {
   title: string
   icon: string
+  defaultOpen?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  defaultOpen: true
+})
 </script>
 
 <template>
   <UCollapsible
-    :default-open="true"
+    :default-open="props.defaultOpen"
     class="bg-default border-muted flex flex-col rounded-lg border duration-500"
     :ui="{
       content: 'p-2'

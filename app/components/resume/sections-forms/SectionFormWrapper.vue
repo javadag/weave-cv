@@ -27,19 +27,22 @@ const props = withDefaults(
 const { t } = useI18n()
 const { updateContent } = useResumeStore()
 const { removeSection } = useEditorState()
+const { isAllCollapsed } = useSectionsCollapse()
+
 const handleDelete = () => {
   removeSection(props.sectionId)
 }
 
 const tabItems = computed(() => [
   { label: t("editor.form.content"), slot: "content" },
-  { label: t("editor.settings"), slot: "settings" }
+  { label: t("editor.style"), slot: "settings" }
 ])
 </script>
 
 <template>
   <UCollapsible
-    :default-open="true"
+    :key="`collapse-${isAllCollapsed}`"
+    :default-open="!isAllCollapsed"
     class="group bg-default border-muted flex flex-col rounded-lg border"
     :ui="{
       content: 'p-2'
