@@ -125,11 +125,11 @@ useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
 
 <template>
   <ClientOnly>
-    <div class="flex h-[calc(100dvh-6rem)] w-full flex-col gap-4 overflow-hidden">
+    <div class="flex h-[calc(100dvh-6rem)]! w-full flex-col gap-4 overflow-hidden">
       <ResumeHeader id="editor-toolbar" />
 
       <!-- Desktop (> 1536px): 3-panel SplitterGroup -->
-      <div v-if="isDesktop" class="min-h-0 flex-1 overflow-hidden" dir="ltr">
+      <div v-if="isDesktop" class="overflow-hidden" dir="ltr">
         <SplitterGroup direction="horizontal" class="flex h-full gap-1">
           <SplitterPanel id="editor-sections" :min-size="15" :default-size="25" :max-size="30" class="overflow-y-auto">
             <ResumeSectionsForms :dir="isRtl ? 'rtl' : 'ltr'" :loading="pending" />
