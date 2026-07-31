@@ -10,6 +10,7 @@ interface Props {
   sid: string
   contentId: string
   sectionType: (typeof AdvancedSectionTypeSchema.options)[number]
+  blockKey?: string
 }
 
 const props = defineProps<Props>()
@@ -25,7 +26,7 @@ const content = computed(
 
 const { updateHeight } = usePreviewStore()
 useSelfResizeObserver((height) => {
-  updateHeight(props.contentId, height)
+  updateHeight(props.blockKey ?? props.contentId, height)
 })
 
 const sectionConfigs = computed(() => configs.value[props.sectionType])

@@ -21,13 +21,15 @@ export function generateAdvancedBlocks(sid: string, section: TCoreSection) {
 
   for (const content of visibleContents) {
     const contentId = content.id
+    const detailBlockKey = `${sid}-${contentId}`
 
-    const detailBlock = blocks?.get(contentId) ?? {
-      id: contentId,
+    const detailBlock = blocks?.get(detailBlockKey) ?? {
+      id: detailBlockKey,
       component: h(AdvancedDetailBlock, {
         sid,
         contentId,
-        sectionType
+        sectionType,
+        blockKey: detailBlockKey
       }),
       height: 0
     }
@@ -35,7 +37,7 @@ export function generateAdvancedBlocks(sid: string, section: TCoreSection) {
     setBlock(detailBlock.id, detailBlock)
 
     const lineBlocks = getContentLine(contentId).map((_, index) => {
-      const lineId = `${content.id}-${index}`
+      const lineId = `${sid}-${content.id}-${index}`
 
       const lineBlock = blocks?.get(lineId) ?? {
         id: lineId,
