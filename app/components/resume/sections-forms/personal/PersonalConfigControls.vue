@@ -16,10 +16,15 @@ import {
 } from "~/utils/options/sharedOptions"
 import type { TAlign, TIconStyle, TSeparator, TSide, TVariant, TVariantSimple } from "~/utils/schemas/shared.schema"
 
+const resumeStore = useResumeStore()
+const { personal } = storeToRefs(resumeStore)
+
 const configsStore = useConfigsStore()
 const { configs } = storeToRefs(configsStore)
 const { updateConfig } = configsStore
 const { t } = useI18n()
+
+const hasPhoto = computed(() => !!personal.value?.photo?.url)
 
 const alignOptions = computed(() => getAlignOptions(t))
 const iconAlignOptions = computed(() => getIconAlignOptions(t))
@@ -41,6 +46,7 @@ const handleUpdate = (key: string, value: unknown) => {
       <ToggleInput
         v-model="configs.personal.photo.visible"
         :label="$t('editor.configs.showPhoto')"
+        :disabled="!hasPhoto"
         @update:model-value="(value) => handleUpdate('photo.visible', value)"
       />
       <SelectItem
@@ -48,7 +54,7 @@ const handleUpdate = (key: string, value: unknown) => {
         :label="$t('editor.configs.photoPosition')"
         label-variant="stacked"
         :options="photoPositionOptions"
-        :disabled="!configs.personal.photo.visible"
+        :disabled="!hasPhoto || !configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.position', value as 'left' | 'right' | 'top')"
       />
       <SelectItem
@@ -56,7 +62,7 @@ const handleUpdate = (key: string, value: unknown) => {
         :label="$t('editor.configs.photoShape')"
         label-variant="stacked"
         :options="photoShapeOptions"
-        :disabled="!configs.personal.photo.visible"
+        :disabled="!hasPhoto || !configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.shape', value as 'circle' | 'rounded' | 'square')"
       />
       <NumberInput
@@ -64,7 +70,7 @@ const handleUpdate = (key: string, value: unknown) => {
         :label="$t('editor.configs.photoSize')"
         :min="40"
         :max="200"
-        :disabled="!configs.personal.photo.visible"
+        :disabled="!hasPhoto || !configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.size', value)"
       />
       <NumberInput
@@ -72,14 +78,14 @@ const handleUpdate = (key: string, value: unknown) => {
         :label="$t('editor.configs.photoBorderWidth')"
         :min="0"
         :max="10"
-        :disabled="!configs.personal.photo.visible"
+        :disabled="!hasPhoto || !configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.border.width', value)"
       />
       <ColorPicker
         v-model="configs.personal.photo.border.color"
         :label="$t('editor.configs.photoBorderColor')"
         :color="configs.personal.photo.border.color"
-        :disabled="!configs.personal.photo.visible"
+        :disabled="!hasPhoto || !configs.personal.photo.visible"
         @update:model-value="(value) => handleUpdate('photo.border.color', value)"
       />
     </ConfigWrapper>
