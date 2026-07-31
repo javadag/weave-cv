@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/JavadAg/weave-cv/compare/v2.6.2...v2.7.0) (2026-07-31)
+
+
+### 📝 Documentation
+
+* add config input types design spec ([192ef92](https://github.com/JavadAg/weave-cv/commit/192ef92554eb15de11a5ec12f529d30cea493ca1))
+
+
+### ✨ Features
+
+* add collapse all and order access ([006db25](https://github.com/JavadAg/weave-cv/commit/006db2534ab4aaa42b79c1171c8d47e038647526))
+* add custom icons and convert select inputs to ButtonGroupInput ([0d744b3](https://github.com/JavadAg/weave-cv/commit/0d744b39afd255b29829c406f027d51ac5021924))
+* add custom UI components for config inputs ([5ac42b5](https://github.com/JavadAg/weave-cv/commit/5ac42b5c7486d548b5ebbbd1dc059ce2dd26c07a))
+* add keyboard shortcuts ([43f0367](https://github.com/JavadAg/weave-cv/commit/43f036715d53b06818bd63a87393551c207834cb))
+* add share resume ([e1684f3](https://github.com/JavadAg/weave-cv/commit/e1684f32028287bdb4c9be65a53781d4903134ed))
+* extract HeroPreview and add landing loader ([97fb5bd](https://github.com/JavadAg/weave-cv/commit/97fb5bdeeb589787f052bff7b174fdc9638de565))
+
+
+### 🐛 Bug Fixes
+
+* adding new sections after delete ([f113c97](https://github.com/JavadAg/weave-cv/commit/f113c97434a38fe999699ecfa1dafa5f4117fd2a))
+* disable photo options on no photo ([9cbe72f](https://github.com/JavadAg/weave-cv/commit/9cbe72f75c157216c229f960727f1cfbcbb56232))
+
+
+### ♻️ Code Refactoring
+
+* extract composables, split helpers, and consolidate server API ([661b5da](https://github.com/JavadAg/weave-cv/commit/661b5dac8a8a50ef74b50db8b649b87a1b047d80))
+* improve responsive and ux ([bb6bfcd](https://github.com/JavadAg/weave-cv/commit/bb6bfcd2768f7bb3506593704afa2b6b908d05af))
+* maximum font limits ([6b2ea87](https://github.com/JavadAg/weave-cv/commit/6b2ea874ecbbb6432bd2c4f108d793d8a0a09fc6))
+* move add section button ([80ec483](https://github.com/JavadAg/weave-cv/commit/80ec48334df4d8f863bc446ab53283e3e2a5b367))
+* redesign hero with full-height layout and config sidebar ([527c5e8](https://github.com/JavadAg/weave-cv/commit/527c5e8411b07b9d52d9e9f3f690162a4227e833))
+* remove unused navigate-away ([71bf9e4](https://github.com/JavadAg/weave-cv/commit/71bf9e40ddb38507016f126225f30b111b96b960))
+* simplify pagination and block generation with discriminated unions ([8e35ebe](https://github.com/JavadAg/weave-cv/commit/8e35ebebdaca7507c34ab36f6fc3f853cd3be38a))
+
 ### [2.6.2](https://github.com/JavadAg/weave-cv/compare/v2.6.1...v2.6.2) (2026-07-24)
 
 
