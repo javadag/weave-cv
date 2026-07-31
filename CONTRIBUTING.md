@@ -144,8 +144,8 @@ pnpm typecheck
 1. **Update your fork:**
    ```bash
    git fetch upstream
-   git checkout main
-   git merge upstream/main
+   git checkout master
+   git merge upstream/master
    ```
 
 2. **Create a feature branch:**
