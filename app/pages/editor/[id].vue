@@ -121,19 +121,6 @@ watch([pending, isDesktop], ([p, isDesk]) => {
 
 // Keyboard shortcuts
 useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
-
-// Warn on navigate-away with unsaved changes
-onBeforeRouteLeave(() => {
-  // autosave handles persistence, but warn if pending changes exist
-})
-
-if (import.meta.client) {
-  const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-    e.preventDefault()
-  }
-  onMounted(() => window.addEventListener("beforeunload", handleBeforeUnload))
-  onUnmounted(() => window.removeEventListener("beforeunload", handleBeforeUnload))
-}
 </script>
 
 <template>
