@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://github.com/JavadAg/weave-cv/compare/v2.7.0...v2.7.1) (2026-07-31)
+
+
+### 🐛 Bug Fixes
+
+* layout height ([556e58a](https://github.com/JavadAg/weave-cv/commit/556e58ac3c43f694f9f578c3c6a2082dc5ae47b3))
+
 ## [2.7.0](https://github.com/JavadAg/weave-cv/compare/v2.6.2...v2.7.0) (2026-07-31)
 
 
