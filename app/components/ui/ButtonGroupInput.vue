@@ -37,7 +37,7 @@ function isCustomIcon(icon?: string) {
     :class="props.labelVariant === 'inline' ? 'flex items-center justify-between gap-2' : ''"
     :ui="{ label: 'text-2sm text-muted', container: `basis-1/2 ${props.labelVariant === 'inline' ? 'mt-0' : ''}` }"
   >
-    <div class="flex w-full flex-wrap gap-1" :class="props.labelVariant === 'inline' ? 'justify-end' : ''">
+    <div class="flex w-full flex-wrap gap-2" :class="props.labelVariant === 'inline' ? 'justify-end' : ''">
       <UTooltip
         v-for="option in props.options"
         :key="option.value"

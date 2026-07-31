@@ -97,7 +97,8 @@ const { isAllCollapsed, toggle: toggleCollapse } = useSectionsCollapse()
   >
     <div class="border-default/30 flex items-center justify-between border-b px-4 py-2">
       <span class="text-2sm text-muted font-medium">{{ $t("editor.sections") }}</span>
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-2">
+        <AddSectionButton />
         <UTooltip :text="$t('editor.sectionsReorder')">
           <UButton
             variant="ghost"
@@ -125,15 +126,12 @@ const { isAllCollapsed, toggle: toggleCollapse } = useSectionsCollapse()
     <div class="flex-1 overflow-y-auto p-4">
       <UCollapsible v-if="isOrderPanelOpen" :default-open="true" class="mb-3">
         <template #content>
-          <div class="pb-2">
-            <SectionsOrderControl />
-          </div>
+          <SectionsOrderControl />
         </template>
       </UCollapsible>
       <div class="flex flex-col gap-3">
         <PersonalSectionForm v-if="personal" :section="personal" />
         <component :is="() => renderSection(key, section)" v-for="[key, section] in orderedSections" :key="key" />
-        <AddSectionButton />
       </div>
     </div>
   </div>
