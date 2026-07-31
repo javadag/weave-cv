@@ -1,7 +1,7 @@
 {
   "name": "Weave CV - Resume Builder",
   "short_name": "Weave CV",
-  "description": "Build polished, ATS-friendly resumes with live PDF preview and AI-powered job matching.",
+  "description": "Build polished, ATS-friendly resumes with live PDF preview.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
