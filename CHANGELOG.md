@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.2](https://github.com/JavadAg/weave-cv/compare/v2.7.1...v2.7.2) (2026-07-31)
+
+
+### 📝 Documentation
+
+* add CONTRIBUTING.md with development guidelines ([d003702](https://github.com/JavadAg/weave-cv/commit/d003702f446bc8a7cecfc2bdb17ce1cee9879290))
+* add Contributor Covenant Code of Conduct ([e64aeab](https://github.com/JavadAg/weave-cv/commit/e64aeab017f6d0603cc85e12ed4c26379b5efb0d))
+* add MIT license with Commons Clause ([64a8090](https://github.com/JavadAg/weave-cv/commit/64a809038d23f5c1395d0968341b335fde806f7e))
+* add professional README.md ([9bbd2c5](https://github.com/JavadAg/weave-cv/commit/9bbd2c59d133b03ba09112a5a083034417fc82fd))
+* add SECURITY.md with vulnerability disclosure policy ([86ba988](https://github.com/JavadAg/weave-cv/commit/86ba988fa5aff1bba55d8176120dba8dd36813c2))
+
+
+### 🐛 Bug Fixes
+
+* correct default branch name and remove redundant gitignore entry ([7fe1a6f](https://github.com/JavadAg/weave-cv/commit/7fe1a6f0d35e85f938b62eed7eff4b268ecc1d3e))
+
+
+### ♻️ Code Refactoring
+
+* remove AI job matching references (keep resume parser) ([b50e9e9](https://github.com/JavadAg/weave-cv/commit/b50e9e92f0e2e6870c1ef3649cbfc755ca82271e))
+* remove job matching from site description ([428a2ea](https://github.com/JavadAg/weave-cv/commit/428a2eaa5bf65d8af2ba05f93d40532a1b9aea02))
+
 ### [2.7.1](https://github.com/JavadAg/weave-cv/compare/v2.7.0...v2.7.1) (2026-07-31)
 
 
