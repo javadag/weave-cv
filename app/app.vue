@@ -19,7 +19,6 @@ useHead(() => ({
         operatingSystem: "Web Browser",
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         featureList: [
-          "AI-powered job matching",
           "Live PDF preview",
           "24 professional templates",
           "PDF export",

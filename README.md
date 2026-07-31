@@ -22,7 +22,7 @@
 - 🔄 **Auto-Save** — Cloud sync across devices with Supabase
 - 🌐 **Multi-Language** — English and Persian (RTL) support
 - 🎯 **Drag & Drop** — Reorder sections and content easily
-- 🤖 **AI Integration** — Resume parsing and job matching with multiple AI providers
+- 🤖 **AI Integration** — Resume parsing with multiple AI providers
 - 📱 **Responsive** — Works on desktop, tablet, and mobile
 
 ## 🚀 Quick Start

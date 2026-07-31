@@ -29,7 +29,7 @@ The honest, no-nonsense resume builder. Free forever, no paywall, no upsell. Mod
 
 ## Capabilities and Constraints
 
-- Multi-provider AI integration (OpenAI, Groq, Anthropic, Gemini, etc.) for resume parsing and job matching — a capability, not the positioning
+- Multi-provider AI integration (OpenAI, Groq, Anthropic, Gemini, etc.) for resume parsing — a capability, not the positioning
 - English and Persian (RTL) interface with `no_prefix` i18n strategy
 - Supabase backend: auth, database, storage
 - Vercel deployment, Nuxt 4 / Vue 3 stack
