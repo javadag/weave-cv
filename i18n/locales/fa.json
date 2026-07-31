@@ -411,6 +411,9 @@
       "redo": "بازگرد (Ctrl+Y)",
       "matchToJob": "تطبیق با آگهی شغلی"
     },
+    "sectionsReorder": "ترتیب بخش‌ها",
+    "collapseAll": "بستن همه",
+    "expandAll": "باز کردن همه",
     "matchToJob": {
       "title": "تطبیق با آگهی شغلی",
       "subtitle": "شرح شغل رو اینجا بچسبون تا بررسی کنیم رزومه‌ات چقدر باهاش جوره.",
@@ -497,8 +500,29 @@
       "generating": "در حال تولید...",
       "exporting": "در حال خروجی..."
     },
+    "share": {
+      "button": "اشتراک‌گذاری",
+      "title": "اشتراک‌گذاری رزومه",
+      "subtitle": "رزومه‌ات رو با یک لینک عمومی به اشتراک بذار",
+      "published": "منتشر شده",
+      "unpublished": "منتشر نشده",
+      "publishedDesc": "رزومه‌ات روی وب در دسترسه. هر کسی با لینک می‌تونه ببینه.",
+      "unpublishedDesc": "رزومه‌ات خصوصیه. فقط خودت می‌تونی ببینی.",
+      "publicUrl": "لینک عمومی",
+      "copyLink": "کپی لینک",
+      "linkCopied": "لینک کپی شد!",
+      "views": "{count} بازدید",
+      "toggleLabel": "صفحه عمومی",
+      "toggleDesc": "هر کسی با این لینک می‌تونه رزومه رو ببینه",
+      "publishSuccess": "رزومه منتشر شد",
+      "unpublishSuccess": "انتشار رزومه لغو شد",
+      "updateError": "خطا در به‌روزرسانی وضعیت انتشار",
+      "copyError": "خطا در کپی لینک",
+      "done": "تمام"
+    },
     "slideover": {
       "settings": "تنظیمات رزومه",
+      "style": "سبک رزومه",
       "sections": "بخش‌های رزومه"
     },
     "configs": {
@@ -553,6 +577,8 @@
         "verticalBorder": "حاشیه عمودی"
       },
       "colors": "رنگ‌ها",
+      "basic": "پایه",
+      "advanced": "پیشرفته",
       "applyAccent": "اعمال رنگ تأکیدی",
       "primary": "اصلی",
       "secondary": "ثانویه",
@@ -702,6 +728,7 @@
       "hideSection": "مخفی کردن بخش",
       "showSection": "نمایش بخش",
       "deleteSection": "حذف بخش",
+      "duplicateSection": "تکثیر بخش",
       "iconLabel": "آیکن",
       "clearDate": "پاک کردن تاریخ",
       "edit": "ویرایش",
@@ -836,6 +863,12 @@
       "step6Desc": "ذخیره خودکار هر ۲ دقیقه انجام می‌شه، ولی هر وقت خواستی می‌تونی دستی ذخیره کنی. وقتی آماده بودی، رزومه‌ات رو به صورت PDF دانلود کن یا JSON خروجی بگیر.",
       "step7Title": "حالا دیگه راه افتادی!",
       "step7Desc": "هر وقت خواستی می‌تونی این تور رو دوباره با کلیک روی دکمه راهنما (؟) توی نوار ابزار ببینی. موفق باشی!"
+    },
+    "shortcuts": {
+      "save": "ذخیره رزومه",
+      "undo": "برگردان",
+      "redo": "باز انجام",
+      "redoAlt": "باز انجام"
     }
   },
   "resetPassword": {
@@ -1014,6 +1047,16 @@
         "thai": "تایلندی"
       }
     }
+  },
+  "publicResume": {
+    "madeWith": "ساخته شده با Weave CV",
+    "createYourOwn": "رزومه خودت رو بساز",
+    "buildYours": "رزومه بساز",
+    "notFound": "رزومه پیدا نشد",
+    "notFoundDesc": "این رزومه ممکنه لغو انتشار شده باشه یا لینک اشتباه باشه.",
+    "createCta": "رزومه خودت رو بساز",
+    "seoTitle": "{name} — Weave CV",
+    "seoDescription": "رزومه حرفه‌ای {name} رو در Weave CV ببینید"
   },
   "seo": {
     "index": {

@@ -390,6 +390,7 @@
   "editor": {
     "sections": "Sections",
     "settings": "Settings",
+    "style": "Style",
     "header": {
       "dashboard": "Dashboard",
       "resumeTitle": "Resume Title",
@@ -411,6 +412,9 @@
       "redo": "Redo (Ctrl+Y)",
       "matchToJob": "Match to Job"
     },
+    "sectionsReorder": "Reorder sections",
+    "collapseAll": "Collapse all",
+    "expandAll": "Expand all",
     "template": {
       "title": "Change Template",
       "subtitle": "Pick a new style — your content will be preserved",
@@ -437,8 +441,29 @@
       "generating": "Generating...",
       "exporting": "Exporting..."
     },
+    "share": {
+      "button": "Share",
+      "title": "Share Resume",
+      "subtitle": "Publish your resume to a public link you can share anywhere.",
+      "published": "Published",
+      "unpublished": "Unpublished",
+      "publishedDesc": "Your resume is live on the web. Anyone with the link can view it.",
+      "unpublishedDesc": "Your resume is private. Only you can view it.",
+      "publicUrl": "Public URL",
+      "copyLink": "Copy link",
+      "linkCopied": "Link copied!",
+      "views": "{count} view | {count} views",
+      "toggleLabel": "Public page",
+      "toggleDesc": "Anyone with the link can view this resume",
+      "publishSuccess": "Resume published",
+      "unpublishSuccess": "Resume unpublished",
+      "updateError": "Failed to update publish status",
+      "copyError": "Failed to copy URL",
+      "done": "Done"
+    },
     "slideover": {
-      "settings": "Resume Settings",
+      "settings": "Resume Style",
+      "style": "Resume Style",
       "sections": "Resume Sections"
     },
     "configs": {
@@ -493,6 +518,8 @@
         "verticalBorder": "Vertical Border"
       },
       "colors": "Colors",
+      "basic": "Basic",
+      "advanced": "Advanced",
       "applyAccent": "Apply Accent",
       "primary": "Primary",
       "secondary": "Secondary",
@@ -702,6 +729,7 @@
       "hideSection": "Hide section",
       "showSection": "Show section",
       "deleteSection": "Delete section",
+      "duplicateSection": "Duplicate section",
       "iconLabel": "Icon",
       "clearDate": "Clear date",
       "edit": "Edit",
@@ -820,7 +848,7 @@
       }
     },
     "tour": {
-      "help": "Help",
+      "help": "Help & Shortcuts",
       "restart": "Restart tour",
       "step1Title": "Welcome to the Editor",
       "step1Desc": "Give your resume a title here. Use the toolbar to navigate back, undo/redo changes, change templates, or use AI to match your resume to a job description.",
@@ -836,6 +864,12 @@
       "step6Desc": "Autosave runs every 2 minutes, but you can save manually anytime. When you're ready, download your resume as a PDF or export it as JSON.",
       "step7Title": "You're All Set!",
       "step7Desc": "You can restart this tour anytime by clicking the help button (?) in the toolbar. Happy resume building!"
+    },
+    "shortcuts": {
+      "save": "Save resume",
+      "undo": "Undo",
+      "redo": "Redo",
+      "redoAlt": "Redo"
     }
   },
   "resetPassword": {
@@ -1014,6 +1048,16 @@
         "thai": "Thai"
       }
     }
+  },
+  "publicResume": {
+    "madeWith": "Made with Weave CV",
+    "createYourOwn": "Create your own resume",
+    "buildYours": "Build yours",
+    "notFound": "Resume not found",
+    "notFoundDesc": "This resume may have been unpublished or the link is incorrect.",
+    "createCta": "Create your own resume",
+    "seoTitle": "{name} — Weave CV",
+    "seoDescription": "View {name}'s professional resume on Weave CV"
   },
   "seo": {
     "index": {
