@@ -43,8 +43,8 @@ const ALWAYS_INCLUDE_SUBSETS = new Set(["arabic", "hebrew"])
 
 // Maximum fonts per category (API returns them sorted by popularity)
 const MAX_PER_CATEGORY: Record<string, number> = {
-  "sans-serif": 80,
-  serif: 50,
+  "sans-serif": 35,
+  serif: 35,
   monospace: 20
 }
 
@@ -67,7 +67,7 @@ async function fetchGoogleFonts() {
     if (!RESUME_CATEGORIES.has(item.category)) continue
 
     const hasSpecialSubset = item.subsets.some((s) => ALWAYS_INCLUDE_SUBSETS.has(s))
-    const limit = MAX_PER_CATEGORY[item.category] ?? 50
+    const limit = MAX_PER_CATEGORY[item.category] ?? 35
     const count = countPerCategory[item.category] ?? 0
 
     if (!hasSpecialSubset && count >= limit) continue
