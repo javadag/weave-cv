@@ -23,8 +23,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
+          node-version: "lts/*"
+          cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
       - name: Run ESLint
@@ -42,8 +42,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
+          node-version: "lts/*"
+          cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
       - name: Run TypeScript checks
@@ -61,8 +61,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
+          node-version: "lts/*"
+          cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
       - name: Build project
@@ -70,3 +70,4 @@ jobs:
         env:
           NUXT_PUBLIC_SUPABASE_URL: http://localhost:54321
           NUXT_PUBLIC_SUPABASE_KEY: placeholder
+          NODE_OPTIONS: --max-old-space-size=4096
