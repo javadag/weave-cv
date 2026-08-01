@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import RichTextEditor from "~/components/ui/rich-text/RichTextEditor.vue"
+import { defineAsyncComponent } from "vue"
+
+const RichTextEditor = defineAsyncComponent(() => import("~/components/ui/rich-text/RichTextEditor.vue"))
 
 interface Props {
   content: string

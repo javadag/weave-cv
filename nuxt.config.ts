@@ -12,6 +12,13 @@ export default defineNuxtConfig({
           lib: ["ESNext", "DOM"]
         }
       }
+    },
+    prerender: {
+      routes: ["/", "/terms", "/privacy", "/login", "/register"],
+      crawlLinks: false
+    },
+    rollupConfig: {
+      external: ["@sparticuz/chromium", "puppeteer-core", "openai"]
     }
   },
   image: {
@@ -70,7 +77,10 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ["zod"]
     },
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      chunkSizeWarningLimit: 800
+    }
   },
   supabase: {
     types: "~/types/database.types.ts",

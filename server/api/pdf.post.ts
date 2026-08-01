@@ -12,20 +12,7 @@ let tailwindCssCache: string | null = null
 const loadTailwindCss = async (baseUrl?: string) => {
   if (tailwindCssCache) return tailwindCssCache
 
-  // Try using Nitro storage (works in serverless environments like Vercel)
-  try {
-    const storage = useStorage()
-    const cssContent = await storage.getItem("public:tailwind-pdf.css")
-    if (cssContent) {
-      tailwindCssCache = typeof cssContent === "string" ? cssContent : cssContent.toString()
-      return tailwindCssCache
-    }
-  } catch (error) {
-    // Fall through to file system approach
-    console.warn("Failed to load CSS from Nitro storage, trying file system:", error)
-  }
-
-  // Fallback: Try different path resolution strategies
+  // Try different path resolution strategies
   const possiblePaths = [
     // Vercel/serverless: Nitro outputs public files here
     path.join(process.cwd(), ".output", "public", "tailwind-pdf.css"),
