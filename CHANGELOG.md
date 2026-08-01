@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.4](https://github.com/JavadAg/weave-cv/compare/v2.7.3...v2.7.4) (2026-08-01)
+
+
+### 🐛 Bug Fixes
+
+* remove unused 'marked' dependency from pnpm-lock.yaml ([c5d8a1e](https://github.com/JavadAg/weave-cv/commit/c5d8a1ef1f67b8892137cc4539eaa91a17cb4158))
+
 ### [2.7.3](https://github.com/JavadAg/weave-cv/compare/v2.7.2...v2.7.3) (2026-08-01)
 
 
