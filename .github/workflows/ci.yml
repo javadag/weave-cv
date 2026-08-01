@@ -1,5 +1,8 @@
 name: CI
 
+env:
+  NODE_OPTIONS: '--max-old-space-size=4096'
+
 on:
   pull_request:
     branches:
