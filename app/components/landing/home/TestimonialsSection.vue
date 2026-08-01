@@ -2,7 +2,7 @@
 import { motion } from "motion-v"
 import { useScrollReveal } from "~/composables/useScrollReveal"
 
-const { t, tm, rt } = useI18n()
+const { tm, rt } = useI18n()
 
 interface Testimonial {
   quote: string
@@ -73,7 +73,9 @@ function cardReveal(i: number) {
           :in-view-options="cardReveal(i).inViewOptions"
         >
           <svg class="text-primary/25 mb-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C9.591 11.689 11 13.213 11 15c0 1.657-1.343 3-3 3-1.308 0-2.417-.622-3.417-1.679zM14.583 17.321C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C19.591 11.689 21 13.213 21 15c0 1.657-1.343 3-3 3-1.308 0-2.417-.622-3.417-1.679z" />
+            <path
+              d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C9.591 11.689 11 13.213 11 15c0 1.657-1.343 3-3 3-1.308 0-2.417-.622-3.417-1.679zM14.583 17.321C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C19.591 11.689 21 13.213 21 15c0 1.657-1.343 3-3 3-1.308 0-2.417-.622-3.417-1.679z"
+            />
           </svg>
           <p class="text-highlighted mb-4 text-sm leading-relaxed">{{ item.quote }}</p>
           <div class="border-default border-t pt-3">
@@ -88,7 +90,9 @@ function cardReveal(i: number) {
 
 <style scoped>
 .testimonial-card {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
 }
 .testimonial-card:hover {
   transform: translateY(-2px);
