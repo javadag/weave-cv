@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.3](https://github.com/JavadAg/weave-cv/compare/v2.7.2...v2.7.3) (2026-08-01)
+
+
+### 🐛 Bug Fixes
+
+* increase memory limit ([0d278af](https://github.com/JavadAg/weave-cv/commit/0d278aff76cd5b4359963943a55fa26ed288ec9c))
+* lint ([36efa35](https://github.com/JavadAg/weave-cv/commit/36efa3533851e82a7925fc6d211fd723cc2e0e81))
+* resolve OOM during build and optimize client bundle ([42fda34](https://github.com/JavadAg/weave-cv/commit/42fda34204b4291cbbe2aae1f0cb70385d1cccf8))
+
 ### [2.7.2](https://github.com/JavadAg/weave-cv/compare/v2.7.1...v2.7.2) (2026-07-31)
 
 

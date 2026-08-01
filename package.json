@@ -1,7 +1,7 @@
 {
   "name": "weave-cv",
   "type": "module",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -39,7 +39,6 @@
     "dompurify": "^3.4.11",
     "driver.js": "^1.6.0",
     "eslint": "^9.35.0",
-    "marked": "^18.0.5",
     "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
     "nuxt-tiptap-editor": "3.4.0",
