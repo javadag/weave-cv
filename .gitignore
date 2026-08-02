@@ -17,7 +17,13 @@ logs
 .DS_Store
 .fleet
 .idea
-supabase
+
+# Supabase CLI — ignore local/ephemeral artifacts only.
+# Migrations and config.toml are tracked so new contributors can recreate the schema.
+supabase/.branches
+supabase/.temp
+supabase/.env
+supabase/volumes/
 
 # Local env files
 .env

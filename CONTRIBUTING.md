@@ -49,11 +49,11 @@ pnpm install
 
 ### 2. Set Up Supabase
 
-Choose one of these options:
+The database schema is version-controlled in `supabase/migrations/`. The CLI applies it automatically when you start a local instance or push to a cloud project.
 
 #### Option A: Local Development (Recommended)
 
-1. Start local Supabase:
+1. Start local Supabase (applies migrations automatically):
    ```bash
    supabase start
    ```
@@ -66,7 +66,11 @@ Choose one of these options:
 #### Option B: Personal Cloud
 
 1. Create a free account at [supabase.com](https://supabase.com)
-2. Create a new project
+2. Create a new project, then link and push:
+   ```bash
+   supabase link --project-ref <your-project-ref>
+   supabase db push
+   ```
 3. Copy your project URL and API keys to `.env`
 
 ### 3. Start Development Server
@@ -89,7 +93,6 @@ NUXT_PUBLIC_SUPABASE_KEY=your-anon-key
 NUXT_SUPABASE_SECRET_KEY=your-service-role-key
 
 # AI (optional - for resume parsing features)
-GROQ_API_KEY=your-groq-key
 DEEPSEEK_API_KEY=your-deepseek-key
 GOOGLE_FONTS_API_KEY=your-google-fonts-key
 
@@ -142,6 +145,7 @@ pnpm typecheck
 ### Before Submitting
 
 1. **Update your fork:**
+
    ```bash
    git fetch upstream
    git checkout master
@@ -149,6 +153,7 @@ pnpm typecheck
    ```
 
 2. **Create a feature branch:**
+
    ```bash
    git checkout -b feat/your-feature-name
    ```
@@ -156,6 +161,7 @@ pnpm typecheck
 3. **Make your changes** following the coding standards
 
 4. **Test your changes:**
+
    ```bash
    pnpm lint
    pnpm typecheck
@@ -165,6 +171,7 @@ pnpm typecheck
 5. **Commit with a clear message** (see [Commit Messages](#commit-messages))
 
 6. **Push to your fork:**
+
    ```bash
    git push origin feat/your-feature-name
    ```
@@ -263,6 +270,7 @@ git commit -m "docs: update README with new screenshots"
 ## Questions?
 
 If you have questions, feel free to:
+
 - Open a [discussion](https://github.com/javadag/weave-cv/discussions)
 - Ask in an issue
 
