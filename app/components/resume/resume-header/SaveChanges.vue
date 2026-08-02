@@ -6,7 +6,7 @@ const { t } = useI18n()
 const route = useRoute()
 const id = computed(() => route.params.id as string)
 
-const { isSaving, lastSavedAt, isOnline, hasPendingOfflineChanges, save } = useAutosave(id)
+const { isDirty, isSaving, lastSavedAt, isOnline, hasPendingOfflineChanges, save } = useAutosave(id)
 
 // Reactive "saved X ago" label
 const lastSavedRef = ref(new Date())
@@ -38,6 +38,13 @@ const handleManualSave = async () => {
       {{ hasPendingOfflineChanges ? $t("editor.header.changesQueued") : $t("editor.header.offline") }}
     </span>
   </div>
+  <span
+    v-else-if="isDirty && !isSaving"
+    class="text-amber-500 hidden items-center gap-1 px-2 text-xs whitespace-nowrap sm:flex"
+  >
+    <UIcon name="i-lucide-cloud-upload" class="h-3.5 w-3.5 shrink-0" />
+    {{ $t("editor.header.unsavedChanges") }}
+  </span>
   <span v-else-if="savedAtLabel && !isSaving" class="text-muted hidden px-2 text-xs whitespace-nowrap sm:inline">
     {{ savedAtLabel }}
   </span>
