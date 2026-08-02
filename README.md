@@ -22,7 +22,7 @@
 - 🔄 **Auto-Save** — Cloud sync across devices with Supabase
 - 🌐 **Multi-Language** — English and Persian (RTL) support
 - 🎯 **Drag & Drop** — Reorder sections and content easily
-- 🤖 **AI Integration** — Resume parsing with multiple AI providers
+- 🤖 **AI Integration** — Resume parsing
 - 📱 **Responsive** — Works on desktop, tablet, and mobile
 
 ## 🚀 Quick Start
@@ -100,14 +100,14 @@
 
 ## 📝 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start development server |
-| `pnpm build` | Build for production |
-| `pnpm preview` | Preview production build |
-| `pnpm lint` | Run ESLint |
-| `pnpm typecheck` | Run TypeScript checks |
-| `pnpm generate` | Generate static site |
+| Command          | Description              |
+| ---------------- | ------------------------ |
+| `pnpm dev`       | Start development server |
+| `pnpm build`     | Build for production     |
+| `pnpm preview`   | Preview production build |
+| `pnpm lint`      | Run ESLint               |
+| `pnpm typecheck` | Run TypeScript checks    |
+| `pnpm generate`  | Generate static site     |
 
 ## 🤝 Contributing
 
