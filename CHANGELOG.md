@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/JavadAg/weave-cv/compare/v2.7.2...v2.8.0) (2026-08-02)
+
+
+### 🐛 Bug Fixes
+
+* add NODE_OPTIONS --max-old-space-size=4096 to CI workflow ([1b151b6](https://github.com/JavadAg/weave-cv/commit/1b151b64c827b509f9d26fdf3160ecd3e45ec5ca))
+* debounce autosave and flush on navigation to prevent data loss ([2201bf6](https://github.com/JavadAg/weave-cv/commit/2201bf6a17e989391dbdb0969cf52bd4cac40d22))
+* lint ([36efa35](https://github.com/JavadAg/weave-cv/commit/36efa3533851e82a7925fc6d211fd723cc2e0e81))
+
+
+### ✨ Features
+
+* add dir on form editor ([42484b9](https://github.com/JavadAg/weave-cv/commit/42484b9b4cc87c7c196ac756cf13d8a8e6b11426))
+
 ### [2.7.2](https://github.com/JavadAg/weave-cv/compare/v2.7.1...v2.7.2) (2026-07-31)
 
 
