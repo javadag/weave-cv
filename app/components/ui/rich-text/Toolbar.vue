@@ -5,12 +5,35 @@ import ToolbarButton from "./ToolbarButton.vue"
 
 interface Props {
   editor: Editor | null
+  defaultRtl?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  defaultRtl: false
+})
 
 const linkOpen = ref(false)
 const linkUrl = ref("")
+
+const currentDirection = computed<"ltr" | "rtl">(() => {
+  const e = unref(props.editor)
+  if (!e) return props.defaultRtl ? "rtl" : "ltr"
+
+  for (const type of ["paragraph", "heading", "listItem"]) {
+    const dir = e.getAttributes(type).dir
+    if (dir === "ltr" || dir === "rtl") return dir
+  }
+
+  return props.defaultRtl ? "rtl" : "ltr"
+})
+
+const toggleTextDirection = () => {
+  const e = unref(props.editor)
+  if (!e) return
+
+  const next = currentDirection.value === "ltr" ? "rtl" : "ltr"
+  e.chain().focus().setTextDirection(next).run()
+}
 
 const handleLinkAction = (action: "apply" | "clear" | "open") => {
   const e = unref(props.editor)
@@ -129,7 +152,6 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().toggleBold().run()"
       @click="toggleBold"
     />
-
     <ToolbarButton
       icon="i-lucide-italic"
       :tooltip="$t('ui.richText.italic')"
@@ -137,14 +159,12 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().toggleItalic().run()"
       @click="toggleItalic"
     />
-
     <LinkPopover
       v-model:is-open="linkOpen"
       v-model:link-url="linkUrl"
       :is-active="editor.isActive('link')"
       @action="handleLinkAction"
     />
-
     <ToolbarButton
       icon="i-lucide-strikethrough"
       :tooltip="$t('ui.richText.strike')"
@@ -152,7 +172,6 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().toggleStrike().run()"
       @click="toggleStrike"
     />
-
     <ToolbarButton
       icon="i-lucide-list"
       :tooltip="$t('ui.richText.bulletList')"
@@ -160,7 +179,6 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().toggleBulletList().run()"
       @click="toggleBulletList"
     />
-
     <ToolbarButton
       icon="i-lucide-list-ordered"
       :tooltip="$t('ui.richText.orderedList')"
@@ -168,9 +186,7 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().toggleOrderedList().run()"
       @click="toggleOrderedList"
     />
-
     <div class="bg-border h-6 w-px" />
-
     <ToolbarButton
       icon="i-lucide-align-left"
       :tooltip="$t('ui.richText.alignLeft')"
@@ -178,7 +194,6 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().setTextAlign('left').run()"
       @click="setTextAlign('left')"
     />
-
     <ToolbarButton
       icon="i-lucide-align-center"
       :tooltip="$t('ui.richText.alignCenter')"
@@ -186,7 +201,6 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().setTextAlign('center').run()"
       @click="setTextAlign('center')"
     />
-
     <ToolbarButton
       icon="i-lucide-align-right"
       :tooltip="$t('ui.richText.alignRight')"
@@ -194,7 +208,6 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().setTextAlign('right').run()"
       @click="setTextAlign('right')"
     />
-
     <ToolbarButton
       icon="i-lucide-align-justify"
       :tooltip="$t('ui.richText.justify')"
@@ -202,9 +215,18 @@ const resetStyles = () => {
       :disabled="!editor.can().chain().focus().setTextAlign('justify').run()"
       @click="setTextAlign('justify')"
     />
-
     <div class="bg-border h-6 w-px" />
-
+    <div class="flex items-center gap-1">
+      <ToolbarButton
+        icon="i-lucide-arrow-left-right"
+        :tooltip="
+          currentDirection === 'ltr' ? $t('ui.richText.textDirectionToRtl') : $t('ui.richText.textDirectionToLtr')
+        "
+        :is-active="currentDirection === 'ltr'"
+        @click="toggleTextDirection"
+      />
+      <span class="text-muted text-xs font-semibold tracking-wide uppercase">{{ currentDirection }}</span>
+    </div>
     <ToolbarButton icon="i-lucide-rotate-ccw" :tooltip="$t('ui.richText.resetStyles')" @click="resetStyles" />
   </div>
 </template>

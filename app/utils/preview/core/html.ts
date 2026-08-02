@@ -7,7 +7,7 @@ import ListItem from "~/components/resume/preview/advanced/content/ListItem.vue"
 export function sanitizeHtml(html: string): string {
   return DOMPurify.sanitize(html, {
     USE_PROFILES: { html: true },
-    ALLOWED_ATTR: ["href", "title", "alt", "rel", "target", "class", "style", "data-type"]
+    ALLOWED_ATTR: ["href", "title", "alt", "rel", "target", "class", "style", "data-type", "dir"]
   })
 }
 
@@ -150,16 +150,17 @@ export function createVNodeFromHtmlTag(
   const tagName = element.tagName.toLowerCase()
   const href = element.getAttribute("href") || ""
   const styleAttribute = element.getAttribute("style") || ""
+  const dir = element.getAttribute("dir") || undefined
 
   const inlineStyles = parseInlineStyles(styleAttribute)
   const styles = computeTextStyles({ tagName, inlineStyles })
 
   if (SUPPORTED_TEXT_TAGS.includes(tagName as (typeof SUPPORTED_TEXT_TAGS)[number])) {
-    return h(tagName, { style: styles }, children)
+    return h(tagName, { style: styles, dir }, children)
   }
 
   if (tagName === "li") {
-    return h(ListItem, { style: styles }, { default: () => children })
+    return h(ListItem, { style: styles, dir }, { default: () => children })
   }
 
   if (tagName === "a") {

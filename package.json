@@ -33,6 +33,7 @@
     "@pinia/nuxt": "0.11.3",
     "@sparticuz/chromium": "^141.0.0",
     "@tailwindcss/vite": "^4.3.2",
+    "@tiptap/core": "^3.27.1",
     "@tiptap/extension-text-align": "^3.27.1",
     "@vueuse/integrations": "^14.3.0",
     "@vueuse/nuxt": "14.3.0",

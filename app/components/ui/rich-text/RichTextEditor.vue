@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { TextAlign } from "@tiptap/extension-text-align"
+import { TextDirection } from "./extensions/TextDirection"
 import Toolbar from "./Toolbar.vue"
 
 interface Props {
@@ -32,7 +33,8 @@ const editor = useEditor({
     }),
     TextAlign.configure({
       types: ["heading", "paragraph"]
-    })
+    }),
+    TextDirection
   ]
 })
 
@@ -43,7 +45,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="flex flex-col gap-2" :dir="props.rtl ? 'rtl' : 'ltr'">
-    <Toolbar :editor="editor || null" />
+    <Toolbar :editor="editor || null" :default-rtl="props.rtl" />
     <TiptapEditorContent :editor="editor" class="bg-muted rounded-lg p-3" />
   </div>
 </template>

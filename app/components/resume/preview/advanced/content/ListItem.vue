@@ -6,10 +6,12 @@ import { ColumnColorsKey } from "../../pages/columnColorsContext"
 
 interface Props {
   style?: Record<string, string>
+  dir?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  style: () => ({})
+  style: () => ({}),
+  dir: undefined
 })
 
 const configsStore = useConfigsStore()
@@ -77,7 +79,7 @@ const listItemStyles = computed(() => {
 })
 </script>
 <template>
-  <li :style="listItemStyles">
+  <li :style="listItemStyles" :dir="props.dir || undefined">
     <div v-if="shouldShowMarker" :style="markerContainerStyles">
       <component :is="listMarker" />
     </div>

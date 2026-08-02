@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, Fragment, h } from "vue"
-import type { TSeparator } from "~/utils/schemas/shared.schema"
 import { sanitizeHtml } from "~/utils/preview/core/html"
+import type { TSeparator } from "~/utils/schemas/shared.schema"
 import LinkIcon from "../../advanced/content/LinkIcon.vue"
 
 interface Props {
@@ -33,51 +33,59 @@ function isNodeEmpty(node: Node): boolean {
 
 type ProcessResult = VNode | string | null
 
-function processNode(
-  node: Node,
-  isFirst: boolean,
-  sep: string,
-  styles: typeof linkStyles.value
-): ProcessResult {
+function processNode(node: Node, isFirst: boolean, sep: string, styles: typeof linkStyles.value): ProcessResult {
   if (node.nodeType === Node.TEXT_NODE) return node.textContent
 
   const name = node.nodeName.toLowerCase()
+  const dir = (node as HTMLElement).getAttribute("dir") || undefined
   const childResults = [...node.childNodes]
     .map((child, i) => processNode(child, isFirst && i === 0, sep, styles))
     .filter((c): c is VNode | string => c !== null)
 
+  let result: ProcessResult = null
+
   if (name === "li") {
     if (isNodeEmpty(node)) return null
     const content = h(Fragment, childResults)
-    return isFirst ? content : h("span", [sep, content])
-  }
 
-  switch (name) {
-    case "strong": {
-      return h("strong", { style: { fontWeight: "bold" } }, childResults)
-    }
-    case "em": {
-      return h("em", { style: { fontStyle: "italic" } }, childResults)
-    }
-    case "u": {
-      return h("u", { style: { textDecoration: "underline" } }, childResults)
-    }
-    case "a": {
-      const href = (node as HTMLAnchorElement).getAttribute("href")
-      if (!href) return h("span", childResults)
-      return h(
-        "span",
-        { style: { display: "inline-flex", alignItems: "center", gap: "0.2em" } },
-        [
+    result = isFirst ? content : h("span", [sep, content])
+  } else {
+    switch (name) {
+      case "strong": {
+        result = h("strong", { style: { fontWeight: "bold" } }, childResults)
+        break
+      }
+      case "em": {
+        result = h("em", { style: { fontStyle: "italic" } }, childResults)
+        break
+      }
+      case "u": {
+        result = h("u", { style: { textDecoration: "underline" } }, childResults)
+        break
+      }
+      case "a": {
+        const href = (node as HTMLAnchorElement).getAttribute("href")
+        if (!href) {
+          result = h("span", childResults)
+          break
+        }
+        result = h("span", { style: { display: "inline-flex", alignItems: "center", gap: "0.2em" } }, [
           h("a", { href, target: "_blank", rel: "noopener noreferrer", style: styles }, childResults),
           h(LinkIcon)
-        ]
-      )
-    }
-    default: {
-      return childResults.length > 0 ? h(Fragment, childResults) : null
+        ])
+        break
+      }
+      default: {
+        result = childResults.length > 0 ? h(Fragment, childResults) : null
+      }
     }
   }
+
+  if (dir && result) {
+    result = h("span", { dir }, [result])
+  }
+
+  return result
 }
 
 const renderContent = computed(() => {
