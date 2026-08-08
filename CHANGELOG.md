@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.8.1](https://github.com/JavadAg/weave-cv/compare/v2.8.0...v2.8.1) (2026-08-08)
+
+
+### 🐛 Bug Fixes
+
+* responsive ([bddbcb3](https://github.com/JavadAg/weave-cv/commit/bddbcb397d0d9f96ba0437794558ec1757eeaab1))
+* track supabase migrations and config for contributor onboarding ([b486f81](https://github.com/JavadAg/weave-cv/commit/b486f81c1bb0939c9221a026c5cf3aaaf1282ee8))
+
 ## [2.8.0](https://github.com/JavadAg/weave-cv/compare/v2.7.2...v2.8.0) (2026-08-02)
 
 
