@@ -121,8 +121,8 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
         </div>
         <div class="text-dimmed flex-1 text-center text-[11px]">weave-cv.app/editor/sara-chen</div>
       </div>
-      <div class="grid h-120 grid-cols-[140px_1fr_120px] lg:h-135">
-        <div class="border-default bg-muted border-r p-3 text-xs">
+      <div class="grid h-80 grid-cols-1 sm:grid-cols-[140px_1fr_120px] sm:h-120 lg:h-135">
+        <div class="border-default bg-muted hidden border-r p-3 text-xs sm:block">
           <motion.div
             class="text-dimmed mb-2.5 text-[10px] font-semibold tracking-widest uppercase"
             :initial="{ opacity: 0, x: -12 }"
@@ -162,7 +162,7 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
           :transition="{ duration: 0.5, delay: 0.5, ease: 'easeOut' }"
         >
           <div
-            class="flex aspect-[0.77] w-full max-w-75 flex-col gap-2.5 rounded-sm bg-white p-5 text-gray-800 shadow-sm"
+            class="flex aspect-[0.77] w-full max-w-55 sm:max-w-75 flex-col gap-2.5 rounded-sm bg-white p-3.5 sm:p-5 text-gray-800 shadow-sm"
           >
             <div>
               <div class="text-[18px] font-bold tracking-[-0.02em] text-slate-950">Sara Chen</div>
@@ -212,7 +212,7 @@ const floatTransition5_5s = { duration: 5.5, repeat: Infinity, ease: "easeInOut"
           </div>
         </motion.div>
         <motion.div
-          class="border-default bg-muted flex flex-col overflow-hidden border-l text-xs"
+          class="border-default bg-muted hidden flex-col overflow-hidden border-l text-xs sm:flex"
           :initial="{ opacity: 0, x: 14 }"
           :animate="{ opacity: 1, x: 0 }"
           :transition="{ duration: 0.4, delay: 0.7, ease: 'easeOut' }"
