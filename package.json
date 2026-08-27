@@ -10,6 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "analyze": "nuxt analyze",
+    "test": "vitest run",
     "lint": "eslint --ext .ts,.js,.vue --ignore-pattern .gitignore .",
     "typecheck": "nuxt typecheck",
     "update-types": "bash scripts/update-types.sh",
@@ -74,6 +75,7 @@
     "puppeteer": "24.29.0",
     "sharp": "^0.35.3",
     "standard-version": "^9.5.0",
+    "vitest": "^4.1.11",
     "vue-tsc": "^3.3.6"
   }
 }
