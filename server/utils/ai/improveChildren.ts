@@ -154,7 +154,8 @@ export function toStrArr(v: unknown): string[] {
 
 export function mapProviderError(error: unknown): string {
   const err = (error ?? {}) as Record<string, unknown>
-  const status = err.status as number | undefined
+  const response = err.response as Record<string, unknown> | undefined
+  const status = (err.status ?? err.statusCode ?? response?.status) as number | undefined
   if (status === 401 || status === 403) {
     return "Your provider rejected the API key or credits. Open dashboard settings to fix it."
   }

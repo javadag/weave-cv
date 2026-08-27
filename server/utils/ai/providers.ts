@@ -24,7 +24,7 @@ export const AI_PROVIDERS: AiProviderConfig[] = [
   { id: "deepseek", label: "DeepSeek", baseURL: "https://api.deepseek.com/v1", defaultModel: "deepseek-chat", modelEditable: false },
   { id: "groq", label: "Groq", baseURL: "https://api.groq.com/openai/v1", defaultModel: "llama-3.3-70b-versatile", modelEditable: true },
   { id: "openai", label: "OpenAI", baseURL: "https://api.openai.com/v1", defaultModel: "gpt-4o-mini", modelEditable: true },
-  { id: "anthropic", label: "Anthropic", baseURL: "https://api.anthropic.com/v1", defaultModel: "claude-sonnet-4-5", modelEditable: true },
+  { id: "anthropic", label: "Anthropic", baseURL: "https://api.anthropic.com/v1", defaultModel: "claude-3-5-sonnet-latest", modelEditable: true },
   { id: "gemini", label: "Gemini", baseURL: "https://generativelanguage.googleapis.com/v1beta/openai", defaultModel: "gemini-2.0-flash", modelEditable: true },
   { id: "mistral", label: "Mistral", baseURL: "https://api.mistral.ai/v1", defaultModel: "mistral-small-latest", modelEditable: true },
   { id: "perplexity", label: "Perplexity", baseURL: "https://api.perplexity.ai", defaultModel: "sonar-pro", modelEditable: true },
