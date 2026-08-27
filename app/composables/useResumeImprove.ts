@@ -23,6 +23,7 @@ export interface ImproveResult {
 
 interface EntryMeta {
   sectionType: string
+  title: string
 }
 
 function extractErrorMessage(error: unknown): string | null {
@@ -72,7 +73,9 @@ export function useResumeImprove() {
     error.value = null
     try {
       const entries = entriesFromStore()
-      entryIndex.value = Object.fromEntries(entries.map((e) => [e.serverId, { sectionType: e.sectionType }]))
+      entryIndex.value = Object.fromEntries(
+        entries.map((e) => [e.serverId, { sectionType: e.sectionType, title: e.title || e.subtitle || "—" }])
+      )
       const res = await $fetch<ImproveResult>("/api/ai/improve-resume", {
         method: "POST",
         body: {
@@ -156,6 +159,14 @@ export function useResumeImprove() {
     return applied.value[serverItemId] !== undefined
   }
 
+  function currentTextOf(serverItemId: string, field: "description" | "title"): string {
+    return currentValue(serverItemId, field) ?? ""
+  }
+
+  function entryTitleOf(serverItemId: string): string {
+    return entryIndex.value[serverItemId]?.title ?? ""
+  }
+
   function reset() {
     result.value = null
     error.value = null
@@ -175,6 +186,8 @@ export function useResumeImprove() {
     error,
     pendingNotes,
     isApplied,
+    currentTextOf,
+    entryTitleOf,
     runAnalyze,
     refine,
     apply,
