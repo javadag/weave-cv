@@ -94,7 +94,7 @@ export function useResumeImprove() {
       applied.value = {}
     } catch (error_) {
       const detail = extractErrorMessage(error_)
-      error.value = { key: "improve_failed", detail: detail ?? undefined }
+      error.value = { key: "editor.improve.improve_failed", detail: detail ?? undefined }
     } finally {
       analyzing.value = false
     }
@@ -130,7 +130,7 @@ export function useResumeImprove() {
       if (i !== -1) result.value.suggestions[i] = refined
     } catch (error_) {
       const detail = extractErrorMessage(error_)
-      error.value = { key: "refine_failed", detail: detail ?? undefined }
+      error.value = { key: "editor.improve.refine_failed", detail: detail ?? undefined }
     } finally {
       refiningId.value = null
     }
