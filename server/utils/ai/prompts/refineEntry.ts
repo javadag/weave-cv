@@ -36,7 +36,7 @@ export function buildRefineMessages(args: {
     ``,
     `Current suggestion (${args.currentSuggestion.field}):\n${args.currentSuggestion.suggestedText}`,
     ``,
-    args.notes.length
+    args.notes.length > 0
       ? `User notes (BINDING, newest last):\n${constraints}`
       : `No notes provided — strengthen the suggestion.`
   ].join("\n")

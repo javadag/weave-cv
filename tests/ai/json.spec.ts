@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { parseJsonLoose, jsonSize, assertCustomBaseUrl } from "../../server/utils/ai/json"
+import { parseJsonLoose, jsonSize, isHttpsBaseUrl } from "../../server/utils/ai/json"
 
 describe("parseJsonLoose", () => {
   it("parses plain JSON", () => {
@@ -27,7 +27,8 @@ describe("body cap", () => {
 
 describe("custom base url", () => {
   it("requires https", () => {
-    expect(assertCustomBaseUrl("https://gateway.example.com/v1")).toBe(true)
-    expect(assertCustomBaseUrl("http://gateway.example.com/v1")).toBe(false)
+    expect(isHttpsBaseUrl("https://gateway.example.com/v1")).toBe(true)
+    // eslint-disable-next-line unicorn/prefer-https
+    expect(isHttpsBaseUrl("http://gateway.example.com/v1")).toBe(false)
   })
 })

@@ -20,7 +20,6 @@ describe("normalizeImproveRequest", () => {
     expect(() => normalizeImproveRequest({ ...validBody, jobDescription: "" })).toThrow()
   })
   it("rejects oversized bodies", () => {
-    const huge = { ...validBody, jobDescription: `"x".repeat(65 * 1024)` }
     expect(() => normalizeImproveRequest({ ...validBody, jobDescription: "x".repeat(65 * 1024) })).toThrow()
   })
   it("rejects http custom base url", () => {

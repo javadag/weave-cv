@@ -4,7 +4,7 @@ import { buildImproveMessages, type AiEntry } from "../../../server/utils/ai/pro
 
 describe("honesty block", () => {
   it("has all three levels", () => {
-    expect(Object.keys(HONESTY_BLOCK).sort()).toEqual(["balanced", "bold", "faithful"])
+    expect(Object.keys(HONESTY_BLOCK).toSorted((a, b) => a.localeCompare(b))).toEqual(["balanced", "bold", "faithful"])
   })
   it("bold flags added facts and others do not", () => {
     expect(HONESTY_BLOCK.bold).toMatch(/addedFacts/)

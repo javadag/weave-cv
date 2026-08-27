@@ -1,13 +1,14 @@
 import type { AiEntry } from "./prompts/improveResume"
-import { sanitizeSuggestions, normalizeAiRequestBase, validEntry, type HistorySuggestion } from "./improveChildren"
+import { sanitizeSuggestions, normalizeAiRequestBase, isValidEntry, type HistorySuggestion } from "./improveChildren"
 import { jsonSize } from "./json"
 import { HttpError } from "./improveChildren"
+import type { AiId, HonestyLevel } from "./providers"
 
 export interface RefineRequestShape {
   jobDescription: string
-  honesty: "faithful" | "balanced" | "bold"
+  honesty: HonestyLevel
   language: string
-  provider: string
+  provider: AiId
   model?: string
   baseUrl?: string
   apiKey: string
@@ -30,7 +31,7 @@ export function normalizeRefineRequest(body: unknown): RefineRequestShape {
   const base = normalizeAiRequestBase(body)
   const b = (body ?? {}) as Record<string, unknown>
 
-  if (!validEntry(b.entry)) {
+  if (!isValidEntry(b.entry)) {
     throw new HttpError(400, "entry is required and must be a known resume entry")
   }
   if (!isHistorySuggestion(b.currentSuggestion)) {

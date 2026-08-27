@@ -1,6 +1,6 @@
 import type { AiEntry } from "./prompts/improveResume"
 import type { AiId, HonestyLevel } from "./providers"
-import { assertCustomBaseUrl, jsonSize } from "./json"
+import { isHttpsBaseUrl, jsonSize } from "./json"
 
 export class HttpError extends Error {
   statusCode: number
@@ -53,7 +53,7 @@ export function isProviderId(v: string): v is AiId {
   return (PROVIDER_IDS as readonly string[]).includes(v)
 }
 
-export function validEntry(e: unknown): e is AiEntry {
+export function isValidEntry(e: unknown): e is AiEntry {
   if (!e || typeof e !== "object") return false
   const o = e as Record<string, unknown>
   return (
@@ -88,10 +88,8 @@ export function normalizeAiRequestBase(body: unknown): AiRequestBase {
   }
   const language = typeof b.language === "string" && b.language ? b.language : "en"
   const baseUrl = typeof b.baseUrl === "string" ? b.baseUrl : undefined
-  if (provider === "custom") {
-    if (!baseUrl || !assertCustomBaseUrl(baseUrl)) {
-      throw new HttpError(400, "custom provider requires an https baseUrl")
-    }
+  if (provider === "custom" && (!baseUrl || !isHttpsBaseUrl(baseUrl))) {
+    throw new HttpError(400, "custom provider requires an https baseUrl")
   }
   const apiKey = typeof b.apiKey === "string" ? b.apiKey : ""
   if (!apiKey.trim()) {
@@ -111,7 +109,7 @@ export function normalizeAiRequestBase(body: unknown): AiRequestBase {
 export function normalizeImproveRequest(body: unknown): ImproveRequestShape {
   const base = normalizeAiRequestBase(body)
   const b = (body ?? {}) as Record<string, unknown>
-  const entries = (Array.isArray(b.entries) ? b.entries : []).filter(validEntry)
+  const entries = (Array.isArray(b.entries) ? b.entries : []).filter((e) => isValidEntry(e))
   if (jsonSize({ jobDescription: base.jobDescription, entries }) > 64 * 1024) {
     throw new HttpError(413, "Request body too large")
   }
@@ -138,6 +136,20 @@ export function sanitizeSuggestions(raw: unknown, knownSections?: ReadonlySet<st
     })
   }
   return out
+}
+
+export function clampMatchScore(v: unknown): number {
+  if (typeof v !== "number" || !Number.isFinite(v)) return 0
+  return Math.max(0, Math.min(100, Math.round(v)))
+}
+
+export function toStr(v: unknown): string {
+  return typeof v === "string" ? v : ""
+}
+
+export function toStrArr(v: unknown): string[] {
+  if (!Array.isArray(v)) return []
+  return v.filter((x): x is string => typeof x === "string")
 }
 
 export function mapProviderError(error: unknown): string {

@@ -9,7 +9,7 @@ export function parseJsonLoose<T>(raw: string): T {
   const direct = tryParse(raw)
   if (direct) return direct
   // strip markdown fences
-  const noFences = raw.replace(/```(?:json)?\s*/g, "").replace(/```/g, "").trim()
+  const noFences = raw.replaceAll(/```(?:json)?\s*/g, "").replaceAll("```", "").trim()
   const fenced = tryParse(noFences)
   if (fenced) return fenced
   // last {...} block
@@ -25,6 +25,6 @@ export function jsonSize(obj: unknown): number {
   return JSON.stringify(obj ?? {}).length
 }
 
-export function assertCustomBaseUrl(u: string): boolean {
+export function isHttpsBaseUrl(u: string): boolean {
   return u.trim().startsWith("https://")
 }
