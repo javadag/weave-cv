@@ -53,7 +53,7 @@ export function isProviderId(v: string): v is AiId {
   return (PROVIDER_IDS as readonly string[]).includes(v)
 }
 
-function validEntry(e: unknown): e is AiEntry {
+export function validEntry(e: unknown): e is AiEntry {
   if (!e || typeof e !== "object") return false
   const o = e as Record<string, unknown>
   return (
@@ -63,7 +63,17 @@ function validEntry(e: unknown): e is AiEntry {
   )
 }
 
-export function normalizeImproveRequest(body: unknown): ImproveRequestShape {
+export interface AiRequestBase {
+  jobDescription: string
+  honesty: HonestyLevel
+  language: string
+  provider: AiId
+  model?: string
+  baseUrl?: string
+  apiKey: string
+}
+
+export function normalizeAiRequestBase(body: unknown): AiRequestBase {
   const b = (body ?? {}) as Record<string, unknown>
   if (typeof b.jobDescription !== "string" || b.jobDescription.trim().length === 0) {
     throw new HttpError(400, "jobDescription is required")
@@ -87,10 +97,6 @@ export function normalizeImproveRequest(body: unknown): ImproveRequestShape {
   if (!apiKey.trim()) {
     throw new HttpError(400, "apiKey is required")
   }
-  const entries = (Array.isArray(b.entries) ? b.entries : []).filter(validEntry)
-  if (jsonSize({ jobDescription: b.jobDescription, entries }) > 64 * 1024) {
-    throw new HttpError(413, "Request body too large")
-  }
   return {
     jobDescription: b.jobDescription,
     honesty,
@@ -98,9 +104,18 @@ export function normalizeImproveRequest(body: unknown): ImproveRequestShape {
     provider: provider as AiId,
     model: typeof b.model === "string" && b.model ? b.model : undefined,
     baseUrl,
-    apiKey,
-    entries
+    apiKey
   }
+}
+
+export function normalizeImproveRequest(body: unknown): ImproveRequestShape {
+  const base = normalizeAiRequestBase(body)
+  const b = (body ?? {}) as Record<string, unknown>
+  const entries = (Array.isArray(b.entries) ? b.entries : []).filter(validEntry)
+  if (jsonSize({ jobDescription: base.jobDescription, entries }) > 64 * 1024) {
+    throw new HttpError(413, "Request body too large")
+  }
+  return { ...base, entries }
 }
 
 export function sanitizeSuggestions(raw: unknown, knownSections?: ReadonlySet<string>): HistorySuggestion[] {
