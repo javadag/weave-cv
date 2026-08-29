@@ -24,7 +24,7 @@ const modelValue = computed({
     :title="$t('editor.slideover.style')"
     :ui="{
       content: 'max-h-[75vh] sm:max-h-[85vh] rounded-t-2xl',
-      body: 'p-0'
+      body: 'p-0 sm:p-0'
     }"
   >
     <template #body>

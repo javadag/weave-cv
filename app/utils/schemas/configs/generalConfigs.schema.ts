@@ -69,7 +69,7 @@ export const LayoutSchema = z.object({
 export const HeadingsSchema = z.object({
   fontSizeMultiplier: z.number().min(1).max(2).default(1.2),
   fontWeight: FontWeight.default("bold"),
-  fontCase: z.enum(["inherit", "uppercase", "lowercase"]).default("inherit"),
+  fontCase: FontCase.default("inherit"),
   variant: z
     .enum(["plain", "underline", "underline-full", "pill", "border", "vertical-border"])
     .default("vertical-border"),

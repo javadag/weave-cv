@@ -119,7 +119,6 @@ watch([pending, isDesktop], ([p, isDesk]) => {
   }
 })
 
-// Keyboard shortcuts
 useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
 </script>
 
@@ -158,29 +157,37 @@ useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
         </SplitterGroup>
       </div>
 
-      <!-- Medium (1024–1536px): 2-panel with toggleable sidebar -->
-      <div v-else-if="isMedium" class="min-h-0 flex-1 overflow-hidden">
-        <div class="flex h-full gap-2">
+      <!-- Medium (1024–1536px): 2-panel with toggleable sidebar & resizer -->
+      <div v-else-if="isMedium" class="min-h-0 flex-1 overflow-hidden" dir="ltr">
+        <SplitterGroup v-if="activeSidebar" direction="horizontal" class="flex h-full gap-1">
           <!-- Sidebar: Sections or Configs -->
-          <Transition name="slide-sidebar">
-            <div v-if="activeSidebar" class="w-80 max-w-[320px] min-w-70 shrink-0 overflow-y-auto">
-              <ResumeSectionsForms
-                v-if="activeSidebar === 'sections'"
-                :dir="isRtl ? 'rtl' : 'ltr'"
-                :loading="pending"
-              />
-              <ResumeConfigs v-else :dir="isRtl ? 'rtl' : 'ltr'" />
-            </div>
-          </Transition>
+          <SplitterPanel
+            :id="`editor-medium-${activeSidebar}`"
+            :min-size="20"
+            :default-size="35"
+            :max-size="50"
+            class="overflow-y-auto"
+          >
+            <ResumeSectionsForms
+              v-if="activeSidebar === 'sections'"
+              :dir="isRtl ? 'rtl' : 'ltr'"
+              :loading="pending"
+            />
+            <ResumeConfigs v-else :dir="isRtl ? 'rtl' : 'ltr'" />
+          </SplitterPanel>
+
+          <!-- Resize Handle -->
+          <SplitterResizeHandle class="bg-default/70 flex w-3 items-center justify-center rounded-2xl">
+            <UIcon name="i-lucide-grip-vertical" class="text-primary shrink-0" />
+          </SplitterResizeHandle>
 
           <!-- Preview -->
-          <div class="relative min-w-0 flex-1 overflow-hidden">
-            <div class="absolute top-2 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          <SplitterPanel id="editor-medium-preview" :min-size="35" class="relative overflow-hidden">
+            <div class="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 gap-2">
               <UButton
                 :color="activeSidebar === 'sections' ? 'primary' : 'neutral'"
                 :variant="activeSidebar === 'sections' ? 'solid' : 'outline'"
                 icon="i-lucide-file-text"
-                size="sm"
                 @click="toggleSidebar('sections')"
               >
                 {{ $t("editor.sections") }}
@@ -189,7 +196,6 @@ useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
                 :color="activeSidebar === 'configs' ? 'primary' : 'neutral'"
                 :variant="activeSidebar === 'configs' ? 'solid' : 'outline'"
                 icon="i-lucide-settings"
-                size="sm"
                 @click="toggleSidebar('configs')"
               >
                 {{ $t("editor.style") }}
@@ -205,6 +211,40 @@ useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
             </span>
             <ResumePreviewSkeleton v-if="pending" :is-responsive="true" />
             <ResumePreview v-else :scale="scale" :is-responsive="true" @update:scale="scale = $event" />
+          </SplitterPanel>
+        </SplitterGroup>
+
+        <!-- No Sidebar Active (Full Preview with centered layout & toggle buttons) -->
+        <div v-else class="relative flex h-full flex-col overflow-hidden">
+          <div class="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+            <UButton
+              color="neutral"
+              variant="outline"
+              icon="i-lucide-file-text"
+              @click="toggleSidebar('sections')"
+            >
+              {{ $t("editor.sections") }}
+            </UButton>
+            <UButton
+              color="neutral"
+              variant="outline"
+              icon="i-lucide-settings"
+              @click="toggleSidebar('configs')"
+            >
+              {{ $t("editor.style") }}
+            </UButton>
+          </div>
+          <span class="text-toned mb-2 flex w-full items-center justify-center text-center text-xs tracking-wider">
+            {{ $t("editor.header.preview") }}
+            <span class="text-muted ms-2 flex items-center justify-center"
+              >{{ configs.general.layout.size }}
+              <UIcon name="i-lucide-dot" class="size-4" />
+              {{ Math.round(scale * 100) }}%</span
+            >
+          </span>
+          <div class="relative min-h-0 flex-1 overflow-hidden">
+            <ResumePreviewSkeleton v-if="pending" :is-responsive="true" />
+            <ResumePreview v-else :scale="scale" :is-responsive="true" @update:scale="scale = $event" />
           </div>
         </div>
       </div>
@@ -213,11 +253,11 @@ useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
       <div v-else class="relative min-h-0 flex-1 overflow-hidden">
         <span class="text-toned mb-2 flex w-full items-center justify-center text-center text-xs tracking-wider">
           {{ $t("editor.header.preview") }}
-          <span class="text-muted ms-2 flex items-center justify-center"
-            >{{ configs.general.layout.size }}
+          <span class="text-muted ms-2 flex items-center justify-center">
+            {{ configs.general.layout.size }}
             <UIcon name="i-lucide-dot" class="size-4" />
-            {{ Math.round(scale * 100) }}%</span
-          >
+            {{ Math.round(scale * 100) }}%
+          </span>
         </span>
         <ResumePreviewSkeleton v-if="pending" :is-responsive="true" />
         <ResumePreview v-else :scale="scale" :is-responsive="true" @update:scale="scale = $event" />
@@ -234,16 +274,3 @@ useEditorKeyboardShortcuts({ canUndo, canRedo, undo, redo })
     </div>
   </ClientOnly>
 </template>
-
-<style scoped>
-.slide-sidebar-enter-active,
-.slide-sidebar-leave-active {
-  transition: all 0.2s ease;
-}
-
-.slide-sidebar-enter-from,
-.slide-sidebar-leave-to {
-  opacity: 0;
-  transform: translateX(-16px);
-}
-</style>

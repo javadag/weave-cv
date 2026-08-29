@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from "vue"
 import { getIcon, getSectionIconNameWithCustom } from "~/utils/preview/icons"
+import { formatFontCase } from "~/utils/preview/core/fontUtils"
 import { ColumnColorsKey } from "../../pages/columnColorsContext"
 import HeadingBorder from "./HeadingBorder.vue"
 import HeadingPill from "./HeadingPill.vue"
@@ -30,6 +31,14 @@ const section = computed(() => {
 })
 
 const headingConfigs = computed(() => configs.value.general.headings)
+
+const formattedSection = computed(() => {
+  if (!section.value) return undefined
+  return {
+    ...section.value,
+    title: formatFontCase(section.value.title, headingConfigs.value.fontCase)
+  }
+})
 const colorsConfigs = computed(() => configs.value.general.colors)
 const layoutConfigs = computed(() => configs.value.general.layout)
 const typographyConfigs = computed(() => configs.value.general.typography)
@@ -78,10 +87,10 @@ const iconHtml = computed(() => {
 const iconSize = computed(() => headingConfigs.value.icon?.size || 16)
 </script>
 <template>
-  <div v-if="section?.isTitleVisible && section.title && section" ref="elementRef" :style="containerStyle">
+  <div v-if="section?.isTitleVisible && section.title && formattedSection" ref="elementRef" :style="containerStyle">
     <component
       :is="heading"
-      :section="section"
+      :section="formattedSection"
       :heading-color="headingColor"
       :icon-html="iconHtml"
       :icon-size="iconSize"

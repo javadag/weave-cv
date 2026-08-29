@@ -73,3 +73,14 @@ export function loadFont(family: string) {
 
   loadedFonts[family] = true
 }
+
+export function formatFontCase(text: string, fontCase?: string): string {
+  if (!text || !fontCase || fontCase === "inherit") return text
+  if (fontCase === "uppercase") return text.toUpperCase()
+  if (fontCase === "lowercase") return text.toLowerCase()
+  if (fontCase === "capitalize") {
+    return text.toLowerCase().replace(/(?:^|[\s\-_/()[\]{}.,:;])\p{L}/gu, (char) => char.toUpperCase())
+  }
+  return text
+}
+

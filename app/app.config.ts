@@ -18,7 +18,7 @@ export default defineAppConfig({
         }
       },
       slots: {
-        base: "rounded-lg autofill:text-sm placeholder:text-sm rtl:placeholder:text-xs"
+        base: "rounded-lg h-8 autofill:text-sm placeholder:text-sm rtl:placeholder:text-xs"
       }
     },
     card: {
