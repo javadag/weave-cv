@@ -28,12 +28,13 @@ describe("normalizeImproveRequest", () => {
   it("rejects unknown providers", () => {
     expect(() => normalizeImproveRequest({ ...validBody, provider: "nope" })).toThrow()
   })
-  it("drops entries with unknown section types", () => {
+  it("drops malformed entries without valid serverId", () => {
     const res = normalizeImproveRequest({
       ...validBody,
-      entries: [...validBody.entries, { serverId: "e2", sectionType: "personal", title: "", subtitle: "", description: "" }]
+      entries: [...validBody.entries, { serverId: "", sectionType: "custom" }, null, "invalid"]
     })
     expect(res.entries).toHaveLength(1)
+    expect(res.entries[0]?.serverId).toBe("e1")
   })
 })
 

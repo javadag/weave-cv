@@ -5,7 +5,6 @@ import {
   mapProviderError,
   normalizeImproveRequest,
   sanitizeSuggestions,
-  SECTION_TYPE_SET_EXPORTED,
   toStr,
   toStrArr
 } from "../../utils/ai/improveChildren"
@@ -36,7 +35,7 @@ export default defineEventHandler(async (event) => {
     })
 
     const parsed = parseJsonLoose<Record<string, unknown>>(raw)
-    const suggestions = sanitizeSuggestions(parsed.suggestions, SECTION_TYPE_SET_EXPORTED)
+    const suggestions = sanitizeSuggestions(parsed.suggestions)
 
     return {
       matchScore: clampMatchScore(parsed.matchScore),

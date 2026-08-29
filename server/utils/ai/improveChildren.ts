@@ -61,7 +61,9 @@ export function isProviderId(v: string): v is AiId {
 }
 
 export function isValidEntry(e: unknown): e is AiEntry {
-  return typeof e === "object" && e !== null && "serverId" in e
+  if (!e || typeof e !== "object") return false
+  const o = e as Record<string, unknown>
+  return typeof o.serverId === "string" && o.serverId.trim().length > 0
 }
 
 export interface AiRequestBase {
@@ -165,8 +167,6 @@ export function toStrArr(v: unknown): string[] {
 
 export function mapProviderError(error: unknown): string {
   const err = (error ?? {}) as Record<string, unknown>
-
-  console.log(err)
 
   const response = err.response as Record<string, unknown> | undefined
   const status = (err.status ?? err.statusCode ?? response?.status) as number | undefined
