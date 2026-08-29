@@ -1,6 +1,6 @@
 import { requireAuth } from "../../utils/auth"
-import { createAiClient, CALL_TIMEOUT_MS } from "../../utils/ai/client"
-import { getAiProvider, isCustomProvider, type AiId } from "../../utils/ai/providers"
+import { createAiClient } from "../../utils/ai/client"
+import { getAiProvider, type AiId } from "../../utils/ai/providers"
 
 export default defineEventHandler(async (event) => {
   await requireAuth(event)
@@ -60,9 +60,9 @@ export default defineEventHandler(async (event) => {
       }
 
       return { ok: true, model: testModel }
-    } catch (err) {
-      if ((err as { statusCode?: number }).statusCode) throw err
-      throw createError({ statusCode: 422, statusMessage: (err as Error).message || "Connection failed" })
+    } catch (error) {
+      if ((error as { statusCode?: number }).statusCode) throw error
+      throw createError({ statusCode: 422, statusMessage: (error as Error).message || "Connection failed" })
     } finally {
       clearTimeout(timeoutId)
     }
@@ -80,11 +80,11 @@ export default defineEventHandler(async (event) => {
       { timeout: 15_000 }
     )
 
-    const ok = !!completion.choices?.[0]?.message?.content
-    return { ok, model: resolvedModel }
-  } catch (err) {
-    const status = (err as { status?: number }).status ?? 422
-    const message = (err as Error).message || "Connection failed"
+    const isOk = !!completion.choices?.[0]?.message?.content
+    return { ok: isOk, model: resolvedModel }
+  } catch (error) {
+    const status = (error as { status?: number }).status ?? 422
+    const message = (error as Error).message || "Connection failed"
     throw createError({ statusCode: status, statusMessage: message })
   }
 })

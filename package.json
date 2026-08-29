@@ -70,6 +70,7 @@
     "eslint-plugin-unicorn": "^70.0.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.4.1",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "puppeteer": "24.29.0",
@@ -77,5 +78,9 @@
     "standard-version": "^9.5.0",
     "vitest": "^4.1.11",
     "vue-tsc": "^3.3.6"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --fix"
   }
 }
+

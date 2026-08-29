@@ -26,18 +26,6 @@ const maskedKey = computed(() => {
 const showModel = computed(() => selectedConfig.value?.modelEditable ?? false)
 const showBaseUrl = computed(() => selectedProvider.value === "openrouter" || selectedProvider.value === "custom")
 
-const modelOptions = computed(() => {
-  const config = selectedConfig.value
-  if (!config) return []
-  // Start with the provider's curated model list
-  const models = [...config.models]
-  // If the user typed a custom model name not in the list, include it
-  if (modelInput.value && !models.includes(modelInput.value)) {
-    models.push(modelInput.value)
-  }
-  return models
-})
-
 const customBaseUrlInvalid = computed(
   () =>
     selectedProvider.value === "custom" &&
@@ -86,8 +74,8 @@ async function testConnection() {
       color: "success",
       icon: "i-lucide-check-circle"
     })
-  } catch (err) {
-    const detail = (err as { data?: { statusMessage?: string } })?.data?.statusMessage
+  } catch (error) {
+    const detail = (error as { data?: { statusMessage?: string } })?.data?.statusMessage
     testResult.value = { ok: false, message: detail || t("dashboard.settings.aiTestFailed") }
     toast.add({
       title: t("dashboard.settings.aiTestFailed"),

@@ -33,7 +33,7 @@ const section = computed(() => {
 const headingConfigs = computed(() => configs.value.general.headings)
 
 const formattedSection = computed(() => {
-  if (!section.value) return undefined
+  if (!section.value) return
   return {
     ...section.value,
     title: formatFontCase(section.value.title, headingConfigs.value.fontCase)

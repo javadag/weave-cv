@@ -79,7 +79,7 @@ export function formatFontCase(text: string, fontCase?: string): string {
   if (fontCase === "uppercase") return text.toUpperCase()
   if (fontCase === "lowercase") return text.toLowerCase()
   if (fontCase === "capitalize") {
-    return text.toLowerCase().replace(/(?:^|[\s\-_/()[\]{}.,:;])\p{L}/gu, (char) => char.toUpperCase())
+    return text.toLowerCase().replaceAll(/(?:^|[\s\-_/()[\]{}.,:;])\p{L}/gu, (char) => char.toUpperCase())
   }
   return text
 }
