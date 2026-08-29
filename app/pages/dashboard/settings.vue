@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AiProviderSettings from '~/components/dashboard/AiProviderSettings.vue'
+
 definePageMeta({ layout: "dashboard" })
 
 const { t, locale, locales, setLocale } = useI18n()
@@ -68,5 +70,11 @@ const languageOptions = computed(() =>
         <USelect id="language-select" v-model="language" :items="languageOptions" value-key="value" />
       </div>
     </UCard>
+    <ClientOnly>
+      <AiProviderSettings />
+      <template #fallback>
+        <div class="mt-4 h-32" />
+      </template>
+    </ClientOnly>
   </div>
 </template>

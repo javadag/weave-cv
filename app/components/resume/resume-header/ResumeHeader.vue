@@ -5,12 +5,14 @@ import SaveChanges from "./SaveChanges.vue"
 const ChangeTemplateModal = defineAsyncComponent(() => import("./ChangeTemplateModal.vue"))
 const ExportModal = defineAsyncComponent(() => import("./ExportModal.vue"))
 const ShareModal = defineAsyncComponent(() => import("./ShareModal.vue"))
+const ImproveResumeU = defineAsyncComponent(() => import("./widgets/improve/ImproveResume.vue"))
 
 const saving = ref(false)
 const isTemplateModalOpen = ref(false)
 const isExportModalOpen = ref(false)
 const isShareModalOpen = ref(false)
 const isHelpModalOpen = ref(false)
+const isImproveModalOpen = ref(false)
 
 const resumeStore = useResumeStore()
 const { title } = storeToRefs(resumeStore)
@@ -104,6 +106,20 @@ const shortcuts = [
       />
       <UButton
         color="neutral"
+        variant="ghost"
+        icon="i-lucide-sparkles"
+        :title="$t('editor.improve.title')"
+        :ui="{
+          leadingIcon: 'size-4'
+        }"
+        @click="
+          () => {
+            isImproveModalOpen = true
+          }
+        "
+      />
+      <UButton
+        color="neutral"
         variant="outline"
         icon="i-lucide-layout-template"
         :ui="{
@@ -161,6 +177,7 @@ const shortcuts = [
     <ChangeTemplateModal v-model="isTemplateModalOpen" />
     <ExportModal v-model="isExportModalOpen" :disabled="saving" />
     <ShareModal v-model="isShareModalOpen" :disabled="saving" />
+    <ImproveResumeU v-model="isImproveModalOpen" />
     <UModal v-model:open="isHelpModalOpen" :title="$t('editor.tour.help')">
       <template #content>
         <div class="p-6">
