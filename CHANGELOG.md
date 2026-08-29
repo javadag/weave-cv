@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/javadag/weave-cv/compare/v2.8.1...v2.9.0) (2026-08-29)
+
+
+### 📝 Documentation
+
+* add AI resume improve design spec ([37cddde](https://github.com/javadag/weave-cv/commit/37cddde4835f3d14da2b29711f390f59acfcf5c5))
+* add AI resume improve implementation plan ([d5c03d1](https://github.com/javadag/weave-cv/commit/d5c03d170c7a2927936c7347ca66f99aef4e0d5c))
+
+
+### ✨ Features
+
+* **ai:** add direct support for Anthropic Messages API ([9985100](https://github.com/javadag/weave-cv/commit/99851008b199a5d5824f6f70d4a98688bac902f0))
+* **ai:** add provider registry + type unions ([86e6864](https://github.com/javadag/weave-cv/commit/86e6864055f3e221181a69f7bb073ceab7ac648c))
+* **ai:** add tolerant JSON extraction + body cap helpers ([ce787a9](https://github.com/javadag/weave-cv/commit/ce787a900324c8145d5ddd4956ca1e63838f9573))
+* **ai:** client orchestrator for analyze/refine/apply ([a969339](https://github.com/javadag/weave-cv/commit/a9693390f0a57f7f4073b295edc4bbe5020fbbcb))
+* **ai:** client provider registry + localStorage key store ([ece3e92](https://github.com/javadag/weave-cv/commit/ece3e92d6eb8b545fac553ce198bcf9d9781b299))
+* **ai:** custom model name, test connection ([5351d75](https://github.com/javadag/weave-cv/commit/5351d757258d297d20ed0f833f3f0869f5f17c3c))
+* **ai:** honesty block + improve prompt builder ([3e1ce48](https://github.com/javadag/weave-cv/commit/3e1ce484e79c2187c0468f26ac9be3ef4494a8c6))
+* **ai:** improve-request validation, sanitize, provider error mapping ([db9f8d6](https://github.com/javadag/weave-cv/commit/db9f8d6de1994ccfaf1e0297ce2e945ff143aa19))
+* **ai:** improve-resume modal + header entry point ([9c4851d](https://github.com/javadag/weave-cv/commit/9c4851d0e093e94b781ee679483bd03d2c69e931))
+* **ai:** presentational improvements widgets ([42b348b](https://github.com/javadag/weave-cv/commit/42b348b510bbd673aa1b22550b2813ef09bc0c59))
+* **ai:** provider key settings in dashboard ([e009bd6](https://github.com/javadag/weave-cv/commit/e009bd6d19722024f1211f7423d9d36eacaabc90))
+* **ai:** refine-entry prompts, validation, extraction ([4cf47aa](https://github.com/javadag/weave-cv/commit/4cf47aa6331e765399140f5cf79459f19d610d18))
+* **ai:** resume flatten + apply-path helpers ([c1f009d](https://github.com/javadag/weave-cv/commit/c1f009d2f87b58a66ff3787ee1650ab49717d32e))
+* **ai:** stateless improve + refine endpoints over BYOK ([56950a0](https://github.com/javadag/weave-cv/commit/56950a08e7201d4bea8a16c7efd737ab5d7fc82c))
+* **i18n:** improvement UI strings (en, fa) ([5d9492f](https://github.com/javadag/weave-cv/commit/5d9492ffc4a67748c997bb28535f7078a6ff026e))
+
+
+### 🐛 Bug Fixes
+
+* **ai:** allow dynamic section types and sanitize suggestions without hardcoded whitelist ([0de1696](https://github.com/javadag/weave-cv/commit/0de169677767d5b441784c86c6508a30ecaedd8b))
+* font casing on headings and update editor responsive UI layout ([67b051f](https://github.com/javadag/weave-cv/commit/67b051f9d3469e382bb94a59693fd15366692721))
+
 ### [2.8.1](https://github.com/JavadAg/weave-cv/compare/v2.8.0...v2.8.1) (2026-08-08)
 
 
