@@ -247,7 +247,11 @@
       "aiBaseUrlPlaceholder": "آدرس پایه سازگار با OpenAI",
       "aiBaseUrlInvalid": "آدرس پایه باید با http:// یا https:// شروع شود",
       "aiSave": "ذخیره",
-      "aiClear": "پاک کردن"
+      "aiClear": "پاک کردن",
+      "aiTestConnection": "تست اتصال",
+      "aiTestSuccess": "اتصال موفقیت‌آمیز — کلید API معتبر است.",
+      "aiTestFailed": "اتصال ناموفق",
+      "aiModelHint": "یک مدل انتخاب کن یا نام دلخواه بنویس."
     },
     "account": {
       "title": "حساب کاربری",

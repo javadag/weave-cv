@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { HonestyUiLevel } from "~/composables/useResumeImprove"
+import KeywordChips from "./KeywordChips.vue"
 import ScoreHero from "./ScoreHero.vue"
 import StrengthsCard from "./StrengthsCard.vue"
-import KeywordChips from "./KeywordChips.vue"
 import SuggestionCard from "./SuggestionCard.vue"
-import type { HonestyUiLevel } from "~/composables/useResumeImprove"
 
 const modelValue = defineModel<boolean>({ default: false })
 
@@ -69,7 +69,9 @@ function handleClose() {
       >
         <template #header>
           <div class="flex items-center gap-3">
-            <div class="bg-primary/10 dark:bg-primary/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-full">
+            <div
+              class="bg-primary/10 dark:bg-primary/20 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+            >
               <UIcon name="i-lucide-sparkles" class="text-primary size-5" />
             </div>
             <div>
@@ -80,7 +82,7 @@ function handleClose() {
         </template>
 
         <!-- Guest nudge -->
-        <div v-if="!user" class="rounded-xl border border-muted p-5 text-center">
+        <div v-if="!user" class="border-muted rounded-xl border p-5 text-center">
           <p class="text-default text-sm font-medium">{{ $t("editor.improve.mustSignIn") }}</p>
           <UButton to="/register" color="primary" variant="solid" icon="i-lucide-log-in" class="mt-3">
             {{ $t("editor.improve.goToRegister") }}
@@ -88,7 +90,7 @@ function handleClose() {
         </div>
 
         <!-- No key gate -->
-        <div v-else-if="!ai.hasKeys()" class="rounded-xl border border-muted p-5 text-center">
+        <div v-else-if="!ai.hasKeys()" class="border-muted rounded-xl border p-5 text-center">
           <p class="text-default text-sm font-medium">{{ $t("editor.improve.noKey") }}</p>
           <UButton to="/dashboard/settings" color="primary" variant="outline" icon="i-lucide-key-round" class="mt-3">
             {{ $t("editor.improve.goToSettings") }}
@@ -105,10 +107,15 @@ function handleClose() {
               id="improve-jd"
               v-model="jobDescription"
               :rows="4"
+              class="w-full"
               :placeholder="$t('editor.improve.jdPlaceholder')"
-              @blur="() => { jdTouched = true }"
+              @blur="
+                () => {
+                  jdTouched = true
+                }
+              "
             />
-            <p v-if="jdErrorText" class="text-red-500 mt-1 text-xs">{{ jdErrorText }}</p>
+            <p v-if="jdErrorText" class="mt-1 text-xs text-red-500">{{ jdErrorText }}</p>
           </div>
 
           <!-- Honesty dial -->
@@ -125,7 +132,11 @@ function handleClose() {
                 :class="{
                   'border-primary bg-primary/5': improve.honesty.value === opt.value
                 }"
-                @click="() => { improve.honesty.value = opt.value }"
+                @click="
+                  () => {
+                    improve.honesty.value = opt.value
+                  }
+                "
               >
                 <div class="text-default text-sm font-semibold">{{ opt.label }}</div>
                 <div class="text-muted mt-0.5 text-xs">{{ opt.desc }}</div>
@@ -154,13 +165,20 @@ function handleClose() {
           <!-- Error with retry -->
           <div
             v-if="improve.error.value"
-            class="border-red-500/40 bg-red-500/5 text-red-600 dark:text-red-400 mt-4 rounded-xl border p-3 text-sm"
+            class="mt-4 rounded-xl border border-red-500/40 bg-red-500/5 p-3 text-sm text-red-600 dark:text-red-400"
           >
             <div class="flex items-center gap-2">
               <UIcon name="i-lucide-triangle-alert" class="size-4" />
               <span>{{ $t(improve.error.value.key, { detail: improve.error.value.detail ?? "" }) }}</span>
             </div>
-            <UButton color="neutral" variant="outline" size="sm" icon="i-lucide-refresh-cw" class="mt-2" @click="handleRetry">
+            <UButton
+              color="neutral"
+              variant="outline"
+              size="sm"
+              icon="i-lucide-refresh-cw"
+              class="mt-2"
+              @click="handleRetry"
+            >
               {{ $t("editor.improve.retry") }}
             </UButton>
           </div>
@@ -168,12 +186,8 @@ function handleClose() {
           <!-- Results -->
           <div v-if="improve.result.value" class="mt-5 space-y-4">
             <ScoreHero :match-score="improve.result.value.matchScore" :summary="improve.result.value.scoreSummary" />
-            <StrengthsCard
-              :strengths="improve.result.value.strengths"
-              :weaknesses="improve.result.value.weaknesses"
-            />
+            <StrengthsCard :strengths="improve.result.value.strengths" :weaknesses="improve.result.value.weaknesses" />
             <KeywordChips :keywords="improve.result.value.missingKeywords" />
-
             <div>
               <div class="text-default mb-2 text-sm font-semibold">{{ $t("editor.improve.suggestions") }}</div>
               <div v-if="improve.result.value.suggestions.length === 0" class="text-muted text-sm italic">

@@ -1,6 +1,6 @@
+import { isHttpsBaseUrl, jsonSize } from "./json"
 import type { AiEntry } from "./prompts/improveResume"
 import type { AiId, HonestyLevel } from "./providers"
-import { isHttpsBaseUrl, jsonSize } from "./json"
 
 export class HttpError extends Error {
   statusCode: number
@@ -43,8 +43,15 @@ export const SECTION_TYPE_SET_EXPORTED: ReadonlySet<string> = new Set([
 ])
 
 const PROVIDER_IDS = [
-  "deepseek", "groq", "openai", "anthropic", "gemini",
-  "mistral", "perplexity", "openrouter", "custom"
+  "deepseek",
+  "groq",
+  "openai",
+  "anthropic",
+  "gemini",
+  "mistral",
+  "perplexity",
+  "openrouter",
+  "custom"
 ] as const
 
 const HONESTY_LEVELS = ["faithful", "balanced", "bold"] as const
@@ -54,13 +61,7 @@ export function isProviderId(v: string): v is AiId {
 }
 
 export function isValidEntry(e: unknown): e is AiEntry {
-  if (!e || typeof e !== "object") return false
-  const o = e as Record<string, unknown>
-  return (
-    typeof o.serverId === "string" &&
-    typeof o.sectionType === "string" &&
-    SECTION_TYPE_SET_EXPORTED.has(o.sectionType)
-  )
+  return typeof e === "object" && e !== null && "serverId" in e
 }
 
 export interface AiRequestBase {
@@ -109,16 +110,21 @@ export function normalizeAiRequestBase(body: unknown): AiRequestBase {
 export function normalizeImproveRequest(body: unknown): ImproveRequestShape {
   const base = normalizeAiRequestBase(body)
   const b = (body ?? {}) as Record<string, unknown>
+
   const entries = (Array.isArray(b.entries) ? b.entries : []).filter((e) => isValidEntry(e))
+
   if (jsonSize({ jobDescription: base.jobDescription, entries }) > 64 * 1024) {
     throw new HttpError(413, "Request body too large")
   }
+
   return { ...base, entries }
 }
 
 export function sanitizeSuggestions(raw: unknown, knownSections?: ReadonlySet<string>): HistorySuggestion[] {
   if (!Array.isArray(raw)) return []
+
   const out: HistorySuggestion[] = []
+
   for (const s of raw) {
     if (!s || typeof s !== "object") continue
     const o = s as Record<string, unknown>
@@ -126,7 +132,12 @@ export function sanitizeSuggestions(raw: unknown, knownSections?: ReadonlySet<st
     if (o.field !== "description" && o.field !== "title") continue
     const suggestedText = typeof o.suggestedText === "string" ? o.suggestedText : ""
     if (!suggestedText.trim()) continue
-    if (knownSections && o.sectionType !== undefined && (typeof o.sectionType !== "string" || !knownSections.has(o.sectionType))) continue
+    if (
+      knownSections &&
+      o.sectionType !== undefined &&
+      (typeof o.sectionType !== "string" || !knownSections.has(o.sectionType))
+    )
+      continue
     out.push({
       entryId: o.entryId,
       field: o.field,
@@ -154,13 +165,18 @@ export function toStrArr(v: unknown): string[] {
 
 export function mapProviderError(error: unknown): string {
   const err = (error ?? {}) as Record<string, unknown>
+
+  console.log(err)
+
   const response = err.response as Record<string, unknown> | undefined
   const status = (err.status ?? err.statusCode ?? response?.status) as number | undefined
+
   if (status === 401 || status === 403) {
     return "Your provider rejected the API key or credits. Open dashboard settings to fix it."
   }
   if (status === 429) {
     return "Your provider rate-limited this request. Try again shortly."
   }
+
   return "The AI provider failed. Please try again."
 }

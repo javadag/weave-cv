@@ -1,17 +1,17 @@
-import { requireAuth } from "../../utils/auth"
+import { completeJson } from "../../utils/ai/client"
 import {
-  normalizeImproveRequest,
-  mapProviderError,
-  sanitizeSuggestions,
   clampMatchScore,
-  toStr,
-  toStrArr,
   HttpError,
-  SECTION_TYPE_SET_EXPORTED
+  mapProviderError,
+  normalizeImproveRequest,
+  sanitizeSuggestions,
+  SECTION_TYPE_SET_EXPORTED,
+  toStr,
+  toStrArr
 } from "../../utils/ai/improveChildren"
 import { parseJsonLoose } from "../../utils/ai/json"
-import { completeJson } from "../../utils/ai/client"
 import { buildImproveMessages } from "../../utils/ai/prompts/improveResume"
+import { requireAuth } from "../../utils/auth"
 
 export default defineEventHandler(async (event) => {
   await requireAuth(event)
@@ -25,6 +25,7 @@ export default defineEventHandler(async (event) => {
       honesty: req.honesty,
       entries: req.entries
     })
+
     const raw = await completeJson({
       provider: req.provider,
       apiKey: req.apiKey,
@@ -33,8 +34,10 @@ export default defineEventHandler(async (event) => {
       system,
       user
     })
+
     const parsed = parseJsonLoose<Record<string, unknown>>(raw)
     const suggestions = sanitizeSuggestions(parsed.suggestions, SECTION_TYPE_SET_EXPORTED)
+
     return {
       matchScore: clampMatchScore(parsed.matchScore),
       scoreSummary: toStr(parsed.scoreSummary),
@@ -47,6 +50,7 @@ export default defineEventHandler(async (event) => {
     if (error instanceof HttpError) {
       throw createError({ statusCode: error.statusCode, statusMessage: error.message })
     }
+
     throw createError({ statusCode: 422, statusMessage: mapProviderError(error) })
   }
 })

@@ -14,13 +14,12 @@ const scoreColor = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-5 rounded-xl border border-muted bg-elevated/50 p-4">
+  <div class="border-muted bg-elevated/50 flex items-center gap-5 rounded-xl border p-4">
     <div class="shrink-0 text-center">
       <div class="text-3xl font-bold" :class="scoreColor.text">{{ matchScore }}</div>
       <div class="text-muted mt-0.5 text-xs">{{ $t("editor.improve.scoreLabel") }}</div>
     </div>
     <div class="min-w-0 flex-1">
-      <UProgress :value="matchScore" color="neutral" size="sm" />
       <p class="text-default mt-2 text-sm">{{ summary }}</p>
     </div>
   </div>

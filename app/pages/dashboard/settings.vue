@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AiProviderSettings from '~/components/dashboard/AiProviderSettings.vue'
+
 definePageMeta({ layout: "dashboard" })
 
 const { t, locale, locales, setLocale } = useI18n()

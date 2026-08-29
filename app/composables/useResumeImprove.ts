@@ -1,6 +1,6 @@
-import { useAiProvider } from "./useAiProvider"
-import { flattenEntries, buildApplyPath, appendNote } from "./useResumeAdmin"
 import type { TCoreSections } from "~/utils/schemas/content.schema"
+import { useAiProvider } from "./useAiProvider"
+import { appendNote, buildApplyPath, flattenEntries } from "./useResumeAdmin"
 
 export type HonestyUiLevel = "faithful" | "balanced" | "bold"
 
@@ -64,7 +64,7 @@ export function useResumeImprove() {
   const lastJobDescription = ref("")
 
   async function runAnalyze(jobDescription: string, selected?: HonestyUiLevel) {
-    if (!ai.keys.value || (!jobDescription || jobDescription.trim().length === 0)) return
+    if (!ai.keys.value || !jobDescription || jobDescription.trim().length === 0) return
     const { provider, key, model, baseUrl } = ai.keys.value
     if (selected) honesty.value = selected
     lastJobDescription.value = jobDescription
@@ -73,6 +73,7 @@ export function useResumeImprove() {
     error.value = null
     try {
       const entries = entriesFromStore()
+
       entryIndex.value = Object.fromEntries(
         entries.map((e) => [e.serverId, { sectionType: e.sectionType, title: e.title || e.subtitle || "—" }])
       )
@@ -141,7 +142,10 @@ export function useResumeImprove() {
     const meta = entryIndex.value[serverItemId]
     if (prev === undefined || !meta) return
     applied.value[serverItemId] = prev
-    resumeStore.updateContent(buildApplyPath(meta.sectionType, serverItemId, suggestion.field), suggestion.suggestedText)
+    resumeStore.updateContent(
+      buildApplyPath(meta.sectionType, serverItemId, suggestion.field),
+      suggestion.suggestedText
+    )
   }
 
   function undo(serverItemId: string, suggestion: ImproveSuggestion) {
@@ -150,9 +154,7 @@ export function useResumeImprove() {
     if (prev === undefined || !meta) return
     resumeStore.updateContent(buildApplyPath(meta.sectionType, serverItemId, suggestion.field), prev)
     // remove only this entry's undo record
-    applied.value = Object.fromEntries(
-      Object.entries(applied.value).filter(([key]) => key !== serverItemId)
-    )
+    applied.value = Object.fromEntries(Object.entries(applied.value).filter(([key]) => key !== serverItemId))
   }
 
   function isApplied(serverItemId: string): boolean {
