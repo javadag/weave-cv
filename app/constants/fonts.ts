@@ -1,5 +1,21 @@
 export type TFontCut = `${number}-${"normal" | "italic"}`
 
+// Fonts pinned to the top of the picker as a static "Popular" section,
+// in deliberate classic-resume-font order (not popularity-derived)
+export const POPULAR_FONT_FAMILIES = [
+  "Calibri",
+  "Helvetica",
+  "Georgia",
+  "Times New Roman",
+  "Cambria",
+  "Garamond",
+  "Verdana",
+  "Lato",
+  "Open Sans",
+  "Inter",
+  "Roboto"
+]
+
 // All fonts that have local WOFF2 files in /public/fonts/
 // These are loaded from the local server (not Google Fonts CDN)
 export const LOCAL_FONT_FAMILIES = new Set([
@@ -22,7 +38,7 @@ export const LOCAL_FONT_FAMILIES = new Set([
   "Sahel",
   "Samim",
   "Shabnam",
-  "Vazirmatn",
+  "Vazirmatn"
 ])
 
 // Weight/style cuts available for each local font
@@ -46,7 +62,7 @@ export const LOCAL_FONTS_CUTS: Record<string, TFontCut[]> = {
   Sahel: ["400-normal", "700-normal"],
   Samim: ["400-normal", "700-normal"],
   Shabnam: ["400-normal", "700-normal"],
-  Vazirmatn: ["400-normal", "700-normal"],
+  Vazirmatn: ["400-normal", "700-normal"]
 }
 
 // Fonts shown in the picker that are NOT in google-fonts.json
@@ -62,7 +78,7 @@ export const LOCAL_ONLY_PICKER_ENTRIES = [
   { label: "ایران سنس", family: "Iran Sans", subsets: ["arabic"] },
   { label: "ساحل", family: "Sahel", subsets: ["arabic"] },
   { label: "صمیم", family: "Samim", subsets: ["arabic"] },
-  { label: "شبنم", family: "Shabnam", subsets: ["arabic"] },
+  { label: "شبنم", family: "Shabnam", subsets: ["arabic"] }
 ]
 
 // Maps old enum slug values (V1 schema) to display names (V2 schema)
@@ -86,5 +102,5 @@ export const FONT_SLUG_MIGRATION_MAP: Record<string, string> = {
   sahel: "Sahel",
   samim: "Samim",
   shabnam: "Shabnam",
-  vazirmatn: "Vazirmatn",
+  vazirmatn: "Vazirmatn"
 }

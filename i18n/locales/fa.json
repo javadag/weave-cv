@@ -1032,6 +1032,7 @@
     "fontPicker": {
       "searchFonts": "جستجوی فونت...",
       "noFontsFound": "فونتی پیدا نشد",
+      "popular": "پرکاربرد",
       "subsets": {
         "all": "همه",
         "latin": "لاتین",

@@ -10,8 +10,25 @@ const props = defineProps<{
 const emit = defineEmits<{ (e: "update:modelValue", value: string): void }>()
 
 const isOpen = ref(false)
-const { fonts, subsets, search, selectedSubset } = useGoogleFonts()
+const { fonts, popularFonts, subsets, search, selectedSubset } = useGoogleFonts()
 const { t } = useI18n()
+
+// Scroll the list so the currently selected font is visible (centered) when the popover opens
+const listRef = ref<HTMLElement | null>(null)
+
+function scrollToSelected() {
+  const container = listRef.value
+  if (!container) return
+  const selected = container.querySelector<HTMLElement>(`[data-family="${CSS.escape(props.modelValue)}"]`)
+  if (!selected) return
+  container.scrollTop = selected.offsetTop - container.clientHeight / 2 + selected.offsetHeight / 2
+}
+
+watch([isOpen, fonts], async ([open]) => {
+  if (!open) return
+  await nextTick()
+  requestAnimationFrame(scrollToSelected)
+})
 
 // Map from subset code (may contain hyphens) to i18n key segment
 const SUBSET_KEY_MAP: Record<string, string> = {
@@ -98,12 +115,34 @@ const vFontVisible = {
               {{ subsetLabel(subset) }}
             </UButton>
           </div>
-          <div class="max-h-64 overflow-y-auto">
+          <div ref="listRef" class="relative max-h-64 overflow-y-auto">
+            <template v-if="popularFonts.length > 0">
+              <span class="text-muted px-3 pt-2 pb-1 text-xs font-medium tracking-wide uppercase">
+                {{ t("ui.fontPicker.popular") }}
+              </span>
+              <button
+                v-for="entry in popularFonts"
+                :key="`popular-${entry.family}`"
+                v-font-visible="entry.family"
+                type="button"
+                :data-family="entry.family"
+                class="hover:bg-muted flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors"
+                :class="{ 'bg-primary/10 text-primary font-medium': modelValue === entry.family }"
+                @click="selectFont(entry)"
+              >
+                <span :style="{ fontFamily: `'${entry.family}', sans-serif` }" class="flex-1 truncate">
+                  {{ entry.label }}
+                </span>
+                <span class="text-muted shrink-0 text-xs">{{ entry.category }}</span>
+              </button>
+              <div class="border-muted my-1 border-t" role="separator"></div>
+            </template>
             <button
               v-for="entry in fonts"
               :key="entry.family"
               v-font-visible="entry.family"
               type="button"
+              :data-family="entry.family"
               class="hover:bg-muted flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors"
               :class="{ 'bg-primary/10 text-primary font-medium': modelValue === entry.family }"
               @click="selectFont(entry)"
@@ -113,7 +152,7 @@ const vFontVisible = {
               </span>
               <span class="text-muted shrink-0 text-xs">{{ entry.category }}</span>
             </button>
-            <div v-if="fonts.length === 0" class="text-muted py-6 text-center text-sm">
+            <div v-if="fonts.length === 0 && popularFonts.length === 0" class="text-muted py-6 text-center text-sm">
               {{ t("ui.fontPicker.noFontsFound") }}
             </div>
           </div>

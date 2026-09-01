@@ -1033,6 +1033,7 @@
     "fontPicker": {
       "searchFonts": "Search fonts...",
       "noFontsFound": "No fonts found",
+      "popular": "Popular",
       "subsets": {
         "all": "All",
         "latin": "Latin",

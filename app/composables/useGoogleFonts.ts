@@ -1,4 +1,4 @@
-import { LOCAL_ONLY_PICKER_ENTRIES } from "~/constants/fonts"
+import { LOCAL_ONLY_PICKER_ENTRIES, POPULAR_FONT_FAMILIES } from "~/constants/fonts"
 
 export type FontEntry = {
   family: string
@@ -59,16 +59,27 @@ export function useGoogleFonts() {
     return ["all", ...sorted]
   })
 
+  // Popular section only shows unfiltered; hidden while searching or a script tab is active
+  const isUnfiltered = computed(() => !search.value.trim() && selectedSubset.value === "all")
+
+  const popularFonts = computed<FontEntry[]>(() => {
+    if (!isUnfiltered.value) return []
+    const byFamily = new Map(allFonts.value.map((f) => [f.family, f]))
+    return POPULAR_FONT_FAMILIES.map((family) => byFamily.get(family)).filter((f) => f !== undefined)
+  })
+
   const fonts = computed(() => {
     const query = search.value.trim().toLowerCase()
     const subset = selectedSubset.value
+    const popular = new Set(isUnfiltered.value ? POPULAR_FONT_FAMILIES : [])
 
     return allFonts.value.filter((f) => {
+      if (popular.has(f.family)) return false
       const matchesSearch = !query || f.family.toLowerCase().includes(query)
       const matchesSubset = subset === "all" || f.subsets.includes(subset)
       return matchesSearch && matchesSubset
     })
   })
 
-  return { fonts, subsets, search, selectedSubset }
+  return { fonts, popularFonts, subsets, search, selectedSubset }
 }
