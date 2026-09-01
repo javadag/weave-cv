@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.10.0](https://github.com/javadag/weave-cv/compare/v2.9.0...v2.10.0) (2026-09-01)
+
+
+### ✨ Features
+
+* **font-picker:** add popular fonts section and scroll to selected font ([a560283](https://github.com/javadag/weave-cv/commit/a560283f354ad9ce45944e2c324eebe423ccf47d))
+
 ## [2.9.0](https://github.com/javadag/weave-cv/compare/v2.8.1...v2.9.0) (2026-08-29)
 
 
